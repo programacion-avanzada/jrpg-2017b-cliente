@@ -11,3 +11,7 @@ jdk:
 before_install:
 
  - chmod +x gradlew
+ - git clone https://github.com/LosIsotopos/jrpg-2017a-dominio.git ~/builds/jrpg-2017a-dominio
+ - pushd ~/builds/jrpg-2017a-dominio
+ - ./run-install-scripts.sh
+ - popd
