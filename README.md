@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/LosIsotopos/jrpg-2017a-cliente.svg?branch=master)](https://travis-ci.org/LosIsotopos/jrpg-2017a-cliente)
 # World Of Middle Earth (WOME) - cliente
 
 ## Sobre las personas
@@ -12,12 +13,10 @@
 
 ### Integrantes del equipo
 
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
+* Ezequiel Laurenti ([ezelau95](https://github.com/ezelau95))
+* Fernando Queirolo ([fernandoq96](https://github.com/fernandoq96))
+* Pablo Raimondo ([PabloRai](https://github.com/PabloRai))
+* Nicolás Sapaya ([NicolasSap](https://github.com/NicolasSap))
 
 ## Sobre la tecnología
 
