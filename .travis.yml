@@ -10,6 +10,8 @@ jdk:
 
 before_install:
 
+ - pwd
+ - ls
  - chmod +x gradlew
  - git clone https://github.com/LosIsotopos/jrpg-2017a-dominio.git ~/builds/jrpg-2017a-dominio
 
