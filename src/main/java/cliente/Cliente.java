@@ -7,11 +7,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
-import frames.*;
+import frames.MenuCarga;
+import frames.MenuCreacionPj;
+import frames.MenuJugar;
+import frames.MenuMapas;
 import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.Paquete;
@@ -60,7 +64,7 @@ public class Cliente extends Thread {
 			puerto = sc.nextInt();
 			sc.close();
 		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo de configuración config.txt");
+			JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo de configuraciÃ³n config.txt");
 			e.printStackTrace();
 		}
 		
@@ -70,7 +74,7 @@ public class Cliente extends Thread {
 			entrada = new ObjectInputStream(cliente.getInputStream());
 			salida = new ObjectOutputStream(cliente.getOutputStream());
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo al iniciar la aplicación. Revise la conexión con el servidor.");
+			JOptionPane.showMessageDialog(null, "Fallo al iniciar la aplicaciÃ³n. Revise la conexiÃ³n con el servidor.");
 			System.exit(1);
 			e.printStackTrace();
 		}
@@ -85,7 +89,7 @@ public class Cliente extends Thread {
 
 				while (!paqueteUsuario.isInicioSesion()) {
 					
-					// Muestro el menú principal
+					// Muestro el menï¿½ principal
 					new MenuJugar(this).setVisible(true);
 					
 					// Creo los paquetes que le voy a enviar al servidor
@@ -121,7 +125,7 @@ public class Cliente extends Thread {
 					case Comando.REGISTRO:
 						if (paquete.getMensaje().equals(Paquete.msjExito)) {
 
-							// Abro el menu para la creación del personaje
+							// Abro el menu para la creaciï¿½n del personaje
 							MenuCreacionPj menuCreacionPJ = new MenuCreacionPj(this, paquetePersonaje);
 							menuCreacionPJ.setVisible(true);
 							
@@ -143,7 +147,7 @@ public class Cliente extends Thread {
 							if (paquete.getMensaje().equals(Paquete.msjFracaso))
 								JOptionPane.showMessageDialog(null, "No se pudo registrar.");
 
-							// El usuario no pudo iniciar sesión
+							// El usuario no pudo iniciar sesiï¿½n
 							paqueteUsuario.setInicioSesion(false);
 						}
 						break;
@@ -151,7 +155,7 @@ public class Cliente extends Thread {
 					case Comando.INICIOSESION:
 						if (paquete.getMensaje().equals(Paquete.msjExito)) {
 							
-							// El usuario ya inicio sesión
+							// El usuario ya inicio sesiï¿½n
 							paqueteUsuario.setInicioSesion(true);
 							
 							// Recibo el paquete personaje con los datos
@@ -159,15 +163,15 @@ public class Cliente extends Thread {
 
 						} else {
 							if (paquete.getMensaje().equals(Paquete.msjFracaso))
-								JOptionPane.showMessageDialog(null, "Error al iniciar sesión. Revise el usuario y la contraseña");
+								JOptionPane.showMessageDialog(null, "Error al iniciar sesiÃ³n. Revise el usuario y la contraseÃ±a");
 	
-							// El usuario no pudo iniciar sesión
+							// El usuario no pudo iniciar sesiï¿½n
 							paqueteUsuario.setInicioSesion(false);
 						}
 						break;
 	
 					case Comando.SALIR:
-						// El usuario no pudo iniciar sesión
+						// El usuario no pudo iniciar sesiï¿½n
 						paqueteUsuario.setInicioSesion(false);
 						salida.writeObject(gson.toJson(new Paquete(Comando.DESCONECTAR), Paquete.class));
 						cliente.close();
@@ -212,7 +216,7 @@ public class Cliente extends Thread {
 				menuCarga.dispose();
 	
 			} catch (IOException | InterruptedException | ClassNotFoundException e) {
-				JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor durante el inicio de sesión.");
+				JOptionPane.showMessageDialog(null, "Fallo la conexiÃ³n con el servidor durante el inicio de sesiÃ³n.");
 				System.exit(1);
 				e.printStackTrace();
 			}
