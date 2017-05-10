@@ -14,11 +14,5 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>Server</name>
-			<type>2</type>
-			<location>/home/lucas/software/eclipse/C::/Users/leodr/Desktop/jrpg/servidor/src</location>
-		</link>
-	</linkedResources>
+	
 </projectDescription>
