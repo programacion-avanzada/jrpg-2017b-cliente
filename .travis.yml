@@ -12,6 +12,7 @@ before_install:
 
  - pwd
  - ls
+ - wget -P "/home/travis/build/LosIsotopos/jrpg-2017a-cliente/" https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar
  - chmod +x gradlew
- - git clone https://github.com/LosIsotopos/jrpg-2017a-dominio.git ~/build/LosIsotopos/jrpg-2017a-dominio
+ - git clone https://github.com/LosIsotopos/jrpg-2017a-dominio.git /home/travis/build/LosIsotopos/jrpg-2017a-dominio
 
