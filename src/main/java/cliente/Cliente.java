@@ -69,7 +69,7 @@ public class Cliente extends Thread {
 		}
 		
 		try {
-			cliente = new Socket(ip, puerto);
+			cliente = new Socket("192.168.0.104", puerto);
 			miIp = cliente.getInetAddress().getHostAddress();
 			entrada = new ObjectInputStream(cliente.getInputStream());
 			salida = new ObjectOutputStream(cliente.getOutputStream());
