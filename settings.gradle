@@ -1,0 +1,2 @@
+include ':Dependency'
+project(':Dependency').projectDir = new File(settingsDir, '../jrpg-2017a-dominio')
