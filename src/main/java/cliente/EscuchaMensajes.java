@@ -80,8 +80,8 @@ public class EscuchaMensajes extends Thread {
 //					juego.getEstadoBatalla().getEnemigo().setEnergia(paqueteAtacar.getNuevaEnergiaPersonaje());
 //					juego.getEstadoBatalla().getPersonaje().setSalud(paqueteAtacar.getNuevaSaludEnemigo());
 //					juego.getEstadoBatalla().getPersonaje().setEnergia(paqueteAtacar.getNuevaEnergiaEnemigo());
-					juego.getEstadoBatalla().getEnemigo().actualizarAtribs(paqueteAtacar.getPersonaje());
-					juego.getEstadoBatalla().getPersonaje().actualizarAtribs(paqueteAtacar.getEnemigo());
+					juego.getEstadoBatalla().getEnemigo().actualizarAtributos(paqueteAtacar.getMapPersonaje());
+					juego.getEstadoBatalla().getPersonaje().actualizarAtributos(paqueteAtacar.getMapEnemigo());
 					juego.getEstadoBatalla().setMiTurno(true);
 					break;
 					
