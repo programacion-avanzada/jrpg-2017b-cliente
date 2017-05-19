@@ -136,7 +136,7 @@ public class EstadoBatalla extends Estado {
 
 					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 6) {
 						seRealizoAccion = true;
-						personaje.serEnergizado(5);
+						personaje.serEnergizado(10);
 						haySpellSeleccionada = true;
 					}
 				}
