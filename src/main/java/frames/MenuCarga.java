@@ -21,7 +21,7 @@ public class MenuCarga extends JFrame {
 	private JLabel barraCargando;
 
 	public MenuCarga(final Cliente cliente) {
-
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
 				new Point(0,0),"custom cursor"));

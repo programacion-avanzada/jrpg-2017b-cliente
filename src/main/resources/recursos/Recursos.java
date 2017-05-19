@@ -235,7 +235,7 @@ public class Recursos {
 		// Fin Ogro
 
 		// Inicio Elfo
-		spriteElfo = new SpriteSheet(CargadorImagen.cargarImagen("/Elfo.png"));
+		spriteElfo = new SpriteSheet(CargadorImagen.cargarImagen("/elfo2.png"));
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
