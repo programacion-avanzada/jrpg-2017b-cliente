@@ -165,7 +165,7 @@ public class Cliente extends Thread {
 							if (paquete.getMensaje().equals(Paquete.msjFracaso))
 								JOptionPane.showMessageDialog(null, "Error al iniciar sesión. Revise el usuario y la contraseña");
 	
-							// El usuario no pudo iniciar sesi�n
+							// El usuario no pudo iniciar sesión
 							paqueteUsuario.setInicioSesion(false);
 						}
 						break;

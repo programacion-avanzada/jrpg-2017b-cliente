@@ -17,7 +17,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int fuerza;
 	private int destreza;
 	private int inteligencia;
-	private int nivel;
+	private int nivel = 1;
 	private int experiencia;
 
 	public PaquetePersonaje() {

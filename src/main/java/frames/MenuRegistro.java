@@ -1,31 +1,28 @@
 package frames;
 
 import java.awt.Color;
-
-import javax.swing.JFrame;
-
-import cliente.*;
-import mensajeria.Comando;
-
-import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
 /*import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;*/
 import javax.swing.JButton;
-import javax.swing.ImageIcon;
-
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JLayeredPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import cliente.Cliente;
+import mensajeria.Comando;
 
 public class MenuRegistro extends JFrame {
 	
@@ -85,10 +82,22 @@ public class MenuRegistro extends JFrame {
 		btnRegistrarse.setIcon(new ImageIcon(MenuRegistro.class.getResource("/frames/BotonMenu.png")));
 		
 		pwPassword = new JPasswordField();
+		pwPassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logIn(cliente);
+				dispose();
+			}
+		});
 		pwPassword.setBounds(199, 120, 118, 20);
 		layeredPane.add(pwPassword, new Integer(1));
 		
 		txtUsuario = new JTextField();
+		txtUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logIn(cliente);
+				dispose();
+			}
+		});
 		txtUsuario.setBounds(199, 69, 118, 20);
 		layeredPane.add(txtUsuario, new Integer(1));
 		txtUsuario.setColumns(10);
@@ -99,12 +108,7 @@ public class MenuRegistro extends JFrame {
 		labelBackground.setIcon(new ImageIcon(MenuRegistro.class.getResource("/frames/menuBackground.jpg")));
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				synchronized(cliente){
-					cliente.getPaqueteUsuario().setUsername(txtUsuario.getText());
-					cliente.getPaqueteUsuario().setPassword(pwPassword.getText());
-					cliente.setAccion(Comando.REGISTRO);
-					cliente.notify();
-				}
+				logIn(cliente);
 				dispose();
 			}
 		});
@@ -124,5 +128,14 @@ public class MenuRegistro extends JFrame {
 
 	public void setPasswordField(JPasswordField pwPassword) {
 		this.pwPassword = pwPassword;
+	}
+
+	private void logIn(final Cliente cliente) {
+		synchronized(cliente){
+			cliente.getPaqueteUsuario().setUsername(txtUsuario.getText());
+			cliente.getPaqueteUsuario().setPassword(String.valueOf(pwPassword.getPassword()));
+			cliente.setAccion(Comando.REGISTRO);
+			cliente.notify();
+		}
 	}
 }
