@@ -27,7 +27,7 @@ public class EscuchaMensajes extends Thread {
 	private Cliente cliente;
 	private ObjectInputStream entrada;
 	private final Gson gson = new Gson();
-	
+
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 
@@ -37,6 +37,7 @@ public class EscuchaMensajes extends Thread {
 		entrada = cliente.getEntrada();
 	}
 
+	@Override
 	public void run() {
 
 		try {
@@ -51,21 +52,21 @@ public class EscuchaMensajes extends Thread {
 			ubicacionPersonajes = new HashMap<>();
 
 			while (true) {
-				
+
 				String objetoLeido = (String)entrada.readObject();
 
 				paquete = gson.fromJson(objetoLeido , Paquete.class);
-				
+
 				switch (paquete.getComando()) {
-	
+
 				case Comando.CONEXION:
-					personajesConectados = (Map<Integer, PaquetePersonaje>) gson.fromJson(objetoLeido, PaqueteDePersonajes.class).getPersonajes();
+					personajesConectados = gson.fromJson(objetoLeido, PaqueteDePersonajes.class).getPersonajes();
 					break;
 
 				case Comando.MOVIMIENTO:
-					ubicacionPersonajes = (Map<Integer, PaqueteMovimiento>) gson.fromJson(objetoLeido, PaqueteDeMovimientos.class).getPersonajes();
+					ubicacionPersonajes = gson.fromJson(objetoLeido, PaqueteDeMovimientos.class).getPersonajes();
 					break;
-					
+
 				case Comando.BATALLA:
 					paqueteBatalla = gson.fromJson(objetoLeido, PaqueteBatalla.class);
 					juego.getPersonaje().setEstado(Estado.estadoBatalla);
@@ -73,31 +74,31 @@ public class EscuchaMensajes extends Thread {
 					juego.setEstadoBatalla(new EstadoBatalla(juego, paqueteBatalla));
 					Estado.setEstado(juego.getEstadoBatalla());
 					break;
-					
+
 				case Comando.ATACAR:
-					paqueteAtacar = (PaqueteAtacar) gson.fromJson(objetoLeido, PaqueteAtacar.class);
+					paqueteAtacar = gson.fromJson(objetoLeido, PaqueteAtacar.class);
 					juego.getEstadoBatalla().getEnemigo().actualizarAtributos(paqueteAtacar.getMapPersonaje());
 					juego.getEstadoBatalla().getPersonaje().actualizarAtributos(paqueteAtacar.getMapEnemigo());
 					juego.getEstadoBatalla().setMiTurno(true);
 					break;
-					
+
 				case Comando.FINALIZARBATALLA:
-					paqueteFinalizarBatalla = (PaqueteFinalizarBatalla) gson.fromJson(objetoLeido, PaqueteFinalizarBatalla.class);
+					paqueteFinalizarBatalla = gson.fromJson(objetoLeido, PaqueteFinalizarBatalla.class);
 					juego.getPersonaje().setEstado(Estado.estadoJuego);
 					Estado.setEstado(juego.getEstadoJuego());
 					break;
-					
+
 				case Comando.ACTUALIZARPERSONAJE:
-					paquetePersonaje = (PaquetePersonaje) gson.fromJson(objetoLeido, PaquetePersonaje.class);
+					paquetePersonaje = gson.fromJson(objetoLeido, PaquetePersonaje.class);
 
 					personajesConectados.remove(paquetePersonaje.getId());
 					personajesConectados.put(paquetePersonaje.getId(), paquetePersonaje);
-					
+
 					if(juego.getPersonaje().getId() == paquetePersonaje.getId()) {
 						juego.actualizarPersonaje();
 						juego.getEstadoJuego().actualizarPersonaje();
 					}
-				}	
+				}
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
@@ -108,7 +109,7 @@ public class EscuchaMensajes extends Thread {
 	public Map<Integer, PaqueteMovimiento> getUbicacionPersonajes() {
 		return ubicacionPersonajes;
 	}
-	
+
 	public Map<Integer, PaquetePersonaje> getPersonajesConectados(){
 		return personajesConectados;
 	}

@@ -10,15 +10,16 @@ public class PaqueteDeMovimientos extends Paquete implements Serializable, Clone
 	public PaqueteDeMovimientos(){
 
 	}
-	
+
 	public PaqueteDeMovimientos(Map<Integer, PaqueteMovimiento> personajes){
 		this.personajes = personajes;
 	}
-	
+
 	public Map<Integer, PaqueteMovimiento> getPersonajes(){
 		return personajes;
 	}
 
+	@Override
 	public Object clone() {
 		Object obj = null;
 		obj = super.clone();

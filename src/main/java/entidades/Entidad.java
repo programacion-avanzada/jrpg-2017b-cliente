@@ -149,10 +149,10 @@ public class Entidad {
 		// Tomo el click izquierdo
 		if (juego.getHandlerMouse().getNuevoClick()) {
 			if (juego.getEstadoJuego().getHaySolicitud()) {
-				
+
 				if (juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])) {
 					if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], posMouse[1])) {
-						
+
 						// pregunto si el menu emergente es de tipo batalla
 						if(juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuBatallar){
 							PaqueteBatalla pBatalla = new PaqueteBatalla();
@@ -171,8 +171,8 @@ public class Entidad {
 						} else {
 							juego.getEstadoJuego().setHaySolicitud(false, null, 0);
 						}
-						
-						
+
+
 					} else if (juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1])) {
 						juego.getEstadoJuego().setHaySolicitud(false, null, 0);
 					}
@@ -187,7 +187,7 @@ public class Entidad {
 				PaqueteMovimiento actual;
 
 				while (it.hasNext()) {
-					key = (int) it.next();
+					key = it.next();
 					actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
 					tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
 					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
@@ -205,7 +205,7 @@ public class Entidad {
 				}
 			}
 		}
-	
+
 
 		if (juego.getHandlerMouse().getNuevoRecorrido() && !juego.getEstadoJuego().getHaySolicitud()) {
 
@@ -346,7 +346,7 @@ public class Entidad {
 	    drawY = (int) (y - juego.getCamara().getyOffset());
 	    g.drawImage(getFrameAnimacionActual(), drawX, drawY+4, ancho, alto, null);
 	}
-	
+
 	public void graficarNombre(Graphics g){
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Book Antiqua", Font.BOLD, 15));

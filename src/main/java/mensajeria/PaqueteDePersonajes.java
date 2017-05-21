@@ -10,15 +10,16 @@ public class PaqueteDePersonajes extends Paquete implements Serializable, Clonea
 	public PaqueteDePersonajes(){
 
 	}
-	
+
 	public PaqueteDePersonajes(Map<Integer, PaquetePersonaje> personajes){
 		this.personajes = personajes;
 	}
-	
+
 	public Map<Integer, PaquetePersonaje> getPersonajes(){
 		return personajes;
 	}
 
+	@Override
 	public Object clone() {
 		Object obj = null;
 		obj = super.clone();
