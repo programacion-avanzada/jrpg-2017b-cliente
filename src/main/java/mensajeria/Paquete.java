@@ -3,24 +3,24 @@ package mensajeria;
 import java.io.Serializable;
 
 public class Paquete implements Serializable, Cloneable {
-	
+
 	public static String msjExito = "1";
 	public static String msjFracaso = "0";
-	
+
 	private String mensaje;
 	private String ip;
 	private int comando;
 
 	public Paquete() {
-		
+
 	}
-	
+
 	public Paquete(String mensaje, String nick, String ip, int comando) {
 		this.mensaje = mensaje;
 		this.ip = ip;
 		this.comando = comando;
 	}
-	
+
 	public Paquete(String mensaje, int comando) {
 		this.mensaje = mensaje;
 		this.comando = comando;
@@ -54,7 +54,8 @@ public class Paquete implements Serializable, Cloneable {
 	public int getComando() {
 		return comando;
 	}
-	
+
+	@Override
 	public Object clone() {
 		Object obj = null;
 		try {

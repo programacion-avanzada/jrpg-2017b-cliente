@@ -15,6 +15,8 @@ import mensajeria.PaquetePersonaje;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -42,7 +44,7 @@ public class MenuCreacionPj extends JFrame {
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
 				new Point(0,0),"custom cursor"));
-		
+
 		final String vecSalud[] = { "55", "50", "60" };
 		final String vecEnergia[] = { "55", "60", "50" };
 		final String vecFuerza[] = { "15", "10", "10" };
@@ -71,7 +73,7 @@ public class MenuCreacionPj extends JFrame {
 		});
 
 		setTitle("WOME - Crear personaje");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -162,8 +164,9 @@ public class MenuCreacionPj extends JFrame {
 		layeredPane.add(btnAceptar, new Integer(1));
 		btnAceptar.setFocusable(false);
 		btnAceptar.setIcon(new ImageIcon(MenuCreacionPj.class.getResource("/frames/BotonMenu.png")));
-		
+
 		btnAceptar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				personaje.setNombre(nombre.getText());
 				if (nombre.getText().equals(""))
@@ -181,7 +184,7 @@ public class MenuCreacionPj extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		JLabel lblNewLabel = new JLabel("Raza");
 		lblNewLabel.setBounds(33, 23, 46, 14);
 		layeredPane.add(lblNewLabel, new Integer(1));
@@ -198,6 +201,7 @@ public class MenuCreacionPj extends JFrame {
 		cbxCasta.setBounds(161, 48, 76, 20);
 		layeredPane.add(cbxCasta, new Integer(1));
 		cbxCasta.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				fuerza.setText(vecFuerza[cbxCasta.getSelectedIndex()]);
 				destreza.setText(vecDestreza[cbxCasta.getSelectedIndex()]);
@@ -212,6 +216,7 @@ public class MenuCreacionPj extends JFrame {
 		cbxRaza.setBounds(32, 48, 76, 20);
 		layeredPane.add(cbxRaza, new Integer(1));
 		cbxRaza.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				salud.setText(vecSalud[cbxRaza.getSelectedIndex()]);
 				energia.setText(vecEnergia[cbxRaza.getSelectedIndex()]);
@@ -220,7 +225,7 @@ public class MenuCreacionPj extends JFrame {
 		cbxRaza.addItem("Humano");
 		cbxRaza.addItem("Elfo");
 		cbxRaza.addItem("Orco");
-		
+
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBounds(0, 0, 444, 271);
 		layeredPane.add(lblBackground, new Integer(0));

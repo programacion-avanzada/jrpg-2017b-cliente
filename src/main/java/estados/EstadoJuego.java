@@ -34,11 +34,11 @@ public class EstadoJuego extends Estado {
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private boolean haySolicitud;
 	private int tipoSolicitud;
-	
+
 	private final Gson gson = new Gson();
-	
+
 	private BufferedImage miniaturaPersonaje;
-	
+
 	MenuInfoPersonaje menuEnemigo;
 
 	public EstadoJuego(Juego juego) {
@@ -78,11 +78,11 @@ public class EstadoJuego extends Estado {
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
 		if(haySolicitud)
 			menuEnemigo.graficar(g, tipoSolicitud);
-			
+
 	}
 
 	public void graficarPersonajes(Graphics g) {
-		
+
 		if(juego.getEscuchaMensajes().getPersonajesConectados() != null){
 			personajesConectados = new HashMap(juego.getEscuchaMensajes().getPersonajesConectados());
 			ubicacionPersonajes = new HashMap(juego.getEscuchaMensajes().getUbicacionPersonajes());
@@ -92,7 +92,7 @@ public class EstadoJuego extends Estado {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
 			while (it.hasNext()) {
-				key = (int) it.next();
+				key = it.next();
 				actual = ubicacionPersonajes.get(key);
 				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
 						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
@@ -101,11 +101,11 @@ public class EstadoJuego extends Estado {
 			}
 		}
 	}
-	
+
 	public Entidad getPersonaje() {
 		return entidadPersonaje;
 	}
-	
+
 	private String getMundo() {
 		int mundo = juego.getPersonaje().getMapa();
 
@@ -119,22 +119,22 @@ public class EstadoJuego extends Estado {
 
 		return null;
 	}
-	
+
 	public void setHaySolicitud(boolean b, PaquetePersonaje enemigo, int tipoSolicitud) {
 		haySolicitud = b;
 		// menu que mostrara al enemigo
 		menuEnemigo = new MenuInfoPersonaje(300, 50, enemigo);
 		this.tipoSolicitud = tipoSolicitud;
 	}
-	
+
 	public boolean getHaySolicitud() {
 		return haySolicitud;
 	}
-	
+
 	public void actualizarPersonaje() {
 		paquetePersonaje = juego.getPersonaje();
 	}
-	
+
 	public MenuInfoPersonaje getMenuEnemigo(){
 		return menuEnemigo;
 	}
@@ -142,5 +142,5 @@ public class EstadoJuego extends Estado {
 	public int getTipoSolicitud() {
 		return tipoSolicitud;
 	}
-	
+
 }

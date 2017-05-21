@@ -31,15 +31,15 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	
+
 	public int getMapa(){
 		return idMapa;
 	}
-	
+
 	public void setMapa(int mapa){
 		idMapa = mapa;
 	}
-	
+
 	public int getNivel() {
 		return nivel;
 	}
@@ -144,6 +144,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		this.inteligencia = inteligencia;
 	}
 
+	@Override
 	public Object clone() {
 		Object obj = null;
 		obj = super.clone();

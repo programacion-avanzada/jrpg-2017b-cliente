@@ -18,7 +18,7 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 		id = idPersonaje;
 		setComando(Comando.MOVIMIENTO);
 	}
-	
+
 	public PaqueteMovimiento(int idPersonaje, float posX, float posY) {
 		this.id = idPersonaje;
 		this.posX = posX;
@@ -66,6 +66,7 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 		this.frame = frame;
 	}
 
+	@Override
 	public Object clone() {
 		Object obj = null;
 		obj = super.clone();

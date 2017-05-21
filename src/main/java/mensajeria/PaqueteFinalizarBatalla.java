@@ -6,7 +6,7 @@ public class PaqueteFinalizarBatalla extends Paquete implements Serializable, Cl
 
 	private int id;
 	private int idEnemigo;
-	
+
 	public PaqueteFinalizarBatalla(){
 		setComando(Comando.FINALIZARBATALLA);
 	}

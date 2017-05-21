@@ -13,7 +13,7 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 	private int nuevaEnergiaEnemigo;
 	private HashMap<String,Integer> mapPersonaje = new HashMap<String,Integer>();
 	private HashMap<String,Integer> mapEnemigo = new HashMap<String,Integer>();
-	
+
 	public PaqueteAtacar(int id, int idEnemigo, int nuevaSalud, int nuevaEnergia, int nuevaSaludEnemigo, int nuevaEnergiaEnemigo, int nuevaDefensa, int nuevaDefensaEnemigo, double probEvitarDano, double probEvitarDanoEnemgio) {
 		setComando(Comando.ATACAR);
 		this.id = id;
@@ -45,7 +45,7 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 	public void setIdEnemigo(int idEnemigo) {
 		this.idEnemigo = idEnemigo;
 	}
-	
+
 	public int getNuevaSaludPersonaje() {
 		return nuevaSaludPersonaje;
 	}

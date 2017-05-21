@@ -15,6 +15,7 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 import com.google.gson.Gson;
 
@@ -32,15 +33,16 @@ public class Pantalla {
 
 	public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
 		pantalla = new JFrame(NOMBRE);
-		
+
 		pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 			new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
 			new Point(0,0),"custom cursor"));
-		
+
 		pantalla.setSize(ANCHO, ALTO);
 		pantalla.setResizable(false);
-		pantalla.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		pantalla.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		pantalla.addWindowListener(new WindowAdapter() {
+			@Override
 			public void windowClosing(WindowEvent evt) {
 				try {
 					Paquete p = new Paquete();
@@ -79,11 +81,11 @@ public class Pantalla {
 	public JFrame getFrame() {
 		return pantalla;
 	}
-	
+
 	public void mostrar() {
 		pantalla.setVisible(true);
 	}
-	
+
 	public static void centerString(Graphics g, Rectangle r, String s) {
 	    FontRenderContext frc = new FontRenderContext(null, true, true);
 
@@ -95,7 +97,7 @@ public class Pantalla {
 
 	    int a = (r.width / 2) - (rWidth / 2) - rX;
 	    int b = (r.height / 2) - (rHeight / 2) - rY;
-	    
+
 	    g.drawString(s, r.x + a, r.y + b);
 	}
 }
