@@ -23,12 +23,13 @@ import recursos.Recursos;
 import entidades.Animacion;
 import estados.Estado;
 import interfaz.MenuInfoPersonaje;
-
+/**Clase Entidad
+ */
 public class Entidad {
 
 	Juego juego;
 
-	// Tama�o de la entidad
+	// Tamaño de la entidad
 	private int ancho;
 	private int alto;
 
@@ -45,8 +46,8 @@ public class Entidad {
 	private int yOffset;
 	private int drawX;
 	private int drawY;
-	private int posMouseRecorrido[];
-	private int posMouse[];
+	private int []posMouseRecorrido;
+	private int []posMouse;
 	private int[] tile;
 
 	// Movimiento Actual
@@ -84,9 +85,20 @@ public class Entidad {
 	private String nombre;
 	private int[] tilePersonajes;
 	private int idEnemigo;
-
-	public Entidad(Juego juego, Mundo mundo, int ancho, int alto, String nombre, float spawnX, float spawnY,
-			LinkedList<BufferedImage[]> animaciones, int velAnimacion) {
+	/**Constructor de la clase Entidad
+	 * @param juego juego con el que se instancia Entidad
+	 * @param mundo mundo con el que se instancia Entidad
+	 * @param ancho ancho
+	 * @param alto alto
+	 * @param nombre nombre del personaje
+	 * @param spawnX tile X donde spawnea
+	 * @param spawnY tile Y donde spawnea
+	 * @param animaciones animaciones del personaje
+	 * @param velAnimacion velocidad de animacion del personaje
+	 */
+	public Entidad(final Juego juego, final Mundo mundo, final int ancho, final int alto, 
+			final String nombre, final float spawnX, final float spawnY,
+			final LinkedList<BufferedImage[]> animaciones, final int velAnimacion) {
 		this.juego = juego;
 		this.ancho = ancho;
 		this.alto = alto;
@@ -112,7 +124,8 @@ public class Entidad {
 		juego.getUbicacionPersonaje().setDireccion(getDireccion());
 		juego.getUbicacionPersonaje().setFrame(getFrame());
 	}
-
+	/**Actualiza el personaje
+	 */
 	public void actualizar() {
 
 		if (enMovimiento) {
@@ -140,7 +153,8 @@ public class Entidad {
 
 		juego.getCamara().Centrar(this);
 	}
-
+	/**Devuelve la entrada
+	 */
 	public void getEntrada() {
 
 		posMouseRecorrido = juego.getHandlerMouse().getPosMouseRecorrido();
@@ -151,10 +165,12 @@ public class Entidad {
 			if (juego.getEstadoJuego().getHaySolicitud()) {
 
 				if (juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])) {
-					if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], posMouse[1])) {
+					if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], 
+							posMouse[1])) {
 
 						// pregunto si el menu emergente es de tipo batalla
-						if(juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuBatallar){
+						if (juego.getEstadoJuego().getTipoSolicitud() == 
+								MenuInfoPersonaje.menuBatallar) {
 							PaqueteBatalla pBatalla = new PaqueteBatalla();
 
 							pBatalla.setId(juego.getPersonaje().getId());
@@ -163,9 +179,11 @@ public class Entidad {
 							juego.getEstadoJuego().setHaySolicitud(false, null, 0);
 
 							try {
-								juego.getCliente().getSalida().writeObject(gson.toJson(pBatalla));
+								juego.getCliente().getSalida().writeObject(gson.toJson
+										(pBatalla));
 							} catch (IOException e) {
-								JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
+								JOptionPane.showMessageDialog(null, "Fallo la conexión "
+										+ "con el servidor");
 								e.printStackTrace();
 							}
 						} else {
@@ -173,17 +191,19 @@ public class Entidad {
 						}
 
 
-					} else if (juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1])) {
+					} else if (juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(
+							posMouse[0], posMouse[1])) {
 						juego.getEstadoJuego().setHaySolicitud(false, null, 0);
 					}
 				} else {
 					juego.getEstadoJuego().setHaySolicitud(false, null, 0);
 				}
 			} else {
-				Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
+				Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().
+						keySet().iterator();
 				int key;
-				int tileMoverme[] = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
-						posMouse[1] + juego.getCamara().getyOffset() - yOffset);
+				int []tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - 
+						xOffset,posMouse[1] + juego.getCamara().getyOffset() - yOffset);
 				PaqueteMovimiento actual;
 
 				while (it.hasNext()) {
@@ -191,14 +211,17 @@ public class Entidad {
 					actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
 					tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
 					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
-							&& juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()) != null
-							&& juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje())
-									.getEstado() == Estado.estadoJuego) {
+							&& juego.getEscuchaMensajes().getPersonajesConectados().get(actual.
+									getIdPersonaje()) != null
+							&& juego.getEscuchaMensajes().getPersonajesConectados().get(actual.
+									getIdPersonaje()).getEstado() == Estado.estadoJuego) {
 
-						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
+						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == 
+								tilePersonajes[1]) {
 							idEnemigo = actual.getIdPersonaje();
-							juego.getEstadoJuego().setHaySolicitud(true,
-									juego.getEscuchaMensajes().getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.menuBatallar);
+							juego.getEstadoJuego().setHaySolicitud(true,juego.getEscuchaMensajes().
+									getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.
+									menuBatallar);
 							juego.getHandlerMouse().setNuevoClick(false);
 						}
 					}
@@ -246,9 +269,10 @@ public class Entidad {
 				return;
 			}
 
-			if (pilaMovimiento == null)
-				pilaMovimiento = caminoMasCorto(tileActual[0], tileActual[1], tileMoverme[0], tileMoverme[1]);
-
+			if (pilaMovimiento == null) {
+				pilaMovimiento = caminoMasCorto(tileActual[0], tileActual[1], 
+						tileMoverme[0], tileMoverme[1]);
+			}
 			// Me muevo al primero de la pila
 			NodoDePila nodoActualTile = pilaMovimiento.pop();
 
@@ -267,34 +291,35 @@ public class Entidad {
 			xFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[0];
 			yFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[1];
 
-			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] - 1)
+			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] - 1) {
 				movimientoHacia = verticalSup;
-
-			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] + 1)
+			}
+			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] + 1) {
 				movimientoHacia = verticalInf;
-
-			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] + 1)
+			}
+			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] + 1) {
 				movimientoHacia = horizontalIzq;
-
-			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] - 1)
+			}
+			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] - 1) {
 				movimientoHacia = horizontalDer;
-
-			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1])
+			}
+			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1]) {
 				movimientoHacia = diagonalSupIzq;
-
-			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1])
+			}
+			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1]) {
 				movimientoHacia = diagonalInfDer;
-
-			if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] - 1)
+			}
+			if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] - 1) {
 				movimientoHacia = diagonalSupDer;
-
-			if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] + 1)
+			}
+			if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] + 1) {
 				movimientoHacia = diagonalInfIzq;
-
+			}
 			enMovimiento = true;
 		}
 	}
-
+	/**Mueve el personaje
+	 */
 	public void mover() {
 
 		dx = 0;
@@ -303,15 +328,15 @@ public class Entidad {
 		double paso = 1;
 
 		if (enMovimiento && !(x == xFinal && y == yFinal - 32)) {
-			if (movimientoHacia == verticalSup)
+			if (movimientoHacia == verticalSup) {
 				dy -= paso;
-			else if (movimientoHacia == verticalInf)
+			} else if (movimientoHacia == verticalInf) {
 				dy += paso;
-			else if (movimientoHacia == horizontalDer)
+			} else if (movimientoHacia == horizontalDer) {
 				dx += paso;
-			else if (movimientoHacia == horizontalIzq)
+			} else if (movimientoHacia == horizontalIzq) {
 				dx -= paso;
-			else if (movimientoHacia == diagonalInfDer) {
+			} else if (movimientoHacia == diagonalInfDer) {
 				dx += paso;
 				dy += paso / 2;
 			} else if (movimientoHacia == diagonalInfIzq) {
@@ -340,19 +365,22 @@ public class Entidad {
 			}
 		}
 	}
-
-	public void graficar(Graphics g) {
+	/**Grafica el frame del personaje
+	 */
+	public void graficar(final Graphics g) {
 	    drawX = (int) (x - juego.getCamara().getxOffset());
 	    drawY = (int) (y - juego.getCamara().getyOffset());
-	    g.drawImage(getFrameAnimacionActual(), drawX, drawY+4, ancho, alto, null);
+	    g.drawImage(getFrameAnimacionActual(), drawX, drawY + 4, ancho, alto, null);
 	}
-
-	public void graficarNombre(Graphics g){
+	/**Grafica el nombre
+	 */
+	public void graficarNombre(final Graphics g) {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Book Antiqua", Font.BOLD, 15));
 	    Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
 	}
-
+	/**Obtiene el frameActual del personaje
+	 */
 	private BufferedImage getFrameAnimacionActual() {
 		if (movimientoHacia == horizontalIzq) {
 			return moverIzq.getFrameActual();
@@ -374,11 +402,14 @@ public class Entidad {
 
 		return Recursos.orco.get(6)[0];
 	}
-
+	/**Pide la direccion donde va
+	 * @return devuelve el movimiento hacia donde va
+	 */
 	private int getDireccion() {
 		return movimientoHacia;
 	}
-
+	/**Obtiene el frame donde esta el personaje
+	 */
 	private int getFrame() {
 		if (movimientoHacia == horizontalIzq) {
 			return moverIzq.getFrame();
@@ -400,22 +431,29 @@ public class Entidad {
 
 		return 0;
 	}
-
+	/**Envia la posicion del personaje
+	 */
 	private void enviarPosicion() {
 		juego.getUbicacionPersonaje().setPosX(x);
 		juego.getUbicacionPersonaje().setPosY(y);
 		juego.getUbicacionPersonaje().setDireccion(getDireccion());
 		juego.getUbicacionPersonaje().setFrame(getFrame());
 		try {
-			juego.getCliente().getSalida()
-					.writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
+			juego.getCliente().getSalida().writeObject(gson.toJson(juego.
+					getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
 			e.printStackTrace();
 		}
 	}
-
-	private PilaDeTiles caminoMasCorto(int xInicial, int yInicial, int xFinal, int yFinal) {
+	/**Busca el camino más corto a recorrer para llegar a una posición
+	 * @param xInicial ubicacion en X inicial
+	 * @param yInicial ubicacion en Y inicial
+	 * @param xFinal ubicacion en X final
+	 * @param yFinal ubicacion en Y final
+	 * @return la pila de tiles a recorrer
+	 */
+	private PilaDeTiles caminoMasCorto(final int xInicial, final int yInicial, final int xFinal, final int yFinal) {
 		Grafo grafoLibres = mundo.obtenerGrafoDeTilesNoSolidos();
 		// Transformo las coordenadas iniciales y finales en indices
 		int nodoInicial = (yInicial - grafoLibres.obtenerNodos()[0].obtenerY())
@@ -442,10 +480,11 @@ public class Entidad {
 		Nodo[] adyacentes = grafoLibres.obtenerNodos()[nodoInicial].obtenerNodosAdyacentes();
 		for (int i = 0; i < grafoLibres.obtenerNodos()[nodoInicial].obtenerCantidadDeAdyacentes(); i++) {
 			if (estanEnDiagonal(grafoLibres.obtenerNodos()[nodoInicial],
-					grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()]))
+					grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
 				vecCostos[adyacentes[i].obtenerIndice()] = 1.5;
-			else
+			} else {
 				vecCostos[adyacentes[i].obtenerIndice()] = 1;
+			}
 			vecPredecesores[adyacentes[i].obtenerIndice()] = nodoInicial;
 		}
 		// Aplico Dijkstra
@@ -471,8 +510,9 @@ public class Entidad {
 			for (int i = 0; i < grafoLibres.obtenerNodos()[indiceMinimo].obtenerCantidadDeAdyacentes(); i++) {
 				double valorASumar = 1;
 				if (estanEnDiagonal(grafoLibres.obtenerNodos()[indiceMinimo],
-						grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()]))
+						grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
 					valorASumar = 1.5;
+				}
 				if (vecCostos[indiceMinimo] + valorASumar < vecCostos[adyacentes[i].obtenerIndice()]) {
 					vecCostos[adyacentes[i].obtenerIndice()] = vecCostos[indiceMinimo] + valorASumar;
 					vecPredecesores[adyacentes[i].obtenerIndice()] = indiceMinimo;
@@ -489,49 +529,73 @@ public class Entidad {
 
 		return camino;
 	}
-
-	private boolean estanEnDiagonal(Nodo nodoUno, Nodo nodoDos) {
+	/**Pregunta si los personajes estan en diagonal
+	 * @param nodoUno personaje 1
+	 * @param nodoDos personaje 2
+	 * @return true or false
+	 */
+	private boolean estanEnDiagonal(final Nodo nodoUno, final Nodo nodoDos) {
 		if (nodoUno.obtenerX() == nodoDos.obtenerX() || nodoUno.obtenerY() == nodoDos.obtenerY())
 			return false;
 		return true;
 	}
-
+	/**Pide el valor de X 
+	 * @return devuelve la ubicacion en X
+	 */
 	public float getX() {
 		return x;
 	}
-
-	public void setX(float x) {
+	/**Setea el valor de X
+	 * @param x valor nuevo de la ubicacion en X
+	 */
+	public void setX(final float x) {
 		this.x = x;
 	}
-
+	/**Pide el valor de Y 
+	 * @return devuelve la ubicacion en Y
+	 */
 	public float getY() {
 		return y;
 	}
-
-	public void setY(float y) {
+	/**Setea el valor de Y
+	 * @param y valor nuevo de la ubicacion en Y
+	 */
+	public void setY(final float y) {
 		this.y = y;
 	}
-
+	/**Pide el ancho 
+	 * @return devuelve el ancho
+	 */
 	public int getAncho() {
 		return ancho;
 	}
-
-	public void setAncho(int ancho) {
+	/**Setea el ancho
+	 * @param ancho nuevo ancho a setear
+	 */
+	public void setAncho(final int ancho) {
 		this.ancho = ancho;
 	}
-
+	/**Pide el alto 
+	 * @return devuelve el alto
+	 */
 	public int getAlto() {
 		return alto;
 	}
-
-	public void setAlto(int alto) {
+	/**Setea el alto
+	 * @param alto nuevo alto a setear
+	 */
+	public void setAlto(final int alto) {
 		this.alto = alto;
 	}
-
+	/**Pide el offset de X
+	 * @return devuelve el offset de X
+	 */
 	public int getxOffset() {
 		return xOffset;
 	}
-
+	/**Pide el offset de Y 
+	 * @return devuelve el offset de Y
+	 */
 	public int getYOffset() {
 		return yOffset;
 	}

@@ -1,30 +1,42 @@
 package entidades;
-
+/**Clase Nodo de Pila
+ */
 public class NodoDePila {
 
 	private int x;
 	private int y;
 	private NodoDePila ptrSiguiente;
-
-	public NodoDePila(int x, int y){
+	/**Constructor de la clase Nodo de Pila
+	 * @param x valor de x donde esta el personaje
+	 * @param y valor de y donde esta el personaje
+	 */
+	public NodoDePila(final int x, final int y) {
 		this.x = x;
 		this.y = y;
 		ptrSiguiente = null;
 	}
-
-	public NodoDePila obtenerSiguiente(){
+	/**Pide el siguiente 
+	 * @return devuelve un nodo de pila con el siguiente
+	 */
+	public NodoDePila obtenerSiguiente() {
 		return ptrSiguiente;
 	}
-
-	public void establecerSiguiente(NodoDePila nodo){
+	/**Setea el siguiente
+	 * @param nodo nuevo nodo a setear
+	 */
+	public void establecerSiguiente(NodoDePila nodo) {
 		ptrSiguiente = nodo;
 	}
-
-	public int obtenerX(){
+	/**Pide el valor de X 
+	 * @return devuelve el valor de X
+	 */
+	public int obtenerX() {
 		return x;
 	}
-
-	public int obtenerY(){
+	/**Pide el valor de Y 
+	 * @return devuelve el valor de Y
+	 */
+	public int obtenerY() {
 		return y;
 	}
 

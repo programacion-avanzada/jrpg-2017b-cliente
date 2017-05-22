@@ -20,7 +20,10 @@ import mensajeria.PaqueteDePersonajes;
 import mensajeria.PaqueteFinalizarBatalla;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
-
+/**La clase EscuchaMensajes tiene como función  
+ * esuchar los mensajes que se enviaran
+ * al servidor.
+ */
 public class EscuchaMensajes extends Thread {
 
 	private Juego juego;
@@ -30,8 +33,10 @@ public class EscuchaMensajes extends Thread {
 
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
-
-	public EscuchaMensajes(Juego juego) {
+	/**Constructor de EsuchaMensaje
+	 * @param juego juego del que se escucha el mensaje
+	 */
+	public EscuchaMensajes(final Juego juego) {
 		this.juego = juego;
 		cliente = juego.getCliente();
 		entrada = cliente.getEntrada();
@@ -53,7 +58,7 @@ public class EscuchaMensajes extends Thread {
 
 			while (true) {
 
-				String objetoLeido = (String)entrada.readObject();
+				String objetoLeido = (String) entrada.readObject();
 
 				paquete = gson.fromJson(objetoLeido , Paquete.class);
 
@@ -94,7 +99,7 @@ public class EscuchaMensajes extends Thread {
 					personajesConectados.remove(paquetePersonaje.getId());
 					personajesConectados.put(paquetePersonaje.getId(), paquetePersonaje);
 
-					if(juego.getPersonaje().getId() == paquetePersonaje.getId()) {
+					if (juego.getPersonaje().getId() == paquetePersonaje.getId()) {
 						juego.actualizarPersonaje();
 						juego.getEstadoJuego().actualizarPersonaje();
 					}
@@ -105,12 +110,16 @@ public class EscuchaMensajes extends Thread {
 			e.printStackTrace();
 		}
 	}
-
+	/**Pide la ubicacion de los personajes
+	 * @return devuelve el mapa con la ubicacion de los personajes
+	 */
 	public Map<Integer, PaqueteMovimiento> getUbicacionPersonajes() {
 		return ubicacionPersonajes;
 	}
-
-	public Map<Integer, PaquetePersonaje> getPersonajesConectados(){
+	/**Pide los personajes conectados
+	 * @return devuelve el mapa con los personajes conectados
+	 */
+	public Map<Integer, PaquetePersonaje> getPersonajesConectados() {
 		return personajesConectados;
 	}
 }
