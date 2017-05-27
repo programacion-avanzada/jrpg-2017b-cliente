@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import frames.MenuCarga;
+import frames.MenuMapas;
 import mundo.Tile;
 
 public class Recursos {
@@ -335,27 +336,38 @@ public class Recursos {
 		
 		
 		// Mapa
-		SpriteSheet mapaAubenor = new SpriteSheet(CargadorImagen.cargarImagen("/Aubenor.png"));
-		
-		Tile.aubenor = new Tile[81];
-		
-		boolean [][] solidezAubenor = {{true, true, false, true, false, true, true, true, true, true},
-				{true, true, true, true, true, true, true, true, true, true},
-				{true, true, true, true, true, true, true, true, true, true},
-				{true, false, false, false, false , false, false ,false, true, true},
-				{false, false, false, false, false , false, false ,false, true, true},
-				{false, true, true, true, true, true, true, true, true, true},
-				{true, true, true, true, true, true, true, true, true, true},
-				{true, true, true, true, true, true, true, true, true, true}};	
-		
-		for(int y = 0 ; y < 8 ; y++){
-			
-			for(int x = 0; x < 10 ; x++){
-				
-				Tile.aubenor[y * 10 + x + 1] = new Tile(mapaAubenor.getTile(x * 64, y * 64, 64, 64), y * 10 + x + 1, solidezAubenor[y][x], 64, 64);
-				
+		if (MenuMapas.numberMap == 1) {
+			SpriteSheet mapaAubenor = new SpriteSheet(CargadorImagen.cargarImagen("/Aubenor.png"));
+			Tile.aubenor = new Tile[81];
+			boolean [][] solidezAubenor = {{true, true, false, true, false, true, true, true, true, true},
+					{true, true, true, true, true, true, true, true, true, true},
+					{true, true, true, true, true, true, true, true, true, true},
+					{true, false, false, false, false , false, false ,false, true, true},
+					{false, false, false, false, false , false, false ,false, true, true},
+					{false, true, true, true, true, true, true, true, true, true},
+					{true, true, true, true, true, true, true, true, true, true},
+					{true, true, true, true, true, true, true, true, true, true}};		
+			for(int y = 0 ; y < 8 ; y++){
+				for(int x = 0; x < 10 ; x++){
+					Tile.aubenor[y * 10 + x + 1] = new Tile(mapaAubenor.getTile(x * 64, y * 64, 64, 64), y * 10 + x + 1, solidezAubenor[y][x], 64, 64);
+				}
 			}
-			
+		} else {
+			SpriteSheet mapaAris = new SpriteSheet(CargadorImagen.cargarImagen("/Aris.png"));
+			Tile.aris = new Tile[81];
+			boolean [][] solidezAris = {{true, false, false, false, false, false, false, true, true, true},
+					{false, false, false, false, false, false, false, false, true, true},
+					{false, false, false, false, true, true, true, true, true, true},
+					{true, true, true, true, true, true, true, true, true, true},
+					{true, true, true, true, true, true, true, true, true, true},
+					{false, true, true, true, true, true, true, true, true, true},
+					{true, true, true, true, true, true, true, true, true, true},
+					{true, true, true, true, true, true, true, true, true, true}};
+			for(int y = 0 ; y < 8 ; y++){
+				for(int x = 0; x < 10 ; x++){
+					Tile.aris[y * 10 + x + 1] = new Tile(mapaAris.getTile(x * 64, y * 64, 64, 64), y * 10 + x + 1, solidezAris[y][x], 64, 64);
+				}
+			}
 		}
 		
 		// Fin Entorno

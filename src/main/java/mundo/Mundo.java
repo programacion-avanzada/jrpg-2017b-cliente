@@ -49,8 +49,17 @@ public class Mundo {
 			for (int j = 0; j < ancho; j++) {
 				iso = dosDaIso(j, i);
 				if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)) {
-					Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-							(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+					int map = juego.getPersonaje().getMapa();
+					if (map == 1) {
+						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+					} else if (map == 2) {
+						Tile.aris[Tile.arisBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+					} else if (map == 3) {
+						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+					}
 					if(!getTile(j,i).esSolido())
 						getTile(j,i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
 								(int) (iso[1] - juego.getCamara().getyOffset() - 32 ),64,64);
@@ -87,7 +96,14 @@ public class Mundo {
 	public Tile getTile(int x, int y) {
 		Tile t = Tile.tiles[tiles[x][y]];
 		if (t == null) {
-			return Tile.aubenor[Tile.aubenorBase];
+			int map = juego.getPersonaje().getMapa();
+			if (map == 1) {
+				return Tile.aubenor[Tile.aubenorBase];
+			} else if (map == 2) {
+				return Tile.aris[Tile.arisBase];
+			} else if (map == 3) {
+				return Tile.aubenor[Tile.aubenorBase];
+			}
 		}
 		return t;
 	}

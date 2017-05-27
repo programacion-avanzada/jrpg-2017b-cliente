@@ -25,7 +25,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLayeredPane;
 
 public class MenuMapas extends JFrame {
-
+	public static int numberMap = 0;
 	private JPanel contentPane;
 
 	public MenuMapas(final Cliente cliente) {
@@ -120,13 +120,14 @@ public class MenuMapas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				synchronized(cliente){
 					cliente.getPaquetePersonaje().setMapa(2);
+					numberMap = 2;
 					cliente.notify();
 				}
 				dispose();
 			}
 		});
 
-		btnAris.setEnabled(false);
+		btnAris.setEnabled(true);
 
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBounds(0, 0, 444, 271);
@@ -137,6 +138,7 @@ public class MenuMapas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				synchronized(cliente){
 					cliente.getPaquetePersonaje().setMapa(1);
+					numberMap = 1;
 					cliente.notify();
 				}
 				dispose();
