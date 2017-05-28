@@ -37,7 +37,7 @@ public class Pantalla {
 
 	public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
 		pantalla = new JFrame(NOMBRE);
-
+		pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 			new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
 			new Point(0,0),"custom cursor"));
