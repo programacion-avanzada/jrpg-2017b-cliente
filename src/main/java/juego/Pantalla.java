@@ -68,7 +68,7 @@ public class Pantalla {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_I) {
-					MenuInventario menu = new MenuInventario(null);
+					MenuInventario menu = new MenuInventario(cliente.getPaquetePersonaje());
 					menu.setVisible(true);
 					
 				}

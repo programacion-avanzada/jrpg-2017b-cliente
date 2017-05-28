@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import dominio.Item;
+
 public class Celda extends JPanel {
 
   
@@ -24,7 +26,11 @@ public class Celda extends JPanel {
         item = ImageIO.read(new File("test.png"));
         
         //itemScaled = (BufferedImage) item.getScaledInstance(label.WIDTH, label.HEIGHT, Image.SCALE_SMOOTH);
-        label = new JLabel(new ImageIcon(item.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
+        actionListenersYLabel();
+    }
+
+	private void actionListenersYLabel() {
+		label = new JLabel(new ImageIcon(item.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
         label.setToolTipText("Item 1");
         this.validate();
         this.repaint();
@@ -45,9 +51,14 @@ public class Celda extends JPanel {
         		}
         	}
         });
-    }
+	}
 
-    @Override
+    public Celda(Item item) {
+		this.item = item.getFoto();
+		actionListenersYLabel();
+	}
+
+	@Override
     public Dimension getPreferredSize() {
         return new Dimension(60, 60);
     }

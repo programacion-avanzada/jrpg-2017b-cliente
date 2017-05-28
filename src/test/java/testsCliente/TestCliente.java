@@ -118,7 +118,7 @@ public class TestCliente {
 	}
 
 	@Test
-	public void testRegistrarPersonaje() {
+	public void testRegistrarPersonaje() throws IOException {
 		Gson gson = new Gson();
 
 		Cliente cliente = new Cliente();
@@ -207,7 +207,7 @@ public class TestCliente {
 	}
 
 	@Test
-	public void testActualizarPersonaje() {
+	public void testActualizarPersonaje() throws IOException {
 		Gson gson = new Gson();
 		Cliente cliente = new Cliente();
 
