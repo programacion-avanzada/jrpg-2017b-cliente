@@ -22,10 +22,8 @@ public class Celda extends JPanel {
     private BufferedImage item;
     
     private JLabel label;
-    public Celda() throws IOException  {
-        item = ImageIO.read(new File("test.png"));
-        
-        //itemScaled = (BufferedImage) item.getScaledInstance(label.WIDTH, label.HEIGHT, Image.SCALE_SMOOTH);
+    public Celda() throws IOException {
+        item = ImageIO.read(new File("recursos//noItem.png"));
         actionListenersYLabel();
     }
 

@@ -1,10 +1,16 @@
 package recursos;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Scanner;
 
+import javax.imageio.ImageIO;
+
+import dominio.Item;
 import frames.MenuCarga;
 import frames.MenuMapas;
 import mundo.Tile;
@@ -76,6 +82,7 @@ public class Recursos {
 	public static BufferedImage barraExperiencia;
 	public static BufferedImage menuBatalla;
 	public static BufferedImage menuBatallaDeshabilitado;
+	public static Item[] items;
 	
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
@@ -83,12 +90,30 @@ public class Recursos {
 
 	// Se cargan todos los recursos del juego una sola vez al inicio
 
-	public static void cargar(MenuCarga menuCarga) {
+	public static void cargar(MenuCarga menuCarga) throws NumberFormatException, IOException {
 		
 		int elementosCargados = 0;
 		
 		ANCHO = 256;
 		ALTO = 256;
+		//Items
+		Scanner sc = new Scanner(new File("recursos//Items.txt"));
+		items = new Item[sc.nextInt()];
+		String[] auxItem;
+		
+		sc.nextLine();
+		for (int i = 0; i < items.length; i++) {
+			auxItem = sc.nextLine().split(" ");
+			//auxItem[3] = auxItem[3].replaceAll("_", " ");
+			try {
+				items[i] = new Item(Integer.valueOf(auxItem[0]), auxItem[1].replaceAll("_", " "),Integer.valueOf(auxItem[2]), Integer.valueOf(auxItem[3]), 
+						Integer.valueOf(auxItem[4]), Integer.valueOf(auxItem[5]), Integer.valueOf(auxItem[6]), Integer.valueOf(auxItem[7]),
+						ImageIO.read(new File("recursos/"+auxItem[8])));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 		// Inicio humano
 		spriteHumano = new SpriteSheet(CargadorImagen.cargarImagen("/Humano.png"));
