@@ -5,10 +5,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,33 +19,51 @@ public class Celda extends JPanel {
     private BufferedImage item;
     
     private JLabel label;
-    public Celda() throws IOException {
-        item = ImageIO.read(new File("recursos//noItem.png"));
-//        actionListenersYLabel();
-    }
 
 	private void actionListenersYLabel(Item item) {
+		StringBuilder s = new StringBuilder();
 		label = new JLabel(new ImageIcon(this.item.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
-        label.setToolTipText(item.getNombre());
+        if(!item.getNombre().equals("No Item")) {
+        	s.append("<html>" + item.getNombre() + "<br>");
+        	if(item.getBonusSalud() != 0) {
+        		s.append("+" + item.getBonusSalud() + " Salud " + "<br>");
+        	}
+        	if(item.getBonusEnergia() != 0) {
+        		s.append("+" + item.getBonusEnergia() + " Energia " + "<br>");
+        	}
+        	if(item.getBonusAtaque() != 0) {
+        		s.append("+" + item.getBonusAtaque() + " Ataque " + "<br>");
+        	}
+        	if(item.getBonusDefensa() != 0) {
+        		s.append("+" + item.getBonusDefensa() + " Defensa " + "<br>");
+        	}
+        	if(item.getBonusMagia() != 0) {
+        		s.append("+" + item.getBonusMagia() + " Magia");
+        	}
+        	s.append("</html>");
+			label.setToolTipText(s.toString());
+	       
+	        label.addMouseListener(new MouseAdapter() {
+	        	@Override
+	        	public void mouseClicked(MouseEvent e) {
+	        		if(e.getClickCount() == 2) {
+	        			JOptionPane.showMessageDialog(getParent(), "Lo toque");
+	        		}
+	        	}
+	        });
+	        
+	        addMouseListener(new MouseAdapter() {
+	        	@Override
+	        	public void mouseClicked(MouseEvent e) {
+	        		if(e.getClickCount() == 2) {
+	        		JOptionPane.showMessageDialog(getParent(), "Lo toque");
+	        		}
+	        	}
+	        });
+        }
+        add(label);
         this.validate();
         this.repaint();
-        label.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		if(e.getClickCount() == 2) {
-        			JOptionPane.showMessageDialog(getParent(), "Lo toque");
-        		}
-        	}
-        });
-        add(label);
-        addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		if(e.getClickCount() == 2) {
-        		JOptionPane.showMessageDialog(getParent(), "Lo toque");
-        		}
-        	}
-        });
 	}
 
     public Celda(Item item) {
