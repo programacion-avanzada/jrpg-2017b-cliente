@@ -104,7 +104,7 @@ public class Recursos {
 		sc.nextLine();
 		for (int i = 0; i < items.length; i++) {
 			auxItem = sc.nextLine().split(" ");
-			//auxItem[3] = auxItem[3].replaceAll("_", " ");
+	
 			try {
 				items[i] = new Item(Integer.valueOf(auxItem[0]), auxItem[1].replaceAll("_", " "),Integer.valueOf(auxItem[2]), Integer.valueOf(auxItem[3]), 
 						Integer.valueOf(auxItem[4]), Integer.valueOf(auxItem[5]), Integer.valueOf(auxItem[6]), Integer.valueOf(auxItem[7]),
