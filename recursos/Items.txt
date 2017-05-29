@@ -1,4 +1,31 @@
-3	
+30	
 0 No_Item 0 0 0 0 0 0 noItem.png
-1 Item_1 0 10 0 0 10 0 Recurso1.png
-2 Item_2 0 0 0 0 0 0 Recurso2.png
+1 Casco 0 10 0 0 10 0 Casco.png
+2 Casco_de_Rubies 0 0 0 0 0 0 CascoConRubies.png
+3 Armadura 0 0 0 0 0 0 Armadura.png
+4 Armadura_de_Rubies 0 0 0 0 0 0 ArmaduraConRubies.png
+5 Quijote_Y_Gebra 0 0 0 0 0 0 Pantalon.png
+6 Quijote_Y_Gebra_de_Rubies 0 0 0 0 0 0 PantalonConRubies.png
+7 Guantelete 0 0 0 0 0 0 Guantes.png
+8 Guantelete_de_Rubies 0 0 0 0 0 0 GuantesConRubies.png
+9 Botas 0 0 0 0 0 0 Botas.png
+10 Botas_de_Rubies 0 0 0 0 0 0 BotasConRubies.png
+11 Tunica_de_Fuego 0 0 0 0 0 0 TunicaRoja.png
+12 Baculo_de_Fuego 0 0 0 0 0 0 BaculoRojo.png
+13 Tunica_Elfica 0 0 0 0 0 0 TunicaElfica.png
+14 Baculo_Elfico 0 0 0 0 0 0 BaculoVerde.png
+15 Tunica_de_Esqueleto 0 0 0 0 0 0 TunicaEsqueleto.png
+16 Baculo_de_Craneo 0 0 0 0 0 0 BaculoCraneo.png
+17 Tunica_de_India 0 0 0 0 0 0 TunicaIndia.png
+18 Baculo_Indigena 0 0 0 0 0 0 BaculoIndio.png
+19 Tunica_Negra 0 0 0 0 0 0 TunicaNegra.png
+20 Daga 0 0 0 0 0 0 Daga.png
+21 Daga_de_Agua 0 0 0 0 0 0 DagaAzul.png
+22 Daga_Craneal 0 0 0 0 0 0 DagaCraneo.png
+23 Daga_de_Aire 0 0 0 0 0 0 DagaAire.png
+24 Daga_de_Oro 0 0 0 0 0 0 DagaOro.png
+25 Daga_Elfica 0 0 0 0 0 0 DagaElfica.png
+26 Daga_de_Fuego 0 0 0 0 0 0 DagaFuego.png
+27 Daga_Rubi 0 0 0 0 0 0 DagaRubi.png
+28 Daga_del_Bosque 0 0 0 0 0 0 DagaHoja.png
+29 Daga_Oscura 0 0 0 0 0 0 DagaOscura.png
