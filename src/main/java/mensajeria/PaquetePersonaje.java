@@ -168,5 +168,9 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		return new ArrayList<Item>(items);
 	}
 	
+	public final void setItems(ArrayList<Item> items) {
+		this.items = items;
+	}
+	
 	
 }

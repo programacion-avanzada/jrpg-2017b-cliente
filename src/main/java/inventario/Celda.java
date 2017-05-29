@@ -31,14 +31,14 @@ public class Celda extends JPanel {
         	if(item.getBonusEnergia() != 0) {
         		s.append("+" + item.getBonusEnergia() + " Energia " + "<br>");
         	}
-        	if(item.getBonusAtaque() != 0) {
-        		s.append("+" + item.getBonusAtaque() + " Ataque " + "<br>");
+        	if(item.getBonusFuerza() != 0) {
+        		s.append("+" + item.getBonusFuerza() + " Fuerza " + "<br>");
         	}
-        	if(item.getBonusDefensa() != 0) {
-        		s.append("+" + item.getBonusDefensa() + " Defensa " + "<br>");
+        	if(item.getBonusDestreza() != 0) {
+        		s.append("+" + item.getBonusDestreza() + " Destreza " + "<br>");
         	}
-        	if(item.getBonusMagia() != 0) {
-        		s.append("+" + item.getBonusMagia() + " Magia");
+        	if(item.getBonusInteligencia() != 0) {
+        		s.append("+" + item.getBonusInteligencia() + " Inteligencia");
         	}
         	s.append("</html>");
 			label.setToolTipText(s.toString());
