@@ -24,12 +24,12 @@ public class Celda extends JPanel {
     private JLabel label;
     public Celda() throws IOException {
         item = ImageIO.read(new File("recursos//noItem.png"));
-        actionListenersYLabel();
+//        actionListenersYLabel();
     }
 
-	private void actionListenersYLabel() {
-		label = new JLabel(new ImageIcon(item.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
-        label.setToolTipText("Item 1");
+	private void actionListenersYLabel(Item item) {
+		label = new JLabel(new ImageIcon(this.item.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
+        label.setToolTipText(item.getNombre());
         this.validate();
         this.repaint();
         label.addMouseListener(new MouseAdapter() {
@@ -53,7 +53,7 @@ public class Celda extends JPanel {
 
     public Celda(Item item) {
 		this.item = item.getFoto();
-		actionListenersYLabel();
+		actionListenersYLabel(item);
 	}
 
 	@Override

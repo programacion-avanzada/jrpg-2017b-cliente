@@ -1,3 +1,4 @@
-2	
-1 Item_1 0 0 0 0 0 0 /Recurso1.png
-2 Item_2 0 0 0 0 0 0 /Recurso2.png
+3	
+1 No_Item 0 0 0 0 0 0 noItem.png
+2 Item_1 0 0 0 0 0 0 Recurso1.png
+3 Item_2 0 0 0 0 0 0 Recurso2.png

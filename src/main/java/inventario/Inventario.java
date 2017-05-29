@@ -32,10 +32,10 @@ public class Inventario extends JPanel {
                 gbc.gridy = row;
                 Celda cellPane;
                 if(!items.isEmpty()) {
-                	cellPane = new Celda(Recursos.items[0]);
+                	cellPane = new Celda(Recursos.items[1]);
                 	items.remove(0);
                 } else {
-                	cellPane = new Celda();
+                	cellPane = new Celda(Recursos.items[0]);
 
                 }
                 
