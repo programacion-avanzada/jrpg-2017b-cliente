@@ -82,7 +82,7 @@ public class Recursos {
 	public static BufferedImage barraExperiencia;
 	public static BufferedImage menuBatalla;
 	public static BufferedImage menuBatallaDeshabilitado;
-	public static Item[] items;
+	public static BufferedImage noItem;
 	
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
@@ -97,24 +97,12 @@ public class Recursos {
 		ANCHO = 256;
 		ALTO = 256;
 		//Items
-		Scanner sc = new Scanner(new File("recursos//Items.txt"));
-		items = new Item[sc.nextInt()];
-		String[] auxItem;
 		
-		sc.nextLine();
-		for (int i = 0; i < items.length; i++) {
-			auxItem = sc.nextLine().split(" ");
-	
-			try {
-				items[i] = new Item(Integer.valueOf(auxItem[0]), auxItem[1].replaceAll("_", " "),Integer.valueOf(auxItem[2]), Integer.valueOf(auxItem[3]), 
-						Integer.valueOf(auxItem[4]), Integer.valueOf(auxItem[5]), Integer.valueOf(auxItem[6]), Integer.valueOf(auxItem[7]),
-						ImageIO.read(new File("recursos//"+auxItem[8])),null);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		sc.close();
+		
+		
+		noItem = ImageIO.read(new File("recursos//noItem.png"));
+		
+
 
 		// Inicio humano
 		spriteHumano = new SpriteSheet(CargadorImagen.cargarImagen("/Humano.png"));

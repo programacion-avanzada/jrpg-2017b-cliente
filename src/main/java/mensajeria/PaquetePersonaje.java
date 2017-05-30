@@ -1,8 +1,11 @@
 package mensajeria;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import dominio.Item;
 import estados.Estado;
@@ -26,7 +29,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	
 	public PaquetePersonaje() throws IOException {
 		estado = Estado.estadoOffline;
-		
 	}
 
 	public int getEstado() {
@@ -170,6 +172,15 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	
 	public final void setItems(ArrayList<Item> items) {
 		this.items = items;
+	}
+	
+	public final void anadirItem(int idItem, String nombre, int wearLocation, int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia, String foto, String fotoEquipado) {
+		try {
+			items.add(new Item(idItem,nombre,wearLocation,bonusSalud,bonusEnergia,bonusAtaque, bonusDefensa, bonusMagia, foto, fotoEquipado));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

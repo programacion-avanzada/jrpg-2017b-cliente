@@ -24,19 +24,16 @@ public class Inventario extends JPanel {
         setLayout(new GridBagLayout());
         items = new ArrayList<Item>(paquetePersonaje.getItems());
         GridBagConstraints gbc = new GridBagConstraints();
-        
-        items.add(Recursos.items[0]);
         for (int row = 0; row <CANTFILAS; row++) {
             for (int col = 0; col < CANTCOLUMNAS; col++) {
                 gbc.gridx = col;
                 gbc.gridy = row;
                 Celda cellPane;
                 if(!items.isEmpty()) {
-                	cellPane = new Celda(Recursos.items[1]);
+                	cellPane = new Celda(items.get(0));
                 	items.remove(0);
                 } else {
-                	cellPane = new Celda(Recursos.items[0]);
-
+                	cellPane = new Celda();
                 }
                 
                 
@@ -57,7 +54,7 @@ public class Inventario extends JPanel {
                 cellPane.setBorder(border);
                 gbc.weightx = gbc.weighty = 1.0;
                 gbc.fill = GridBagConstraints.BOTH;
-               
+
                 add(cellPane, gbc);
             }
         }

@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import dominio.Item;
+import recursos.Recursos;
 
 public class Celda extends JPanel {
 
@@ -22,8 +24,7 @@ public class Celda extends JPanel {
 
 	private void actionListenersYLabel(Item item) {
 		StringBuilder s = new StringBuilder();
-		label = new JLabel(new ImageIcon(this.item.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
-        if(!item.getNombre().equals("No Item")) {
+        
         	s.append("<html>" + item.getNombre() + "<br>");
         	if(item.getBonusSalud() != 0) {
         		s.append("+" + item.getBonusSalud() + " Salud " + "<br>");
@@ -60,15 +61,21 @@ public class Celda extends JPanel {
 	        		}
 	        	}
 	        });
-        }
+        
         add(label);
         this.validate();
         this.repaint();
 	}
 
-    public Celda(Item item) {
+    public Celda(Item item) throws IOException {
 		this.item = item.getFoto();
+		label = new JLabel(new ImageIcon(this.item.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
 		actionListenersYLabel(item);
+	}
+
+	public Celda() {
+		label = new JLabel(new ImageIcon(Recursos.noItem.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
+		add(label);
 	}
 
 	@Override
