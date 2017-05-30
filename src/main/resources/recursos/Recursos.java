@@ -108,7 +108,7 @@ public class Recursos {
 			try {
 				items[i] = new Item(Integer.valueOf(auxItem[0]), auxItem[1].replaceAll("_", " "),Integer.valueOf(auxItem[2]), Integer.valueOf(auxItem[3]), 
 						Integer.valueOf(auxItem[4]), Integer.valueOf(auxItem[5]), Integer.valueOf(auxItem[6]), Integer.valueOf(auxItem[7]),
-						ImageIO.read(new File("recursos//"+auxItem[8])));
+						ImageIO.read(new File("recursos//"+auxItem[8])),null);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
