@@ -20,7 +20,8 @@ public class MenuInfoPersonaje {
 	public static final int menuSubirNivel = 2;
 	public static final int menuGanarBatalla = 3;
 	public static final int menuPerderBatalla = 4;
-	private static final String [] leyendaBoton = {"Batallar", "Volver", "Aceptar", "Aceptar", "Aceptar"};
+	public static final int menuGanarItem = 5;
+	private static final String [] leyendaBoton = {"Batallar", "Volver", "Aceptar", "Aceptar", "Aceptar", "Aceptar"};
 
 	private int x;
 	private int y;
@@ -62,6 +63,9 @@ public class MenuInfoPersonaje {
 		case menuPerderBatalla:
 			graficarMenuPerderBatalla(g);
 			break;
+		case menuGanarItem:
+			graficarMenuItem(g);
+			break;
 		}
 
 
@@ -97,6 +101,7 @@ public class MenuInfoPersonaje {
 		Pantalla.centerString(g, new Rectangle(x, y + 290, menu.getWidth(), 0), "a tu oponente, sigue así");
 		Pantalla.centerString(g, new Rectangle(x, y + 310, menu.getWidth(), 0), "para lograr subir de nivel");
 		Pantalla.centerString(g, new Rectangle(x, y + 330, menu.getWidth(), 0), "y mejorar tus atributos.");
+		
 	}
 
 	private void graficarMenuSubirNivel(Graphics g) {
@@ -127,6 +132,20 @@ public class MenuInfoPersonaje {
 		g.drawString(personaje.getCasta(), x + 100, y + 260);
 		g.drawString(personaje.getNivel() + " ", x + 100, y + 290);
 		g.drawString(personaje.getExperiencia() + " / " + Personaje.getTablaDeNiveles()[personaje.getNivel() + 1], x + 150, y + 320);
+
+	}
+	
+	private void graficarMenuItem(Graphics g) {
+
+		// Informo que subio de nivel
+		g.setColor(Color.BLACK);
+		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Aca iria algo!");
+
+		g.setFont(new Font("Book Antiqua", 0, 18));
+		Pantalla.centerString(g, new Rectangle(x, y + 240, menu.getWidth(), 0), "¡Aca otra cosa!");
+		Pantalla.centerString(g, new Rectangle(x, y + 270, menu.getWidth(), 0), "Nuevo Nivel");
+		g.setFont(new Font("Book Antiqua", 1, 62));
+		Pantalla.centerString(g, new Rectangle(x, y + 325, menu.getWidth(), 0), String.valueOf(personaje.getNivel()));
 
 	}
 

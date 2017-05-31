@@ -1,11 +1,8 @@
 package mensajeria;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 import dominio.Item;
 import estados.Estado;
@@ -174,13 +171,50 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		this.items = items;
 	}
 	
+	public final int getItemID(int index) {
+		return items.get(index).getIdItem();
+	}
+	
 	public final void anadirItem(int idItem, String nombre, int wearLocation, int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia, String foto, String fotoEquipado) {
 		try {
 			items.add(new Item(idItem,nombre,wearLocation,bonusSalud,bonusEnergia,bonusAtaque, bonusDefensa, bonusMagia, foto, fotoEquipado));
+			useBonus(bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa, bonusMagia);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
+	}
+	
+	public final void removerBonus() {
+		//Intente usar un iterator y por alguna razón no andaba..
+		int i = 0;
+		while(i < items.size()) {
+			sacarBonus(items.get(i).getBonusSalud(),items.get(i).getBonusEnergia(),items.get(i).getBonusFuerza(), items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+			i++;
+		}
+	}
+	private void sacarBonus(int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia) {
+		saludTope -= bonusSalud;
+		energiaTope -= bonusEnergia;
+		fuerza -= bonusAtaque;
+		destreza -= bonusDefensa;
+		inteligencia -= bonusMagia;
+	}
+	public final void ponerBonus() {
+		//Intente usar un iterator y por alguna razón no andaba..
+		int i = 0;
+		while(i < items.size()) {
+			useBonus(items.get(i).getBonusSalud(),items.get(i).getBonusEnergia(),items.get(i).getBonusFuerza(), items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+			i++;
+		}
+	}
+
+	private void useBonus(int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia) {
+		saludTope += bonusSalud;
+		energiaTope += bonusEnergia;
+		fuerza += bonusAtaque;
+		destreza += bonusDefensa;
+		inteligencia += bonusMagia;
 	}
 	
 	
