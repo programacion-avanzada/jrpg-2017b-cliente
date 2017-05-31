@@ -76,6 +76,7 @@ public class EstadoJuego extends Estado {
 		entidadPersonaje.graficarNombre(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
+		
 		if(haySolicitud)
 			menuEnemigo.graficar(g, tipoSolicitud);
 

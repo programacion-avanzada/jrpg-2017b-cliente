@@ -184,6 +184,7 @@ public class EstadoBatalla extends Estado {
 
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 25, 5, personaje, miniaturaPersonaje);
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 550, 5, enemigo, miniaturaEnemigo);
+		
 
 	}
 
@@ -285,8 +286,9 @@ public class EstadoBatalla extends Estado {
 
 			juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteEnemigo));
-			paquetePersonaje.ponerBonus();
-			paqueteEnemigo.ponerBonus();
+//			paquetePersonaje.ponerBonus();
+//			paqueteEnemigo.ponerBonus();
+			
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
 			e.printStackTrace();
