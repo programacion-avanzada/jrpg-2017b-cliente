@@ -189,7 +189,8 @@ public class Cliente extends Thread {
 						salida.writeObject(gson.toJson(new Paquete(Comando.DESCONECTAR), Paquete.class));
 						cliente.close();
 						break;
-
+						
+					
 					default:
 						break;
 					}

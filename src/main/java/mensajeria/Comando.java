@@ -14,4 +14,5 @@ public class Comando {
 	public static final int MOVIMIENTO = 5;
 	public static final int REGISTRO = 6;
 	public static final int SALIR = 7;
+	public static final int ACTUALIZARINVENTARO = 12;
 }

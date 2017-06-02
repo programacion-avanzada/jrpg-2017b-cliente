@@ -3,6 +3,7 @@ package mensajeria;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import dominio.Item;
 import estados.Estado;
@@ -215,6 +216,34 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		fuerza += bonusAtaque;
 		destreza += bonusDefensa;
 		inteligencia += bonusMagia;
+	}
+
+	public int getCantItems() {
+		return items.size();
+	}
+
+	public void anadirItem(int idItem) {
+		try {
+			items.add(new Item(idItem,null,0,0,0,0, 0, 0, null, null));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public Iterator<Item> getIterator() {
+		// TODO Auto-generated method stub
+		return items.iterator();
+	}
+
+	public void removerUltimoItem() {
+		items.remove(items.size() -1);
+		
+	}
+	
+	public boolean nuevoItem() {
+		return items.get(items.size()-1).getNombre() == null;
 	}
 	
 	
