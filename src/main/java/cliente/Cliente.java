@@ -309,4 +309,10 @@ public class Cliente extends Thread {
 	public MenuCarga getMenuCarga() {
 		return menuCarga;
 	}
+	public void actualizarItems(PaquetePersonaje paqueteActualizado) {
+		if(paquetePersonaje.getCantItems() != paqueteActualizado.getCantItems()) {
+			paquetePersonaje.anadirItem(paqueteActualizado.getItems().get(paqueteActualizado.getItems().size() -1));
+		}
+		
+	}
 }

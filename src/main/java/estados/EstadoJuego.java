@@ -143,5 +143,10 @@ public class EstadoJuego extends Estado {
 	public int getTipoSolicitud() {
 		return tipoSolicitud;
 	}
+	
+	@Override
+	public boolean esEstadoDeJuego() {
+		return true;
+	}
 
 }

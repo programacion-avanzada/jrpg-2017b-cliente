@@ -328,4 +328,9 @@ public class EstadoBatalla extends Estado {
 	public Personaje getEnemigo() {
 		return enemigo;
 	}
+	
+	@Override
+	public boolean esEstadoDeJuego() {
+		return false;
+	}
 }

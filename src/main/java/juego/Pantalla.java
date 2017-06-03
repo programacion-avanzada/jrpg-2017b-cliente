@@ -22,6 +22,7 @@ import javax.swing.WindowConstants;
 import com.google.gson.Gson;
 
 import cliente.Cliente;
+import estados.Estado;
 import frames.MenuInventario;
 import frames.MenuJugar;
 import mensajeria.Comando;
@@ -67,9 +68,10 @@ public class Pantalla {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_I) {
-					MenuInventario menu = new MenuInventario(cliente.getPaquetePersonaje());
-					menu.setVisible(true);
-					
+					if(Estado.getEstado().esEstadoDeJuego()) {
+						MenuInventario menu = new MenuInventario(cliente.getPaquetePersonaje());
+						menu.setVisible(true);
+					}
 				}
 			}
 			
