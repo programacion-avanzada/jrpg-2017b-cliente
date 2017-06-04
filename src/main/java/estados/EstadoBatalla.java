@@ -176,7 +176,9 @@ public class EstadoBatalla extends Estado {
 		// de item válido para llenarlo más adelante en el server
 		if( paquetePersonaje.getCantItems() < 9) {
 			System.out.println("El personaje " + personaje.getNombre() + " gano un item");
-			paquetePersonaje.anadirItem(new Random().nextInt(30));
+			int itemGanado = new Random().nextInt(29);
+			itemGanado += 1;
+			paquetePersonaje.anadirItem(itemGanado);
 		} 
 	}
 
