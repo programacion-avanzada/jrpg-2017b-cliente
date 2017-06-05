@@ -12,7 +12,6 @@ import javax.swing.border.MatteBorder;
 
 import dominio.Item;
 import mensajeria.PaquetePersonaje;
-import recursos.Recursos;
 
 
 
@@ -30,7 +29,7 @@ public class Inventario extends JPanel {
                 gbc.gridy = row;
                 Celda cellPane;
                 if(!items.isEmpty()) {
-                	cellPane = new Celda(items.get(0));
+                	cellPane = new Celda(items.get(0), paquetePersonaje);
                 	items.remove(0);
                 } else {
                 	cellPane = new Celda();

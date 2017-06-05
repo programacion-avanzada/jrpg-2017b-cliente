@@ -8,19 +8,30 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import com.google.gson.Gson;
+
+import cliente.Cliente;
 import inventario.Inventario;
-import mensajeria.PaquetePersonaje;
+import mensajeria.Comando;
 
 public class MenuInventario extends JFrame {
 
 	private JButton cancelar = new JButton("Exit");
 	
-    public MenuInventario(PaquetePersonaje paquetePersonaje) {
-                //cancelar.setBounds(90, 190, 50, 50);
+    public MenuInventario(Cliente cliente) {
+                
     			cancelar.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						try {
+							Gson gson = new Gson();
+							cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARINVENTARIO);
+							cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
+						} catch (IOException e1) {
+							
+							e1.printStackTrace();
+						}
 						dispose();
 						
 					}
@@ -31,7 +42,7 @@ public class MenuInventario extends JFrame {
                 this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				try {
 					this.setLayout(new BorderLayout());
-					this.add(new Inventario(paquetePersonaje));
+					this.add(new Inventario(cliente.getPaquetePersonaje()));
 					this.add(cancelar,BorderLayout.AFTER_LAST_LINE);
 
 				} catch (IOException e) {

@@ -69,7 +69,7 @@ public class Pantalla {
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_I) {
 					if(Estado.getEstado().esEstadoDeJuego()) {
-						MenuInventario menu = new MenuInventario(cliente.getPaquetePersonaje());
+						MenuInventario menu = new MenuInventario(cliente);
 						menu.setVisible(true);
 					}
 				}
