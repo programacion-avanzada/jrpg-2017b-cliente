@@ -43,7 +43,7 @@ public class Cliente extends Thread {
 
 	// Ip y puerto
 	private String ip;
-	private int puerto;
+	private final int puerto = 9999;
 	/**Pide la accion
 	 * @return Devuelve la accion
 	 */
@@ -63,19 +63,12 @@ public class Cliente extends Thread {
 	 */
 	public Cliente() {
 
-		Scanner sc;
 
-		try {
-			sc = new Scanner(new File("config.txt"));
-			ip = sc.nextLine();
-			puerto = sc.nextInt();
-			sc.close();
-		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "No se ha encontrado el "
-					+ "archivo de configuración config.txt");
-			e.printStackTrace();
+		
+		ip = JOptionPane.showInputDialog("Ingrese IP del servidor: (default localhost)");
+		if(ip == null) {
+			ip = "localhost";
 		}
-
 		try {
 			cliente = new Socket(ip, puerto);
 			miIp = cliente.getInetAddress().getHostAddress();
