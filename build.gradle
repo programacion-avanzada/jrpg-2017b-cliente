@@ -11,8 +11,19 @@ sourceCompatibility = 1.7
 version = '0.1'
 test.ignoreFailures = true
 
-defaultTasks 'clean', 'compileJava', 'test', 'checkstyleMain', 'pmd', 'findbugsMain', 'jacocoTestReport'
-
+defaultTasks 'clean', 'compileJava', 'fatJar', 'test', 'checkstyleMain', 'pmd', 'findbugsMain', 'jacocoTestReport'
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/resources'
+            srcDirs 'src/main/java'
+        }
+        resources {
+            srcDirs 'recursos'
+            
+        }
+    }
+ }
 repositories {
 	mavenCentral()
 }
@@ -87,12 +98,30 @@ findbugs {
     ignoreFailures = true
 }
 
+task fatJar(type: Jar) {
+	manifest { 
+    	attributes "Main-Class": "frames.MenuInicio"
+  	}
+
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from('src/main/java/frames') {
+    	include '*.png'
+    	include '*.jpg'
+    	into 'frames'
+  	}
+  	from(rootDir) {
+  		include 'config.txt'
+  	}
+ 	
+    with jar
+}
 
 jacocoTestReport {
     reports {
         xml.enabled false
         csv.enabled true
-        html.enabled false
+        html.enabled true
         //html.destination "${buildDir}/jacocoHtml"
     }
 }

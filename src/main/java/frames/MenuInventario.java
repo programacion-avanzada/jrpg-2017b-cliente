@@ -17,11 +17,10 @@ import mensajeria.Comando;
 public class MenuInventario extends JFrame {
 
 	private JButton cancelar = new JButton("Exit");
-	
-    public MenuInventario(Cliente cliente) {
+    public MenuInventario(final Cliente cliente) {
+	    	
                 
     			cancelar.addActionListener(new ActionListener() {
-
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						try {
