@@ -308,4 +308,7 @@ public class Cliente extends Thread {
 		}
 		
 	}
+	public String getIp() {
+		return ip;
+	}
 }
