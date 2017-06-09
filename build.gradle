@@ -11,7 +11,7 @@ sourceCompatibility = 1.7
 version = '0.1'
 test.ignoreFailures = true
 
-defaultTasks 'clean', 'compileJava', 'fatJar', 'test', 'checkstyleMain', 'pmd', 'findbugsMain', 'jacocoTestReport'
+defaultTasks 'clean', 'compileJava', 'fatJar', 'test', 'checkstyleMain', 'pmd', 'findbugsMain', 'jacocoTestReport', 'wrapper'
 sourceSets {
     main {
         java {
@@ -124,4 +124,8 @@ jacocoTestReport {
         html.enabled true
         //html.destination "${buildDir}/jacocoHtml"
     }
+    
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14'
+}
 }
