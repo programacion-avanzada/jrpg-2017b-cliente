@@ -91,11 +91,11 @@ public class Celda extends JPanel {
 	
 	MouseListener mouseListener = new MouseAdapter() {
 		public void mouseClicked(MouseEvent e) {
-    		Object[] options = {"Equipar", "Tirar", "Cancelar"};
+    		Object[] options = {"Tirar", "Cancelar"};
     		if(e.getClickCount() == 2) {
-    			int answer = JOptionPane.showOptionDialog(getParent(),  "¿Qué desea hacer?", "Item: " + it.getNombre(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[2]);
+    			int answer = JOptionPane.showOptionDialog(getParent(),  "¿Qué desea hacer?", "Item: " + it.getNombre(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
     			//Tirar
-    			if(answer == 1) {
+    			if(answer == 0) {
     				paquetePersonaje.sacarBonus(it.getBonusSalud(), it.getBonusEnergia(), it.getBonusFuerza(), it.getBonusDestreza(), it.getBonusInteligencia());
     				resetLabel();
     			}
