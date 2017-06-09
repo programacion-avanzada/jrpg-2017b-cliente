@@ -42,8 +42,8 @@ public class Celda extends JPanel {
 	private void actionListenersYLabel(Item item) {
 		StringBuilder s = new StringBuilder();
         
-        	s.append("<html>" + item.getNombre() + "<br>");
         	
+			s.append("<html>" + item.getNombre() + "<br>");
         	if(item.getBonusSalud() != 0) {
         		s.append("+" + item.getBonusSalud() + " Salud " + "<br>");
         	}
