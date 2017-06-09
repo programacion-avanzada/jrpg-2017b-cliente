@@ -1,12 +1,9 @@
 package cliente;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -69,6 +66,23 @@ public class Cliente extends Thread {
 		if(ip == null) {
 			ip = "localhost";
 		}
+		try {
+			cliente = new Socket(ip, puerto);
+			miIp = cliente.getInetAddress().getHostAddress();
+			entrada = new ObjectInputStream(cliente.getInputStream());
+			salida = new ObjectOutputStream(cliente.getOutputStream());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Fallo al iniciar la aplicación. "
+					+ "Revise la conexión con el servidor.");
+			System.exit(1);
+			e.printStackTrace();
+		}
+	}
+	
+	public Cliente(String ip, int puerto) {
+
+
+		
 		try {
 			cliente = new Socket(ip, puerto);
 			miIp = cliente.getInetAddress().getHostAddress();
