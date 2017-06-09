@@ -111,6 +111,7 @@ task fatJar(type: Jar) {
     	into 'frames'
   	}
   	from(rootDir) {
+  		
   		include 'config.txt'
   	}
  	
