@@ -43,6 +43,7 @@ public class Celda extends JPanel {
 		StringBuilder s = new StringBuilder();
         
         	s.append("<html>" + item.getNombre() + "<br>");
+        	
         	if(item.getBonusSalud() != 0) {
         		s.append("+" + item.getBonusSalud() + " Salud " + "<br>");
         	}
