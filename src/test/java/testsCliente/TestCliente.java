@@ -1,5 +1,6 @@
 package testsCliente;
 
+<<<<<<< HEAD
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -8,19 +9,18 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Queue;
 
+=======
+>>>>>>> 6b85171643618c9b9b0f81ab3a80ad25498076bd
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-
-import cliente.Cliente;
 import mensajeria.Comando;
 import mensajeria.Paquete;
-import mensajeria.PaquetePersonaje;
-import mensajeria.PaqueteUsuario;
+import mensajeria.PaqueteAtacar;
+import mensajeria.PaqueteBatalla;
 
 public class TestCliente {
+<<<<<<< HEAD
 	private Thread myThread;
 	private ServerSocket server;
 	private Gson gson = new Gson();
@@ -97,9 +97,19 @@ public class TestCliente {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
+=======
+	
 	@Test
+	public void testPaquete() {
+		Paquete paquete = new Paquete("Mensaje","Nick","localhost",Comando.ACTUALIZARINVENTARIO);
+		Assert.assertEquals("Mensaje", paquete.getMensaje());
+		Assert.assertEquals("localhost", paquete.getIp());
+		Assert.assertEquals(Comando.ACTUALIZARINVENTARIO, paquete.getComando());
+>>>>>>> 6b85171643618c9b9b0f81ab3a80ad25498076bd
+	}
+	
+	@Test
+<<<<<<< HEAD
 	public void testRegistro() {
 		
 		Queue<Paquete> queue = new LinkedList<Paquete>();
@@ -137,9 +147,24 @@ public class TestCliente {
 			e.printStackTrace();
 		}
 		
+=======
+	public void testPaqueteAtacar() {
+		PaqueteAtacar paqueteAtacar = new PaqueteAtacar(1,2,20,20,25,25,10,11,0.2,0.4);
+		Assert.assertEquals(1, paqueteAtacar.getId());
+		Assert.assertEquals(2, paqueteAtacar.getIdEnemigo());
+		Assert.assertEquals(20, paqueteAtacar.getNuevaSaludPersonaje());
+		Assert.assertEquals(20, paqueteAtacar.getNuevaEnergiaPersonaje());
+		Assert.assertEquals(25, paqueteAtacar.getNuevaSaludEnemigo());
+		Assert.assertEquals(25, paqueteAtacar.getNuevaEnergiaEnemigo());
+		Assert.assertEquals(10, paqueteAtacar.getMapPersonaje().get("defensa"));
+		Assert.assertEquals(11, paqueteAtacar.getMapEnemigo().get("defensa"));
+		Assert.assertEquals(0.2, paqueteAtacar.getMapPersonaje().get("probEvitarDanio"));
+		Assert.assertEquals(0.4, paqueteAtacar.getMapEnemigo().get("probEvitarDanio"));
+>>>>>>> 6b85171643618c9b9b0f81ab3a80ad25498076bd
 	}
-
+	
 	@Test
+<<<<<<< HEAD
 	public void testRegistroFallido() {
 		
 		Queue<Paquete> queue = new LinkedList<Paquete>();
@@ -155,31 +180,18 @@ public class TestCliente {
 		testServer(queue);
 
 		Cliente cliente = new Cliente("localhost",9999);
+=======
+	public void testPaqueteBatallar() {
+		PaqueteBatalla paqueteBatalla = new PaqueteBatalla();
+		paqueteBatalla.setId(1);
+		paqueteBatalla.setIdEnemigo(2);
+		Assert.assertEquals(1, paqueteBatalla.getId());
+		Assert.assertEquals(2, paqueteBatalla.getIdEnemigo());
+>>>>>>> 6b85171643618c9b9b0f81ab3a80ad25498076bd
 
-		try {
-
-			// Envio el paquete para registrarme
-			cliente.getSalida().writeObject(gson.toJson(pu));
-
-			// Recibo la respuesta del servidor
-			Paquete resultado = (Paquete) gson.fromJson((String) cliente.getEntrada().readObject(), Paquete.class);
-
-			// Cierro las conexiones
-			Paquete p = new Paquete();
-			p.setComando(Comando.DESCONECTAR);
-			p.setIp(cliente.getMiIp());
-			cliente.getSalida().writeObject(gson.toJson(p));
-			cliente.getSalida().close();
-			cliente.getEntrada().close();
-			cliente.getSocket().close();
-
-			Assert.assertEquals(Paquete.msjFracaso, resultado.getMensaje());
-
-		} catch (JsonSyntaxException | ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
 	}
 
+<<<<<<< HEAD
 	@Test
 	public void testRegistrarPersonaje() throws IOException {
 		Queue<Paquete> queue = new LinkedList<Paquete>();
@@ -324,3 +336,6 @@ public class TestCliente {
 		}
 	}
 }
+=======
+}
+>>>>>>> 6b85171643618c9b9b0f81ab3a80ad25498076bd
