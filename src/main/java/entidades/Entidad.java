@@ -12,6 +12,10 @@ import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
+import estados.Estado;
+import frames.MenuEscape;
+import frames.MenuInventario;
+import interfaz.MenuInfoPersonaje;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.PaqueteBatalla;
@@ -20,9 +24,6 @@ import mundo.Grafo;
 import mundo.Mundo;
 import mundo.Nodo;
 import recursos.Recursos;
-import entidades.Animacion;
-import estados.Estado;
-import interfaz.MenuInfoPersonaje;
 /**Clase Entidad
  */
 public class Entidad {
@@ -159,8 +160,19 @@ public class Entidad {
 
 		posMouseRecorrido = juego.getHandlerMouse().getPosMouseRecorrido();
 		posMouse = juego.getHandlerMouse().getPosMouse();
-
-		// Tomo el click izquierdo
+		if(juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 738 && posMouse[0] <= 797  && posMouse[1] >= 545 && posMouse[1] <= 597) {
+			MenuInventario menu = new MenuInventario(juego.getCliente());
+			menu.setVisible(true);
+			juego.getHandlerMouse().setNuevoClick(false);
+		}
+		if(juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 3 && posMouse[0] <= 105 && posMouse[1] >= 562 && posMouse[1] <= 597) {
+			MenuEscape menu = new MenuEscape
+					
+					(juego.getCliente());
+			menu.setVisible(true);
+			juego.getHandlerMouse().setNuevoClick(false);
+		}
+		// Tomo el click izquierdo 
 		if (juego.getHandlerMouse().getNuevoClick()) {
 			if (juego.getEstadoJuego().getHaySolicitud()) {
 

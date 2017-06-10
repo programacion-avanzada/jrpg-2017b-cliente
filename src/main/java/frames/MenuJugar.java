@@ -16,6 +16,8 @@ import mensajeria.Comando;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -26,6 +28,16 @@ public class MenuJugar extends JFrame {
 	private JPanel contentPane;
 
 	public MenuJugar(final Cliente cliente) {
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					MenuInicioSesion menuInicioSesion = new MenuInicioSesion(cliente);
+					menuInicioSesion.setVisible(true);
+					dispose();
+				}
+			}
+		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),

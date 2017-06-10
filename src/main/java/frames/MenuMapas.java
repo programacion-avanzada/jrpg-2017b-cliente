@@ -23,12 +23,27 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JLayeredPane;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MenuMapas extends JFrame {
 	public static int numberMap = 0;
 	private JPanel contentPane;
 
 	public MenuMapas(final Cliente cliente) {
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					synchronized(cliente){
+						cliente.getPaquetePersonaje().setMapa(1);
+						numberMap = 1;
+						cliente.notify();
+					}
+					dispose();
+				}
+			}
+		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),

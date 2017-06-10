@@ -16,12 +16,24 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import cliente.Cliente;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MenuInicio extends JFrame {
 
 	private JPanel contentPane;
 
 	public MenuInicio() {
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					Cliente cliente = new Cliente();
+					cliente.start();
+					dispose();
+				}
+			}
+		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
@@ -78,7 +90,7 @@ public class MenuInicio extends JFrame {
 				dispose();
 			}
 		});
-
+		
 		JButton btnIniciarSesion = new JButton("Salir");
 		btnIniciarSesion.setBounds(127, 202, 191, 23);
 		layeredPane.add(btnIniciarSesion, new Integer(1));
@@ -90,8 +102,9 @@ public class MenuInicio extends JFrame {
 				dispose();
 			}
 		});
-
+		
 		JLabel lblBackground = new JLabel("");
+
 		lblBackground.setBounds(0, 0, 444, 271);
 		lblBackground.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/menuBackground.jpg")));
 		layeredPane.add(lblBackground, new Integer(0));

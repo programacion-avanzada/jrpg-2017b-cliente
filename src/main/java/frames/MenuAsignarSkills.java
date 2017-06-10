@@ -37,7 +37,7 @@ public class MenuAsignarSkills extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuAsignarSkills(Cliente cliente) {
+	public MenuAsignarSkills(final Cliente cliente) {
 		puntosAsignarInicial = 3;
 //		puntosAsignarInicial = cliente.getPaquetePersonaje().getPtsAsignar();
 		puntosFuerzaInicial = cliente.getPaquetePersonaje().getFuerza();
@@ -65,40 +65,40 @@ public class MenuAsignarSkills extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 
-		JLabel labelFuerza = new JLabel("");
+		final JLabel labelFuerza = new JLabel("");
 		labelFuerza.setForeground(Color.WHITE);
 		labelFuerza.setHorizontalAlignment(SwingConstants.CENTER);
 		labelFuerza.setBounds(50, 101, 56, 16);
 		labelFuerza.setText(String.valueOf(puntosFuerzaInicial));
 		contentPane.add(labelFuerza);
 		
-		JLabel labelDestreza = new JLabel("");
+		final JLabel labelDestreza = new JLabel("");
 		labelDestreza.setForeground(Color.WHITE);
 		labelDestreza.setHorizontalAlignment(SwingConstants.CENTER);
 		labelDestreza.setBounds(50, 159, 56, 16);
 		labelDestreza.setText(String.valueOf(puntosDestrezaInicial));
 		contentPane.add(labelDestreza);
 		
-		JLabel labelInteligencia = new JLabel("");
+		final JLabel labelInteligencia = new JLabel("");
 		labelInteligencia.setForeground(Color.WHITE);
 		labelInteligencia.setHorizontalAlignment(SwingConstants.CENTER);
 		labelInteligencia.setBounds(50, 217, 56, 16);
 		labelInteligencia.setText(String.valueOf(puntosInteligenciaInicial));
 		contentPane.add(labelInteligencia);
 		
-		JLabel labelPuntos = new JLabel("");
+		final JLabel labelPuntos = new JLabel("");
 		labelPuntos.setForeground(Color.WHITE);
 		labelPuntos.setHorizontalAlignment(SwingConstants.CENTER);
 		labelPuntos.setBounds(39, 41, 83, 26);
 		labelPuntos.setText(String.valueOf(puntosAsignarInicial));
 		contentPane.add(labelPuntos);
 		
-		JLabel lblCantidadDePuntos = new JLabel("Cantidad de Puntos a Asignar");
+		final JLabel lblCantidadDePuntos = new JLabel("Cantidad de Puntos a Asignar");
 		lblCantidadDePuntos.setForeground(Color.WHITE);
 		lblCantidadDePuntos.setBounds(12, 13, 177, 29);
 		contentPane.add(lblCantidadDePuntos);
 		
-		JLabel lblInteligencia = new JLabel("Inteligencia");
+		final JLabel lblInteligencia = new JLabel("Inteligencia");
 		lblInteligencia.setForeground(Color.WHITE);
 		lblInteligencia.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInteligencia.setBounds(39, 188, 83, 16);
@@ -110,13 +110,13 @@ public class MenuAsignarSkills extends JFrame {
 		lblDestreza.setBounds(50, 130, 56, 16);
 		contentPane.add(lblDestreza);
 		
-		JLabel lblFuerza = new JLabel("Fuerza");
+		final JLabel lblFuerza = new JLabel("Fuerza");
 		lblFuerza.setForeground(Color.WHITE);
 		lblFuerza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFuerza.setBounds(50, 72, 56, 16);
 		contentPane.add(lblFuerza);
 		
-		JButton buttonConfirm = new JButton("Confirmar");
+		final JButton buttonConfirm = new JButton("Confirmar");
 		ImageIcon icono_confirm = new ImageIcon("recursos//botonConfirmar.png");
 		buttonConfirm.setIcon(icono_confirm);
 		buttonConfirm.setEnabled(false);
@@ -142,7 +142,7 @@ public class MenuAsignarSkills extends JFrame {
 		buttonConfirm.setBounds(176, 112, 97, 25);
 		contentPane.add(buttonConfirm);
 		
-		JButton buttonCancel = new JButton("Cancelar");
+		final JButton buttonCancel = new JButton("Cancelar");
 		ImageIcon icono_c = new ImageIcon("recursos//botonCancelar.png");
 		buttonCancel.setIcon(icono_c);
 		buttonCancel.addActionListener(new ActionListener() {
@@ -153,12 +153,12 @@ public class MenuAsignarSkills extends JFrame {
 		buttonCancel.setBounds(176, 146, 97, 25);
 		contentPane.add(buttonCancel);
 		
-		JButton buttonMinus = new JButton("");
-		JButton buttonMinus1 = new JButton("");
-		JButton buttonMinus2 = new JButton("");
-		JButton buttonMore = new JButton("");
-		JButton buttonMore1 = new JButton("");
-		JButton buttonMore2 = new JButton("");
+		final JButton buttonMinus = new JButton("");
+		final JButton buttonMinus1 = new JButton("");
+		final JButton buttonMinus2 = new JButton("");
+		final JButton buttonMore = new JButton("");
+		final JButton buttonMore1 = new JButton("");
+		final JButton buttonMore2 = new JButton("");
 		buttonMinus.setEnabled(false);
 		buttonMinus1.setEnabled(false);
 		buttonMinus2.setEnabled(false);
@@ -343,7 +343,7 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMore2.setBounds(118, 217, 34, 25);
 		contentPane.add(buttonMore2);
 		
-		JLabel imageLabel = new JLabel(new ImageIcon("recursos//background.jpg")); 
+		final JLabel imageLabel = new JLabel(new ImageIcon("recursos//background.jpg")); 
 		imageLabel.setBounds(0, 0, 298, 294);
 		imageLabel.setVisible(true);
 		contentPane.add(imageLabel);
