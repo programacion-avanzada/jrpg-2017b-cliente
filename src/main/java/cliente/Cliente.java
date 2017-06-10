@@ -143,8 +143,8 @@ public class Cliente extends Thread {
 
 							// Abro el menu para la creaci�n del personaje
 							MenuCreacionPj menuCreacionPJ = new MenuCreacionPj(this, paquetePersonaje);
+							
 							menuCreacionPJ.setVisible(true);
-
 							// Espero a que el usuario cree el personaje
 							wait();
 
