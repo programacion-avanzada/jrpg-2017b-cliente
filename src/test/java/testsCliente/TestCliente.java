@@ -95,7 +95,7 @@ public class TestCliente {
 			cliente.getSalida().close();
 			cliente.getEntrada().close();
 			cliente.getSocket().close();
-
+			myThread.stop();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -136,7 +136,7 @@ public class TestCliente {
 			cliente.getSocket().close();
 
 			Assert.assertEquals(Paquete.msjExito, resultado.getMensaje());
-
+			myThread.stop();
 		} catch (JsonSyntaxException | ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
@@ -176,7 +176,7 @@ public class TestCliente {
 			cliente.getEntrada().close();
 			cliente.getSocket().close();
 			Assert.assertEquals(Paquete.msjFracaso, resultado.getMensaje());
-
+			myThread.stop();
 		} catch (JsonSyntaxException | ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
@@ -236,6 +236,7 @@ public class TestCliente {
 			// Lo fuerzo porque la verdad que de esta manera está compliqueti
 			pp.setNombre("PjTest");
 			Assert.assertEquals("PjTest", pp.getNombre());
+			myThread.stop();
 		} catch (IOException | JsonSyntaxException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -277,6 +278,7 @@ public class TestCliente {
 			cliente.getSocket().close();
 
 			Assert.assertEquals("PjTest", paquetePersonaje.getNombre());
+			myThread.stop();
 		} catch (IOException | JsonSyntaxException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -321,6 +323,7 @@ public class TestCliente {
 			cliente.getSocket().close();
 
 			Assert.assertEquals(10000, paquetePersonaje.getSaludTope());
+			myThread.stop();
 		} catch (IOException | JsonSyntaxException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
