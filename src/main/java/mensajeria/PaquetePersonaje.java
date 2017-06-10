@@ -210,7 +210,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		}
 	}
 
-	private void useBonus(int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia) {
+	public void useBonus(int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia) {
 		saludTope += bonusSalud;
 		energiaTope += bonusEnergia;
 		fuerza += bonusAtaque;

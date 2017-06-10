@@ -322,4 +322,8 @@ public class Cliente extends Thread {
 	public String getIp() {
 		return ip;
 	}
+	
+	public void actualizarPersonaje(PaquetePersonaje pP) {
+		paquetePersonaje = pP;
+	}
 }

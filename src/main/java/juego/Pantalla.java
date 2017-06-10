@@ -23,8 +23,11 @@ import com.google.gson.Gson;
 
 import cliente.Cliente;
 import estados.Estado;
+import frames.MenuAsignarSkills;
+import frames.MenuEscape;
 import frames.MenuInventario;
 import frames.MenuJugar;
+import frames.MenuStats;
 import mensajeria.Comando;
 import mensajeria.Paquete;
 
@@ -72,10 +75,26 @@ public class Pantalla {
 						MenuInventario menu = new MenuInventario(cliente);
 						menu.setVisible(true);
 					}
+				} else if (e.getKeyCode() == KeyEvent.VK_A) {
+					if(Estado.getEstado().esEstadoDeJuego()) {
+						MenuAsignarSkills menu1 = new MenuAsignarSkills(cliente);
+						menu1.setVisible(true);
+					} 
+				} else if (e.getKeyCode() == KeyEvent.VK_S) {
+					if(Estado.getEstado().esEstadoDeJuego()) {
+						MenuStats menu2 = new MenuStats(cliente);
+						menu2.setVisible(true);
+					}
+				} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					if(Estado.getEstado().esEstadoDeJuego()) {
+						MenuEscape menuEscp = new MenuEscape(cliente);
+						menuEscp.setVisible(true);
+					}
 				}
 			}
-			
 		});
+
+
 		pantalla.setLocationRelativeTo(null);
 		pantalla.setVisible(false);
 
