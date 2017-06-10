@@ -204,6 +204,12 @@ public class EstadoBatalla extends Estado {
 
 	private void crearPersonajes() {
 		String nombre = paquetePersonaje.getNombre();
+		System.out.println("Nombre: " + paqueteEnemigo.getNombre());
+		System.out.println("Salud: " + paqueteEnemigo.getSaludTope());
+		System.out.println("Energia: " + paqueteEnemigo.getEnergiaTope());
+		System.out.println("Fuerza: " + paqueteEnemigo.getFuerza());
+		System.out.println("Destreza: " + paqueteEnemigo.getDestreza());
+		System.out.println("Inteligencia: " + paqueteEnemigo.getInteligencia());
 		int salud = paquetePersonaje.getSaludTope();
 		int energia = paquetePersonaje.getEnergiaTope();
 		int fuerza = paquetePersonaje.getFuerza();

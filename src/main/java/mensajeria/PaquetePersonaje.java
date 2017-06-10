@@ -245,6 +245,25 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public boolean nuevoItem() {
 		return items.get(items.size()-1).getNombre() == null;
 	}
-	
-	
+
+	public void ponerBonus(int cantItems) {
+		int i = 0;
+		while(i < cantItems) {
+			useBonus(items.get(i).getBonusSalud(),items.get(i).getBonusEnergia(),items.get(i).getBonusFuerza(), items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+			i++;
+		}
+	}
+
+	public void sacarUltimoItem() {
+		int i = items.size()-1;
+		if(i>=0) {
+			sacarBonus(items.get(i).getBonusSalud(),items.get(i).getBonusEnergia(),items.get(i).getBonusFuerza(), items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+		}
+	}
+	public void ponerUltimoItem() {
+		int i = items.size()-1;
+		if(i>=0) {
+			useBonus(items.get(i).getBonusSalud(),items.get(i).getBonusEnergia(),items.get(i).getBonusFuerza(), items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+		}
+	}
 }
