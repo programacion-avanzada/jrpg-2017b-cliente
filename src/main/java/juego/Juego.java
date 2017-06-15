@@ -3,6 +3,7 @@ package juego;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -43,6 +44,9 @@ public class Juego implements Runnable {
 	private EscuchaMensajes escuchaMensajes;
 	private PaquetePersonaje paquetePersonaje;
 	private PaqueteMovimiento ubicacionPersonaje;
+	private Map<Integer, PaquetePersonaje> personajesConectados;
+	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
+
 
 	private CargarRecursos cargarRecursos;
 
@@ -219,6 +223,22 @@ public class Juego implements Runnable {
 	}
 
 	public void actualizarPersonaje() {
-		paquetePersonaje = (PaquetePersonaje) (escuchaMensajes.getPersonajesConectados().get(paquetePersonaje.getId()).clone());
+		paquetePersonaje = (PaquetePersonaje) (personajesConectados.get(paquetePersonaje.getId()).clone());
+	}
+
+	public Map<Integer, PaquetePersonaje> getPersonajesConectados() {
+		return personajesConectados;
+	}
+
+	public void setPersonajesConectados(Map<Integer, PaquetePersonaje> map) {
+		this.personajesConectados = map;
+	}
+	
+	public Map<Integer, PaqueteMovimiento> getUbicacionPersonajes() {
+		return ubicacionPersonajes;
+	}
+
+	public void setUbicacionPersonajes(Map<Integer, PaqueteMovimiento> ubicacionPersonajes) {
+		this.ubicacionPersonajes = ubicacionPersonajes;
 	}
 }
