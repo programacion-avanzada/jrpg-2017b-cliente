@@ -1,8 +1,8 @@
 package comandos;
 
-import mensajeria.*;
+import mensajeria.PaqueteDePersonajes;
 
-public class Conexion extends Comando {
+public class Conexion extends ComandosEscucha {
 
 	
 	@Override

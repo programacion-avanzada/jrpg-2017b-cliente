@@ -1,10 +1,9 @@
 package comandos;
 
 import estados.Estado;
-import mensajeria.Comando;
 import mensajeria.PaqueteFinalizarBatalla;
 
-public class FinalizarBatalla extends Comando{
+public class FinalizarBatalla extends ComandosEscucha{
 
 	@Override
 	public void ejecutar() {

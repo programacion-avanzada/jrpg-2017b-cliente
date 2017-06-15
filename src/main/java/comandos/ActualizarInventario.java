@@ -1,8 +1,6 @@
 package comandos;
 
-import mensajeria.Comando;
-
-public class ActualizarInventario extends Comando {
+public class ActualizarInventario extends ComandosEscucha {
 
 	@Override
 	public void ejecutar() {

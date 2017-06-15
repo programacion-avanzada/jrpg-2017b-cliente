@@ -2,8 +2,6 @@ package mensajeria;
 
 import com.google.gson.Gson;
 
-import juego.Juego;
-
 public abstract class Comando {
 	// Nombre del paquete donde se encuentran las clases con las responsabilidades
 	public static final String NOMBREPAQUETE = "comandos";
@@ -25,13 +23,11 @@ public abstract class Comando {
 	public static final int ACTUALIZARPERSONAJELV = 12;
 	protected final Gson gson = new Gson();
 	protected String cadenaLeida;
-	protected Juego juego;
+	
 	public void setCadena(String cadenaLeida) {
 		this.cadenaLeida = cadenaLeida;
 	}
-	public void setJuego(Juego juego) {
-		this.juego = juego;
-	}
+
 	
 	public abstract void ejecutar();
 }

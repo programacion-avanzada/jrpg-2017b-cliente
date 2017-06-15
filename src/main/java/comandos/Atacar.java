@@ -1,9 +1,8 @@
 package comandos;
 
-import mensajeria.Comando;
 import mensajeria.PaqueteAtacar;
 
-public class Atacar extends Comando {
+public class Atacar extends ComandosEscucha {
 
 	@Override
 	public void ejecutar() {

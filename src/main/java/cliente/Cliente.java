@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
+import comandos.ComandosCliente;
 import frames.MenuCarga;
 import frames.MenuCreacionPj;
 import frames.MenuJugar;
@@ -27,7 +28,7 @@ public class Cliente extends Thread {
 	private String miIp;
 	private ObjectInputStream entrada;
 	private ObjectOutputStream salida;
-
+	
 	// Objeto gson
 	private final Gson gson = new Gson();
 
@@ -97,7 +98,7 @@ public class Cliente extends Thread {
 	public void run() {
 		synchronized(this) {
 			try {
-
+				ComandosCliente comand;
 				// Creo el paquete que le voy a enviar al servidor
 				paqueteUsuario = new PaqueteUsuario();
 
@@ -166,32 +167,44 @@ public class Cliente extends Thread {
 							// El usuario no pudo iniciar sesión
 							paqueteUsuario.setInicioSesion(false);
 						}
+//						comand = (ComandosCliente) paquete.getObjeto(Comando.NOMBREPAQUETE);
+//						comand.setCadena(cadenaLeida);
+//						comand.setCliente(this);
+//						comand.ejecutar();
 						break;
 
 					case Comando.INICIOSESION:
-						if (paquete.getMensaje().equals(Paquete.msjExito)) {
-
-							// El usuario ya inicio sesi�n
-							paqueteUsuario.setInicioSesion(true);
-
-							// Recibo el paquete personaje con los datos
-							paquetePersonaje = gson.fromJson(cadenaLeida, PaquetePersonaje.class);
-
-						} else {
-							if (paquete.getMensaje().equals(Paquete.msjFracaso))
-								JOptionPane.showMessageDialog(null, "Error al iniciar sesión."
-										+ " Revise el usuario y la contraseña");
-
-							// El usuario no pudo iniciar sesión
-							paqueteUsuario.setInicioSesion(false);
-						}
+//						if (paquete.getMensaje().equals(Paquete.msjExito)) {
+//
+//							// El usuario ya inicio sesi�n
+//							paqueteUsuario.setInicioSesion(true);
+//
+//							// Recibo el paquete personaje con los datos
+//							paquetePersonaje = gson.fromJson(cadenaLeida, PaquetePersonaje.class);
+//
+//						} else {
+//							if (paquete.getMensaje().equals(Paquete.msjFracaso))
+//								JOptionPane.showMessageDialog(null, "Error al iniciar sesión."
+//										+ " Revise el usuario y la contraseña");
+//
+//							// El usuario no pudo iniciar sesión
+//							paqueteUsuario.setInicioSesion(false);
+//						}
+						comand = (ComandosCliente) paquete.getObjeto(Comando.NOMBREPAQUETE);
+						comand.setCadena(cadenaLeida);
+						comand.setCliente(this);
+						comand.ejecutar();
 						break;
 
 					case Comando.SALIR:
 						// El usuario no pudo iniciar sesión
-						paqueteUsuario.setInicioSesion(false);
-						salida.writeObject(gson.toJson(new Paquete(Comando.DESCONECTAR), Paquete.class));
-						cliente.close();
+//						paqueteUsuario.setInicioSesion(false);
+//						salida.writeObject(gson.toJson(new Paquete(Comando.DESCONECTAR), Paquete.class));
+//						cliente.close();
+						comand = (ComandosCliente) paquete.getObjeto(Comando.NOMBREPAQUETE);
+						comand.setCadena(cadenaLeida);
+						comand.setCliente(this);
+						comand.ejecutar();
 						break;
 						
 					
@@ -325,5 +338,26 @@ public class Cliente extends Thread {
 	
 	public void actualizarPersonaje(PaquetePersonaje pP) {
 		paquetePersonaje = pP;
+	}
+	public Juego getWome() {
+		return wome;
+	}
+	public void setWome(Juego wome) {
+		this.wome = wome;
+	}
+	public int getPuerto() {
+		return puerto;
+	}
+	public void setPaqueteUsuario(PaqueteUsuario paqueteUsuario) {
+		this.paqueteUsuario = paqueteUsuario;
+	}
+	public void setPaquetePersonaje(PaquetePersonaje paquetePersonaje) {
+		this.paquetePersonaje = paquetePersonaje;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public void setMenuCarga(MenuCarga menuCarga) {
+		this.menuCarga = menuCarga;
 	}
 }

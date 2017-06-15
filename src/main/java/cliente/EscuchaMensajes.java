@@ -2,22 +2,15 @@ package cliente;
 
 import java.io.ObjectInputStream;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
-import estados.Estado;
-import estados.EstadoBatalla;
+import comandos.ComandosEscucha;
 import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.Paquete;
-import mensajeria.PaqueteAtacar;
-import mensajeria.PaqueteBatalla;
-import mensajeria.PaqueteDeMovimientos;
-import mensajeria.PaqueteDePersonajes;
-import mensajeria.PaqueteFinalizarBatalla;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
 /**La clase EscuchaMensajes tiene como función  
@@ -49,7 +42,7 @@ public class EscuchaMensajes extends Thread {
 
 			Paquete paquete;
 			
-			Comando comand;
+			ComandosEscucha comand;
 			juego.setPersonajesConectados(new HashMap<Integer, PaquetePersonaje>());
 			juego.setUbicacionPersonajes(new HashMap<Integer, PaqueteMovimiento>());
 
@@ -58,7 +51,7 @@ public class EscuchaMensajes extends Thread {
 				String objetoLeido = (String) entrada.readObject();
 
 				paquete = gson.fromJson(objetoLeido , Paquete.class);
-				comand = (Comando) paquete.getObjeto(Comando.NOMBREPAQUETE);
+				comand = (ComandosEscucha) paquete.getObjeto(Comando.NOMBREPAQUETE);
 				comand.setJuego(juego);
 				comand.setCadena(objetoLeido);
 				comand.ejecutar();

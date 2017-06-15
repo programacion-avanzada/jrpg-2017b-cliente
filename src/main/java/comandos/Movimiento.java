@@ -1,9 +1,8 @@
 package comandos;
 
-import mensajeria.Comando;
 import mensajeria.PaqueteDeMovimientos;
 
-public class Movimiento extends Comando{
+public class Movimiento extends ComandosEscucha{
 
 	@Override
 	public void ejecutar() {

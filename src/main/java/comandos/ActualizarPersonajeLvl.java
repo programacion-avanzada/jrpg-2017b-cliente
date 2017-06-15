@@ -1,9 +1,8 @@
 package comandos;
 
-import mensajeria.Comando;
 import mensajeria.PaquetePersonaje;
 
-public class ActualizarPersonajeLvl extends Comando {
+public class ActualizarPersonajeLvl extends ComandosEscucha {
 
 	@Override
 	public void ejecutar() {

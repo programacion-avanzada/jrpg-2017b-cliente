@@ -2,10 +2,9 @@ package comandos;
 
 import estados.Estado;
 import estados.EstadoBatalla;
-import mensajeria.Comando;
 import mensajeria.PaqueteBatalla;
 
-public class Batalla extends Comando {
+public class Batalla extends ComandosEscucha {
 
 	@Override
 	public void ejecutar() {
