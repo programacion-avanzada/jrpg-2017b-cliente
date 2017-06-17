@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,7 +21,11 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
 import cliente.Cliente;
+import mensajeria.Comando;
 import mensajeria.PaquetePersonaje;
 
 public class MenuCreacionPj extends JFrame {
@@ -36,7 +41,7 @@ public class MenuCreacionPj extends JFrame {
 	private JComboBox<String> cbxCasta;
 	private JComboBox<String> cbxRaza;
 
-	public MenuCreacionPj(final Cliente cliente, final PaquetePersonaje personaje) {
+	public MenuCreacionPj(final Cliente cliente, final PaquetePersonaje personaje, Gson gson) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
@@ -175,10 +180,19 @@ public class MenuCreacionPj extends JFrame {
 				personaje.setFuerza(Integer.parseInt(vecFuerza[cbxCasta.getSelectedIndex()]));
 				personaje.setDestreza(Integer.parseInt(vecDestreza[cbxCasta.getSelectedIndex()]));
 				personaje.setInteligencia(Integer.parseInt(vecInteligencia[cbxCasta.getSelectedIndex()]));
-				synchronized (cliente) {
-					cliente.notify();
+				try {
+					
+
+					// Le envio los datos al servidor
+					cliente.getPaquetePersonaje().setComando(Comando.CREACIONPJ);
+					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
+					dispose();
+				} catch (JsonSyntaxException | IOException esd) {
+					// TODO Auto-generated catch block
+					esd.printStackTrace();
 				}
-				dispose();
+
+				
 			}
 		});
 

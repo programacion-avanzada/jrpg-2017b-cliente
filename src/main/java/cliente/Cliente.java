@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 
 import comandos.ComandosCliente;
 import frames.MenuCarga;
-import frames.MenuCreacionPj;
 import frames.MenuJugar;
 import frames.MenuMapas;
 import juego.Juego;
@@ -101,119 +100,53 @@ public class Cliente extends Thread {
 				ComandosCliente comand;
 				// Creo el paquete que le voy a enviar al servidor
 				paqueteUsuario = new PaqueteUsuario();
-
+				MenuJugar menuJugar = null;
 				while (!paqueteUsuario.isInicioSesion()) {
 
 					// Muestro el menú principal
-					new MenuJugar(this).setVisible(true);
-
-					// Creo los paquetes que le voy a enviar al servidor
-					paqueteUsuario = new PaqueteUsuario();
-					paquetePersonaje = new PaquetePersonaje();
-
-					// Espero a que el usuario seleccione alguna accion
-					wait();
-
-					switch (getAccion()) {
-
-					case Comando.REGISTRO:
-						paqueteUsuario.setComando(Comando.REGISTRO);
-						break;
-					case Comando.INICIOSESION:
-						paqueteUsuario.setComando(Comando.INICIOSESION);
-						break;
-					case Comando.SALIR:
-						paqueteUsuario.setIp(getMiIp());
-						paqueteUsuario.setComando(Comando.SALIR);
-						break;
-					default:
-						break;
-					}
+					if(menuJugar == null){
+						menuJugar = new MenuJugar(this);
+						menuJugar.setVisible(true);
+	
+						// Creo los paquetes que le voy a enviar al servidor
+						paqueteUsuario = new PaqueteUsuario();
+						paquetePersonaje = new PaquetePersonaje();
+	
+						// Espero a que el usuario seleccione alguna accion
+						wait();
+	
+						switch (getAccion()) {
+	
+						case Comando.REGISTRO:
+							paqueteUsuario.setComando(Comando.REGISTRO);
+							break;
+						case Comando.INICIOSESION:
+							paqueteUsuario.setComando(Comando.INICIOSESION);
+							break;
+						case Comando.SALIR:
+							paqueteUsuario.setIp(getMiIp());
+							paqueteUsuario.setComando(Comando.SALIR);
+							break;
+						default:
+							break;
+						}
 
 					// Le envio el paquete al servidor
-					salida.writeObject(gson.toJson(paqueteUsuario));
-
+						salida.writeObject(gson.toJson(paqueteUsuario));
+					}
 					// Recibo el paquete desde el servidor
 					String cadenaLeida = (String) entrada.readObject();
 					Paquete paquete = gson.fromJson(cadenaLeida, Paquete.class);
 
-					switch (paquete.getComando()) {
 
-					case Comando.REGISTRO:
-						if (paquete.getMensaje().equals(Paquete.msjExito)) {
-
-							// Abro el menu para la creaci�n del personaje
-							MenuCreacionPj menuCreacionPJ = new MenuCreacionPj(this, paquetePersonaje);
-							
-							menuCreacionPJ.setVisible(true);
-							// Espero a que el usuario cree el personaje
-							wait();
-
-							// Le envio los datos al servidor
-							paquetePersonaje.setComando(Comando.CREACIONPJ);
-							salida.writeObject(gson.toJson(paquetePersonaje));
-							JOptionPane.showMessageDialog(null, "Registro exitoso.");
-
-							// Recibo el paquete personaje con los datos (la id incluida)
-							paquetePersonaje = gson.fromJson((String) entrada.readObject(), PaquetePersonaje.class);
-
-							// Indico que el usuario ya inicio sesion
-							paqueteUsuario.setInicioSesion(true);
-
-						} else {
-							if (paquete.getMensaje().equals(Paquete.msjFracaso)) {
-								JOptionPane.showMessageDialog(null, "No se pudo registrar.");
-							}
-							// El usuario no pudo iniciar sesión
-							paqueteUsuario.setInicioSesion(false);
-						}
-//						comand = (ComandosCliente) paquete.getObjeto(Comando.NOMBREPAQUETE);
-//						comand.setCadena(cadenaLeida);
-//						comand.setCliente(this);
-//						comand.ejecutar();
-						break;
-
-					case Comando.INICIOSESION:
-//						if (paquete.getMensaje().equals(Paquete.msjExito)) {
-//
-//							// El usuario ya inicio sesi�n
-//							paqueteUsuario.setInicioSesion(true);
-//
-//							// Recibo el paquete personaje con los datos
-//							paquetePersonaje = gson.fromJson(cadenaLeida, PaquetePersonaje.class);
-//
-//						} else {
-//							if (paquete.getMensaje().equals(Paquete.msjFracaso))
-//								JOptionPane.showMessageDialog(null, "Error al iniciar sesión."
-//										+ " Revise el usuario y la contraseña");
-//
-//							// El usuario no pudo iniciar sesión
-//							paqueteUsuario.setInicioSesion(false);
-//						}
-						comand = (ComandosCliente) paquete.getObjeto(Comando.NOMBREPAQUETE);
-						comand.setCadena(cadenaLeida);
-						comand.setCliente(this);
-						comand.ejecutar();
-						break;
-
-					case Comando.SALIR:
-						// El usuario no pudo iniciar sesión
-//						paqueteUsuario.setInicioSesion(false);
-//						salida.writeObject(gson.toJson(new Paquete(Comando.DESCONECTAR), Paquete.class));
-//						cliente.close();
-						comand = (ComandosCliente) paquete.getObjeto(Comando.NOMBREPAQUETE);
-						comand.setCadena(cadenaLeida);
-						comand.setCliente(this);
-						comand.ejecutar();
-						break;
-						
+					comand = (ComandosCliente) paquete.getObjeto(Comando.NOMBREPAQUETE);
+					comand.setCadena(cadenaLeida);
+					comand.setCliente(this);
+					comand.ejecutar();
 					
-					default:
-						break;
-					}
-
 				}
 
+				
 				// Creo un paquete con el comando mostrar mapas
 				paquetePersonaje.setComando(Comando.MOSTRARMAPAS);
 
