@@ -115,21 +115,10 @@ public class Cliente extends Thread {
 						// Espero a que el usuario seleccione alguna accion
 						wait();
 	
-						switch (getAccion()) {
-	
-						case Comando.REGISTRO:
-							paqueteUsuario.setComando(Comando.REGISTRO);
-							break;
-						case Comando.INICIOSESION:
-							paqueteUsuario.setComando(Comando.INICIOSESION);
-							break;
-						case Comando.SALIR:
-							paqueteUsuario.setIp(getMiIp());
-							paqueteUsuario.setComando(Comando.SALIR);
-							break;
-						default:
-							break;
-						}
+						comand = (ComandosCliente) Paquete.getObjetoSet(Comando.NOMBREPAQUETE, getAccion());
+						comand.setCadena(null);
+						comand.setCliente(this);
+						comand.ejecutar();
 
 					// Le envio el paquete al servidor
 						salida.writeObject(gson.toJson(paqueteUsuario));
