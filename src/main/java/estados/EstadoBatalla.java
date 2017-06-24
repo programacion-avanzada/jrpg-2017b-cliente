@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -150,8 +149,8 @@ public class EstadoBatalla extends Estado {
 							juego.getPersonaje().setNivel(personaje.getNivel());
 							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuSubirNivel);
 						}
-						ganarItem();
-						
+						System.out.println("El personaje " + personaje.getNombre() + " gano un item");
+						paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
 						finalizarBatalla();
 						Estado.setEstado(juego.getEstadoJuego());
 						
@@ -171,16 +170,6 @@ public class EstadoBatalla extends Estado {
 
 	}
 
-	private void ganarItem() {
-		// Si mi mochila no está llena agrego un id
-		// de item válido para llenarlo más adelante en el server
-		if( paquetePersonaje.getCantItems() < 9) {
-			System.out.println("El personaje " + personaje.getNombre() + " gano un item");
-			int itemGanado = new Random().nextInt(29);
-			itemGanado += 1;
-			paquetePersonaje.anadirItem(itemGanado);
-		} 
-	}
 
 	@Override
 	public void graficar(Graphics g) {

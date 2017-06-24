@@ -266,4 +266,8 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 			useBonus(items.get(i).getBonusSalud(),items.get(i).getBonusEnergia(),items.get(i).getBonusFuerza(), items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
 		}
 	}
+
+	public void eliminarItems() {
+		items.removeAll(items);
+	}
 }

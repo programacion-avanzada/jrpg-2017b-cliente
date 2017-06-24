@@ -249,7 +249,7 @@ public class Cliente extends Thread {
 		return menuCarga;
 	}
 	public void actualizarItems(PaquetePersonaje paqueteActualizado) {
-		if(paquetePersonaje.getCantItems() != paqueteActualizado.getCantItems()) {
+		if(paquetePersonaje.getCantItems() != 0 && paquetePersonaje.getCantItems() != paqueteActualizado.getCantItems()) {
 			paquetePersonaje.anadirItem(paqueteActualizado.getItems().get(paqueteActualizado.getItems().size() -1));
 		}
 		
