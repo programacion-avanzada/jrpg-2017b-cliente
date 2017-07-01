@@ -21,7 +21,8 @@ public class MenuInfoPersonaje {
 	public static final int menuGanarBatalla = 3;
 	public static final int menuPerderBatalla = 4;
 	public static final int menuGanarItem = 5;
-	private static final String [] leyendaBoton = {"Batallar", "Volver", "Aceptar", "Aceptar", "Aceptar", "Aceptar"};
+	public static final int menuComerciar = 6;
+	private static final String [] leyendaBoton = {"Batallar", "Volver", "Aceptar", "Aceptar", "Aceptar", "Aceptar", "Comerciar"};
 
 	private int x;
 	private int y;
@@ -48,24 +49,27 @@ public class MenuInfoPersonaje {
 
 		// Grafico la leyenda segun el tipo de menu
 		switch(tipoMenu){
-		case menuBatallar:
-			graficarMenuInformacion(g);
-			break;
-		case menuInformacion:
-			graficarMenuInformacion(g);
-			break;
-		case menuSubirNivel:
-			graficarMenuSubirNivel(g);
-			break;
-		case menuGanarBatalla:
-			graficarMenuGanarBatalla(g);
-			break;
-		case menuPerderBatalla:
-			graficarMenuPerderBatalla(g);
-			break;
-		case menuGanarItem:
-			graficarMenuItem(g);
-			break;
+			case menuBatallar:
+				graficarMenuInformacion(g);
+				break;
+			case menuInformacion:
+				graficarMenuInformacion(g);
+				break;
+			case menuSubirNivel:
+				graficarMenuSubirNivel(g);
+				break;
+			case menuGanarBatalla:
+				graficarMenuGanarBatalla(g);
+				break;
+			case menuPerderBatalla:
+				graficarMenuPerderBatalla(g);
+				break;
+			case menuGanarItem:
+				graficarMenuItem(g);
+				break;
+			case menuComerciar:
+				graficarMenuComerciar(g);
+				break;
 		}
 
 
@@ -146,6 +150,23 @@ public class MenuInfoPersonaje {
 		Pantalla.centerString(g, new Rectangle(x, y + 270, menu.getWidth(), 0), "Nuevo Nivel");
 		g.setFont(new Font("Book Antiqua", 1, 62));
 		Pantalla.centerString(g, new Rectangle(x, y + 325, menu.getWidth(), 0), String.valueOf(personaje.getNivel()));
+
+	}
+	
+	private void graficarMenuComerciar(Graphics g){
+
+		// muestro los nombres de los atributos
+		g.setColor(Color.BLACK);
+		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), personaje.getRaza());
+		g.drawString("Casta: ", x + 30, y + 260);
+		g.drawString("Nivel: ", x + 30, y + 290);
+		g.drawString("Experiencia: ", x + 30, y + 320);
+
+		// muestro los atributos
+		g.setFont(new Font("Book Antiqua", 0, 20));
+		g.drawString(personaje.getCasta(), x + 100, y + 260);
+		g.drawString(personaje.getNivel() + " ", x + 100, y + 290);
+		g.drawString(personaje.getExperiencia() + " / " + Personaje.getTablaDeNiveles()[personaje.getNivel() + 1], x + 150, y + 320);
 
 	}
 

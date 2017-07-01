@@ -11,11 +11,13 @@ import com.google.gson.Gson;
 
 import comandos.ComandosCliente;
 import frames.MenuCarga;
+import frames.MenuComerciar;
 import frames.MenuJugar;
 import frames.MenuMapas;
 import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.Paquete;
+import mensajeria.PaqueteComerciar;
 import mensajeria.PaquetePersonaje;
 import mensajeria.PaqueteUsuario;
 /**La clase Cliente tiene como función  
@@ -34,10 +36,14 @@ public class Cliente extends Thread {
 	// Paquete usuario y paquete personaje
 	private PaqueteUsuario paqueteUsuario;
 	private PaquetePersonaje paquetePersonaje;
+	private PaqueteComerciar paqueteComercio;
 
 	// Acciones que realiza el usuario
 	private int accion;
 
+	//MENU COMERCIAR
+	private MenuComerciar m1;
+		
 	// Ip y puerto
 	private String ip;
 	private final int puerto = 9999;
@@ -281,5 +287,21 @@ public class Cliente extends Thread {
 	}
 	public void setMenuCarga(MenuCarga menuCarga) {
 		this.menuCarga = menuCarga;
+	}
+	
+	public MenuComerciar getM1() {
+		return m1;
+	}
+	
+	public void setM1(MenuComerciar m1) {
+		this.m1 = m1;
+	}
+	
+	public PaqueteComerciar getPaqueteComercio() {
+		return paqueteComercio;
+	}
+	
+	public void setPaqueteComercio(PaqueteComerciar paqueteComercio) {
+		this.paqueteComercio = paqueteComercio;	
 	}
 }

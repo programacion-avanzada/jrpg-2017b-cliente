@@ -270,4 +270,11 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public void eliminarItems() {
 		items.removeAll(items);
 	}
+	
+	public void actualizarTrueque(ArrayList<Item> items) {
+		this.items.removeAll(this.items);
+		for (Item item : items) {
+			this.items.add(item);
+		}
+	}
 }
