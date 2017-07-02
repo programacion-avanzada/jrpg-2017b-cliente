@@ -133,12 +133,10 @@ public class Cliente extends Thread {
 					String cadenaLeida = (String) entrada.readObject();
 					Paquete paquete = gson.fromJson(cadenaLeida, Paquete.class);
 
-
 					comand = (ComandosCliente) paquete.getObjeto(Comando.NOMBREPAQUETE);
 					comand.setCadena(cadenaLeida);
 					comand.setCliente(this);
 					comand.ejecutar();
-					
 				}
 
 				
@@ -263,7 +261,6 @@ public class Cliente extends Thread {
 		if(paquetePersonaje.getCantItems() != 0 && paquetePersonaje.getCantItems() != paqueteActualizado.getCantItems()) {
 			paquetePersonaje.anadirItem(paqueteActualizado.getItems().get(paqueteActualizado.getItems().size() -1));
 		}
-		
 	}
 	public String getIp() {
 		return ip;
