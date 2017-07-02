@@ -46,7 +46,7 @@ public class Cliente extends Thread {
 		
 	// Ip y puerto
 	private String ip;
-	private final int puerto = 9999;
+	private final int puerto = 55050;
 	/**Pide la accion
 	 * @return Devuelve la accion
 	 */
