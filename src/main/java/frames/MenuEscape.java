@@ -19,15 +19,13 @@ import com.google.gson.Gson;
 
 import cliente.Cliente;
 import estados.Estado;
+import juego.Pantalla;
 import mensajeria.Comando;
 import mensajeria.Paquete;
 
 public class MenuEscape extends JFrame {
 
 	private JPanel contentPane;
-	private MenuAsignarSkills m1;
-	private MenuInventario menu;
-	private MenuStats s1;
 	private final Gson gson = new Gson();
 	/**
 	 * Create the frame.
@@ -51,8 +49,11 @@ public class MenuEscape extends JFrame {
 		verStats.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();	
-				s1 = new MenuStats(cliente);
-				s1.setVisible(true);
+				Pantalla.menuEscp = null;
+				if (Pantalla.menuStats == null) {
+					Pantalla.menuStats = new MenuStats(cliente);
+					Pantalla.menuStats.setVisible(true);					
+				}
 			}
 		});
 		contentPane.add(verStats);
@@ -64,8 +65,11 @@ public class MenuEscape extends JFrame {
 		asignarSkills.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();	
-				m1 = new MenuAsignarSkills(cliente);
-				m1.setVisible(true);
+				Pantalla.menuEscp = null;
+				if (Pantalla.menuAsignar == null) {
+					Pantalla.menuAsignar = new MenuAsignarSkills(cliente);
+					Pantalla.menuAsignar.setVisible(true);
+				}
 			}
 		});
 		contentPane.add(asignarSkills);
@@ -77,9 +81,12 @@ public class MenuEscape extends JFrame {
 		inventario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				Pantalla.menuEscp = null;
 				if(Estado.getEstado().esEstadoDeJuego()) {
-					menu = new MenuInventario(cliente);
-					menu.setVisible(true);
+					if (Pantalla.menuInventario == null) {
+						Pantalla.menuInventario = new MenuInventario(cliente);
+						Pantalla.menuInventario.setVisible(true);
+					}
 				}
 			}
 		});
@@ -111,6 +118,7 @@ public class MenuEscape extends JFrame {
 		volver.setBounds(29, 227, 125, 25);
 		volver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Pantalla.menuEscp = null;
 				dispose();
 			}
 		});

@@ -16,9 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import cliente.Cliente;
+import juego.Pantalla;
 import mensajeria.PaquetePersonaje;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MenuStats extends JFrame {
 
@@ -42,6 +45,14 @@ public class MenuStats extends JFrame {
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
+			
+			addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowClosing(WindowEvent e) {
+					Pantalla.menuStats = null;
+					dispose();
+				}
+			});
 			
 			BufferedImage imagenFondo = null;
 			try {
@@ -210,6 +221,7 @@ public class MenuStats extends JFrame {
 			btnVolver.setIcon(new ImageIcon("recursos//volver.png"));
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					Pantalla.menuStats = null;
 					dispose();
 				}
 			});

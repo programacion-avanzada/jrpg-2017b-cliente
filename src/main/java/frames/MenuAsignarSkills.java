@@ -19,7 +19,10 @@ import javax.swing.border.EmptyBorder;
 import com.google.gson.Gson;
 
 import cliente.Cliente;
+import juego.Pantalla;
 import mensajeria.Comando;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MenuAsignarSkills extends JFrame {
 
@@ -39,7 +42,6 @@ public class MenuAsignarSkills extends JFrame {
 	 */
 	public MenuAsignarSkills(final Cliente cliente) {
 		puntosAsignarInicial = 3;
-//		puntosAsignarInicial = cliente.getPaquetePersonaje().getPtsAsignar();
 		puntosFuerzaInicial = cliente.getPaquetePersonaje().getFuerza();
 		puntosDestrezaInicial = cliente.getPaquetePersonaje().getDestreza();
 		puntosInteligenciaInicial = cliente.getPaquetePersonaje().getInteligencia();
@@ -65,6 +67,14 @@ public class MenuAsignarSkills extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				Pantalla.menuAsignar = null;
+				dispose();
+			}
+		});
+		
 		final JLabel labelFuerza = new JLabel("");
 		labelFuerza.setForeground(Color.WHITE);
 		labelFuerza.setHorizontalAlignment(SwingConstants.CENTER);
@@ -147,6 +157,7 @@ public class MenuAsignarSkills extends JFrame {
 		buttonCancel.setIcon(icono_c);
 		buttonCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Pantalla.menuAsignar = null;
 				dispose();
 			}
 		});

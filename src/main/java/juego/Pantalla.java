@@ -36,6 +36,12 @@ public class Pantalla {
 	private JFrame pantalla;
 	private Canvas canvas;
 
+	// Menus
+	public static MenuInventario menuInventario;
+	public static MenuAsignarSkills menuAsignar;
+	public static MenuStats menuStats;
+	public static MenuEscape menuEscp;
+		
 	private final Gson gson = new Gson();
 
 	public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
@@ -72,23 +78,31 @@ public class Pantalla {
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_I) {
 					if(Estado.getEstado().esEstadoDeJuego()) {
-						MenuInventario menu = new MenuInventario(cliente);
-						menu.setVisible(true);
+						if (menuInventario == null) {
+							menuInventario = new MenuInventario(cliente);
+							menuInventario.setVisible(true);
+						}
 					}
 				} else if (e.getKeyCode() == KeyEvent.VK_A) {
 					if(Estado.getEstado().esEstadoDeJuego()) {
-						MenuAsignarSkills menu1 = new MenuAsignarSkills(cliente);
-						menu1.setVisible(true);
+						if (menuAsignar == null) {
+							menuAsignar = new MenuAsignarSkills(cliente);
+							menuAsignar.setVisible(true);
+						}
 					} 
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 					if(Estado.getEstado().esEstadoDeJuego()) {
-						MenuStats menu2 = new MenuStats(cliente);
-						menu2.setVisible(true);
+						if (menuStats == null) {
+							menuStats = new MenuStats(cliente);
+							menuStats.setVisible(true);
+						}
 					}
 				} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 					if(Estado.getEstado().esEstadoDeJuego()) {
-						MenuEscape menuEscp = new MenuEscape(cliente);
-						menuEscp.setVisible(true);
+						if (menuEscp == null) {
+							menuEscp = new MenuEscape(cliente);
+							menuEscp.setVisible(true);
+						}
 					}
 				}
 			}
