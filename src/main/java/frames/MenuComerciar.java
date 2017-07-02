@@ -30,6 +30,8 @@ import com.google.gson.Gson;
 import cliente.Cliente;
 import dominio.Item;
 import mensajeria.Comando;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MenuComerciar extends JFrame {
 
@@ -58,6 +60,14 @@ public class MenuComerciar extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				cliente.setM1(null);
+				dispose();
+			}
+		});
+		
 		BufferedImage imagenFondo = null;
 		try {
 			imagenFondo = ImageIO.read(new File("recursos//background.jpg"));
@@ -69,6 +79,7 @@ public class MenuComerciar extends JFrame {
 		btnCancelar.setIcon(new ImageIcon("recursos//volver.png"));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				cliente.setM1(null);
 				dispose();
 			}
 		});

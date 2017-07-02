@@ -202,7 +202,7 @@ public class Entidad {
 						if (juego.getEstadoJuego().getTipoSolicitud() == 
 								MenuInfoPersonaje.menuBatallar) {
 							//ME FIJO SI CON EL QUE QUIERO BATALLAR ESTA EN LA ZONA DE COMERCIO
-							if(!((int)comercio[0] >= 44 && (int)comercio[0] <= 71 && 
+							if (!((int)comercio[0] >= 44 && (int)comercio[0] <= 71 && 
 									(int)comercio[1] >= 0 && (int)comercio[1] <= 29)) {
 								juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
 								PaqueteBatalla pBatalla = new PaqueteBatalla();
@@ -226,27 +226,26 @@ public class Entidad {
 							}				
 						} else {
 							// PREGUNTO SI EL MENU EMERGENTE ES DE TIPO COMERCIO
-							if(juego.getEstadoJuego().getTipoSolicitud() == 
-									MenuInfoPersonaje.menuComerciar){
-//								if(XY[0] >= 44 && XY[0] <= 71 && XY[1] >= 0 && XY[1] <= 29) {
-									// ESTA ESTE PARA NO MOVERME HASTA EL LUGAR.
-								if((int)comercio[0] >= 44 && (int)comercio[0] <= 71 && 
+							if (juego.getEstadoJuego().getTipoSolicitud() == 
+									MenuInfoPersonaje.menuComerciar) {
+								if ((int)comercio[0] >= 44 && (int)comercio[0] <= 71 && 
 										(int)comercio[1] >= 0 && (int)comercio[1] <= 29) {
-									juego.getCliente().setPaqueteComercio(new PaqueteComerciar());
-									juego.getCliente().getPaqueteComercio().setId(juego.getPersonaje().getId());
-									juego.getCliente().getPaqueteComercio().setIdEnemigo(idEnemigo);
-									
-									try {
-										juego.getCliente().getSalida().writeObject(gson.toJson
-												(juego.getCliente().getPaqueteComercio()));
-									} catch (IOException e) {
-										JOptionPane.showMessageDialog(null, "Fallo la conexión "
-												+ "con el servidor");
-										e.printStackTrace();
+									if (juego.getCliente().getM1() == null) {
+										juego.getCliente().setPaqueteComercio(new PaqueteComerciar());
+										juego.getCliente().getPaqueteComercio().setId(juego.getPersonaje().getId());
+										juego.getCliente().getPaqueteComercio().setIdEnemigo(idEnemigo);
+										
+										try {
+											juego.getCliente().getSalida().writeObject(gson.toJson
+													(juego.getCliente().getPaqueteComercio()));
+										} catch (IOException e) {
+											JOptionPane.showMessageDialog(null, "Fallo la conexión "
+													+ "con el servidor");
+											e.printStackTrace();
+										}	
+									} else {
+										JOptionPane.showMessageDialog(null, "Ya te encuentras comerciando!");
 									}
-								
-									juego.getCliente().setM1(new MenuComerciar(juego.getCliente()));
-									juego.getCliente().getM1().setVisible(true);	
 								} else {
 									JOptionPane.showMessageDialog(null, "El otro usuario no se encuentra "
 											+ "dentro de la zona de comercio");
@@ -285,7 +284,6 @@ public class Entidad {
 								tilePersonajes[1]) {
 							idEnemigo = actual.getIdPersonaje();
 							float XY[] = Mundo.isoA2D(x,y);
-//							if(XY[0] >= 44 && XY[0] <= 71 && XY[1] >= 0 && XY[1] <= 29) {
 							// ESTA ESTE PARA NO MOVERME HASTA EL LUGAR.
 							if(XY[0] >= 44 && XY[0] <= 71 && XY[1] >= 0 && XY[1] <= 29) {
 								// SI ESTOY DENTRO DE LA ZONA DE COMERCIO SETEO QUE SE ABRA EL MENU

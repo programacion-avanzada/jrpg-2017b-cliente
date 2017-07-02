@@ -1,6 +1,12 @@
 package comandos;
 
+import java.io.IOException;
+
+import javax.swing.JOptionPane;
+
 import frames.MenuComerciar;
+import frames.MenuStats;
+import mensajeria.Paquete;
 import mensajeria.PaqueteComerciar;
 
 public class Comercio extends ComandosEscucha {
@@ -9,14 +15,49 @@ public class Comercio extends ComandosEscucha {
 	public void ejecutar() {
 		PaqueteComerciar paqueteComerciar;
 		paqueteComerciar = gson.fromJson(cadenaLeida, PaqueteComerciar.class);
-		
 		// Cuando recibo el paquete de comercio actualizado intercambio user/ destino
 		paqueteComerciar.setIdEnemigo(paqueteComerciar.getId());
 		paqueteComerciar.setId(juego.getCliente().getPaquetePersonaje().getId());
 		
-		juego.getCliente().setPaqueteComercio(paqueteComerciar);
-		juego.getCliente().setM1(new MenuComerciar(juego.getCliente()));
-		juego.getCliente().getM1().setVisible(true);
+		if (paqueteComerciar.isSolicitudDeComercio()) {
+			if (juego.getCliente().getM1() != null) {
+				paqueteComerciar.setMensaje(Paquete.msjFracaso);		
+			} else {
+				juego.getCliente().setPaqueteComercio(paqueteComerciar);
+				juego.getCliente().setM1(new MenuComerciar(juego.getCliente()));
+				juego.getCliente().getM1().setVisible(true);
+				paqueteComerciar.setMensaje(Paquete.msjExito);
+			}
+			paqueteComerciar.setSolicitudDeComercio(false);
+			try {
+				juego.getCliente().getSalida().writeObject(gson.toJson(paqueteComerciar));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		} else {
+			if (paqueteComerciar.getMensaje().equals(Paquete.msjFracaso)) {
+				JOptionPane.showMessageDialog(null, "Ya esta comerciando");
+			} else {
+				if (juego.getCliente().getM1() == null) {
+					juego.getCliente().setPaqueteComercio(paqueteComerciar);
+					juego.getCliente().setM1(new MenuComerciar(juego.getCliente()));
+					juego.getCliente().getM1().setVisible(true);
+				}
+			}
+		}
+		
+//		PaqueteComerciar paqueteComerciar;
+//		paqueteComerciar = gson.fromJson(cadenaLeida, PaqueteComerciar.class);
+//		
+//		// Cuando recibo el paquete de comercio actualizado intercambio user/ destino
+//		paqueteComerciar.setIdEnemigo(paqueteComerciar.getId());
+//		paqueteComerciar.setId(juego.getCliente().getPaquetePersonaje().getId());
+//		
+//		juego.getCliente().setPaqueteComercio(paqueteComerciar);
+//		juego.getCliente().setM1(new MenuComerciar(juego.getCliente()));
+//		juego.getCliente().getM1().setVisible(true);
 
 	}
 

@@ -12,11 +12,21 @@ public class PaqueteComerciar extends Paquete implements Serializable, Cloneable
 	private int listo = 0;
 	private ArrayList<Item> itemsADar = new ArrayList<Item>();
 	private ArrayList<Item> itemsAObtener = new ArrayList<Item>();
+	private boolean solicitudDeComercio;
 
 	public PaqueteComerciar(){
 		setComando(Comando.COMERCIO);
+		solicitudDeComercio = true;
 	}
 	
+	public boolean isSolicitudDeComercio() {
+		return solicitudDeComercio;
+	}
+
+	public void setSolicitudDeComercio(boolean solicitudDeComercio) {
+		this.solicitudDeComercio = solicitudDeComercio;
+	}
+
 	public ArrayList<Item> getItemsADar() {
 		return itemsADar;
 	}
