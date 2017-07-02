@@ -151,29 +151,34 @@ public class Cliente extends Thread {
 
 				// Espero a que el usuario elija el mapa
 				wait();
-
-				// Establezco el mapa en el paquete personaje
-				paquetePersonaje.setIp(miIp);
-
-				// Le envio el paquete con el mapa seleccionado
-				salida.writeObject(gson.toJson(paquetePersonaje));
-
-				// Instancio el juego y cargo los recursos
-				wome = new Juego("World Of the Middle Earth", 800, 600, this, paquetePersonaje);
-
-				// Muestro el menu de carga
-				menuCarga = new MenuCarga(this);
-				menuCarga.setVisible(true);
-
-				// Espero que se carguen todos los recursos
-				wait();
-
-				// Inicio el juego
-				wome.start();
-
-				// Finalizo el menu de carga
-				menuCarga.dispose();
-
+				
+				//Si clickeo en la Cruz al Seleccionar mapas
+				if (paquetePersonaje.getMapa() == 0) {
+					paquetePersonaje.setComando(Comando.DESCONECTAR);
+					salida.writeObject(gson.toJson(paquetePersonaje));
+				} else {
+					// Establezco el mapa en el paquete personaje
+					paquetePersonaje.setIp(miIp);
+	
+					// Le envio el paquete con el mapa seleccionado
+					salida.writeObject(gson.toJson(paquetePersonaje));
+	
+					// Instancio el juego y cargo los recursos
+					wome = new Juego("World Of the Middle Earth", 800, 600, this, paquetePersonaje);
+	
+					// Muestro el menu de carga
+					menuCarga = new MenuCarga(this);
+					menuCarga.setVisible(true);
+	
+					// Espero que se carguen todos los recursos
+					wait();
+	
+					// Inicio el juego
+					wome.start();
+	
+					// Finalizo el menu de carga
+					menuCarga.dispose();
+				}
 			} catch (IOException | InterruptedException | ClassNotFoundException e) {
 				JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor durante el inicio de sesión.");
 				System.exit(1);
