@@ -18,6 +18,7 @@ import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.Paquete;
 import mensajeria.PaqueteComerciar;
+import mensajeria.PaqueteMensaje;
 import mensajeria.PaquetePersonaje;
 import mensajeria.PaqueteUsuario;
 /**La clase Cliente tiene como función  
@@ -37,6 +38,7 @@ public class Cliente extends Thread {
 	private PaqueteUsuario paqueteUsuario;
 	private PaquetePersonaje paquetePersonaje;
 	private PaqueteComerciar paqueteComercio;
+	private PaqueteMensaje paqueteMensaje = new PaqueteMensaje();
 
 	// Acciones que realiza el usuario
 	private int accion;
@@ -305,5 +307,13 @@ public class Cliente extends Thread {
 	
 	public void setPaqueteComercio(PaqueteComerciar paqueteComercio) {
 		this.paqueteComercio = paqueteComercio;	
+	}
+	
+	public PaqueteMensaje getPaqueteMensaje() {
+		return paqueteMensaje;
+	}
+	
+	public void setPaqueteMensaje(PaqueteMensaje paqueteMensaje) {
+		this.paqueteMensaje = paqueteMensaje;
 	}
 }

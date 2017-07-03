@@ -27,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 import cliente.Cliente;
 import cliente.EscuchaMensajes;
 import juego.Juego;
+import juego.Pantalla;
 import mensajeria.Comando;
 import mensajeria.Paquete;
 import mensajeria.PaquetePersonaje;
@@ -42,12 +43,12 @@ public class VentanaContactos extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaContactos(Juego juego) {
-
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 327, 273);
 		setLocationRelativeTo(null);
-						
+		setTitle("Usuarios Conectados");
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -57,6 +58,40 @@ public class VentanaContactos extends JFrame {
 		scrollPane.setBounds(10, 11, 299, 188);
 		contentPane.add(scrollPane);
 
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				Pantalla.ventContac = null;
+				dispose();
+			}
+		});
+		
+		botonMc = new JButton("Multichat");
+		botonMc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(modelo.size() != 0) {
+					if(!juego.getChatsActivos().containsKey("Sala")) {
+						MiChat chat = new MiChat(juego);
+						juego.getChatsActivos().put("Sala", chat);
+						chat.setTitle("Sala");
+						chat.setVisible(true);
+						botonMc.setEnabled(false);
+					}
+				}
+			}
+		});
+		botonMc.setBounds(119, 208, 89, 23);
+		contentPane.add(botonMc);
+		
+		// Cargo la lista de contactos
+		actualizarLista(juego);
+		// Pregunto si la ventana sala esta abierta y cancelo el boton multichat
+		if (juego.getChatsActivos().containsKey("Sala")) {
+			botonMc.setEnabled(false);
+		} else {
+			botonMc.setEnabled(true);
+		}
+		
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -75,22 +110,6 @@ public class VentanaContactos extends JFrame {
 			}
 		});
 
-		botonMc = new JButton("Multichat");
-		botonMc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(modelo.size() != 0) {
-					if(!juego.getChatsActivos().containsKey("Sala")) {
-						MiChat chat = new MiChat(juego);
-						juego.getChatsActivos().put("Sala", chat);
-						chat.setTitle("Sala");
-						chat.setVisible(true);
-						botonMc.setEnabled(false);
-					}
-				}
-			}
-		});
-		botonMc.setBounds(119, 208, 89, 23);
-		contentPane.add(botonMc);
 
 		list.setModel(modelo);
 		scrollPane.setViewportView(list);

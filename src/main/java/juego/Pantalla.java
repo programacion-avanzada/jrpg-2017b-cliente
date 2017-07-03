@@ -21,6 +21,7 @@ import javax.swing.WindowConstants;
 
 import com.google.gson.Gson;
 
+import chat.VentanaContactos;
 import cliente.Cliente;
 import estados.Estado;
 import frames.MenuAsignarSkills;
@@ -41,6 +42,7 @@ public class Pantalla {
 	public static MenuAsignarSkills menuAsignar;
 	public static MenuStats menuStats;
 	public static MenuEscape menuEscp;
+	public static VentanaContactos ventContac;
 		
 	private final Gson gson = new Gson();
 
@@ -102,6 +104,13 @@ public class Pantalla {
 						if (menuEscp == null) {
 							menuEscp = new MenuEscape(cliente);
 							menuEscp.setVisible(true);
+						}
+					}
+				} else if (e.getKeyCode() == KeyEvent.VK_C) {
+					if(Estado.getEstado().esEstadoDeJuego()) {
+						if (ventContac == null) {
+							ventContac = new VentanaContactos(cliente.getJuego());
+							ventContac.setVisible(true);
 						}
 					}
 				}
