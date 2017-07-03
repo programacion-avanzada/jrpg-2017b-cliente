@@ -3,6 +3,7 @@ package juego;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
@@ -13,6 +14,7 @@ import dominio.Personaje;
 import estados.Estado;
 import estados.EstadoBatalla;
 import estados.EstadoJuego;
+import chat.MiChat;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
 
@@ -46,6 +48,7 @@ public class Juego implements Runnable {
 	private PaqueteMovimiento ubicacionPersonaje;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
+	private Map<String, MiChat> chatsActivos = new HashMap<>();
 
 
 	private CargarRecursos cargarRecursos;
@@ -240,5 +243,9 @@ public class Juego implements Runnable {
 
 	public void setUbicacionPersonajes(Map<Integer, PaqueteMovimiento> ubicacionPersonajes) {
 		this.ubicacionPersonajes = ubicacionPersonajes;
+	}
+
+	public Map<String, MiChat> getChatsActivos() {
+		return chatsActivos;
 	}
 }
