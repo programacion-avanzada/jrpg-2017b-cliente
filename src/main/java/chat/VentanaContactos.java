@@ -1,14 +1,11 @@
 package chat;
 
-import java.awt.EventQueue;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.util.Map;
 
 import javax.swing.DefaultListModel;
@@ -16,22 +13,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import cliente.Cliente;
-import cliente.EscuchaMensajes;
 import juego.Juego;
 import juego.Pantalla;
-import mensajeria.Comando;
-import mensajeria.Paquete;
 import mensajeria.PaquetePersonaje;
-import mensajeria.PaqueteUsuario;
 
 public class VentanaContactos extends JFrame {	
 	private JPanel contentPane;
@@ -42,7 +30,7 @@ public class VentanaContactos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaContactos(Juego juego) {
+	public VentanaContactos(final Juego juego) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 327, 273);

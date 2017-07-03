@@ -107,12 +107,12 @@ public class Pantalla {
 						}
 					}
 				} else if (e.getKeyCode() == KeyEvent.VK_C) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
+//					if(Estado.getEstado().esEstadoDeJuego()) {
 						if (ventContac == null) {
 							ventContac = new VentanaContactos(cliente.getJuego());
 							ventContac.setVisible(true);
 						}
-					}
+//					}
 				}
 			}
 		});

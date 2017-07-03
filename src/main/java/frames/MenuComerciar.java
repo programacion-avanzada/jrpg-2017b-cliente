@@ -8,6 +8,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -30,8 +32,6 @@ import com.google.gson.Gson;
 import cliente.Cliente;
 import dominio.Item;
 import mensajeria.Comando;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class MenuComerciar extends JFrame {
 
@@ -171,67 +171,67 @@ public class MenuComerciar extends JFrame {
 		lblListo.setBounds(276, 279, 56, 16);
 		contentPane.add(lblListo);
 		
-		JLabel bonusSalud = new JLabel("");
+		final JLabel  bonusSalud = new JLabel("");
 		bonusSalud.setForeground(Color.WHITE);
 		bonusSalud.setHorizontalAlignment(SwingConstants.RIGHT);
 		bonusSalud.setBounds(51, 217, 56, 16);
 		contentPane.add(bonusSalud);
 		
-		JLabel bonusEnergia = new JLabel("");
+		final JLabel bonusEnergia = new JLabel("");
 		bonusEnergia.setForeground(Color.WHITE);
 		bonusEnergia.setHorizontalAlignment(SwingConstants.RIGHT);
 		bonusEnergia.setBounds(51, 240, 56, 16);
 		contentPane.add(bonusEnergia);
 		
-		JLabel bonusFuerza = new JLabel("");
+		final JLabel bonusFuerza = new JLabel("");
 		bonusFuerza.setForeground(Color.WHITE);
 		bonusFuerza.setHorizontalAlignment(SwingConstants.RIGHT);
 		bonusFuerza.setBounds(176, 217, 56, 16);
 		contentPane.add(bonusFuerza);
 		
-		JLabel bonusDes = new JLabel("");
+		final JLabel bonusDes = new JLabel("");
 		bonusDes.setForeground(Color.WHITE);
 		bonusDes.setHorizontalAlignment(SwingConstants.RIGHT);
 		bonusDes.setBounds(176, 240, 56, 16);
 		contentPane.add(bonusDes);
 		
-		JLabel bonusInt = new JLabel("");
+		final JLabel bonusInt = new JLabel("");
 		bonusInt.setForeground(Color.WHITE);
 		bonusInt.setHorizontalAlignment(SwingConstants.RIGHT);
 		bonusInt.setBounds(51, 263, 56, 16);
 		contentPane.add(bonusInt);
 		
-		JLabel saludEnemy = new JLabel("");
+		final JLabel saludEnemy = new JLabel("");
 		saludEnemy.setHorizontalAlignment(SwingConstants.RIGHT);
 		saludEnemy.setForeground(Color.WHITE);
 		saludEnemy.setBounds(428, 217, 56, 16);
 		contentPane.add(saludEnemy);
 		
-		JLabel energyEnemy = new JLabel("");
+		final JLabel energyEnemy = new JLabel("");
 		energyEnemy.setHorizontalAlignment(SwingConstants.RIGHT);
 		energyEnemy.setForeground(Color.WHITE);
 		energyEnemy.setBounds(428, 240, 56, 16);
 		contentPane.add(energyEnemy);
 		
-		JLabel fzaEnemy = new JLabel("");
+		final JLabel fzaEnemy = new JLabel("");
 		fzaEnemy.setHorizontalAlignment(SwingConstants.RIGHT);
 		fzaEnemy.setForeground(Color.WHITE);
 		fzaEnemy.setBounds(536, 217, 56, 16);
 		contentPane.add(fzaEnemy);
 		
-		JLabel desEnemy = new JLabel("");
+		final JLabel desEnemy = new JLabel("");
 		desEnemy.setHorizontalAlignment(SwingConstants.RIGHT);
 		desEnemy.setForeground(Color.WHITE);
 		desEnemy.setBounds(536, 240, 56, 16);
 		contentPane.add(desEnemy);
 		
-		JLabel intEnemy = new JLabel("");
+		final JLabel intEnemy = new JLabel("");
 		intEnemy.setHorizontalAlignment(SwingConstants.RIGHT);
 		intEnemy.setForeground(Color.WHITE);
 		intEnemy.setBounds(428, 263, 56, 16);
 		contentPane.add(intEnemy);
 		
-		JCheckBox chckbxListo = new JCheckBox("Listo");
+		final JCheckBox chckbxListo = new JCheckBox("Listo");
 		chckbxListo.setForeground(Color.WHITE);
 		chckbxListo.setBackground(Color.BLACK);
 		// Arranca deshabilitada
