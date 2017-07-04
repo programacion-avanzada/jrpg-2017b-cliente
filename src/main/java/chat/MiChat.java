@@ -105,6 +105,7 @@ public class MiChat extends JFrame {
 		
 		//SI TOCO ENVIAR
 		JButton enviar = new JButton("ENVIAR");
+		enviar.setIcon(new ImageIcon("recursos//enviarButton.png"));
 		enviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!texto.getText().equals("")) {

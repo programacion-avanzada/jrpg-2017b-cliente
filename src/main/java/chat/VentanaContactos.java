@@ -57,6 +57,7 @@ public class VentanaContactos extends JFrame {
 		});
 		
 		botonMc = new JButton("Multichat");
+		botonMc.setIcon(new ImageIcon("recursos//multichatButton.png"));
 		botonMc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(modelo.size() != 0) {

@@ -247,6 +247,7 @@ public class MenuComerciar extends JFrame {
 		leyenda.setVisible(false);
 		
 		final JButton btnAgregar = new JButton("-->");
+		btnAgregar.setIcon(new ImageIcon("recursos//flechaDer.png"));
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(listMisItems.getSelectedValue() != null) {
@@ -288,6 +289,7 @@ public class MenuComerciar extends JFrame {
 		contentPane.add(btnAgregar);
 		
 		final JButton btnSacar = new JButton("<--");
+		btnSacar.setIcon(new ImageIcon("recursos//flechaIzq.png"));
 		btnSacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(listADar.getSelectedValue() != null) {

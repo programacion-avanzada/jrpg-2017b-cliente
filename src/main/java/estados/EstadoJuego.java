@@ -78,6 +78,7 @@ public class EstadoJuego extends Estado {
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
 		g.drawImage(Recursos.mochila, 738, 545, 59, 52, null);
 		g.drawImage(Recursos.menu, 3, 562, 102, 35, null);
+		g.drawImage(Recursos.chat, 3, 524, 102, 35, null);
 		if(haySolicitud)
 			menuEnemigo.graficar(g, tipoSolicitud);
 

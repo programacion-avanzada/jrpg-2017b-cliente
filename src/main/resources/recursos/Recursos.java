@@ -85,6 +85,7 @@ public class Recursos {
 	public static BufferedImage noItem;
 	public static BufferedImage mochila;
 	public static BufferedImage menu;
+	public static BufferedImage chat;
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
 	
@@ -104,6 +105,7 @@ public class Recursos {
 		noItem = ImageIO.read(new File("recursos//noItem.png"));
 		mochila = ImageIO.read(new File("recursos//mochila.png"));
 		menu = ImageIO.read(new File("recursos//menu.png"));
+		chat = ImageIO.read(new File("recursos//chat.png"));
 
 		// Inicio humano
 		spriteHumano = new SpriteSheet(CargadorImagen.cargarImagen("/Humano.png"));

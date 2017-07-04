@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
+import chat.VentanaContactos;
+import cliente.Cliente;
 import estados.Estado;
 import frames.MenuComerciar;
 import frames.MenuEscape;
@@ -178,6 +180,13 @@ public class Entidad {
 			if (Pantalla.menuEscp == null) {
 				Pantalla.menuEscp = new MenuEscape(juego.getCliente());
 				Pantalla.menuEscp.setVisible(true);
+			}
+			juego.getHandlerMouse().setNuevoClick(false);				
+		}
+		if(juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 3 && posMouse[0] <= 105 && posMouse[1] >= 524 && posMouse[1] <= 559) {
+			if (Pantalla.ventContac == null) {
+				Pantalla.ventContac = new VentanaContactos(juego);
+				Pantalla.ventContac.setVisible(true);
 			}
 			juego.getHandlerMouse().setNuevoClick(false);				
 		}
