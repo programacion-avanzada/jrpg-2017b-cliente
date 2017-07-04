@@ -82,6 +82,7 @@ public class Trueque extends ComandosEscucha {
 		juego.getCliente().getPaquetePersonaje().actualizarTrueque(pj.getItems());
 		paquetePersonaje = juego.getCliente().getPaquetePersonaje();
 		paquetePersonaje.setComando(Comando.ACTUALIZARTRUEQUE);
+		juego.getCliente().setM1(null);
 		try {
 			juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 		} catch (IOException e) {

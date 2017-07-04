@@ -44,6 +44,9 @@ public class MenuComerciar extends JFrame {
 	private Item item1;
 	private int count = 0;
 	private final Gson gson = new Gson();
+	private int sizeItems;
+	private JCheckBox chckbxListo;
+	private JLabel leyenda;
 
 	/**
 	 * Create the frame.
@@ -51,7 +54,7 @@ public class MenuComerciar extends JFrame {
 	public MenuComerciar(final Cliente cliente) {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
-		this.setBounds(100, 100, 610, 356);
+		this.setBounds(100, 100, 610, 363);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Comercio");
 		
@@ -231,18 +234,29 @@ public class MenuComerciar extends JFrame {
 		intEnemy.setBounds(428, 263, 56, 16);
 		contentPane.add(intEnemy);
 		
-		final JCheckBox chckbxListo = new JCheckBox("Listo");
+		chckbxListo = new JCheckBox("Listo");
 		chckbxListo.setForeground(Color.WHITE);
 		chckbxListo.setBackground(Color.BLACK);
 		// Arranca deshabilitada
 		chckbxListo.setEnabled(false);
 		
+		leyenda = new JLabel("Recuerda que la máxima cantidad de items es 9");
+		leyenda.setForeground(Color.WHITE);
+		leyenda.setBounds(12, 299, 282, 16);
+		contentPane.add(leyenda);
+		leyenda.setVisible(false);
+		
 		final JButton btnAgregar = new JButton("-->");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(listMisItems.getSelectedValue() != null) {
-					chckbxListo.setEnabled(true);
 					dar.addElement(listMisItems.getSelectedValue());
+					if (obtener.size() != 0) {
+						if (sizeItems - dar.size() + obtener.size() <= 9) {
+							chckbxListo.setEnabled(true);
+							leyenda.setVisible(false);
+						}						
+					}
 					// Pongo el primer item y pregunto si es igual al seleccionado
 					// Entonces mientras que sean distinto lo busca
 					// Cuando sea igual sale del while y lo agrega en la lista 
@@ -287,6 +301,11 @@ public class MenuComerciar extends JFrame {
 					// Si saque el item y la lista no tiene nada deshabilito el check
 					if (dar.size() == 0) {
 						chckbxListo.setEnabled(false);
+					}
+					// Si los items en total es mayor a 9 no puedo comerciar
+					if (sizeItems - dar.size() + obtener.size() > 9) {
+						chckbxListo.setEnabled(false);
+						leyenda.setVisible(true);
 					}
 					cliente.getPaqueteComercio().setComando(Comando.ACTUALIZARCOMERCIO);
 					try {
@@ -359,6 +378,9 @@ public class MenuComerciar extends JFrame {
 			misItems.addElement(item.getNombre());
 		}
 		
+		// Seteo la cantidad de mis items en mi mochila
+		sizeItems = misItems.size();
+				
 		//Seteo de JList
 		listMisItems.setModel(misItems);
 		listADar.setModel(dar);
@@ -438,7 +460,7 @@ public class MenuComerciar extends JFrame {
 		chckbxListo.setHorizontalAlignment(SwingConstants.CENTER);
 		chckbxListo.setBounds(289, 213, 71, 25);
 		contentPane.add(chckbxListo);
-		
+
 		final JLabel background = new JLabel(new ImageIcon(imagenFondo.getScaledInstance(610, 416, Image.SCALE_DEFAULT)));
 		background.setBounds(-12, 0, 628, 336);
 		contentPane.add(background);
@@ -466,5 +488,17 @@ public class MenuComerciar extends JFrame {
 
 	public DefaultListModel<String> getDar() {
 		return dar;
-	}	
+	}
+
+	public int getSizeItems() {
+		return sizeItems;
+	}
+
+	public JCheckBox getChckbxListo() {
+		return chckbxListo;
+	}
+
+	public JLabel getLeyenda() {
+		return leyenda;
+	}
 }

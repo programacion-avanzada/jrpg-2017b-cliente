@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import java.util.Map;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,6 +27,7 @@ public class VentanaContactos extends JFrame {
 	private DefaultListModel<String> modelo = new DefaultListModel<String>();
 	private static JList<String> list = new JList<String>();
 	private static JButton botonMc;
+	private JLabel background;
 
 	/**
 	 * Create the frame.
@@ -35,7 +37,7 @@ public class VentanaContactos extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 327, 273);
 		setLocationRelativeTo(null);
-		setTitle("Usuarios Conectados");
+		setTitle("Usuarios");
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,10 +103,10 @@ public class VentanaContactos extends JFrame {
 
 		list.setModel(modelo);
 		scrollPane.setViewportView(list);
-
-		JLabel label = new JLabel("");
-		label.setBounds(130, 267, 56, 16);
-		contentPane.add(label);
+		
+		background = new JLabel(new ImageIcon("recursos//background.jpg"));
+		background.setBounds(-16, 0, 352, 254);
+		contentPane.add(background);
 	}
 
 	private void actualizarLista(final Juego juego) {

@@ -9,8 +9,27 @@ public class ActualizarComercio extends ComandosEscucha {
 
 	@Override
 	public void ejecutar() {
+		int sizeMisItems = juego.getCliente().getM1().getSizeItems();
+		int sizeADar = juego.getCliente().getM1().getDar().size();
+		int sizeAObtener;
+		int cuentaSize;
 		PaqueteComerciar paqueteComerciar;
 		paqueteComerciar = gson.fromJson(cadenaLeida, PaqueteComerciar.class);
+		sizeAObtener = paqueteComerciar.getItemsADar().size();
+		cuentaSize = sizeMisItems - sizeADar + sizeAObtener;
+		if (sizeADar != 0) {
+			if (cuentaSize <= 9) {
+				juego.getCliente().getM1().getChckbxListo().setEnabled(true);
+				juego.getCliente().getM1().getLeyenda().setVisible(false);
+			} else if (cuentaSize > 9) {
+				juego.getCliente().getM1().getChckbxListo().setEnabled(false);
+				juego.getCliente().getM1().getLeyenda().setVisible(true);
+			}			
+		}
+		if (sizeAObtener == 0) {
+			juego.getCliente().getM1().getChckbxListo().setEnabled(false);
+			juego.getCliente().getM1().getLeyenda().setVisible(true);
+		}
 		if(juego.getCliente().getPaqueteComercio().getListo() == paqueteComerciar.getListo()) {
 				//actualizar la lista
 				juego.getCliente().getM1().getObtener().removeAllElements();

@@ -6,6 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ import cliente.Cliente;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
+import javax.swing.JLabel;
 
 public class MiChat extends JFrame {
 
@@ -30,6 +32,7 @@ public class MiChat extends JFrame {
 	private JTextArea chat;
 	private Juego juego;
 	private final Gson gson = new Gson();
+	private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
 	
 	/**
 	 * Create the frame. 
@@ -135,6 +138,8 @@ public class MiChat extends JFrame {
 		texto.setBounds(10, 223, 314, 27);
 		contentPane.add(texto);
 		texto.setColumns(10);
+		background.setBounds(-20, 0, 480, 283);
+		contentPane.add(background);
 	}
 	
 	public JTextArea getChat() {
