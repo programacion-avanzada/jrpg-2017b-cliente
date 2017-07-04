@@ -39,7 +39,7 @@ public class TestCliente {
 			@Override
 			public void run() {
 				try {
-					server = new ServerSocket(9999);
+					server = new ServerSocket(55050);
 					Socket cliente = server.accept();
 					salida = new ObjectOutputStream(cliente.getOutputStream());
 					entrada = new ObjectInputStream(cliente.getInputStream());
@@ -80,7 +80,7 @@ public class TestCliente {
 		
 		queue.add(new Paquete());
 		testServer(queue);
-		Cliente cliente = new Cliente("localhost",9999);
+		Cliente cliente = new Cliente("localhost",55050);
 
 		// Pasado este punto la conexión entre el cliente y el servidor resulto exitosa
 		Assert.assertEquals(1, 1);
@@ -116,7 +116,7 @@ public class TestCliente {
 		queue.add(new Paquete());
 		queue.add(pu);
 		testServer(queue);
-		Cliente cliente = new Cliente("localhost",9999);
+		Cliente cliente = new Cliente("localhost",55050);
 
 		try {
 
@@ -159,7 +159,7 @@ public class TestCliente {
 		queue.add(pu);
 		testServer(queue);
 
-		Cliente cliente = new Cliente("localhost",9999);
+		Cliente cliente = new Cliente("localhost",55050);
 		try {
 
 			// Envio el paquete para registrarme
@@ -210,7 +210,7 @@ public class TestCliente {
 		queue.add(pu);
 		queue.add(pp);
 		testServer(queue);
-		Cliente cliente = new Cliente("localhost",9999);
+		Cliente cliente = new Cliente("localhost",55050);
 		try {
 
 			// Envio el paquete de registro de usuario
@@ -257,7 +257,7 @@ public class TestCliente {
 		
 		
 		testServer(queue);
-		Cliente cliente = new Cliente("localhost",9999);
+		Cliente cliente = new Cliente("localhost",55050);
 
 		try {
 
@@ -303,7 +303,7 @@ public class TestCliente {
 		pp.setSaludTope(10000);
 		queue.add(pp);
 		testServer(queue);
-		Cliente cliente = new Cliente("localhost",9999);
+		Cliente cliente = new Cliente("localhost",55050);
 		try {
 
 			// Envio el paquete de actualizacion de personaje

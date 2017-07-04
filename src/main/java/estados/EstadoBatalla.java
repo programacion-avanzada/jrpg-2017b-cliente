@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JOptionPane;
 
@@ -202,24 +204,20 @@ public class EstadoBatalla extends Estado {
 		int id = paquetePersonaje.getId();
 
 		Casta casta = null;
-		if (paquetePersonaje.getCasta().equals("Guerrero")) {
-			casta = new Guerrero();
-		} else if (paquetePersonaje.getCasta().equals("Hechicero")) {
-			casta = new Hechicero();
-		} else if (paquetePersonaje.getCasta().equals("Asesino")) {
-			casta = new Asesino();
+		try {
+			casta = (Casta) Class.forName("dominio" + "." + paquetePersonaje.getCasta()).newInstance();
+			personaje = (Personaje) Class.forName("dominio" + "." + paquetePersonaje.getRaza()).getConstructor(String.class, Integer.TYPE, 
+					Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE, Casta.class, Integer.TYPE, Integer.TYPE, Integer.TYPE).
+					newInstance(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
+							experiencia, nivel, id);
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 
-		if (paquetePersonaje.getRaza().equals("Humano")) {
-			personaje = new Humano(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
-				experiencia, nivel, id);
-		} else if (paquetePersonaje.getRaza().equals("Orco")) {
-			personaje = new Orco(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
-					experiencia, nivel, id);
-		} else if (paquetePersonaje.getRaza().equals("Elfo")) {
-			personaje = new Elfo(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
-					experiencia, nivel, id);
-		}
+
+
 
 		nombre = paqueteEnemigo.getNombre();
 		salud = paqueteEnemigo.getSaludTope();
