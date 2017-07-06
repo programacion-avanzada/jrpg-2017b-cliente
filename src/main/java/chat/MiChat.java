@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -16,14 +17,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.DefaultCaret;
 
 import com.google.gson.Gson;
 
-import cliente.Cliente;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
-import javax.swing.JLabel;
 
 public class MiChat extends JFrame {
 
@@ -33,7 +33,8 @@ public class MiChat extends JFrame {
 	private Juego juego;
 	private final Gson gson = new Gson();
 	private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
-	
+	private DefaultCaret caret;
+
 	/**
 	 * Create the frame. 
 	 */
@@ -57,7 +58,9 @@ public class MiChat extends JFrame {
 		chat = new JTextArea();
 		chat.setEditable(false);
 		scrollPane.setViewportView(chat);
-		
+		caret = (DefaultCaret)chat.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+
 		texto = new JTextField();
 		this.addWindowListener(new WindowAdapter() {
 			public void windowOpened(WindowEvent e) {
