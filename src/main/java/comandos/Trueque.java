@@ -1,18 +1,13 @@
 package comandos;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import dominio.Asesino;
 import dominio.Casta;
-import dominio.Elfo;
-import dominio.Guerrero;
-import dominio.Hechicero;
-import dominio.Humano;
 import dominio.Item;
-import dominio.Orco;
 import dominio.Personaje;
 import mensajeria.Comando;
 import mensajeria.PaqueteComerciar;
@@ -40,23 +35,16 @@ public class Trueque extends ComandosEscucha {
 		int id = juego.getCliente().getPaquetePersonaje().getId();
 
 		Casta casta = null;
-		if (juego.getCliente().getPaquetePersonaje().getCasta().equals("Guerrero")) {
-			casta = new Guerrero();
-		} else if (juego.getCliente().getPaquetePersonaje().getCasta().equals("Hechicero")) {
-			casta = new Hechicero();
-		} else if (juego.getCliente().getPaquetePersonaje().getCasta().equals("Asesino")) {
-			casta = new Asesino();
-		}
 
-		if (juego.getCliente().getPaquetePersonaje().getRaza().equals("Humano")) {
-			pj = new Humano(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
-					experiencia, nivel, id);
-		} else if (juego.getCliente().getPaquetePersonaje().getRaza().equals("Orco")) {
-			pj = new Orco(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
-					experiencia, nivel, id);
-		} else if (juego.getCliente().getPaquetePersonaje().getRaza().equals("Elfo")) {
-			pj = new Elfo(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
-					experiencia, nivel, id);
+		
+		try {
+			casta = (Casta) Class.forName("dominio" + "." + juego.getCliente().getPaquetePersonaje().getCasta()).newInstance();
+			pj = (Personaje) Class.forName("dominio" + "." + juego.getCliente().getPaquetePersonaje().getRaza()).getConstructor(String.class, Integer.TYPE, 
+					Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE, Casta.class, Integer.TYPE, Integer.TYPE, Integer.TYPE).
+					newInstance(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
+							experiencia, nivel, id);
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			JOptionPane.showMessageDialog(null, "Error al crear la batalla");
 		}
 		// Si soy yo mismo, tengo que cambiar los items a darme, y despues trueque
 		if(id == paqueteComerciar.getId()){
