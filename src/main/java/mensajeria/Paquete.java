@@ -71,7 +71,6 @@ public class Paquete implements Serializable, Cloneable {
 			c = (Comando) Class.forName(nombrePaquete + "." + Comando.CLASSNAMES[comando]).newInstance();
 			return c;
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
 			return null;
 		}
 
@@ -82,7 +81,6 @@ public class Paquete implements Serializable, Cloneable {
 			c = (Comando) Class.forName(nombrePaquete + "." + Comando.CLASSNAMESBIS[accion]).newInstance();
 			return c;
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
 			return null;
 		}
 

@@ -3,6 +3,8 @@ package comandos;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import dominio.Asesino;
 import dominio.Casta;
 import dominio.Elfo;
@@ -86,8 +88,8 @@ public class Trueque extends ComandosEscucha {
 		try {
 			juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error al actualizar trueque");
+
 		}
 
 	}

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JOptionPane;
@@ -211,8 +210,7 @@ public class EstadoBatalla extends Estado {
 					newInstance(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
 							experiencia, nivel, id);
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error al crear la batalla");
 		}
 		
 
@@ -255,7 +253,6 @@ public class EstadoBatalla extends Estado {
 			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteAtacar));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexion con el servidor.");
-			e.printStackTrace();
 		}
 	}
 
@@ -289,7 +286,6 @@ public class EstadoBatalla extends Estado {
 			
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
-			e.printStackTrace();
 		}
 	}
 

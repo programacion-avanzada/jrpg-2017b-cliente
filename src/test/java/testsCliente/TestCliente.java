@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import javax.swing.JOptionPane;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -58,14 +60,15 @@ public class TestCliente {
 					}
 					cliente.close();
 				} catch (IOException | ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Falló");
+
 				} finally {
 					try {
 						server.close();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Falló");
+
 					}
 				}
 
@@ -97,7 +100,7 @@ public class TestCliente {
 			cliente.getSocket().close();
 			myThread.stop();
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Falló");
 		}
 	}
 	
@@ -138,7 +141,7 @@ public class TestCliente {
 			Assert.assertEquals(Paquete.msjExito, resultado.getMensaje());
 			myThread.stop();
 		} catch (JsonSyntaxException | ClassNotFoundException | IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Falló");
 		}
 	}
 
@@ -178,7 +181,7 @@ public class TestCliente {
 			Assert.assertEquals(Paquete.msjFracaso, resultado.getMensaje());
 			myThread.stop();
 		} catch (JsonSyntaxException | ClassNotFoundException | IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Falló");
 		}
 	}
 
@@ -238,7 +241,7 @@ public class TestCliente {
 			Assert.assertEquals("PjTest", pp.getNombre());
 			myThread.stop();
 		} catch (IOException | JsonSyntaxException | ClassNotFoundException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Falló");
 		}
 	}
 
@@ -280,7 +283,7 @@ public class TestCliente {
 			Assert.assertEquals("PjTest", paquetePersonaje.getNombre());
 			myThread.stop();
 		} catch (IOException | JsonSyntaxException | ClassNotFoundException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Falló");
 		}
 	}
 
@@ -325,7 +328,7 @@ public class TestCliente {
 			Assert.assertEquals(10000, paquetePersonaje.getSaludTope());
 			myThread.stop();
 		} catch (IOException | JsonSyntaxException | ClassNotFoundException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Falló");
 		}
 	}
 }

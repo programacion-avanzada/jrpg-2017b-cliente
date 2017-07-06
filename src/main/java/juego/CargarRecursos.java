@@ -3,6 +3,8 @@ package juego;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import cliente.Cliente;
 import mensajeria.Comando;
 import recursos.Recursos;
@@ -21,14 +23,12 @@ public class CargarRecursos extends Thread {
 			try {
 				Recursos.cargar(cliente.getMenuCarga());
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Falló al cargar los recursos");
+
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Falló al cargar los recursos");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Falló al cargar los recursos");
 			}
 
 			cliente.setAccion(Comando.SALIR);

@@ -1,8 +1,11 @@
 package frames;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,16 +15,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import cliente.Cliente;
 import juego.Pantalla;
 import mensajeria.PaquetePersonaje;
-import javax.swing.SwingConstants;
-import java.awt.Color;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class MenuStats extends JFrame {
 
@@ -58,7 +59,8 @@ public class MenuStats extends JFrame {
 			try {
 				imagenFondo = ImageIO.read(new File("recursos//background.jpg"));
 			} catch (IOException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "No se pudo cargar el fondo");
+
 			}
 			
 			JLabel lblNombre = new JLabel("Nombre");

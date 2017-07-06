@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -128,7 +129,8 @@ public class MenuEscape extends JFrame {
 		try {
 			imagenFondo = ImageIO.read(new File("recursos//fondo2.png"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se pudo cargar el fondo");
+
 		}
 		JLabel background = new JLabel(new ImageIcon(imagenFondo.getScaledInstance(200, 350, Image.SCALE_DEFAULT)));
 		background.setBounds(0, 0, 186, 273);

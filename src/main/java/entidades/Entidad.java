@@ -13,9 +13,7 @@ import javax.swing.JOptionPane;
 import com.google.gson.Gson;
 
 import chat.VentanaContactos;
-import cliente.Cliente;
 import estados.Estado;
-import frames.MenuComerciar;
 import frames.MenuEscape;
 import frames.MenuInventario;
 import interfaz.MenuInfoPersonaje;
@@ -227,7 +225,6 @@ public class Entidad {
 								} catch (IOException e) {
 									JOptionPane.showMessageDialog(null, "Fallo la conexión "
 											+ "con el servidor");
-									e.printStackTrace();
 								}
 							} else {
 								JOptionPane.showMessageDialog(null, "El otro usuario se encuentra "
@@ -250,7 +247,6 @@ public class Entidad {
 										} catch (IOException e) {
 											JOptionPane.showMessageDialog(null, "Fallo la conexión "
 													+ "con el servidor");
-											e.printStackTrace();
 										}	
 									} else {
 										JOptionPane.showMessageDialog(null, "Ya te encuentras comerciando!");
@@ -528,7 +524,6 @@ public class Entidad {
 					getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
-			e.printStackTrace();
 		}
 	}
 	/**Busca el camino más corto a recorrer para llegar a una posición

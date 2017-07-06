@@ -8,13 +8,13 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import chat.MiChat;
 import cliente.Cliente;
 import cliente.EscuchaMensajes;
 import dominio.Personaje;
 import estados.Estado;
 import estados.EstadoBatalla;
 import estados.EstadoJuego;
-import chat.MiChat;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
 
@@ -173,7 +173,6 @@ public class Juego implements Runnable {
 			hilo.join();
 		} catch (InterruptedException e) {
 			JOptionPane.showMessageDialog(null, "Fallo al intentar detener el juego.");
-			e.printStackTrace();
 		}
 	}
 

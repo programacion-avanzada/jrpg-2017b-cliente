@@ -71,7 +71,6 @@ public class Pantalla {
 				} catch (IOException e) {
 					JOptionPane.showMessageDialog(null, "Fallo al intentar cerrar la aplicación.");
 					System.exit(1);
-					e.printStackTrace();
 				}
 			}
 		});

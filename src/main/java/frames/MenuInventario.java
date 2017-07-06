@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
@@ -42,8 +43,8 @@ public class MenuInventario extends JFrame {
 			this.add(new Inventario(cliente.getPaquetePersonaje()));
 			this.add(cancelar,BorderLayout.AFTER_LAST_LINE);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Falló al iniciar el inventario");
+
 		}
 		this.setBounds(600, 600, 600, 600);
 		this.pack();

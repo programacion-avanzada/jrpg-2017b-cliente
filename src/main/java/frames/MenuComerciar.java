@@ -75,7 +75,8 @@ public class MenuComerciar extends JFrame {
 		try {
 			imagenFondo = ImageIO.read(new File("recursos//background.jpg"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se pudo cargar el fondo");
+
 		}
 		
 		final JButton btnCancelar = new JButton("Cancelar");
@@ -273,7 +274,7 @@ public class MenuComerciar extends JFrame {
 					try {
 						cliente.getSalida().writeObject(gson.toJson(cliente.getPaqueteComercio()));
 					} catch (IOException e) {
-						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, "No se pudo actualizar comercio");
 					}
 					if(misItems.size() == 0) {
 						bonusSalud.setText("");
@@ -313,7 +314,7 @@ public class MenuComerciar extends JFrame {
 					try {
 						cliente.getSalida().writeObject(gson.toJson(cliente.getPaqueteComercio()));
 					} catch (IOException e) {
-						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, "No se pudo actualizar comercio");
 					}
 					// Cuando paso un item de ofertar a no ofertado muestro el que movi
 					int i = misItems.size();
@@ -408,7 +409,7 @@ public class MenuComerciar extends JFrame {
 							try {
 								cliente.getSalida().writeObject(gson.toJson(cliente.getPaqueteComercio()));
 							} catch (IOException e) {
-								e.printStackTrace();
+								JOptionPane.showMessageDialog(null, "No se pudo actualizar comercio");
 							}
 							////////
 							// Ahora le digo que haga el trueque
@@ -417,7 +418,7 @@ public class MenuComerciar extends JFrame {
 							try {
 								cliente.getSalida().writeObject(gson.toJson(cliente.getPaqueteComercio()));
 							} catch (IOException e) {
-								e.printStackTrace();
+								JOptionPane.showMessageDialog(null, "No se pudo actualizar comercio");
 							}
 							JOptionPane.showMessageDialog(cliente.getM1(), "Se ha realizado con exito el comercio");
 							dispose();
@@ -433,7 +434,7 @@ public class MenuComerciar extends JFrame {
 							try {
 								cliente.getSalida().writeObject(gson.toJson(cliente.getPaqueteComercio()));
 							} catch (IOException e) {
-								e.printStackTrace();
+								JOptionPane.showMessageDialog(null, "No se pudo actualizar comercio");
 							}
 							cantListo.setText(cantListos + "/2");
 						}
@@ -452,7 +453,7 @@ public class MenuComerciar extends JFrame {
 						try {
 							cliente.getSalida().writeObject(gson.toJson(cliente.getPaqueteComercio()));
 						} catch (IOException e) {
-							e.printStackTrace();
+							JOptionPane.showMessageDialog(null, "No se pudo actualizar comercio");
 						}
 						cantListo.setText(cantListos + "/2");			
 					}

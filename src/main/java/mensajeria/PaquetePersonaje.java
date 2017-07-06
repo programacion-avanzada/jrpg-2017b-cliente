@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JOptionPane;
+
 import dominio.Item;
 import estados.Estado;
 
@@ -181,8 +183,8 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 			items.add(new Item(idItem,nombre,wearLocation,bonusSalud,bonusEnergia,bonusAtaque, bonusDefensa, bonusMagia, foto, fotoEquipado));
 			useBonus(bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa, bonusMagia);
 		} catch (IOException e) {
-			
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Falló al añadir item");
+
 		}
 	}
 	
@@ -226,8 +228,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		try {
 			items.add(new Item(idItem,null,0,0,0,0, 0, 0, null, null));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Falló al añadir item");
 		}
 		
 	}
