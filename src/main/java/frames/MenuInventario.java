@@ -28,8 +28,7 @@ public class MenuInventario extends JFrame {
 					cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARINVENTARIO);
 					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
 				} catch (IOException e1) {
-					
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error al actualizar inventario");
 				}
 				Pantalla.menuInventario = null;
 				dispose();	

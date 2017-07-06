@@ -94,8 +94,7 @@ public class MiChat extends JFrame {
 					try {
 						juego.getCliente().getSalida().writeObject(gson.toJson(juego.getCliente().getPaqueteMensaje()));
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Error al enviar mensaje");
 					}
 					texto.setText("");
 				}
@@ -125,8 +124,8 @@ public class MiChat extends JFrame {
 					try {
 						juego.getCliente().getSalida().writeObject(gson.toJson(juego.getCliente().getPaqueteMensaje()));
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Error al enviar mensaje");
+
 					}
 					texto.setText("");
 				}

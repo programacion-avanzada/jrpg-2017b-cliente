@@ -142,8 +142,8 @@ public class MenuAsignarSkills extends JFrame {
 				try {
 					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error al actualizar stats");
+
 				}
 				JOptionPane.showMessageDialog(null,"Se han actualizado tus atributos.");
 				dispose();

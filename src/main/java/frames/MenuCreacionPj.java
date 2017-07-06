@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -251,8 +252,8 @@ public class MenuCreacionPj extends JFrame {
 				cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
 				dispose();
 			} catch (JsonSyntaxException | IOException esd) {
-				// TODO Auto-generated catch block
-				esd.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error al crear personaje");
+
 			}
 		}
 		

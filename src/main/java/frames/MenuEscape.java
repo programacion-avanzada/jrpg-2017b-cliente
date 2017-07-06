@@ -108,7 +108,8 @@ public class MenuEscape extends JFrame {
 						cliente.getSocket().close();
 						System.exit(0);
 					} catch (IOException e1) {
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Error al desconectar");
+
 					}
 			}
 		});
