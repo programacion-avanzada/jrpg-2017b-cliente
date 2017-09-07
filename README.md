@@ -12,13 +12,13 @@
 
 ### Integrantes del equipo
 
-* Completar ([Agustin Magliano](https://github.com/agusmag))
-* Completar ([Adrian Radice](https://github.com/adrianRadice))
-* Completar ([Sanabria Facundo](https://github.com/FockaSanabria))
-* Completar ([Juan Ignacio Rosmirez](https://github.com/juanrosmirez))
-* Completar ([Luciano Siculin](https://github.com/luchosic))
-* Completar ([Matías González Romero](https://github.com/mati167))
-* Completar ([Tomas Eugenio Castillo](https://github.com/tomascastillo))
+([Agustin Magliano](https://github.com/agusmag))
+([Adrian Radice](https://github.com/adrianRadice))
+([Sanabria Facundo](https://github.com/FockaSanabria))
+([Juan Ignacio Rosmirez](https://github.com/juanrosmirez))
+([Luciano Siculin](https://github.com/luchosic))
+([Matías González Romero](https://github.com/mati167))
+([Tomas Eugenio Castillo](https://github.com/tomascastillo))
 
 ## Sobre la tecnología
 
