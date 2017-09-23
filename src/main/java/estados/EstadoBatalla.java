@@ -173,7 +173,7 @@ public class EstadoBatalla extends Estado {
 	public void graficar(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
-		mundo.graficar(g);
+		mundo.graficarSuelo(g);
 
 		g.drawImage(Recursos.personaje.get(paquetePersonaje.getRaza()).get(3)[0], 0, 175, 256, 256, null);
 		g.drawImage(Recursos.personaje.get(paqueteEnemigo.getRaza()).get(7)[0], 550, 75, 256, 256, null);

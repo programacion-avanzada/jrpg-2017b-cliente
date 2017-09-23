@@ -1,9 +1,19 @@
 package mundo;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import estados.Estado;
 import juego.Juego;
+import juego.Pantalla;
+import mensajeria.PaqueteMovimiento;
+import mensajeria.PaquetePersonaje;
+import recursos.Recursos;
 
 public class Mundo {
 	private Juego juego;
@@ -35,7 +45,7 @@ public class Mundo {
 
 	}
 
-	public void graficar(Graphics g) {
+	public void graficarSuelo(Graphics g) {
 		xOffset = juego.getEstadoJuego().getPersonaje().getxOffset();
 		yOffset = juego.getEstadoJuego().getPersonaje().getYOffset();
 
@@ -65,19 +75,56 @@ public class Mundo {
 	}
 
 	public void graficarObstaculos(Graphics g) {
+		Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
+		Map<Integer, PaquetePersonaje> personajesConectados;
+		int a;
+		int b;
 		Tile obst;
 		for (int i = 0; i < alto; i++) {
 			for (int j = 0; j < ancho; j++) {
-				iso = dosDaIso(j, i);
-				// Grafico al personaje
-				if (Estado.getEstado() == juego.getEstadoJuego())
-					if (Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[0] == j && Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[1] == i)
-						juego.getEstadoJuego().getPersonaje().graficar(g);
 
-				// Grafico los obstaculos
+				// Se grafican los obstáculos sólidos
+				iso = dosDaIso(j, i);
 				if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo) && getTile(j, i).esSolido()) {
 					obst = getTile(j, i);
 					obst.graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto() / 2), obst.getAncho(), obst.getAlto());
+				}
+
+				// Se grafica el personaje, teniendo en cuenta si es adyacente a un obstáculo sólido
+				a = Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[0];
+				b = Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[1];
+				if ((j >= a - 1 && j <= a + 1) && (i >= b - 1 && i <= b + 1)) {
+					if ((j != a && i != b - 1) && (j != a + 1 && i != b) && (j != a + 1 && i != b - 1)) {
+						juego.getEstadoJuego().getPersonaje().graficar(g);
+						juego.getEstadoJuego().getPersonaje().graficarNombre(g);
+					}
+				}
+
+				// Se grafican los otros personajes, teniendo en cuenta si son adyacentes a un obstáculo sólido
+				if (juego.getPersonajesConectados() != null) {
+					personajesConectados = new HashMap(juego.getPersonajesConectados());
+					ubicacionPersonajes = new HashMap(juego.getUbicacionPersonajes());
+					Iterator<Integer> it = personajesConectados.keySet().iterator();
+					int key;
+					PaqueteMovimiento actual;
+					g.setColor(Color.WHITE);
+					g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+					while (it.hasNext()) {
+						key = it.next();
+						actual = ubicacionPersonajes.get(key);
+						if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+
+							a = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[0];
+							b = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[1];
+
+							if ((j >= a - 1 && j <= a + 1) && (i >= b - 1 && i <= b + 1)) {
+								if ((j != a && i != b - 1) && (j != a + 1 && i != b) && (j != a + 1 && i != b - 1)) {
+									Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
+									g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset()), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+								}
+							}
+						}
+					}
 				}
 			}
 		}

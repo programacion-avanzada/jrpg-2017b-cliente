@@ -1,13 +1,8 @@
 package estados;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
@@ -18,7 +13,6 @@ import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
 import interfaz.MenuInfoPersonaje;
 import juego.Juego;
-import juego.Pantalla;
 import mensajeria.Comando;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
@@ -68,11 +62,8 @@ public class EstadoJuego extends Estado {
 	@Override
 	public void graficar(Graphics g) {
 		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
-		mundo.graficar(g);
-		// entidadPersonaje.graficar(g);
-		graficarPersonajes(g);
+		mundo.graficarSuelo(g);
 		mundo.graficarObstaculos(g);
-		entidadPersonaje.graficarNombre(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
 		g.drawImage(Recursos.mochila, 738, 545, 59, 52, null);
@@ -80,28 +71,6 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.chat, 3, 524, 102, 35, null);
 		if (haySolicitud)
 			menuEnemigo.graficar(g, tipoSolicitud);
-
-	}
-
-	public void graficarPersonajes(Graphics g) {
-
-		if (juego.getPersonajesConectados() != null) {
-			personajesConectados = new HashMap(juego.getPersonajesConectados());
-			ubicacionPersonajes = new HashMap(juego.getUbicacionPersonajes());
-			Iterator<Integer> it = personajesConectados.keySet().iterator();
-			int key;
-			PaqueteMovimiento actual;
-			g.setColor(Color.WHITE);
-			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
-			while (it.hasNext()) {
-				key = it.next();
-				actual = ubicacionPersonajes.get(key);
-				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
-					Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
-					g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset()), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
-				}
-			}
-		}
 	}
 
 	public Entidad getPersonaje() {
