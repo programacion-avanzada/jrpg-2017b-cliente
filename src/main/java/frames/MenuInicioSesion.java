@@ -31,14 +31,12 @@ public class MenuInicioSesion extends JFrame {
 
 	public MenuInicioSesion(final Cliente cliente) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0), "custom cursor"));
 
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.setAccion(Comando.SALIR);
 					cliente.notify();
 				}
@@ -113,7 +111,6 @@ public class MenuInicioSesion extends JFrame {
 			}
 		});
 
-
 		JLabel labelBackground = new JLabel("");
 		labelBackground.setBounds(0, 0, 444, 271);
 		labelBackground.setIcon(new ImageIcon(MenuInicioSesion.class.getResource("/frames/menuBackground.jpg")));
@@ -121,7 +118,7 @@ public class MenuInicioSesion extends JFrame {
 	}
 
 	private void logIn(final Cliente cliente) {
-		synchronized(cliente){
+		synchronized (cliente) {
 			cliente.setAccion(Comando.INICIOSESION);
 			cliente.getPaqueteUsuario().setUsername(textField.getText());
 			cliente.getPaqueteUsuario().setPassword(String.valueOf(passwordField.getPassword()));

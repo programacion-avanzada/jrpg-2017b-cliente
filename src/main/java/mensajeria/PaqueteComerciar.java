@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import dominio.Item;
 
-public class PaqueteComerciar extends Paquete implements Serializable, Cloneable  {
-	
+public class PaqueteComerciar extends Paquete implements Serializable, Cloneable {
+
 	private int id;
 	private int idEnemigo;
 	private int listo = 0;
@@ -14,11 +14,11 @@ public class PaqueteComerciar extends Paquete implements Serializable, Cloneable
 	private ArrayList<Item> itemsAObtener = new ArrayList<Item>();
 	private boolean solicitudDeComercio;
 
-	public PaqueteComerciar(){
+	public PaqueteComerciar() {
 		setComando(Comando.COMERCIO);
 		solicitudDeComercio = true;
 	}
-	
+
 	public boolean isSolicitudDeComercio() {
 		return solicitudDeComercio;
 	}
@@ -47,7 +47,7 @@ public class PaqueteComerciar extends Paquete implements Serializable, Cloneable
 		return idEnemigo;
 	}
 
-	public void setIdEnemigo(int idEnemigo){
+	public void setIdEnemigo(int idEnemigo) {
 		this.idEnemigo = idEnemigo;
 	}
 
@@ -58,11 +58,11 @@ public class PaqueteComerciar extends Paquete implements Serializable, Cloneable
 	public void aumentarListo() {
 		this.listo++;
 	}
-	
+
 	public void disminuirListo() {
 		this.listo--;
 	}
-	
+
 	public ArrayList<Item> getItemsAObtener() {
 		return itemsAObtener;
 	}

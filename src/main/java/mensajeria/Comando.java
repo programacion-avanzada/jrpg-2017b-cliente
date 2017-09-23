@@ -3,13 +3,12 @@ package mensajeria;
 import com.google.gson.Gson;
 
 public abstract class Comando {
-	// Nombre del paquete donde se encuentran las clases con las responsabilidades
+	// Nombre del paquete donde se encuentran las clases con las
+	// responsabilidades
 	public static final String NOMBREPAQUETE = "comandos";
-	public static final String[] CLASSNAMES = { "Conexion", "CrearPersonaje", "Desconectar", "InicioSesion", "MostrarMapas",
-			"Movimiento", "Registro", "Salir", "Batalla", "Atacar", "FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk" };
-	public static final String[] CLASSNAMESBIS = { "Conexion", "CrearPersonaje", "Desconectar", "InicioSesionSet", "MostrarMapas",
-			"Movimiento", "RegistroSet", "SalirSet", "Batalla", "Atacar", "FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk" };
-	
+	public static final String[] CLASSNAMES = { "Conexion", "CrearPersonaje", "Desconectar", "InicioSesion", "MostrarMapas", "Movimiento", "Registro", "Salir", "Batalla", "Atacar", "FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk" };
+	public static final String[] CLASSNAMESBIS = { "Conexion", "CrearPersonaje", "Desconectar", "InicioSesionSet", "MostrarMapas", "Movimiento", "RegistroSet", "SalirSet", "Batalla", "Atacar", "FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque", "ActualizarTrueque", "Talk" };
+
 	public static final int CONEXION = 0;
 	public static final int CREACIONPJ = 1;
 	public static final int DESCONECTAR = 2;
@@ -29,14 +28,13 @@ public abstract class Comando {
 	public static final int TRUEQUE = 16;
 	public static final int ACTUALIZARTRUEQUE = 17;
 	public static final int TALK = 18;
-	
+
 	protected final Gson gson = new Gson();
 	protected String cadenaLeida;
-	
+
 	public void setCadena(String cadenaLeida) {
 		this.cadenaLeida = cadenaLeida;
 	}
 
-	
 	public abstract void ejecutar();
 }

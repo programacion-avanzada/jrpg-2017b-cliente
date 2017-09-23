@@ -51,18 +51,14 @@ public class Mundo {
 				if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)) {
 					int map = juego.getPersonaje().getMapa();
 					if (map == 1) {
-						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 					} else if (map == 2) {
-						Tile.aris[Tile.arisBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+						Tile.aris[Tile.arisBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 					} else if (map == 3) {
-						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 					}
-					if(!getTile(j,i).esSolido())
-						getTile(j,i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32 ),64,64);
+					if (!getTile(j, i).esSolido())
+						getTile(j, i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 				}
 			}
 		}
@@ -74,20 +70,14 @@ public class Mundo {
 			for (int j = 0; j < ancho; j++) {
 				iso = dosDaIso(j, i);
 				// Grafico al personaje
-				if(Estado.getEstado() == juego.getEstadoJuego())
-					if (Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
-							juego.getUbicacionPersonaje().getPosY())[0] == j
-							&& Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
-									juego.getUbicacionPersonaje().getPosY())[1] == i )
+				if (Estado.getEstado() == juego.getEstadoJuego())
+					if (Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[0] == j && Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[1] == i)
 						juego.getEstadoJuego().getPersonaje().graficar(g);
 
 				// Grafico los obstaculos
-				if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)
-						&& getTile(j, i).esSolido()) {
+				if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo) && getTile(j, i).esSolido()) {
 					obst = getTile(j, i);
-					obst.graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-							(int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto()/2), obst.getAncho(),
-							obst.getAlto());
+					obst.graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto() / 2), obst.getAncho(), obst.getAlto());
 				}
 			}
 		}
@@ -156,9 +146,7 @@ public class Mundo {
 						// Y ademas el de arriba ni el de la derecha lo son, lo
 						// uno
 						// Tiene que ser a partir de la segunda fila
-						if (y > 0 && !Tile.tiles[tilesInv[x + 1][y - 1]].esSolido()
-								&& !Tile.tiles[tilesInv[x + 1][y]].esSolido()
-								&& !Tile.tiles[tilesInv[x][y - 1]].esSolido()) {
+						if (y > 0 && !Tile.tiles[tilesInv[x + 1][y - 1]].esSolido() && !Tile.tiles[tilesInv[x + 1][y]].esSolido() && !Tile.tiles[tilesInv[x][y - 1]].esSolido()) {
 							nodos[x][y].agregarAdyacente(nodos[x + 1][y - 1]);
 							nodos[x + 1][y - 1].agregarAdyacente(nodos[x][y]);
 						}
@@ -171,9 +159,7 @@ public class Mundo {
 						// Y ademas el de abajo ni el de la derecha lo son, lo
 						// uno
 						// Debe ser antes de la ultima fila
-						if (y < yFinal - 1 && !Tile.tiles[tilesInv[x + 1][y + 1]].esSolido()
-								&& !Tile.tiles[tilesInv[x + 1][y]].esSolido()
-								&& !Tile.tiles[tilesInv[x][y + 1]].esSolido()) {
+						if (y < yFinal - 1 && !Tile.tiles[tilesInv[x + 1][y + 1]].esSolido() && !Tile.tiles[tilesInv[x + 1][y]].esSolido() && !Tile.tiles[tilesInv[x][y + 1]].esSolido()) {
 							nodos[x][y].agregarAdyacente(nodos[x + 1][y + 1]);
 							nodos[x + 1][y + 1].agregarAdyacente(nodos[x][y]);
 						}

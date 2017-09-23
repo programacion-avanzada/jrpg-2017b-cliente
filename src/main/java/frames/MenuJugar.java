@@ -31,7 +31,7 @@ public class MenuJugar extends JFrame {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					MenuInicioSesion menuInicioSesion = new MenuInicioSesion(cliente);
 					menuInicioSesion.setVisible(true);
 					dispose();
@@ -39,9 +39,7 @@ public class MenuJugar extends JFrame {
 			}
 		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0), "custom cursor"));
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -49,7 +47,7 @@ public class MenuJugar extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.setAccion(Comando.SALIR);
 					cliente.notify();
 				}
@@ -121,5 +119,3 @@ public class MenuJugar extends JFrame {
 		layeredPane.add(lblBackground, new Integer(0));
 	}
 }
-
-

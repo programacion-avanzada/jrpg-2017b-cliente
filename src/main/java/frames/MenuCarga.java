@@ -22,9 +22,7 @@ public class MenuCarga extends JFrame {
 
 	public MenuCarga(final Cliente cliente) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0), "custom cursor"));
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -32,7 +30,7 @@ public class MenuCarga extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.setAccion(Comando.SALIR);
 					cliente.notify();
 				}
@@ -75,5 +73,3 @@ public class MenuCarga extends JFrame {
 		barraCargando.setSize(ancho, 27);
 	}
 }
-
-

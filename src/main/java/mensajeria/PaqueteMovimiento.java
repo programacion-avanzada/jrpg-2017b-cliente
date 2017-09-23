@@ -73,4 +73,3 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 		return obj;
 	}
 }
-
