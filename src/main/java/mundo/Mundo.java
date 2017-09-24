@@ -77,8 +77,9 @@ public class Mundo {
 	public void graficarObstaculos(Graphics g) {
 		Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 		Map<Integer, PaquetePersonaje> personajesConectados;
-		int a;
-		int b;
+		int jPersonaje;
+		int iPersonaje;
+		boolean haySolidoAdyacente;
 		Tile obst;
 		for (int i = 0; i < alto; i++) {
 			for (int j = 0; j < ancho; j++) {
@@ -90,17 +91,24 @@ public class Mundo {
 					obst.graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto() / 2), obst.getAncho(), obst.getAlto());
 				}
 
-				// Se grafica el personaje, teniendo en cuenta si es adyacente a un obstáculo sólido
-				a = Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[0];
-				b = Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[1];
-				if ((j >= a - 1 && j <= a + 1) && (i >= b - 1 && i <= b + 1)) {
-					if ((j != a && i != b - 1) && (j != a + 1 && i != b) && (j != a + 1 && i != b - 1)) {
-						juego.getEstadoJuego().getPersonaje().graficar(g);
-						juego.getEstadoJuego().getPersonaje().graficarNombre(g);
-					}
+				// Se grafica el personaje, teniendo en cuenta si es adyacente a
+				// un obstáculo sólido
+				jPersonaje = Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[0];
+				iPersonaje = Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[1];
+
+				try {
+					haySolidoAdyacente = getTile(jPersonaje + 1, iPersonaje).esSolido();
+				} catch (Exception e) {
+					haySolidoAdyacente = false;
 				}
 
-				// Se grafican los otros personajes, teniendo en cuenta si son adyacentes a un obstáculo sólido
+				if (((!haySolidoAdyacente) && (j == jPersonaje && i == iPersonaje + 1)) || ((haySolidoAdyacente) && (j == jPersonaje && i == iPersonaje - 1))) {
+					juego.getEstadoJuego().getPersonaje().graficar(g);
+					juego.getEstadoJuego().getPersonaje().graficarNombre(g);
+				}
+
+				// Se grafican los otros personajes, teniendo en cuenta si son
+				// adyacentes a un obstáculo sólido
 				if (juego.getPersonajesConectados() != null) {
 					personajesConectados = new HashMap(juego.getPersonajesConectados());
 					ubicacionPersonajes = new HashMap(juego.getUbicacionPersonajes());
@@ -113,15 +121,18 @@ public class Mundo {
 						key = it.next();
 						actual = ubicacionPersonajes.get(key);
 						if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+				            jPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[0];
+				            iPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[1];
 
-							a = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[0];
-							b = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[1];
+							try {
+								haySolidoAdyacente = getTile(jPersonaje + 1, iPersonaje).esSolido();
+							} catch (Exception e) {
+								haySolidoAdyacente = false;
+							}
 
-							if ((j >= a - 1 && j <= a + 1) && (i >= b - 1 && i <= b + 1)) {
-								if ((j != a && i != b - 1) && (j != a + 1 && i != b) && (j != a + 1 && i != b - 1)) {
-									Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
-									g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset()), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
-								}
+							if (((!haySolidoAdyacente) && (j == jPersonaje && i == iPersonaje + 1)) || ((haySolidoAdyacente) && (j == jPersonaje && i == iPersonaje - 1))) {
+								Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
+								g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset()), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 							}
 						}
 					}
