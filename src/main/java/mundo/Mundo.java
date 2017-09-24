@@ -80,6 +80,8 @@ public class Mundo {
 		int jPersonaje;
 		int iPersonaje;
 		boolean haySolidoAdyacente;
+		boolean tienePosicionProblematica;
+		boolean tieneDireccionProblematica;
 		Tile obst;
 		for (int i = 0; i < alto; i++) {
 			for (int j = 0; j < ancho; j++) {
@@ -96,13 +98,37 @@ public class Mundo {
 				jPersonaje = Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[0];
 				iPersonaje = Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[1];
 
+				/*
+				 * Parche temporal
+				 *
+				 * Bug a solucionar: La coordenada j del personaje no se
+				 * actualiza si la dirección del personaje es es 4 o 5
+				 *
+				 * Será necesario remover el parche una vez solucionado el bug
+				 */
+				try {
+					tienePosicionProblematica = getTile(jPersonaje + 2, iPersonaje).esSolido();
+				} catch (Exception e) {
+					tienePosicionProblematica = false;
+				}
+
+				tieneDireccionProblematica = juego.getUbicacionPersonaje().getDireccion() == 4 || juego.getUbicacionPersonaje().getDireccion() == 5;
+
+				if (tienePosicionProblematica && tieneDireccionProblematica) {
+					jPersonaje++;
+				}
+				/*
+				 * -------------------------------------------------------------
+				 * -------------------------------------------------------------
+				 */
+
 				try {
 					haySolidoAdyacente = getTile(jPersonaje + 1, iPersonaje).esSolido();
 				} catch (Exception e) {
 					haySolidoAdyacente = false;
 				}
 
-				if (((!haySolidoAdyacente) && (j == jPersonaje && i == iPersonaje + 1)) || ((haySolidoAdyacente) && (j == jPersonaje && i == iPersonaje - 1))) {
+				if (((!haySolidoAdyacente) && (j == jPersonaje - 1 && i == iPersonaje + 1)) || ((haySolidoAdyacente) && (j == jPersonaje && i == iPersonaje - 1))) {
 					juego.getEstadoJuego().getPersonaje().graficar(g);
 					juego.getEstadoJuego().getPersonaje().graficarNombre(g);
 				}
@@ -121,8 +147,34 @@ public class Mundo {
 						key = it.next();
 						actual = ubicacionPersonajes.get(key);
 						if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
-				            jPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[0];
-				            iPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[1];
+							jPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[0];
+							iPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[1];
+
+							/*
+							 * Parche temporal
+							 *
+							 * Bug a solucionar: La coordenada j del personaje
+							 * no se actualiza si la dirección del personaje es
+							 * es 4 o 5
+							 *
+							 * Será necesario remover el parche una vez
+							 * solucionado el bug
+							 */
+							try {
+								tienePosicionProblematica = getTile(jPersonaje + 2, iPersonaje).esSolido();
+							} catch (Exception e) {
+								tienePosicionProblematica = false;
+							}
+
+							tieneDireccionProblematica = actual.getDireccion() == 4 || actual.getDireccion() == 5;
+
+							if (tienePosicionProblematica && tieneDireccionProblematica) {
+								jPersonaje++;
+							}
+							/*
+							 * -------------------------------------------------
+							 * -------------------------------------------------
+							 */
 
 							try {
 								haySolidoAdyacente = getTile(jPersonaje + 1, iPersonaje).esSolido();
@@ -130,7 +182,7 @@ public class Mundo {
 								haySolidoAdyacente = false;
 							}
 
-							if (((!haySolidoAdyacente) && (j == jPersonaje && i == iPersonaje + 1)) || ((haySolidoAdyacente) && (j == jPersonaje && i == iPersonaje - 1))) {
+							if (((!haySolidoAdyacente) && (j == jPersonaje - 1 && i == iPersonaje + 1)) || ((haySolidoAdyacente) && (j == jPersonaje && i == iPersonaje - 1))) {
 								Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
 								g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset()), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 							}
