@@ -45,7 +45,7 @@ public class MenuAsignarSkills extends JFrame {
 		puntosFuerzaInicial = cliente.getPaquetePersonaje().getFuerza();
 		puntosDestrezaInicial = cliente.getPaquetePersonaje().getDestreza();
 		puntosInteligenciaInicial = cliente.getPaquetePersonaje().getInteligencia();
-		puntosAsignar = puntosAsignarInicial;
+		puntosAsignar = puntosAsignarInicial * cliente.getPaquetePersonaje().getNivel();
 		puntosFuerza = puntosFuerzaInicial;
 		puntosDestreza = puntosDestrezaInicial;
 		puntosInteligencia = puntosInteligenciaInicial;
@@ -125,6 +125,7 @@ public class MenuAsignarSkills extends JFrame {
 		lblFuerza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFuerza.setBounds(50, 72, 56, 16);
 		contentPane.add(lblFuerza);
+		
 
 		final JButton buttonConfirm = new JButton("Confirmar");
 		ImageIcon icono_confirm = new ImageIcon("recursos//botonConfirmar.png");

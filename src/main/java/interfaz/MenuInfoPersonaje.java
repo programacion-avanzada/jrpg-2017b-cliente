@@ -77,6 +77,11 @@ public class MenuInfoPersonaje {
 		g.drawImage(Recursos.botonMenu, x + 50, y + 380, 200, 25, null);
 		g.setColor(Color.WHITE);
 		Pantalla.centerString(g, new Rectangle(x + 50, y + 380, 200, 25), leyendaBoton[tipoMenu]);
+		
+		if (tipoMenu == 2) {
+			g.drawImage(Recursos.botonMenu, x + 50, y + 410, 200, 25, null);
+			Pantalla.centerString(g, new Rectangle(x + 50, y + 410, 200, 25), "Asignar Skills");
+		}
 	}
 
 	private void graficarMenuPerderBatalla(Graphics g) {
@@ -172,7 +177,15 @@ public class MenuInfoPersonaje {
 	public boolean clickEnBoton(int mouseX, int mouseY) {
 		if (mouseX >= x + 50 && mouseX <= x + 250 && mouseY >= y + 380 && mouseY <= y + 405)
 			return true;
+		
 		return false;
+	}
+	
+	public boolean clickEnAsignarSkills(int mouseX, int mouseY) {		
+		if (mouseX >= x + 50 && mouseX <= x + 250 && mouseY >= y + 410 && mouseY <= y + 430) 			
+			return true;
+		
+		return false;		
 	}
 
 	public boolean clickEnCerrar(int mouseX, int mouseY) {
