@@ -177,7 +177,15 @@ public class MenuInfoPersonaje {
 	public boolean clickEnBoton(int mouseX, int mouseY) {
 		if (mouseX >= x + 50 && mouseX <= x + 250 && mouseY >= y + 380 && mouseY <= y + 405)
 			return true;
+		
 		return false;
+	}
+	
+	public boolean clickEnAsignarSkills(int mouseX, int mouseY) {		
+		if (mouseX >= x + 50 && mouseX <= x + 250 && mouseY >= y + 410 && mouseY <= y + 430) 			
+			return true;
+		
+		return false;		
 	}
 
 	public boolean clickEnCerrar(int mouseX, int mouseY) {
