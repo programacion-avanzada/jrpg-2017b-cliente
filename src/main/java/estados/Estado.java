@@ -30,6 +30,6 @@ public abstract class Estado {
 	public static Estado getEstado() {
 		return estadoActual;
 	}
-	
+
 	public abstract boolean esEstadoDeJuego();
 }

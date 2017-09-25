@@ -33,8 +33,8 @@ public class MenuMapas extends JFrame {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					synchronized(cliente){
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					synchronized (cliente) {
 						cliente.getPaquetePersonaje().setMapa(1);
 						numberMap = 1;
 						cliente.notify();
@@ -44,9 +44,7 @@ public class MenuMapas extends JFrame {
 			}
 		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0), "custom cursor"));
 
 		setTitle("Elegir Mapa");
 		setBounds(100, 100, 450, 300);
@@ -55,7 +53,7 @@ public class MenuMapas extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.setAccion(Comando.SALIR);
 					cliente.notify();
 				}
@@ -114,7 +112,7 @@ public class MenuMapas extends JFrame {
 		btnEodrim.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.getPaquetePersonaje().setMapa(3);
 					cliente.notify();
 				}
@@ -132,7 +130,7 @@ public class MenuMapas extends JFrame {
 		btnAris.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.getPaquetePersonaje().setMapa(2);
 					numberMap = 2;
 					cliente.notify();
@@ -150,7 +148,7 @@ public class MenuMapas extends JFrame {
 		btnAubenor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.getPaquetePersonaje().setMapa(1);
 					numberMap = 1;
 					cliente.notify();
@@ -160,4 +158,3 @@ public class MenuMapas extends JFrame {
 		});
 	}
 }
-

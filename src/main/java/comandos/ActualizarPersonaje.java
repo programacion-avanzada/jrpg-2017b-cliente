@@ -10,7 +10,7 @@ public class ActualizarPersonaje extends ComandosEscucha {
 
 		juego.getPersonajesConectados().remove(paquetePersonaje.getId());
 		juego.getPersonajesConectados().put(paquetePersonaje.getId(), paquetePersonaje);
-		
+
 		if (juego.getPersonaje().getId() == paquetePersonaje.getId()) {
 			juego.actualizarPersonaje();
 			juego.getEstadoJuego().actualizarPersonaje();

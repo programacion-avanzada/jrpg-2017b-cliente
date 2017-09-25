@@ -28,7 +28,9 @@ public class Juego implements Runnable {
 	private Thread hilo;
 	private boolean corriendo;
 
-	private BufferStrategy bs; // Estrategia para graficar mediante buffers (Primero se "grafica" en el/los buffer/s y finalmente en el canvas)
+	private BufferStrategy bs; // Estrategia para graficar mediante buffers
+								// (Primero se "grafica" en el/los buffer/s y
+								// finalmente en el canvas)
 	private Graphics g;
 
 	// Estados
@@ -49,7 +51,6 @@ public class Juego implements Runnable {
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
-
 
 	private CargarRecursos cargarRecursos;
 
@@ -97,7 +98,8 @@ public class Juego implements Runnable {
 
 	private void graficar() { // Grafica los objetos y sus posiciones
 		bs = pantalla.getCanvas().getBufferStrategy();
-		if (bs == null) { // Seteo una estrategia para el canvas en caso de que no tenga una
+		if (bs == null) { // Seteo una estrategia para el canvas en caso de que
+							// no tenga una
 			pantalla.getCanvas().createBufferStrategy(3);
 			return;
 		}
@@ -107,7 +109,7 @@ public class Juego implements Runnable {
 		g.clearRect(0, 0, ANCHO, ALTO); // Limpiamos la pantalla
 
 		// Graficado de imagenes
-		g.setFont(new Font("Book Antiqua",1,15));
+		g.setFont(new Font("Book Antiqua", 1, 15));
 
 		if (Estado.getEstado() != null) {
 			Estado.getEstado().graficar(g);
@@ -123,17 +125,30 @@ public class Juego implements Runnable {
 	public void run() { // Hilo principal del juego
 
 		int fps = 60; // Cantidad de actualizaciones por segundo que se desean
-		double tiempoPorActualizacion = 1000000000 / fps; // Cantidad de nanosegundos en FPS deseados
+		double tiempoPorActualizacion = 1000000000 / fps; // Cantidad de
+															// nanosegundos en
+															// FPS deseados
 		double delta = 0;
 		long ahora;
 		long ultimoTiempo = System.nanoTime();
 		long timer = 0; // Timer para mostrar fps cada un segundo
-		int actualizaciones = 0; // Cantidad de actualizaciones que se realizan realmente
+		int actualizaciones = 0; // Cantidad de actualizaciones que se realizan
+									// realmente
 
 		while (corriendo) {
 			ahora = System.nanoTime();
-			delta += (ahora - ultimoTiempo) / tiempoPorActualizacion; // Calculo  para determinar cuando realizar la actualizacion y el graficado
-			timer += ahora - ultimoTiempo; // Sumo el tiempo transcurrido hasta que se acumule 1 segundo y mostrar los FPS
+			delta += (ahora - ultimoTiempo) / tiempoPorActualizacion; // Calculo
+																		// para
+																		// determinar
+																		// cuando
+																		// realizar
+																		// la
+																		// actualizacion
+																		// y el
+																		// graficado
+			timer += ahora - ultimoTiempo; // Sumo el tiempo transcurrido hasta
+											// que se acumule 1 segundo y
+											// mostrar los FPS
 			ultimoTiempo = ahora; // Para las proximas corridas del bucle
 
 			if (delta >= 1) {
@@ -196,11 +211,11 @@ public class Juego implements Runnable {
 		return (EstadoJuego) estadoJuego;
 	}
 
-	public EstadoBatalla getEstadoBatalla(){
+	public EstadoBatalla getEstadoBatalla() {
 		return (EstadoBatalla) estadoBatalla;
 	}
 
-	public void setEstadoBatalla(EstadoBatalla estadoBatalla){
+	public void setEstadoBatalla(EstadoBatalla estadoBatalla) {
 		this.estadoBatalla = estadoBatalla;
 	}
 
@@ -216,7 +231,7 @@ public class Juego implements Runnable {
 		return paquetePersonaje;
 	}
 
-	public PaqueteMovimiento getUbicacionPersonaje(){
+	public PaqueteMovimiento getUbicacionPersonaje() {
 		return ubicacionPersonaje;
 	}
 
@@ -235,7 +250,7 @@ public class Juego implements Runnable {
 	public void setPersonajesConectados(Map<Integer, PaquetePersonaje> map) {
 		this.personajesConectados = map;
 	}
-	
+
 	public Map<Integer, PaqueteMovimiento> getUbicacionPersonajes() {
 		return ubicacionPersonajes;
 	}

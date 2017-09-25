@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-
 public class Utilitarias {
 
 	public static String archivoAString(String path) {
@@ -22,7 +21,7 @@ public class Utilitarias {
 
 			br.close();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo al intentar cargar el mapa " + path );
+			JOptionPane.showMessageDialog(null, "Fallo al intentar cargar el mapa " + path);
 		}
 
 		return builder.toString();

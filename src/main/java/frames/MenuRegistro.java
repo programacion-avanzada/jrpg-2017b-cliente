@@ -31,14 +31,12 @@ public class MenuRegistro extends JFrame {
 
 	public MenuRegistro(final Cliente cliente) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0), "custom cursor"));
 
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.setAccion(Comando.SALIR);
 					cliente.notify();
 				}
@@ -134,7 +132,7 @@ public class MenuRegistro extends JFrame {
 	}
 
 	private void logIn(final Cliente cliente) {
-		synchronized(cliente){
+		synchronized (cliente) {
 			cliente.getPaqueteUsuario().setUsername(txtUsuario.getText());
 			cliente.getPaqueteUsuario().setPassword(String.valueOf(pwPassword.getPassword()));
 			cliente.setAccion(Comando.REGISTRO);

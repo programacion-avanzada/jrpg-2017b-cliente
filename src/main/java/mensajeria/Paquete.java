@@ -12,6 +12,7 @@ public class Paquete implements Serializable, Cloneable {
 	private String mensaje;
 	private String ip;
 	private int comando;
+
 	public Paquete() {
 
 	}
@@ -47,7 +48,6 @@ public class Paquete implements Serializable, Cloneable {
 		return mensaje;
 	}
 
-
 	public String getIp() {
 		return ip;
 	}
@@ -67,7 +67,7 @@ public class Paquete implements Serializable, Cloneable {
 		}
 		return obj;
 	}
-	
+
 	public Comando getObjeto(String nombrePaquete) {
 		try {
 			Comando c;
@@ -78,6 +78,7 @@ public class Paquete implements Serializable, Cloneable {
 		}
 
 	}
+
 	public static Comando getObjetoSet(String nombrePaquete, int accion) {
 		try {
 			Comando c;
@@ -88,6 +89,5 @@ public class Paquete implements Serializable, Cloneable {
 		}
 
 	}
-
 
 }
