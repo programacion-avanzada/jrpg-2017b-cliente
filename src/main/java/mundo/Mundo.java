@@ -77,8 +77,8 @@ public class Mundo {
 	public void graficarObstaculos(Graphics g) {
 		Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 		Map<Integer, PaquetePersonaje> personajesConectados;
-		int jPersonaje; // abajo <-> arriba
-		int iPersonaje; // izquierda <-> derecha
+		int jPersonaje;
+		int iPersonaje;
 		boolean haySolidoArriba;
 		boolean haySolidoAbajo;
 		Tile obst;
@@ -105,38 +105,47 @@ public class Mundo {
 				 *
 				 * Será necesario remover el parche una vez solucionado el bug
 				 */
-				if (juego.getUbicacionPersonaje().getDireccion() == 0) iPersonaje++; // arriba + izquierda
-				//if (juego.getUbicacionPersonaje().getDireccion() == 1); // arriba
-				//if (juego.getUbicacionPersonaje().getDireccion() == 2); // arriba + derecha
-				//if (juego.getUbicacionPersonaje().getDireccion() == 3); // derecha
-				if (juego.getUbicacionPersonaje().getDireccion() == 4) jPersonaje++; //abajo + derecha
-				if (juego.getUbicacionPersonaje().getDireccion() == 5) jPersonaje++; // abajo
-				if (juego.getUbicacionPersonaje().getDireccion() == 6) {jPersonaje++; iPersonaje++;} // abajo + izquierda
-				if (juego.getUbicacionPersonaje().getDireccion() == 7) iPersonaje++; // izquierda
+				if (juego.getUbicacionPersonaje().getDireccion() == 0) {
+					iPersonaje++;
+				}
+				if (juego.getUbicacionPersonaje().getDireccion() == 4) {
+					jPersonaje++;
+				}
+				if (juego.getUbicacionPersonaje().getDireccion() == 5) {
+					jPersonaje++;
+				}
+				if (juego.getUbicacionPersonaje().getDireccion() == 6) {
+					jPersonaje++;
+					iPersonaje++;
+				}
+				if (juego.getUbicacionPersonaje().getDireccion() == 7) {
+					iPersonaje++;
+				}
 				/*
 				 * -------------------------------------------------------------
 				 * -------------------------------------------------------------
 				 */
-				
+
 				try {
 					haySolidoAbajo = getTile(jPersonaje + 1, iPersonaje).esSolido();
 				} catch (Exception e) {
 					haySolidoAbajo = false;
 				}
-				
+
 				try {
 					haySolidoArriba = getTile(jPersonaje - 1, iPersonaje).esSolido();
 				} catch (Exception e) {
 					haySolidoArriba = false;
 				}
-				
-				if ( ((haySolidoAbajo == haySolidoArriba)&&(j == jPersonaje && i == iPersonaje)) || ((haySolidoAbajo && !haySolidoArriba)&&(j == jPersonaje && i == iPersonaje - 1)) || ((haySolidoArriba && !haySolidoAbajo)&&(j == jPersonaje && i == iPersonaje + 1)) ) {
+
+				if (((haySolidoAbajo == haySolidoArriba) && (j == jPersonaje && i == iPersonaje)) || ((haySolidoAbajo && !haySolidoArriba) && (j == jPersonaje && i == iPersonaje - 1)) || ((haySolidoArriba && !haySolidoAbajo) && (j == jPersonaje && i == iPersonaje + 1))) {
 					juego.getEstadoJuego().getPersonaje().graficar(g);
 					juego.getEstadoJuego().getPersonaje().graficarNombre(g);
 				}
 
 				// Se grafican los otros personajes, teniendo en cuenta si son
-				// adyacentes a un obstáculo sólido
+				// adyacentes a un obstáculo sólido, y teniendo en cuenta si
+				// están en el mismo mapa
 				if (juego.getPersonajesConectados() != null) {
 					personajesConectados = new HashMap(juego.getPersonajesConectados());
 					ubicacionPersonajes = new HashMap(juego.getUbicacionPersonajes());
@@ -148,50 +157,63 @@ public class Mundo {
 					while (it.hasNext()) {
 						key = it.next();
 						actual = ubicacionPersonajes.get(key);
-						if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+						if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego && personajesConectados.get(actual.getIdPersonaje()).getMapa() == juego.getPersonaje().getMapa()) {
+							
 							jPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[0];
 							iPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[1];
 
 							/*
 							 * Parche temporal
 							 *
-							 * Bug a solucionar: Las coordenadas del personaje no se
-							 * actualizan apropiadamente luego de un movimiento
+							 * Bug a solucionar: Las coordenadas del personaje
+							 * no se actualizan apropiadamente luego de un
+							 * movimiento
 							 *
-							 * Será necesario remover el parche una vez solucionado el bug
+							 * Será necesario remover el parche una vez
+							 * solucionado el bug
 							 */
-							if (actual.getDireccion() == 0) iPersonaje++; // arriba + izquierda
-							//if (actual.getDireccion() == 1); // arriba
-							//if (actual.getDireccion() == 2); // arriba + derecha
-							//if (actual.getDireccion() == 3); // derecha
-							if (actual.getDireccion() == 4) jPersonaje++; //abajo + derecha
-							if (actual.getDireccion() == 5) jPersonaje++; // abajo
-							if (actual.getDireccion() == 6) {jPersonaje++; iPersonaje++;} // abajo + izquierda
-							if (actual.getDireccion() == 7) iPersonaje++; // izquierda
+							if (juego.getUbicacionPersonaje().getDireccion() == 0) {
+								iPersonaje++;
+							}
+							if (juego.getUbicacionPersonaje().getDireccion() == 4) {
+								jPersonaje++;
+							}
+							if (juego.getUbicacionPersonaje().getDireccion() == 5) {
+								jPersonaje++;
+							}
+							if (juego.getUbicacionPersonaje().getDireccion() == 6) {
+								jPersonaje++;
+								iPersonaje++;
+							}
+							if (juego.getUbicacionPersonaje().getDireccion() == 7) {
+								iPersonaje++;
+							}
 							/*
-							 * -------------------------------------------------------------
-							 * -------------------------------------------------------------
+							 * -------------------------------------------------
+							 * -------------------------------------------------
 							 */
-							
+
 							try {
 								haySolidoAbajo = getTile(jPersonaje + 1, iPersonaje).esSolido();
 							} catch (Exception e) {
 								haySolidoAbajo = false;
 							}
-							
+
 							try {
 								haySolidoArriba = getTile(jPersonaje - 1, iPersonaje).esSolido();
 							} catch (Exception e) {
 								haySolidoArriba = false;
 							}
-							
-							if ( ((haySolidoAbajo == haySolidoArriba)&&(j == jPersonaje && i == iPersonaje)) || ((haySolidoAbajo && !haySolidoArriba)&&(j == jPersonaje && i == iPersonaje - 1)) || ((haySolidoArriba && !haySolidoAbajo)&&(j == jPersonaje && i == iPersonaje + 1)) ) {
+
+							if (((haySolidoAbajo == haySolidoArriba) && (j == jPersonaje && i == iPersonaje)) || ((haySolidoAbajo && !haySolidoArriba) && (j == jPersonaje && i == iPersonaje - 1)) || ((haySolidoArriba && !haySolidoAbajo) && (j == jPersonaje && i == iPersonaje + 1))) {
 								Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
 								g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset()), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 							}
 						}
 					}
 				}
+				
+				
 			}
 		}
 	}
