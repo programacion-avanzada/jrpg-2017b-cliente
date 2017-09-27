@@ -2,6 +2,7 @@ package frames;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -125,6 +126,23 @@ public class MenuAsignarSkills extends JFrame {
 		lblFuerza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFuerza.setBounds(50, 72, 56, 16);
 		contentPane.add(lblFuerza);
+		
+		final JButton buttonReiniciar = new JButton("Reiniciar");
+		ImageIcon icono_R = new ImageIcon("recursos//botonMenu.png");
+		buttonReiniciar.setHorizontalTextPosition(SwingConstants.CENTER);
+		buttonReiniciar.setHorizontalTextPosition(SwingConstants.CENTER);
+		buttonReiniciar.setFont(new Font("Arial", Font.PLAIN, 15));
+		buttonReiniciar.setForeground(Color.WHITE);
+		buttonReiniciar.setIcon(icono_R);
+		buttonReiniciar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			//CODIGO A EJECUTAR
+				dispose();
+			}
+		});
+		buttonReiniciar.setBounds(176, 112, 97, 25);
+		contentPane.add(buttonReiniciar);
+		
 		
 		final JButton buttonConfirm = new JButton("Confirmar");
 		ImageIcon icono_confirm = new ImageIcon("recursos//botonConfirmar.png");
