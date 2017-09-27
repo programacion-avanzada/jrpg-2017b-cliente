@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/XXX/jrpg-2017b-cliente.svg?branch=master)](https://travis-ci.org/XXX/jrpg-2017b-cliente)
+[![Build Status](https://travis-ci.org/Bitseller/jrpg-2017b-cliente.svg?branch=master)](https://travis-ci.org/Bitseller/jrpg-2017b-cliente)
 # World Of Middle Earth (WOME) - cliente
 
 ## Sobre las personas
@@ -12,14 +12,13 @@
 
 ### Integrantes del equipo
 
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
+* Agustin Magliano ([agusmag](https://github.com/agusmag))
+* Adrian Radice ([adrianRadice](https://github.com/adrianRadice))
+* Sanabria Facundo ([FockaSanabria](https://github.com/FockaSanabria))
+* Juan Ignacio Rosmirez ([juanrosmirez](https://github.com/juanrosmirez))
+* Luciano Siculin ([luchosic](https://github.com/luchosic))
+* Matías González Romero ([mati167](https://github.com/mati167))
+* Tomas Eugenio Castillo ([tomascastillo](https://github.com/tomascastillo))
 
 ## Sobre la tecnología
 
