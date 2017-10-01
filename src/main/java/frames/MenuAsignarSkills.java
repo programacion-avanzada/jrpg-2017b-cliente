@@ -127,13 +127,25 @@ public class MenuAsignarSkills extends JFrame {
 		contentPane.add(lblFuerza);
 		
 
+		
+		//Boton para resetear las habilidades
+		final JButton buttonReset = new JButton("Reset");
+		ImageIcon icono_Reset = new ImageIcon("recursos//botonReset.png");
+		buttonReset.setIcon(icono_Reset);
+		buttonReset.setEnabled(false);
+		buttonReset.setBounds(176, 112, 97, 25);
+		contentPane.add(buttonReset);
+		
 		final JButton buttonConfirm = new JButton("Confirmar");
 		ImageIcon icono_confirm = new ImageIcon("recursos//botonConfirmar.png");
 		buttonConfirm.setIcon(icono_confirm);
 		buttonConfirm.setEnabled(false);
+		
+		
 		buttonConfirm.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
-				;
+
 				puntosAsignarInicial = puntosAsignar;
 				int bonusF = puntosFuerza - puntosFuerzaInicial;
 				int bonusD = puntosDestreza - puntosDestrezaInicial;
@@ -151,7 +163,7 @@ public class MenuAsignarSkills extends JFrame {
 				dispose();
 			}
 		});
-		buttonConfirm.setBounds(176, 112, 97, 25);
+		buttonConfirm.setBounds(176, 78, 97, 25);
 		contentPane.add(buttonConfirm);
 
 		final JButton buttonCancel = new JButton("Cancelar");
@@ -287,6 +299,9 @@ public class MenuAsignarSkills extends JFrame {
 				if (puntosAsignar != 0 && !labelFuerza.getText().equals("200")) {
 					puntosFuerza++;
 					puntosAsignar--;
+					
+					buttonReset.setEnabled(true);
+					
 					buttonConfirm.setEnabled(true);
 					labelPuntos.setText(String.valueOf(puntosAsignar));
 					labelFuerza.setText(String.valueOf(puntosFuerza));
@@ -312,6 +327,9 @@ public class MenuAsignarSkills extends JFrame {
 				if (puntosAsignar != 0 && !labelDestreza.getText().equals("200")) {
 					puntosDestreza++;
 					puntosAsignar--;
+					
+					buttonReset.setEnabled(true);
+					
 					buttonConfirm.setEnabled(true);
 					labelPuntos.setText(String.valueOf(puntosAsignar));
 					labelDestreza.setText(String.valueOf(puntosDestreza));
@@ -336,6 +354,9 @@ public class MenuAsignarSkills extends JFrame {
 				if (puntosAsignar != 0 && !labelInteligencia.getText().equals("200")) {
 					puntosInteligencia++;
 					puntosAsignar--;
+					
+					buttonReset.setEnabled(true);
+					
 					buttonConfirm.setEnabled(true);
 					labelPuntos.setText(String.valueOf(puntosAsignar));
 					labelInteligencia.setText(String.valueOf(puntosInteligencia));
