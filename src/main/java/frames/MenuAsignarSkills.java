@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import com.google.gson.Gson;
 
 import cliente.Cliente;
+import dominio.Personaje;
 import juego.Pantalla;
 import mensajeria.Comando;
 import java.awt.event.WindowAdapter;
@@ -142,6 +143,23 @@ public class MenuAsignarSkills extends JFrame {
 		buttonConfirm.setEnabled(false);
 		
 		
+		
+		
+		
+		
+		
+		
+		if(cliente.getPaquetePersonaje().getSubioNivel()==true) {
+			buttonReset.setEnabled(true);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		buttonConfirm.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -153,12 +171,15 @@ public class MenuAsignarSkills extends JFrame {
 				cliente.getPaquetePersonaje().useBonus(0, 0, bonusF, bonusD, bonusI);
 				cliente.getPaquetePersonaje().removerBonus();
 				cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
+				cliente.getPaquetePersonaje().subioNivel(false);
 				try {
 					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(null, "Error al actualizar stats");
 
 				}
+				
+				buttonReset.setEnabled(false);
 				JOptionPane.showMessageDialog(null, "Se han actualizado tus atributos.");
 				dispose();
 			}
@@ -172,6 +193,7 @@ public class MenuAsignarSkills extends JFrame {
 		buttonCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Pantalla.menuAsignar = null;
+				buttonReset.setEnabled(false);
 				dispose();
 			}
 		});
@@ -300,7 +322,6 @@ public class MenuAsignarSkills extends JFrame {
 					puntosFuerza++;
 					puntosAsignar--;
 					
-					buttonReset.setEnabled(true);
 					
 					buttonConfirm.setEnabled(true);
 					labelPuntos.setText(String.valueOf(puntosAsignar));
@@ -328,7 +349,6 @@ public class MenuAsignarSkills extends JFrame {
 					puntosDestreza++;
 					puntosAsignar--;
 					
-					buttonReset.setEnabled(true);
 					
 					buttonConfirm.setEnabled(true);
 					labelPuntos.setText(String.valueOf(puntosAsignar));
@@ -355,7 +375,6 @@ public class MenuAsignarSkills extends JFrame {
 					puntosInteligencia++;
 					puntosAsignar--;
 					
-					buttonReset.setEnabled(true);
 					
 					buttonConfirm.setEnabled(true);
 					labelPuntos.setText(String.valueOf(puntosAsignar));
