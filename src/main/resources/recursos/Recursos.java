@@ -109,7 +109,7 @@ public class Recursos {
 		chat = ImageIO.read(new File("recursos//chat.png"));
 		
 		// Inicio enemigo npc //
-		enemigoNPC = new SpriteSheet(CargadorImagen.cargarImagen("/enemigoNPC.png")).getTile(0, 0, 63, 50);
+		enemigoNPC = new SpriteSheet(CargadorImagen.cargarImagen("/enemigoNPC.jpg")).getTile(0, 0, 63, 50);
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		// Fin enemigo npc //
 

@@ -3,6 +3,7 @@ package juego;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import estados.Estado;
 import estados.EstadoBatalla;
 import estados.EstadoJuego;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaqueteNPC;
 import mensajeria.PaquetePersonaje;
 
 public class Juego implements Runnable {
@@ -48,6 +50,8 @@ public class Juego implements Runnable {
 	private PaqueteMovimiento ubicacionPersonaje;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
+	private Map<Integer, PaqueteNPC> npcsSpawneados;
+	private Map<Integer, PaqueteNPC> ubicacionNpcs;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
 
 
@@ -242,6 +246,22 @@ public class Juego implements Runnable {
 
 	public void setUbicacionPersonajes(Map<Integer, PaqueteMovimiento> ubicacionPersonajes) {
 		this.ubicacionPersonajes = ubicacionPersonajes;
+	}
+
+	public Map<Integer, PaqueteNPC> getNpcsSpawneados() {
+		return npcsSpawneados;
+	}
+
+	public void setNpcsSpawneados(Map<Integer, PaqueteNPC> npcsSpawneados) {
+		this.npcsSpawneados = npcsSpawneados;
+	}
+
+	public Map<Integer, PaqueteNPC> getUbicacionNpcs() {
+		return ubicacionNpcs;
+	}
+
+	public void setUbicacionNpcs(Map<Integer, PaqueteNPC> ubicacionNpcs) {
+		this.ubicacionNpcs = ubicacionNpcs;
 	}
 
 	public Map<String, MiChat> getChatsActivos() {
