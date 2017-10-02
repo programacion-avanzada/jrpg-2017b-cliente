@@ -72,6 +72,7 @@ public class Recursos {
 	public static BufferedImage greenTree;
 	public static BufferedImage nievePiso1;
 	public static BufferedImage iceBlock;
+	public static BufferedImage enemigoNPC;
 	// Fin Entorno
 
 	// Batalla
@@ -106,6 +107,11 @@ public class Recursos {
 		mochila = ImageIO.read(new File("recursos//mochila.png"));
 		menu = ImageIO.read(new File("recursos//menu.png"));
 		chat = ImageIO.read(new File("recursos//chat.png"));
+		
+		// Inicio enemigo npc //
+		enemigoNPC = new SpriteSheet(CargadorImagen.cargarImagen("/enemigoNPC.jpg")).getTile(0, 0, 63, 50);
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		// Fin enemigo npc //
 
 		// Inicio humano
 		spriteHumano = new SpriteSheet(CargadorImagen.cargarImagen("/Humano.png"));

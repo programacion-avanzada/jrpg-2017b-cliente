@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import dominio.Peleable;
 import dominio.Personaje;
 import mensajeria.PaquetePersonaje;
 import recursos.Recursos;
@@ -18,7 +19,7 @@ public class EstadoDePersonaje {
 	private static final int ALTOMINIATURA = 64;
 	private static final int ANCHOMINIATURA = 64;
 
-	public static void dibujarEstadoDePersonaje(Graphics g, int x, int y, Personaje personaje, BufferedImage miniaturaPersonaje){
+	public static void dibujarEstadoDePersonaje(Graphics g, int x, int y, Peleable personaje, BufferedImage miniaturaPersonaje){
 
 		int drawBarra = 0;
 
@@ -46,18 +47,24 @@ public class EstadoDePersonaje {
 		g.drawImage(Recursos.barraEnergia, x + 80, y + 42, drawBarra, ALTOENERGIA, null);
 		g.drawString(String.valueOf(personaje.getEnergia()) + " / " + String.valueOf(personaje.getEnergiaTope()), x + 132, y + 52);
 
-		if(personaje.getExperiencia() == Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
-			drawBarra = ANCHOBARRA;
-		} else {
-			drawBarra = (personaje.getExperiencia() * ANCHOBARRA) / Personaje.getTablaDeNiveles()[personaje.getNivel() + 1];
+		if(personaje instanceof Personaje)
+		{
+			if(((Personaje)personaje).getExperiencia() == Personaje.getTablaDeNiveles()[((Personaje)personaje).getNivel() + 1]) {
+				drawBarra = ANCHOBARRA;
+			} else {
+				drawBarra = (((Personaje)personaje).getExperiencia() * ANCHOBARRA) / Personaje.getTablaDeNiveles()[((Personaje)personaje).getNivel() + 1];
+			}
+			
+			g.drawString(String.valueOf(((Personaje)personaje).getExperiencia()) + " / " + String.valueOf(Personaje.getTablaDeNiveles()[((Personaje)personaje).getNivel() + 1]), x + 132, y + 70);
+			g.drawString(String.valueOf(((Personaje)personaje).getNivel()), x + 59, y + 70);
 		}
+		
 
 		g.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		g.drawImage(Recursos.barraExperiencia, x + 77, y + 65, drawBarra, ALTOEXPERIENCIA, null);
-		g.drawString(String.valueOf(personaje.getExperiencia()) + " / " + String.valueOf(Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]), x + 132, y + 70);
+		
 		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		g.setColor(Color.GREEN);
-		g.drawString(String.valueOf(personaje.getNivel()), x + 59, y + 70);
 
 
 	}

@@ -7,6 +7,7 @@ public class PaqueteBatalla extends Paquete implements Serializable, Cloneable {
 	private int id;
 	private int idEnemigo;
 	private boolean miTurno;
+	private boolean enemigoEsNPC = false;
 
 	public PaqueteBatalla(){
 		setComando(Comando.BATALLA);
@@ -36,5 +37,13 @@ public class PaqueteBatalla extends Paquete implements Serializable, Cloneable {
 
 	public void setMiTurno(boolean miTurno) {
 		this.miTurno = miTurno;
+	}
+
+	public boolean enemigoEsNPC() {
+		return enemigoEsNPC;
+	}
+
+	public void setEnemigoEsNPC(boolean enemigoEsNPC) {
+		this.enemigoEsNPC = enemigoEsNPC;
 	}
 }
