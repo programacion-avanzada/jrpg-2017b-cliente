@@ -100,8 +100,7 @@ public class Mundo {
 				/*
 				 * Parche temporal
 				 *
-				 * Bug a solucionar: Las coordenadas del personaje no se
-				 * actualizan apropiadamente luego de un movimiento
+				 * Bug a solucionar: Las coordenadas del personaje no se actualizan apropiadamente luego de un movimiento
 				 *
 				 * Será necesario remover el parche una vez solucionado el bug
 				 */
@@ -122,8 +121,7 @@ public class Mundo {
 					iPersonaje++;
 				}
 				/*
-				 * -------------------------------------------------------------
-				 * -------------------------------------------------------------
+				 * -------------------------------------------------
 				 */
 
 				try {
@@ -158,19 +156,16 @@ public class Mundo {
 						key = it.next();
 						actual = ubicacionPersonajes.get(key);
 						if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego && personajesConectados.get(actual.getIdPersonaje()).getMapa() == juego.getPersonaje().getMapa()) {
-							
+
 							jPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[0];
 							iPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[1];
 
 							/*
 							 * Parche temporal
 							 *
-							 * Bug a solucionar: Las coordenadas del personaje
-							 * no se actualizan apropiadamente luego de un
-							 * movimiento
+							 * Bug a solucionar: Las coordenadas del personaje no se actualizan apropiadamente luego de un movimiento
 							 *
-							 * Será necesario remover el parche una vez
-							 * solucionado el bug
+							 * Será necesario remover el parche una vez solucionado el bug
 							 */
 							if (juego.getUbicacionPersonaje().getDireccion() == 0) {
 								iPersonaje++;
@@ -189,7 +184,6 @@ public class Mundo {
 								iPersonaje++;
 							}
 							/*
-							 * -------------------------------------------------
 							 * -------------------------------------------------
 							 */
 
@@ -212,8 +206,7 @@ public class Mundo {
 						}
 					}
 				}
-				
-				
+
 			}
 		}
 	}

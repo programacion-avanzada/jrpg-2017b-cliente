@@ -8,9 +8,8 @@ public class Tile {
 	public static Tile[] tiles = new Tile[256];
 	public static Tile[] aubenor;
 	public static Tile[] aris;
-	// es el piso de aubenor por defecto si queres llamarlo asi, es gris
-	public static int arisBase = 3;
-	public static int aubenorBase = 3;
+	public static int aubenorBase = 3; // Piso por defecto
+	public static int arisBase = 3; // Piso por defecto
 
 	public static final int ANCHO = 64;
 	public static final int ALTO = 32;

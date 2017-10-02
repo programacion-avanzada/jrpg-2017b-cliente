@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -21,8 +23,6 @@ import com.google.gson.Gson;
 import cliente.Cliente;
 import juego.Pantalla;
 import mensajeria.Comando;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class MenuAsignarSkills extends JFrame {
 
@@ -125,7 +125,6 @@ public class MenuAsignarSkills extends JFrame {
 		lblFuerza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFuerza.setBounds(50, 72, 56, 16);
 		contentPane.add(lblFuerza);
-		
 
 		final JButton buttonConfirm = new JButton("Confirmar");
 		ImageIcon icono_confirm = new ImageIcon("recursos//botonConfirmar.png");
