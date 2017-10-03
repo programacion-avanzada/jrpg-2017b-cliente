@@ -2,6 +2,7 @@ package cliente;
 
 import java.io.ObjectInputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -24,8 +25,8 @@ public class EscuchaMensajes extends Thread {
 	private ObjectInputStream entrada;
 	private final Gson gson = new Gson();
 
-	//private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
-	//private Map<Integer, PaquetePersonaje> personajesConectados;
+	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
+	private Map<Integer, PaquetePersonaje> personajesConectados;
 	/**Constructor de EsuchaMensaje
 	 * @param juego juego del que se escucha el mensaje
 	 */
@@ -43,8 +44,10 @@ public class EscuchaMensajes extends Thread {
 			Paquete paquete;
 			
 			ComandosEscucha comand;
-			juego.setPersonajesConectados(new HashMap<Integer, PaquetePersonaje>());
-			juego.setUbicacionPersonajes(new HashMap<Integer, PaqueteMovimiento>());
+			//ubicacionPersonajes.put(juego.getUbicacionPersonaje().getIdPersonaje(), juego.getUbicacionPersonaje());
+			
+			juego.setPersonajesConectados(personajesConectados);
+			juego.setUbicacionPersonajes(ubicacionPersonajes);
 
 			while (true) {
 
@@ -58,7 +61,8 @@ public class EscuchaMensajes extends Thread {
 				
 			}
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
+			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor (EscuchaMensajes)");
 		}
 	}
 	/**Pide la ubicacion de los personajes

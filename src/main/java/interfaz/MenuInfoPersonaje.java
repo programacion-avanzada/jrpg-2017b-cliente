@@ -82,7 +82,7 @@ public class MenuInfoPersonaje {
 
 	private void graficarMenuPerderBatalla(Graphics g) {
 
-		// Informo que perdio la batalla
+		// Informo que perdió la batalla
 		g.setColor(Color.BLACK);
 		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Has sido derrotado!");
 
@@ -95,7 +95,7 @@ public class MenuInfoPersonaje {
 
 	private void graficarMenuGanarBatalla(Graphics g) {
 
-		// Informo que gano la batalla
+		// Informo que ganó la batalla
 		g.setColor(Color.BLACK);
 		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Has derrotado");
 		Pantalla.centerString(g, new Rectangle(x, y + 230, menu.getWidth(), 0), "a tu enemigo!");
@@ -110,7 +110,7 @@ public class MenuInfoPersonaje {
 
 	private void graficarMenuSubirNivel(Graphics g) {
 
-		// Informo que subio de nivel
+		// Informo que subió de nivel
 		g.setColor(Color.BLACK);
 		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Has subido de nivel!");
 
@@ -141,7 +141,7 @@ public class MenuInfoPersonaje {
 	
 	private void graficarMenuItem(Graphics g) {
 
-		// Informo que subio de nivel
+		// Informo que subió de nivel
 		g.setColor(Color.BLACK);
 		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Aca iria algo!");
 

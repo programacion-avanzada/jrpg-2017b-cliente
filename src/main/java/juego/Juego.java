@@ -12,10 +12,12 @@ import chat.MiChat;
 import cliente.Cliente;
 import cliente.EscuchaMensajes;
 import dominio.Personaje;
+import entidades.Entidad;
 import estados.Estado;
 import estados.EstadoBatalla;
 import estados.EstadoJuego;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 
 public class Juego implements Runnable {
@@ -34,6 +36,7 @@ public class Juego implements Runnable {
 	// Estados
 	private Estado estadoJuego;
 	private Estado estadoBatalla;
+	private Estado estadoBatallaNpc;
 
 	// HandlerMouse
 	private HandlerMouse handlerMouse;
@@ -44,10 +47,22 @@ public class Juego implements Runnable {
 	// Conexion
 	private Cliente cliente;
 	private EscuchaMensajes escuchaMensajes;
+	
+	// El player
 	private PaquetePersonaje paquetePersonaje;
 	private PaqueteMovimiento ubicacionPersonaje;
+	
+	// Personajes conectados
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
+	
+	// NPCs
+	// hay 2 maps, uno para los paquetes que llevan toda la información de los npcs
+	// y otro para las entidades, que se van a encargar de la posición y el graficado del npc
+	// en la pantalla.
+	private Map<Integer, Entidad> entidadesNpcs;
+	private Map<Integer, PaqueteNpc> paquetesNpcs;
+
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
 
 
@@ -60,12 +75,21 @@ public class Juego implements Runnable {
 		this.cliente = cliente;
 		this.paquetePersonaje = pp;
 
+		// Inicializo árbol de npcs
+		entidadesNpcs = new HashMap<Integer, Entidad>();
+		paquetesNpcs = new HashMap<Integer, PaqueteNpc>();
+		
 		// Inicializo la ubicacion del personaje
 		ubicacionPersonaje = new PaqueteMovimiento();
 		ubicacionPersonaje.setIdPersonaje(paquetePersonaje.getId());
 		ubicacionPersonaje.setFrame(0);
 		ubicacionPersonaje.setDireccion(6);
 
+		// Creo paquetes de los npcs
+		paquetesNpcs.put(1, new PaqueteNpc(1, 100, 50, 10, 10, 10, 2, 25, "Lucas Videla", "Orco", "Guerrero"));
+		paquetesNpcs.put(2, new PaqueteNpc(2, 200, 50, 10, 10, 10, 4, 50, "Lucas Videlason", "Orco", "Guerrero"));
+		paquetesNpcs.put(3, new PaqueteNpc(3, 300, 50, 10, 10, 10, 6, 75, "Son of Lucas Videlason", "Orco", "Guerrero"));
+		
 		// Creo el escucha de mensajes
 		escuchaMensajes = new EscuchaMensajes(this);
 		escuchaMensajes.start();
@@ -204,6 +228,16 @@ public class Juego implements Runnable {
 		this.estadoBatalla = estadoBatalla;
 	}
 
+	public Estado getEstadoBatallaNpc()
+	{
+		return estadoBatallaNpc;
+	}
+
+	public void setEstadoBatallaNpc(Estado estadoBatallaNpc)
+	{
+		this.estadoBatallaNpc = estadoBatallaNpc;
+	}
+
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -246,5 +280,25 @@ public class Juego implements Runnable {
 
 	public Map<String, MiChat> getChatsActivos() {
 		return chatsActivos;
+	}
+	
+	public Map<Integer, Entidad> getNpcs()
+	{
+		return entidadesNpcs;
+	}
+
+	public void setNpcs(Map<Integer, Entidad> npcs)
+	{
+		this.entidadesNpcs = npcs;
+	}
+
+	public Map<Integer, PaqueteNpc> getPaquetesNpcs()
+	{
+		return paquetesNpcs;
+	}
+
+	public void setUbicacionNpcs(Map<Integer, PaqueteNpc> paquetesNpcs)
+	{
+		this.paquetesNpcs = paquetesNpcs;
 	}
 }

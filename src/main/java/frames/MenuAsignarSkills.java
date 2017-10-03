@@ -2,6 +2,7 @@ package frames;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,10 @@ import javax.swing.border.EmptyBorder;
 import com.google.gson.Gson;
 
 import cliente.Cliente;
+import dominio.Casta;
+import dominio.MadreDeTodo;
+import dominio.Peleable;
+import dominio.Personaje;
 import juego.Pantalla;
 import mensajeria.Comando;
 import java.awt.event.WindowAdapter;
@@ -41,7 +46,7 @@ public class MenuAsignarSkills extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuAsignarSkills(final Cliente cliente) {
-		puntosAsignarInicial = 3;
+		puntosAsignarInicial = cliente.getPaquetePersonaje().getPuntosSkill();
 		puntosFuerzaInicial = cliente.getPaquetePersonaje().getFuerza();
 		puntosDestrezaInicial = cliente.getPaquetePersonaje().getDestreza();
 		puntosInteligenciaInicial = cliente.getPaquetePersonaje().getInteligencia();
@@ -50,17 +55,16 @@ public class MenuAsignarSkills extends JFrame {
 		puntosDestreza = puntosDestrezaInicial;
 		puntosInteligencia = puntosInteligenciaInicial;
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("recursos//1up.png"));
 		setTitle("Asignar");
 		setBounds(100, 100, 298, 294);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		getContentPane().setLayout(null);
 		setVisible(true);
 		setLocationRelativeTo(null);
@@ -70,10 +74,10 @@ public class MenuAsignarSkills extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				Pantalla.menuAsignar = null;
-				dispose();
+				cerrarMenuAsignarSkills();
 			}
 		});
+		contentPane.setLayout(null);
 		
 		final JLabel labelFuerza = new JLabel("");
 		labelFuerza.setForeground(Color.WHITE);
@@ -131,13 +135,14 @@ public class MenuAsignarSkills extends JFrame {
 		buttonConfirm.setIcon(icono_confirm);
 		buttonConfirm.setEnabled(false);
 		buttonConfirm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {;
+			public void actionPerformed(ActionEvent e) {
 				puntosAsignarInicial = puntosAsignar;
 				int bonusF = puntosFuerza-puntosFuerzaInicial;
 				int bonusD = puntosDestreza-puntosDestrezaInicial;
 				int bonusI = puntosInteligencia-puntosInteligenciaInicial;
 				cliente.getPaquetePersonaje().useBonus(0, 0, bonusF, bonusD, bonusI);
 				cliente.getPaquetePersonaje().removerBonus();
+				cliente.getPaquetePersonaje().setPuntosSkill(puntosAsignar);
 				cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
 				try {
 					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
@@ -146,7 +151,7 @@ public class MenuAsignarSkills extends JFrame {
 
 				}
 				JOptionPane.showMessageDialog(null,"Se han actualizado tus atributos.");
-				dispose();
+				cerrarMenuAsignarSkills();
 			}
 		});
 		buttonConfirm.setBounds(176, 112, 97, 25);
@@ -157,8 +162,7 @@ public class MenuAsignarSkills extends JFrame {
 		buttonCancel.setIcon(icono_c);
 		buttonCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Pantalla.menuAsignar = null;
-				dispose();
+				cerrarMenuAsignarSkills();
 			}
 		});
 		buttonCancel.setBounds(176, 146, 97, 25);
@@ -174,10 +178,71 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMinus1.setEnabled(false);
 		buttonMinus2.setEnabled(false);
 		
+		if(puntosAsignar == 0)
+		{
+			buttonMore.setEnabled(false);
+			buttonMore1.setEnabled(false);
+			buttonMore2.setEnabled(false);
+		}
+		
+		JButton buttonRestart = new JButton("Reiniciar");
+		ImageIcon icono_restart = new ImageIcon("recursos//botonMenu.png");
+		buttonRestart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent paramActionEvent) {
+				int intIni=10,
+						fueIni=10,
+						desIni=10;			
+				
+				switch (cliente.getPaquetePersonaje().getCasta()) {
+				case "Hechicero":
+					intIni += 5;
+					break;
+				case "Guerrero":
+					fueIni += 5;
+					break;
+				default:
+					desIni += 5;
+				}
+				puntosAsignar = (cliente.getPaquetePersonaje().getNivel())*3;
+				labelPuntos.setText(String.valueOf(puntosAsignar));
+				
+				puntosFuerza = fueIni+cliente.getPaquetePersonaje().getFuerzaItems();
+				labelFuerza.setText(String.valueOf(puntosFuerza));
+				
+				puntosDestreza = desIni+cliente.getPaquetePersonaje().getDestrezaItem();
+				labelDestreza.setText(String.valueOf(puntosDestreza));
+				
+				puntosInteligencia = intIni+cliente.getPaquetePersonaje().getInteligenciaItem();
+				labelInteligencia.setText(String.valueOf(puntosInteligencia));
+				
+				/*puntosAsignar = puntosAsignarInicial;
+			puntosFuerza = puntosFuerzaInicial;
+			puntosDestreza = puntosDestrezaInicial;
+			puntosInteligencia = puntosInteligenciaInicial;*/
+				
+				buttonMinus.setEnabled(false);
+				buttonMinus1.setEnabled(false);
+				buttonMinus2.setEnabled(false);
+				buttonMore.setEnabled(true);
+				buttonMore1.setEnabled(true);
+				buttonMore2.setEnabled(true);
+				buttonConfirm.setEnabled(true);
+			}
+		});
+		buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
+		buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
+		buttonRestart.setFont(new Font("Arial", Font.PLAIN, 15));
+		buttonRestart.setForeground(Color.WHITE);
+		buttonRestart.setIcon(icono_restart);
+		buttonRestart.setBounds(176, 78, 97, 25);
+		contentPane.add(buttonRestart);
+			
 		ImageIcon icono_1 = new ImageIcon("recursos//botonMenoss.png");
 		buttonMinus.setIcon(icono_1);
 		buttonMinus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("Fuerza: " + puntosFuerza);
+				System.out.println("Fuerza Inicial: " + puntosFuerzaInicial);
 				if(puntosFuerza > puntosFuerzaInicial){
 					puntosFuerza--;
 					if(puntosAsignar == 0){
@@ -207,6 +272,7 @@ public class MenuAsignarSkills extends JFrame {
 				}
 			}
 		});
+		
 		buttonMinus.setBounds(12, 92, 34, 25);
 		contentPane.add(buttonMinus);
 		
@@ -305,7 +371,6 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMore.setBounds(118, 92, 34, 25);
 		contentPane.add(buttonMore);
 		
-		
 		buttonMore1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(puntosAsignar != 0 && !labelDestreza.getText().equals("200")){
@@ -355,8 +420,15 @@ public class MenuAsignarSkills extends JFrame {
 		contentPane.add(buttonMore2);
 		
 		final JLabel imageLabel = new JLabel(new ImageIcon("recursos//background.jpg")); 
-		imageLabel.setBounds(0, 0, 298, 294);
+		imageLabel.setBounds(5, 5, 282, 259);
 		imageLabel.setVisible(true);
 		contentPane.add(imageLabel);
+		
+	}
+	
+	private void cerrarMenuAsignarSkills ()
+	{
+		Pantalla.menuAsignar = null;
+		dispose();
 	}
 }

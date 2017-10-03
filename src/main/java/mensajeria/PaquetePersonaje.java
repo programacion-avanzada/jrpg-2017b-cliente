@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import dominio.Item;
 import estados.Estado;
+import sun.text.resources.cldr.es.FormatData_es_EC;
 
 public class PaquetePersonaje extends Paquete implements Serializable, Cloneable {
 
@@ -25,6 +26,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int inteligencia;
 	private int nivel = 1;
 	private int experiencia;
+	private int puntosSkill = 0;
 	private ArrayList<Item> items = new ArrayList<Item>();
 	
 	public PaquetePersonaje() throws IOException {
@@ -131,7 +133,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		this.fuerza = fuerza;
 	}
 
-
 	public int getDestreza() {
 		return destreza;
 	}
@@ -196,6 +197,34 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 			i++;
 		}
 	}
+	
+	public final int getFuerzaItems(){
+		int fuerzaStat = 0;
+		
+		for (Item item : items) {
+			fuerzaStat += item.getBonusFuerza();
+		}
+		return fuerzaStat;
+	}
+	
+	public final int getDestrezaItem(){
+		int destrezaItem = 0;
+		
+		for (Item item : items) {
+			destrezaItem += item.getBonusDestreza();
+		}
+		return destrezaItem;
+	}
+	
+	public final int getInteligenciaItem(){
+		int inteligenciaItem = 0;
+		
+		for (Item item : items) {
+			inteligenciaItem += item.getBonusDestreza();
+		}
+		return inteligenciaItem;
+	}
+	
 	public final  void sacarBonus(int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia) {
 		saludTope -= bonusSalud;
 		energiaTope -= bonusEnergia;
@@ -277,5 +306,13 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		for (Item item : items) {
 			this.items.add(item);
 		}
+	}
+
+	public int getPuntosSkill() {
+		return puntosSkill;
+	}
+
+	public void setPuntosSkill(int puntosSkill) {
+		this.puntosSkill = puntosSkill;
 	}
 }
