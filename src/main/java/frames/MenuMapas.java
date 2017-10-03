@@ -1,29 +1,27 @@
 package frames;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import cliente.Cliente;
 import mensajeria.Comando;
-
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.Toolkit;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.ActionEvent;
-import javax.swing.JLayeredPane;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class MenuMapas extends JFrame {
 	public static int numberMap = 0;

@@ -1,19 +1,18 @@
 package frames;
 
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import cliente.*;
+import cliente.Cliente;
 import mensajeria.Comando;
-
-import javax.swing.ImageIcon;
-
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class MenuCarga extends JFrame {
 

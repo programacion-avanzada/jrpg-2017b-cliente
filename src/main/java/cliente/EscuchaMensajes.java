@@ -15,8 +15,7 @@ import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
 
 /**
- * La clase EscuchaMensajes tiene como función esuchar los mensajes que se
- * enviaran al servidor.
+ * La clase EscuchaMensajes tiene como función esuchar los mensajes que se enviaran al servidor.
  */
 public class EscuchaMensajes extends Thread {
 
