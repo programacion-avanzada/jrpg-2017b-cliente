@@ -42,7 +42,6 @@ public class EstadoBatallaNpc extends Estado {
 	private int[] posMouse;
 	private PaquetePersonaje paquetePersonaje;
 	private PaqueteNpc paqueteEnemigo;
-	private PaqueteAtacar paqueteAtacar;
 	private PaqueteFinalizarBatalla paqueteFinalizarBatalla;
 	private boolean miTurno;
 
@@ -75,9 +74,9 @@ public class EstadoBatallaNpc extends Estado {
 		miniaturaEnemigo = Recursos.personaje.get(paqueteEnemigo.getRaza()).get(5)[0];
 		miniaturaPersonaje = Recursos.personaje.get(personaje.getNombreRaza()).get(5)[0];
 
-		//paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
-		//paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
-		//paqueteFinalizarBatalla.setIdEnemigo(-1);
+		paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
+		paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
+		paqueteFinalizarBatalla.setIdEnemigo(-1);
 
 		// por defecto batalla perdida
 		juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
@@ -150,7 +149,6 @@ public class EstadoBatallaNpc extends Estado {
 					}
 				}
 
-
 				if (haySpellSeleccionada && seRealizoAccion) 
 				{
 					if (!enemigo.estaVivo())  // EL NPC MUERE
@@ -162,9 +160,7 @@ public class EstadoBatallaNpc extends Estado {
 							juego.getPersonaje().setPuntosSkill(personaje.getPuntosSkill()+3);
 							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuSubirNivel);
 						}
-						
-						System.out.println("Nueva exp: " + personaje.getExperiencia());
-						//paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
+						paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
 
 						juego.getPersonaje().setEstado(Estado.estadoJuego);
 						finalizarBatalla();
@@ -174,8 +170,6 @@ public class EstadoBatallaNpc extends Estado {
 					{
 						// BATALLAR VS NPC
 						enemigo.atacar(personaje);
-						miTurno = true;
-						menuBatalla.setHabilitado(true);
 						
 						if(!personaje.estaVivo()) // EL PERSONAJE MUERE
 						{
@@ -186,6 +180,7 @@ public class EstadoBatallaNpc extends Estado {
 							Estado.setEstado(juego.getEstadoJuego());
 						}
 						
+						setMiTurno(true);
 						/*paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(), personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(), personaje.getDefensa(), enemigo.getDefensa(), personaje.getCasta().getProbabilidadEvitarDaño(), enemigo.getCasta().getProbabilidadEvitarDaño());
 						enviarAtaque(paqueteAtacar);
 						miTurno = false;
@@ -279,17 +274,8 @@ public class EstadoBatallaNpc extends Estado {
 		enemigo = new NonPlayableCharacter(paqueteEnemigo.getNombre(), paqueteEnemigo.getNivel(), paqueteEnemigo.getNivel());
 	}
 
-	public void enviarAtaque(PaqueteAtacar paqueteAtacar) {
-		try {
-			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteAtacar));
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexion con el servidor.");
-		}
-	}
-
 	private void finalizarBatalla() 
 	{
-		/*
 		try 
 		{
 			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
@@ -303,28 +289,13 @@ public class EstadoBatallaNpc extends Estado {
 			paquetePersonaje.setInteligencia(personaje.getInteligencia());
 			
 			paquetePersonaje.setPuntosSkill(personaje.getPuntosSkill());
-			
 			paquetePersonaje.removerBonus();
 
-			juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
-			
-			/*paqueteEnemigo.setSaludTope(enemigo.getSaludTope());
-			paqueteEnemigo.setEnergiaTope(enemigo.getEnergiaTope());
-			paqueteEnemigo.setNivel(enemigo.getNivel());
-			paqueteEnemigo.setExperiencia(enemigo.getExperiencia());
-			paqueteEnemigo.setDestreza(enemigo.getDestreza());
-			paqueteEnemigo.setFuerza(enemigo.getFuerza());
-			paqueteEnemigo.setInteligencia(enemigo.getInteligencia());
-			paqueteEnemigo.removerBonus();
-
 			paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
-			paqueteEnemigo.setComando(Comando.ACTUALIZARPERSONAJE);
-
-			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteEnemigo));
-			
+			juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
-		}*/
+		}
 	}
 
 	public PaquetePersonaje getPaquetePersonaje() {
