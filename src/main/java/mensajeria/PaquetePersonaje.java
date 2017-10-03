@@ -18,6 +18,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private String casta;
 	private String nombre;
 	private String raza;
+	private boolean subioNivel=false;
 	private int saludTope;
 	private int energiaTope;
 	private int fuerza;
@@ -264,5 +265,13 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		for (Item item : items) {
 			this.items.add(item);
 		}
+	}
+	
+	public void subioNivel(boolean subio) {
+		this.subioNivel=subio;
+	}
+	
+	public boolean getSubioNivel() {
+		return this.subioNivel;
 	}
 }
