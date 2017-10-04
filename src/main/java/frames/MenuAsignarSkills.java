@@ -2,6 +2,7 @@ package frames;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,10 @@ import javax.swing.border.EmptyBorder;
 import com.google.gson.Gson;
 
 import cliente.Cliente;
+import dominio.Casta;
+import dominio.MadreDeTodo;
+import dominio.Peleable;
+import dominio.Personaje;
 import juego.Pantalla;
 import mensajeria.Comando;
 import java.awt.event.WindowAdapter;
@@ -41,7 +46,7 @@ public class MenuAsignarSkills extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuAsignarSkills(final Cliente cliente) {
-		puntosAsignarInicial = 3;
+		puntosAsignarInicial = cliente.getPaquetePersonaje().getPuntosSkill();
 		puntosFuerzaInicial = cliente.getPaquetePersonaje().getFuerza();
 		puntosDestrezaInicial = cliente.getPaquetePersonaje().getDestreza();
 		puntosInteligenciaInicial = cliente.getPaquetePersonaje().getInteligencia();
@@ -50,11 +55,9 @@ public class MenuAsignarSkills extends JFrame {
 		puntosDestreza = puntosDestrezaInicial;
 		puntosInteligencia = puntosInteligenciaInicial;
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("recursos//1up.png"));
@@ -74,6 +77,7 @@ public class MenuAsignarSkills extends JFrame {
 				dispose();
 			}
 		});
+		contentPane.setLayout(null);
 		
 		final JLabel labelFuerza = new JLabel("");
 		labelFuerza.setForeground(Color.WHITE);
@@ -131,13 +135,14 @@ public class MenuAsignarSkills extends JFrame {
 		buttonConfirm.setIcon(icono_confirm);
 		buttonConfirm.setEnabled(false);
 		buttonConfirm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {;
+			public void actionPerformed(ActionEvent e) {
 				puntosAsignarInicial = puntosAsignar;
 				int bonusF = puntosFuerza-puntosFuerzaInicial;
 				int bonusD = puntosDestreza-puntosDestrezaInicial;
 				int bonusI = puntosInteligencia-puntosInteligenciaInicial;
 				cliente.getPaquetePersonaje().useBonus(0, 0, bonusF, bonusD, bonusI);
 				cliente.getPaquetePersonaje().removerBonus();
+				cliente.getPaquetePersonaje().setPuntosSkill(puntosAsignar);
 				cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
 				try {
 					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
@@ -146,6 +151,7 @@ public class MenuAsignarSkills extends JFrame {
 
 				}
 				JOptionPane.showMessageDialog(null,"Se han actualizado tus atributos.");
+				Pantalla.menuAsignar = null;
 				dispose();
 			}
 		});
@@ -174,11 +180,19 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMinus1.setEnabled(false);
 		buttonMinus2.setEnabled(false);
 		
+		if(puntosAsignar == 0){
+			buttonMore.setEnabled(false);
+			buttonMore1.setEnabled(false);
+			buttonMore2.setEnabled(false);
+		}
+		
+		buttonMinus.setBounds(12, 92, 34, 25);
+		contentPane.add(buttonMinus);
 		ImageIcon icono_1 = new ImageIcon("recursos//botonMenoss.png");
 		buttonMinus.setIcon(icono_1);
 		buttonMinus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(puntosFuerza > puntosFuerzaInicial){
+				if(puntosFuerza > getMinusFuerza(cliente)){
 					puntosFuerza--;
 					if(puntosAsignar == 0){
 						if(puntosInteligencia != 200){
@@ -207,12 +221,11 @@ public class MenuAsignarSkills extends JFrame {
 				}
 			}
 		});
-		buttonMinus.setBounds(12, 92, 34, 25);
-		contentPane.add(buttonMinus);
+		
 		
 		buttonMinus1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(puntosDestreza > puntosDestrezaInicial){
+				if(puntosDestreza > getMinusDestreza(cliente)){
 					puntosDestreza--;
 					if(puntosAsignar == 0){
 						if(puntosInteligencia != 200){
@@ -247,7 +260,7 @@ public class MenuAsignarSkills extends JFrame {
 		
 		buttonMinus2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(puntosInteligencia > puntosInteligenciaInicial){
+				if(puntosInteligencia > getMinusInteligencia(cliente)){
 					puntosInteligencia--;
 					if(puntosAsignar == 0){
 						if(puntosFuerza != 200){
@@ -355,8 +368,87 @@ public class MenuAsignarSkills extends JFrame {
 		contentPane.add(buttonMore2);
 		
 		final JLabel imageLabel = new JLabel(new ImageIcon("recursos//background.jpg")); 
-		imageLabel.setBounds(0, 0, 298, 294);
+		imageLabel.setBounds(5, 5, 282, 259);
 		imageLabel.setVisible(true);
 		contentPane.add(imageLabel);
+		//  BOTON RESET DE PUNTOS SKILLS
+		JButton buttonRestart = new JButton("Reiniciar");
+		ImageIcon icono_restart = new ImageIcon("recursos//botonMenu.png");
+		buttonRestart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent paramActionEvent) {
+				// Puntos skills disponibles 
+				puntosAsignar = (cliente.getPaquetePersonaje().getNivel()-1)*3;
+				labelPuntos.setText(String.valueOf(puntosAsignar));
+				
+				// Puntos de fuerza base (bonus y items) 
+				puntosFuerza = getMinusFuerza(cliente);
+				labelFuerza.setText(String.valueOf(puntosFuerza));
+				
+				// Puntos de destreza base (bonus y items) 
+				puntosDestreza = getMinusDestreza(cliente);
+				labelDestreza.setText(String.valueOf(puntosDestreza));
+
+				// Puntos de inteligencia base (bonus y items) 
+				puntosInteligencia = getMinusInteligencia(cliente);
+				labelInteligencia.setText(String.valueOf(puntosInteligencia));
+
+				if(puntosAsignar != 0){
+					buttonMore.setEnabled(true);
+					buttonMore1.setEnabled(true);
+					buttonMore2.setEnabled(true);
+				}
+				
+				buttonMinus.setEnabled(false);
+				buttonMinus1.setEnabled(false);
+				buttonMinus2.setEnabled(false);
+				
+				buttonConfirm.setEnabled(true);
+				
+			}
+		});
+		buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
+		buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
+		buttonRestart.setFont(new Font("Arial", Font.PLAIN, 15));
+		buttonRestart.setForeground(Color.WHITE);
+		buttonRestart.setIcon(icono_restart);
+		buttonRestart.setBounds(176, 78, 97, 25);
+		contentPane.add(buttonRestart);
+
 	}
+	/**
+	 * 
+	 * @param cliente
+	 * @return bonus de fuerza total de los items incluyendo el bonus por casta
+	 */
+		private int getMinusFuerza(Cliente cliente){
+			int fueIni = 10;
+			if(cliente.getPaquetePersonaje().getCasta().equals("Guerrero")){
+				fueIni = 15;
+			}
+			return fueIni+cliente.getPaquetePersonaje().getFuerzaItems();
+		}
+		/**
+		 * 
+		 * @param cliente
+		 * @return bonus de inteligencia total de los items incluyendo el bonus por casta 
+		 */
+		private int getMinusInteligencia(Cliente cliente){
+			int intIni = 10;
+			if(cliente.getPaquetePersonaje().getCasta().equals("Hechicero")){
+				intIni = 15;
+			}
+			return (intIni+cliente.getPaquetePersonaje().getInteligenciaItem());
+		}
+		/**
+		 * 
+		 * @param cliente
+		 * @return bonus de destreza total de los items incluyendo el bonus por casta
+		 */
+		private int getMinusDestreza(Cliente cliente){
+			int intDes = 10;
+			if(cliente.getPaquetePersonaje().getCasta().equals("Asesino")){
+				intDes = 15;
+			}
+			return intDes+cliente.getPaquetePersonaje().getDestrezaItem();
+		}
 }

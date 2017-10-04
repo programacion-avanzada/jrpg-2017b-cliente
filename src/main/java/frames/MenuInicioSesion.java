@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -123,8 +124,10 @@ public class MenuInicioSesion extends JFrame {
 	private void logIn(final Cliente cliente) {
 		synchronized(cliente){
 			cliente.setAccion(Comando.INICIOSESION);
+
 			cliente.getPaqueteUsuario().setUsername(textField.getText());
 			cliente.getPaqueteUsuario().setPassword(String.valueOf(passwordField.getPassword()));
+
 			cliente.notify();
 			dispose();
 		}
