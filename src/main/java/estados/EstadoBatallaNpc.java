@@ -64,8 +64,7 @@ public class EstadoBatallaNpc extends Estado {
 		miTurno = true;
 
 		paquetePersonaje = juego.getPersonajesConectados().get(paqueteBatalla.getId());
-		paqueteEnemigo = juego.getPaquetesNpcs().get(paqueteBatalla.getIdEnemigo());
-		System.out.println("Num id enemigo: " + paqueteBatalla.getIdEnemigo());
+		paqueteEnemigo = juego.getNpcManager().getPaquetesNpcs().get(paqueteBatalla.getIdEnemigo());
 		
 		crearPersonajes();
 
@@ -176,7 +175,7 @@ public class EstadoBatallaNpc extends Estado {
 							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
 							
 							juego.getPersonaje().setEstado(Estado.estadoJuego);
-							finalizarBatalla();
+							//finalizarBatalla();
 							Estado.setEstado(juego.getEstadoJuego());
 						}
 						
@@ -197,7 +196,8 @@ public class EstadoBatallaNpc extends Estado {
 	}
 
 	@Override
-	public void graficar(Graphics g) {
+	public void graficar(Graphics g) 
+	{
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
 		mundo.graficar(g);
@@ -212,8 +212,6 @@ public class EstadoBatallaNpc extends Estado {
 
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 25, 5, personaje, miniaturaPersonaje);
 		EstadoDeNpc.dibujarEstadoDeNpc(g, 550, 5, enemigo, miniaturaEnemigo);
-		
-
 	}
 
 	private void crearPersonajes() 
@@ -239,35 +237,15 @@ public class EstadoBatallaNpc extends Estado {
 			JOptionPane.showMessageDialog(null, "Error al crear la batalla");
 		}
 		
-		nombre = paqueteEnemigo.getNombre();
+		/*nombre = paqueteEnemigo.getNombre();
 		salud = paqueteEnemigo.getSaludTope();
 		energia = paqueteEnemigo.getEnergiaTope();
 		fuerza = paqueteEnemigo.getFuerza();
 		destreza = paqueteEnemigo.getDestreza();
 		inteligencia = paqueteEnemigo.getInteligencia();
-		//experiencia = paqueteEnemigo.getExperiencia();
+		experiencia = paqueteEnemigo.getExperiencia();
 		nivel = paqueteEnemigo.getNivel();
-		id = paqueteEnemigo.getId();
-
-		casta = null;
-		if (paqueteEnemigo.getCasta().equals("Guerrero")) {
-			casta = new Guerrero();
-		} else if (paqueteEnemigo.getCasta().equals("Hechicero")) {
-			casta = new Hechicero();
-		} else if (paqueteEnemigo.getCasta().equals("Asesino")) {
-			casta = new Asesino();
-		}
-
-		/*if (paqueteEnemigo.getRaza().equals("Humano")) {
-			enemigo = new Humano(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
-					experiencia, nivel, id);
-		} else if (paqueteEnemigo.getRaza().equals("Orco")) {
-			enemigo = new Orco(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
-					experiencia, nivel, id);
-		} else if (paqueteEnemigo.getRaza().equals("Elfo")) {
-			enemigo = new Elfo(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
-					experiencia, nivel, id);
-		}*/
+		id = paqueteEnemigo.getId();*/
 		
 		// Esto hay que modificarlo una vez tengamos más npcs...
 		// Pero por ahora, el npc más primitivo posible:

@@ -117,9 +117,12 @@ public class Entidad {
 		this.mundo = mundo;
 		xOffset = ancho / 2;
 		yOffset = alto / 2;
+		
 		x = (int) (spawnX / 64) * 64;
 		y = (int) (spawnY / 32) * 32;
-
+		//x = spawnX;
+		//y = spawnY;
+		
 		moverIzq = new Animacion(velAnimacion, animaciones.get(0));
 		moverArribaIzq = new Animacion(velAnimacion, animaciones.get(1));
 		moverArriba = new Animacion(velAnimacion, animaciones.get(2));
@@ -280,7 +283,6 @@ public class Entidad {
 			else 
 			{
 				// Me fijo si hizo click en alguno de los personajes
-				
 				{
 					Iterator<Integer> it = juego.getUbicacionPersonajes().
 							keySet().iterator();
@@ -337,7 +339,7 @@ public class Entidad {
 				// Quedó medio desprolijo, si llegamos con tiempo a la entrega deberíamos acomodarlo.
 				if(!juego.getEstadoJuego().getHaySolicitud())
 				{
-					Iterator<Integer> it = juego.getNpcs().
+					Iterator<Integer> it = juego.getNpcManager().getEntidadesNpcs().
 							keySet().iterator();
 					int key;
 					int []tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - 
@@ -347,24 +349,17 @@ public class Entidad {
 					while (it.hasNext()) 
 					{
 						key = it.next();
-						actual = juego.getNpcs().get(key);
+						actual = juego.getNpcManager().getEntidadesNpcs().get(key);
 						tileNpc = Mundo.mouseATile(actual.getX(), actual.getY());
 
 						if (actual != null)
 						{
 							if (tileMoverme[0] == tileNpc[0] && tileMoverme[1] == tileNpc[1]) 
 							{
-
-								/*juego.getEstadoJuego().setHaySolicitud(true,juego.
-										getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.
-										menuBatallar);	*/
-								System.out.println("Batallar npc: " + actual.nombre);
-								
 								PaqueteBatalla pBatalla = new PaqueteBatalla();
 								
 								pBatalla.setId(juego.getPersonaje().getId());
 								pBatalla.setIdEnemigo(actual.idEnemigo);
-								System.out.println("ID ENEMIGO: " + actual.idEnemigo);
 								
 								juego.getPersonaje().setEstado(Estado.estadoBatallaNpc);
 								Estado.setEstado(null);
@@ -403,6 +398,8 @@ public class Entidad {
 			yInicio = y;
 
 			tileActual = Mundo.mouseATile(x, y);
+			System.out.println(tileMoverme[0] + " " + tileMoverme[1]);
+			System.out.println(mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido());
 
 			if (tileMoverme[0] < 0 || tileMoverme[1] < 0 || tileMoverme[0] >= mundo.obtenerAncho()
 					|| tileMoverme[1] >= mundo.obtenerAlto()) {
@@ -555,12 +552,21 @@ public class Entidad {
 
 		return Recursos.orco.get(6)[0];
 	}
+	
 	/**Pide la direccion donde va
 	 * @return devuelve el movimiento hacia donde va
 	 */
-	private int getDireccion() {
+	public int getDireccion() {
 		return movimientoHacia;
 	}
+	
+	/**Setea la dirección hacia donde va
+	 * @param dir int dirección
+	 */
+	public void setDireccion(int dir) {
+		this.movimientoHacia = dir;
+	}
+	
 	/**Obtiene el frame donde esta el personaje
 	 */
 	private int getFrame() {

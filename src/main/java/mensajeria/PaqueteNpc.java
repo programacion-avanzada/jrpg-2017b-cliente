@@ -12,14 +12,18 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable
 	private String nombre;
 	private String raza;
 	private int id;
+	private int nivel = 1; // Se usaría solo como un indicador del poder del npc
+	
+	// Por ahora la IA no usa estos stats, a futuro vemos que onda porque la que hay ahora
+	// es bastante cavernícola
 	private int saludTope;
 	private int energiaTope;
 	private int fuerza;
 	private int destreza;
 	private int inteligencia;
-	private int nivel = 1; // Se usaría solo como un indicio del poder del npc
 	private int experienciaOtorga;
 	
+	// Constructor no útil por el momento.
 	public PaqueteNpc(int id, int saludTope, int energiaTope, int fuerza, int destreza, int inteligencia, int nivel,
 			int experienciaOtorga, String nombre, String raza, String casta)
 	{
@@ -32,6 +36,16 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable
 		this.inteligencia = inteligencia;
 		this.nivel = nivel;
 		this.experienciaOtorga = experienciaOtorga;
+		this.nombre = nombre;
+		this.raza = raza;
+		this.casta = casta;
+	}
+	
+	public PaqueteNpc(int id,  int nivel, String nombre, String raza, String casta)
+	{
+		super();
+		this.id = id;
+		this.nivel = nivel;
 		this.nombre = nombre;
 		this.raza = raza;
 		this.casta = casta;

@@ -18,6 +18,7 @@ import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
 import interfaz.MenuInfoPersonaje;
 import juego.Juego;
+import juego.NpcManager;
 import juego.Pantalla;
 import mensajeria.Comando;
 import mensajeria.PaqueteMovimiento;
@@ -32,10 +33,11 @@ public class EstadoJuego extends Estado {
 	private Mundo mundo;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
-	private Map<Integer, Entidad> npcs;
-	private Map<Integer, PaqueteMovimiento> ubicacionNpcs;
 	private boolean haySolicitud;
 	private int tipoSolicitud;
+	
+	// NPCs
+	private NpcManager npcManager;
 
 	private final Gson gson = new Gson();
 
@@ -51,20 +53,13 @@ public class EstadoJuego extends Estado {
 		//ente = new Entidad(juego, mundo, 256, 256, "Lucas Videla", 128, 128, Recursos.personaje.get("Orco"), 15);
 		miniaturaPersonaje = Recursos.personaje.get(paquetePersonaje.getRaza()).get(5)[0];
 		
-		// Instancio las entidades de los npcs
-		// Método super hardcodeado, después hay que hacerlo automático que instancie entidades
-		// según los PaquetesNpcs
-		npcs = juego.getNpcs();
-		Entidad npc = new Entidad(juego, mundo, 64, 64, "Lucas Videla", 128, 128, Recursos.personaje.get("Orco"), 15);
-		npc.setIdEnemigo(1);
-		npcs.put(1, npc);
-		npc = new Entidad(juego, mundo, 64, 64, "Lucas Videlason", 0, 256, Recursos.personaje.get("Orco"), 15);
-		npc.setIdEnemigo(2);
-		npcs.put(2, npc);
-		npc = new Entidad(juego, mundo, 64, 64, "Son of Lucas Videlason", -128, 128, Recursos.personaje.get("Orco"), 15);
-		npc.setIdEnemigo(3);
-		npcs.put(3, npc);
-		juego.setNpcs(npcs);
+		// Inicializo NpcManager
+		npcManager = new NpcManager(juego, mundo);
+		juego.setNpcManager(npcManager);
+		/*npcManager.spawnNpc(1, 2, "Lucas Videla", "Orco", "Guerrero", 4, 4, 4);
+		npcManager.spawnNpc(2, 4, "Lucas Videlason", "Orco", "Guerrero", 0, 5, 5);
+		npcManager.spawnNpc(3, 6, "Son of Lucas Videlason", "Orco", "Guerrero", 5, 0, 6);*/
+		npcManager.spawnInicial(100);
 
 		try {
 			// Le envio al servidor que me conecte al mapa y mi posicion
@@ -88,12 +83,12 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mundo.graficar(g);
 		//entidadPersonaje.graficar(g);
+		juego.getNpcManager().graficarNpcs(g);
 		graficarPersonajes(g);
 		mundo.graficarObstaculos(g);
 		entidadPersonaje.graficarNombre(g);
-		graficarNpcs(g);
+		juego.getNpcManager().graficarNombresNpcs(g);
 		
-
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
 		g.drawImage(Recursos.mochila, 738, 545, 59, 52, null);
@@ -123,29 +118,6 @@ public class EstadoJuego extends Estado {
 						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
 						g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 				}
-			}
-		}
-	}
-	
-	public void graficarNpcs(Graphics g) 
-	{
-		// recorro el árbol de entidades de los npcs y los voy graficando
-		if(juego.getNpcs() != null)
-		{
-			npcs = new HashMap(juego.getNpcs());
-			//ubicacionNpcs = new HashMap(juego.getUbicacionNpcs());
-			Iterator<Integer> it = npcs.keySet().iterator();
-			int key;
-			Entidad actual;
-			
-			/*g.setColor(Color.WHITE);
-			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));*/
-			while (it.hasNext()) {
-				key = it.next();
-				actual = npcs.get(key);
-				
-				actual.graficar(g);
-				actual.graficarNombre(g);
 			}
 		}
 	}
