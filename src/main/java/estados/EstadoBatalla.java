@@ -146,12 +146,17 @@ public class EstadoBatalla extends Estado {
 					if (!enemigo.estaVivo()) {
 						juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuGanarBatalla);
 						if (personaje.ganarExperiencia(enemigo.getNivel() * 40)) {
+							int nivIni=juego.getPersonaje().getNivel();
+
 							juego.getPersonaje().setNivel(personaje.getNivel());
+
 							
-							paquetePersonaje.subioNivel(true);
 							System.out.println("EstadoBatalla ->actualizar");
-							
+
 							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuSubirNivel);
+						
+							int nivFin = juego.getPersonaje().getNivel();
+							paquetePersonaje.setCantNivSubidos(nivFin-nivIni);
 						}
 						paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
 						finalizarBatalla();
@@ -306,4 +311,7 @@ public class EstadoBatalla extends Estado {
 	public boolean esEstadoDeJuego() {
 		return false;
 	}
+	
+	
+	
 }

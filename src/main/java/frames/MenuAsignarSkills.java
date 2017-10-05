@@ -148,7 +148,7 @@ public class MenuAsignarSkills extends JFrame {
 		
 		
 		
-		if(cliente.getPaquetePersonaje().getSubioNivel()==true) {
+		if(cliente.getPaquetePersonaje().cantNivSubidos()!=0) {
 			buttonReset.setEnabled(true);
 		}
 		
@@ -170,7 +170,13 @@ public class MenuAsignarSkills extends JFrame {
 				cliente.getPaquetePersonaje().useBonus(0, 0, bonusF, bonusD, bonusI);
 				cliente.getPaquetePersonaje().removerBonus();
 				cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
-				cliente.getPaquetePersonaje().subioNivel(false);
+
+
+				cliente.getPaquetePersonaje().setCantNivSubidos(0);
+				
+				
+				buttonReset.setEnabled(false);
+				
 				try {
 					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
 				} catch (IOException e1) {
@@ -178,7 +184,6 @@ public class MenuAsignarSkills extends JFrame {
 
 				}
 				
-				buttonReset.setEnabled(false);
 				JOptionPane.showMessageDialog(null, "Se han actualizado tus atributos.");
 				dispose();
 			}

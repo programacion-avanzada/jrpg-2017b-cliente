@@ -27,6 +27,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int nivel = 1;
 	private int experiencia;
 	private ArrayList<Item> items = new ArrayList<Item>();
+	private int cantNivSubidos =0;
 
 	public PaquetePersonaje() throws IOException {
 		estado = Estado.estadoOffline;
@@ -267,11 +268,12 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		}
 	}
 	
-	public void subioNivel(boolean subio) {
-		this.subioNivel=subio;
+	
+	public int cantNivSubidos() {
+		return this.cantNivSubidos;
 	}
 	
-	public boolean getSubioNivel() {
-		return this.subioNivel;
+	public void setCantNivSubidos(int niv) {
+		this.cantNivSubidos=niv;
 	}
 }
