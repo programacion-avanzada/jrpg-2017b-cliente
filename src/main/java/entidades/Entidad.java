@@ -354,17 +354,26 @@ public class Entidad {
 
 						if (actual != null)
 						{
-							if (tileMoverme[0] == tileNpc[0] && tileMoverme[1] == tileNpc[1]) 
+							if (tileMoverme[0] == tileNpc[0] && tileMoverme[1] == tileNpc[1] 
+									&& juego.getPaquetesNpcs().get(actual.getIdEnemigo()).getEstado() == Estado.estadoJuego) 
 							{
 								PaqueteBatalla pBatalla = new PaqueteBatalla();
 								
 								pBatalla.setId(juego.getPersonaje().getId());
-								pBatalla.setIdEnemigo(actual.idEnemigo);
+								pBatalla.setIdEnemigo(actual.idEnemigo * -1);
 								
 								juego.getPersonaje().setEstado(Estado.estadoBatallaNpc);
 								Estado.setEstado(null);
 								juego.setEstadoBatallaNpc(new EstadoBatallaNpc(juego, pBatalla));
 								Estado.setEstado(juego.getEstadoBatallaNpc());
+								
+								try {
+									juego.getCliente().getSalida().writeObject(gson.toJson
+											(pBatalla));
+								} catch (IOException e) {
+									JOptionPane.showMessageDialog(null, "Fallo la conexión "
+											+ "con el servidor");
+								}
 							}
 						}
 					}
@@ -373,10 +382,6 @@ public class Entidad {
 			
 			juego.getHandlerMouse().setNuevoClick(false);
 		}
-
-		// AÑADIDO SANTI
-		/*if (juego.getHandlerMouse().getNuevoRecorrido())
-			System.out.println("HAY SOLICITUD? " + juego.getEstadoJuego().getHaySolicitud());*/
 
 		if (juego.getHandlerMouse().getNuevoRecorrido() && !juego.getEstadoJuego().getHaySolicitud()) {
 
@@ -398,8 +403,6 @@ public class Entidad {
 			yInicio = y;
 
 			tileActual = Mundo.mouseATile(x, y);
-			System.out.println(tileMoverme[0] + " " + tileMoverme[1]);
-			System.out.println(mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido());
 
 			if (tileMoverme[0] < 0 || tileMoverme[1] < 0 || tileMoverme[0] >= mundo.obtenerAncho()
 					|| tileMoverme[1] >= mundo.obtenerAlto()) {

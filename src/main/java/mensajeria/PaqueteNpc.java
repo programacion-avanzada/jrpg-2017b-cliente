@@ -2,6 +2,8 @@ package mensajeria;
 
 import java.io.Serializable;
 
+import estados.Estado;
+
 public class PaqueteNpc extends Paquete implements Serializable, Cloneable 
 {
 	// Por ahora tiene todo lo mismo que un personaje para poder tratarlos de forma similar.
@@ -39,6 +41,7 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable
 		this.nombre = nombre;
 		this.raza = raza;
 		this.casta = casta;
+		this.estado = Estado.estadoJuego;
 	}
 	
 	public PaqueteNpc(int id,  int nivel, String nombre, String raza, String casta)
@@ -49,6 +52,7 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable
 		this.nombre = nombre;
 		this.raza = raza;
 		this.casta = casta;
+		this.estado = Estado.estadoJuego;
 	}
 	
 	public String getNombre()

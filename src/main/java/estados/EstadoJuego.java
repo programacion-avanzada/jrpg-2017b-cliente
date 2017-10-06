@@ -21,6 +21,7 @@ import juego.Juego;
 import juego.NpcManager;
 import juego.Pantalla;
 import mensajeria.Comando;
+import mensajeria.PaqueteDeNpcs;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
@@ -45,7 +46,7 @@ public class EstadoJuego extends Estado {
 
 	MenuInfoPersonaje menuEnemigo;
 
-	public EstadoJuego(Juego juego) {
+	public EstadoJuego(Juego juego) throws IOException {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
 		paquetePersonaje = juego.getPersonaje();
@@ -56,11 +57,17 @@ public class EstadoJuego extends Estado {
 		// Inicializo NpcManager
 		npcManager = new NpcManager(juego, mundo);
 		juego.setNpcManager(npcManager);
-		/*npcManager.spawnNpc(1, 2, "Lucas Videla", "Orco", "Guerrero", 4, 4, 4);
-		npcManager.spawnNpc(2, 4, "Lucas Videlason", "Orco", "Guerrero", 0, 5, 5);
-		npcManager.spawnNpc(3, 6, "Son of Lucas Videlason", "Orco", "Guerrero", 5, 0, 6);*/
-		npcManager.spawnInicial(100);
-
+		
+		if(juego.getPaquetesNpcs() == null)
+		{
+			npcManager.spawnInicial(100);
+			PaqueteDeNpcs paqueteDeNpcs = new PaqueteDeNpcs(juego.getPaquetesNpcs(), juego.getUbicacionNpcs());
+			paqueteDeNpcs.setComando(Comando.ACTUALIZARNPCS);
+			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteDeNpcs));
+		}
+		else
+			npcManager.actualizar();
+		
 		try {
 			// Le envio al servidor que me conecte al mapa y mi posicion
 			juego.getPersonaje().setComando(Comando.CONEXION);

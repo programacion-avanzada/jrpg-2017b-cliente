@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 import entidades.Entidad;
+import estados.Estado;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaqueteNpc;
 import mundo.Mundo;
@@ -15,7 +16,7 @@ import recursos.Recursos;
 
 public class NpcManager
 {
-	private final int CANTIDAD_NPCS = 10;
+	//private final int CANTIDAD_NPCS = 10;
 	
 	// Esta clase se encarga del spawn y despawn de NPCs.
 	
@@ -39,6 +40,7 @@ public class NpcManager
 	private Map<Integer, PaqueteMovimiento> ubicacionNpcs;
 	private Juego juego;
 	private Mundo mundo;
+	
 	/*
 	 * Inicializa el NpcManager
 	 * 
@@ -46,16 +48,10 @@ public class NpcManager
 	public NpcManager (Juego juego, Mundo mundo)
 	{
 		entidadesNpcs = new HashMap<Integer, Entidad>();
-		paquetesNpcs = new HashMap<Integer, PaqueteNpc>();
-		ubicacionNpcs = new HashMap<Integer, PaqueteMovimiento>();
+		paquetesNpcs = juego.getPaquetesNpcs();
+		ubicacionNpcs = juego.getUbicacionNpcs();
 		this.juego = juego;
 		this.mundo = mundo;
-		
-		float[] coords = new float[2];
-		coords = Mundo.dosDaIso(mundo.obtenerAncho(), mundo.obtenerAlto());
-		System.out.println(coords[0] + " " + coords[1]);
-		coords = Mundo.isoA2D(mundo.obtenerAncho(), mundo.obtenerAlto());
-		System.out.println(coords[0] + " " + coords[1]);
 	}
 	
 	/*
@@ -66,8 +62,6 @@ public class NpcManager
 	{
 		float[] coords = new float[2];
 		coords = Mundo.dosDaIso(posX, posY);
-		System.out.println(coords[0] + " " + coords[1]);
-		System.out.println(coords[1]);
 		
 		paquetesNpcs.put(id, new PaqueteNpc(id, nivel, nombre, raza, casta));
 		ubicacionNpcs.put(id, new PaqueteMovimiento(id, posX, posY));
@@ -79,14 +73,37 @@ public class NpcManager
 	}
 	
 	/**
+	 * Borra a un npc.
+	 * @param id id del npc a borrar
+	 * @return boolean falso si no lo pudo borrar
+	 */
+	
+	public boolean despawnNpc (int id)
+	{
+		if(paquetesNpcs.remove(id) == null)
+			return false;
+		
+		ubicacionNpcs.remove(id);
+		entidadesNpcs.remove(id);
+		
+		return true;
+	}
+	
+	/**
 	 * Hace aparecer una determinada cantidad de npcs en el mapa.
 	 * @param cant Cantidad de npcs a spawnear
 	 */
 	public void spawnInicial (int cant)
 	{
+		paquetesNpcs = new HashMap<Integer, PaqueteNpc>();
+		ubicacionNpcs = new HashMap<Integer, PaqueteMovimiento>();
+		
+		juego.setPaquetesNpcs(this.paquetesNpcs);
+		juego.setUbicacionNpcs(this.ubicacionNpcs);
+		
 		boolean puedoSpawnear;
 		int posX, posY;
-		Tile tile;
+		//Tile tile;
 		Random random = new Random();
 		
 		for (int i = 1; i <= cant; i++)
@@ -100,7 +117,7 @@ public class NpcManager
 				puedoSpawnear = true;
 				posX = random.nextInt(mundo.obtenerAncho() - 18) + 13;
 				posY = random.nextInt(mundo.obtenerAlto() - 18) + 13;
-				tile = mundo.getTile(posX, posY);
+				//tile = mundo.getTile(posX, posY);
 				
 				for(int j = -1; j < 2; j++)
 				{
@@ -137,7 +154,8 @@ public class NpcManager
 				key = it.next();
 				actual = entidadesNpcs.get(key);
 				
-				actual.graficar(g);
+				if(paquetesNpcs.get(key).getEstado() == Estado.estadoJuego)
+					actual.graficar(g);
 			}
 		}
 	}
@@ -162,11 +180,42 @@ public class NpcManager
 				key = it.next();
 				actual = entidadesNpcs.get(key);
 				
-				actual.graficarNombre(g);
+				if(paquetesNpcs.get(key).getEstado() == Estado.estadoJuego)
+					actual.graficarNombre(g);
 			}
 		}
 	}
 
+	public void actualizar()
+	{
+		entidadesNpcs = new HashMap<Integer, Entidad>();
+		
+		if(paquetesNpcs != null && !paquetesNpcs.isEmpty())
+		{
+			Iterator<Integer> it = paquetesNpcs.keySet().iterator();
+			int key;
+			PaqueteNpc actualNpc;
+			PaqueteMovimiento actualUbicacion;
+			
+			/*g.setColor(Color.WHITE);
+			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));*/
+			while (it.hasNext()) 
+			{
+				key = it.next();
+				actualNpc = paquetesNpcs.get(key);
+				actualUbicacion = ubicacionNpcs.get(key);
+				
+				float[] coords = new float[2];
+				coords = Mundo.dosDaIso(actualUbicacion.getPosX(), actualUbicacion.getPosY());
+				
+				Entidad ente = new Entidad(juego, mundo, 64, 64, actualNpc.getNombre(), coords[0], coords[1], Recursos.personaje.get(actualNpc.getRaza()), 150);
+				ente.setIdEnemigo(key);
+				ente.setDireccion(6);
+				entidadesNpcs.put(key, ente);
+			}
+		}
+	}
+	
 	public Map<Integer, Entidad> getEntidadesNpcs()
 	{
 		return entidadesNpcs;
@@ -177,7 +226,7 @@ public class NpcManager
 		this.entidadesNpcs = entidadesNpcs;
 	}
 
-	public Map<Integer, PaqueteNpc> getPaquetesNpcs()
+	/*public Map<Integer, PaqueteNpc> getPaquetesNpcs()
 	{
 		return paquetesNpcs;
 	}
@@ -195,5 +244,5 @@ public class NpcManager
 	public void setUbicacionNpcs(Map<Integer, PaqueteMovimiento> ubicacionNpcs)
 	{
 		this.ubicacionNpcs = ubicacionNpcs;
-	}
+	}*/
 }

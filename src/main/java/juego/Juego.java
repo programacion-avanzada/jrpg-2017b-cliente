@@ -3,6 +3,7 @@ package juego;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,10 +58,10 @@ public class Juego implements Runnable {
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	
 	// NPCs
+	private Map<Integer, PaqueteNpc> paquetesNpcs;
+	private Map<Integer, PaqueteMovimiento> ubicacionNpcs;
+	
 	private NpcManager npcManager;
-	// hay 2 maps, uno para los paquetes que llevan toda la información de los npcs
-	// y otro para las entidades, que se van a encargar de la posición y el graficado del npc
-	// en la pantalla.
 
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
 
@@ -167,7 +168,7 @@ public class Juego implements Runnable {
 		stop();
 	}
 
-	public synchronized void start() { // Inicia el juego
+	public synchronized void start() throws IOException { // Inicia el juego
 		if (corriendo)
 			return;
 
@@ -268,6 +269,26 @@ public class Juego implements Runnable {
 		this.ubicacionPersonajes = ubicacionPersonajes;
 	}
 
+	public Map<Integer, PaqueteNpc> getPaquetesNpcs()
+	{
+		return paquetesNpcs;
+	}
+
+	public void setPaquetesNpcs(Map<Integer, PaqueteNpc> paquetesNpcs)
+	{
+		this.paquetesNpcs = paquetesNpcs;
+	}
+
+	public Map<Integer, PaqueteMovimiento> getUbicacionNpcs()
+	{
+		return ubicacionNpcs;
+	}
+
+	public void setUbicacionNpcs(Map<Integer, PaqueteMovimiento> ubicacionNpcs)
+	{
+		this.ubicacionNpcs = ubicacionNpcs;
+	}
+	
 	public NpcManager getNpcManager()
 	{
 		return npcManager;

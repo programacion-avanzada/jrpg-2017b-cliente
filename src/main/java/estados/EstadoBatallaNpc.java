@@ -27,6 +27,7 @@ import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.PaqueteAtacar;
 import mensajeria.PaqueteBatalla;
+import mensajeria.PaqueteDeNpcs;
 import mensajeria.PaqueteFinalizarBatalla;
 import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
@@ -57,14 +58,14 @@ public class EstadoBatallaNpc extends Estado {
 
 	public EstadoBatallaNpc(Juego juego, PaqueteBatalla paqueteBatalla) 
 	{
-		// El paquete de batalla va a tener la id del jugador y la id del npc
+		// El paquete de batalla va a tener la id del jugador y la id del npc pero negativa
 		
 		super(juego);
 		mundo = new Mundo(juego, "recursos/mundoBatalla.txt", "recursos/mundoBatallaCapaDos.txt");
 		miTurno = true;
 
 		paquetePersonaje = juego.getPersonajesConectados().get(paqueteBatalla.getId());
-		paqueteEnemigo = juego.getNpcManager().getPaquetesNpcs().get(paqueteBatalla.getIdEnemigo());
+		paqueteEnemigo = juego.getPaquetesNpcs().get(paqueteBatalla.getIdEnemigo() * -1);
 		
 		crearPersonajes();
 
@@ -75,7 +76,8 @@ public class EstadoBatallaNpc extends Estado {
 
 		paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
 		paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
-		paqueteFinalizarBatalla.setIdEnemigo(-1);
+		paqueteFinalizarBatalla.setIdEnemigo(paqueteEnemigo.getId() * -1);
+		//System.out.println("Batallar: " + paqueteEnemigo.getId() * -1);
 
 		// por defecto batalla perdida
 		juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
@@ -159,11 +161,14 @@ public class EstadoBatallaNpc extends Estado {
 							juego.getPersonaje().setPuntosSkill(personaje.getPuntosSkill()+3);
 							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuSubirNivel);
 						}
+						
+						//juego.getNpcManager().despawnNpc(paqueteEnemigo.getId());
 						paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
 
 						juego.getPersonaje().setEstado(Estado.estadoJuego);
 						finalizarBatalla();
 						Estado.setEstado(juego.getEstadoJuego());
+						
 					}
 					else 
 					{

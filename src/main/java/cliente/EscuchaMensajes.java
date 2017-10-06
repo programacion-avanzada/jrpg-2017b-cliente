@@ -49,8 +49,8 @@ public class EscuchaMensajes extends Thread {
 			juego.setPersonajesConectados(personajesConectados);
 			juego.setUbicacionPersonajes(ubicacionPersonajes);
 
-			while (true) {
-
+			while (true) 
+			{
 				String objetoLeido = (String) entrada.readObject();
 
 				paquete = gson.fromJson(objetoLeido , Paquete.class);
