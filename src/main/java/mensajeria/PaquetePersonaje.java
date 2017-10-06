@@ -18,7 +18,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private String casta;
 	private String nombre;
 	private String raza;
-	private boolean subioNivel=false;
 	private int saludTope;
 	private int energiaTope;
 	private int fuerza;
@@ -27,7 +26,10 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int nivel = 1;
 	private int experiencia;
 	private ArrayList<Item> items = new ArrayList<Item>();
-	private int cantNivSubidos =0;
+	private int puntosNoAsignados;
+	private int puntosAsignadosFuerza;
+	private int puntosAsignadosDestreza;
+	private int puntosAsignadosInteligencia;
 
 	public PaquetePersonaje() throws IOException {
 		estado = Estado.estadoOffline;
@@ -175,7 +177,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	}
 
 	public final void removerBonus() {
-		// Intente usar un iterator y por alguna razón no andaba..
 		int i = 0;
 		while (i < items.size()) {
 			sacarBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(), items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
@@ -192,7 +193,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	}
 
 	public final void ponerBonus() {
-		// Intente usar un iterator y por alguna razón no andaba..
 		int i = 0;
 		while (i < items.size()) {
 			useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(), items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
@@ -222,7 +222,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	}
 
 	public Iterator<Item> getIterator() {
-		// TODO Auto-generated method stub
 		return items.iterator();
 	}
 
@@ -267,13 +266,36 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 			this.items.add(item);
 		}
 	}
-	
-	
-	public int cantNivSubidos() {
-		return this.cantNivSubidos;
+
+	public int getPuntosNoAsignados() {
+		return puntosNoAsignados;
 	}
-	
-	public void setCantNivSubidos(int niv) {
-		this.cantNivSubidos=niv;
+
+	public void setPuntosNoAsignados(int puntosNoAsignados) {
+		this.puntosNoAsignados = puntosNoAsignados;
+	}
+
+	public int getPuntosAsignadosFuerza() {
+		return puntosAsignadosFuerza;
+	}
+
+	public void setPuntosAsignadosFuerza(int puntosAsignadosFuerza) {
+		this.puntosAsignadosFuerza = puntosAsignadosFuerza;
+	}
+
+	public int getPuntosAsignadosDestreza() {
+		return puntosAsignadosDestreza;
+	}
+
+	public void setPuntosAsignadosDestreza(int puntosAsignadosDestreza) {
+		this.puntosAsignadosDestreza = puntosAsignadosDestreza;
+	}
+
+	public int getPuntosAsignadosInteligencia() {
+		return puntosAsignadosInteligencia;
+	}
+
+	public void setPuntosAsignadosInteligencia(int puntosAsignadosInteligencia) {
+		this.puntosAsignadosInteligencia = puntosAsignadosInteligencia;
 	}
 }

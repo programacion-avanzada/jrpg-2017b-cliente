@@ -2,6 +2,8 @@ package frames;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -34,6 +36,10 @@ public class MenuStats extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuStats(final Cliente cliente) {
+		// Se inicializa ícono y cursor
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0), "custom cursor"));
+
 		paquetePersonaje = cliente.getPaquetePersonaje();
 
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

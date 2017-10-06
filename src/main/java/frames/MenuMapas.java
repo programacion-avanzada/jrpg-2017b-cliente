@@ -28,6 +28,10 @@ public class MenuMapas extends JFrame {
 	private JPanel contentPane;
 
 	public MenuMapas(final Cliente cliente) {
+		// Se inicializa ícono y cursor
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0), "custom cursor"));
+
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -41,8 +45,6 @@ public class MenuMapas extends JFrame {
 				}
 			}
 		});
-		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0), "custom cursor"));
 
 		setTitle("Elegir Mapa");
 		setBounds(100, 100, 450, 300);

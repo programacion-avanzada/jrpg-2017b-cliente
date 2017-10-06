@@ -47,7 +47,7 @@ public class MenuBatalla {
 		g.drawString(personaje.getHabilidadesCasta()[2], x + 442, y + 94);
 		g.drawString("Ser energizado", x + 442, y + 168);
 
-		// Dibujo el turno de quien es
+		// Dibujo de quién es el turno
 		g.setColor(Color.WHITE);
 		if (habilitado)
 			Pantalla.centerString(g, new Rectangle(x, y + 5, Recursos.menuBatalla.getWidth(), 20), "Mi Turno");

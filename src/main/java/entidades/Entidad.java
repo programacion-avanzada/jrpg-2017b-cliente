@@ -208,13 +208,13 @@ public class Entidad {
 		if (juego.getHandlerMouse().getNuevoClick()) {
 			if (juego.getEstadoJuego().getHaySolicitud()) {
 
-				// Pregunto si esta el Menu de subir de Nivel
+				// Pregunto si esta el menú de subir de nivel
 				if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuSubirNivel) {
 					if (juego.getEstadoJuego().getMenuEnemigo().clickEnAsignarSkills(posMouse[0], posMouse[1])) {
 						if (Pantalla.menuAsignar == null) {
 							Pantalla.menuAsignar = new MenuAsignarSkills(juego.getCliente());
-							Pantalla.menuAsignar.setVisible(true);
 						}
+						Pantalla.menuAsignar.setVisible(true);
 					}
 				}
 

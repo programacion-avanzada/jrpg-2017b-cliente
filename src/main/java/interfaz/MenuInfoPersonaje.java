@@ -36,13 +36,13 @@ public class MenuInfoPersonaje {
 
 	public void graficar(Graphics g, int tipoMenu) {
 
-		// dibujo el menu
+		// Dibujo el menu
 		g.drawImage(menu, x, y, null);
 
-		// dibujo el personaje
+		// Dibujo el personaje
 		g.drawImage(Recursos.personaje.get(personaje.getRaza()).get(6)[0], x + menu.getWidth() / 2 - anchoPersonaje / 2, y + 70, 128, 128, null);
 
-		// muestro el nombre
+		// Muestro el nombre
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Book Antiqua", 1, 20));
 		Pantalla.centerString(g, new Rectangle(x, y + 15, menu.getWidth(), 0), personaje.getNombre());
@@ -72,12 +72,13 @@ public class MenuInfoPersonaje {
 			break;
 		}
 
-		// muestro los botones
+		// Muestro los botones
 		g.setFont(new Font("Book Antiqua", 1, 20));
 		g.drawImage(Recursos.botonMenu, x + 50, y + 380, 200, 25, null);
 		g.setColor(Color.WHITE);
 		Pantalla.centerString(g, new Rectangle(x + 50, y + 380, 200, 25), leyendaBoton[tipoMenu]);
 
+		// Agrego el botón "Asignar Skills"
 		if (tipoMenu == 2) {
 			g.drawImage(Recursos.botonMenu, x + 50, y + 410, 200, 25, null);
 			Pantalla.centerString(g, new Rectangle(x + 50, y + 410, 200, 25), "Asignar Skills");
@@ -86,7 +87,7 @@ public class MenuInfoPersonaje {
 
 	private void graficarMenuPerderBatalla(Graphics g) {
 
-		// Informo que perdio la batalla
+		// Informo que perdió la batalla
 		g.setColor(Color.BLACK);
 		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Has sido derrotado!");
 
@@ -99,7 +100,7 @@ public class MenuInfoPersonaje {
 
 	private void graficarMenuGanarBatalla(Graphics g) {
 
-		// Informo que gano la batalla
+		// Informo que ganó la batalla
 		g.setColor(Color.BLACK);
 		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Has derrotado");
 		Pantalla.centerString(g, new Rectangle(x, y + 230, menu.getWidth(), 0), "a tu enemigo!");
@@ -114,7 +115,7 @@ public class MenuInfoPersonaje {
 
 	private void graficarMenuSubirNivel(Graphics g) {
 
-		// Informo que subio de nivel
+		// Informo que subió de nivel
 		g.setColor(Color.BLACK);
 		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Has subido de nivel!");
 
@@ -128,14 +129,14 @@ public class MenuInfoPersonaje {
 
 	public void graficarMenuInformacion(Graphics g) {
 
-		// muestro los nombres de los atributos
+		// Muestro los nombres de los atributos
 		g.setColor(Color.BLACK);
 		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), personaje.getRaza());
 		g.drawString("Casta: ", x + 30, y + 260);
 		g.drawString("Nivel: ", x + 30, y + 290);
 		g.drawString("Experiencia: ", x + 30, y + 320);
 
-		// muestro los atributos
+		// Muestro los atributos
 		g.setFont(new Font("Book Antiqua", 0, 20));
 		g.drawString(personaje.getCasta(), x + 100, y + 260);
 		g.drawString(personaje.getNivel() + " ", x + 100, y + 290);
@@ -145,7 +146,7 @@ public class MenuInfoPersonaje {
 
 	private void graficarMenuItem(Graphics g) {
 
-		// Informo que subio de nivel
+		// Informo que subió de nivel
 		g.setColor(Color.BLACK);
 		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Aca iria algo!");
 
@@ -159,14 +160,14 @@ public class MenuInfoPersonaje {
 
 	private void graficarMenuComerciar(Graphics g) {
 
-		// muestro los nombres de los atributos
+		// Muestro los nombres de los atributos
 		g.setColor(Color.BLACK);
 		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), personaje.getRaza());
 		g.drawString("Casta: ", x + 30, y + 260);
 		g.drawString("Nivel: ", x + 30, y + 290);
 		g.drawString("Experiencia: ", x + 30, y + 320);
 
-		// muestro los atributos
+		// Muestro los atributos
 		g.setFont(new Font("Book Antiqua", 0, 20));
 		g.drawString(personaje.getCasta(), x + 100, y + 260);
 		g.drawString(personaje.getNivel() + " ", x + 100, y + 290);

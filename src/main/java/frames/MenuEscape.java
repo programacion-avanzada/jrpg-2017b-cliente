@@ -33,7 +33,6 @@ public class MenuEscape extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuEscape(final Cliente cliente) {
-		System.out.println("Menu Escape");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setUndecorated(true);
 		this.setResizable(false);
@@ -69,15 +68,10 @@ public class MenuEscape extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				Pantalla.menuEscp = null;
-				System.out.println("1------HOLA ");
+				Pantalla.menuAsignar = null;
 				if (Pantalla.menuAsignar == null) {
-					System.out.println("2------HOLA ");
 					Pantalla.menuAsignar = new MenuAsignarSkills(cliente);
-					//Pantalla.menuAsignar.setVisible(true);
 				}
-//				else {
-//					Pantalla.menuAsignar.setVisible(true);
-//				}
 				Pantalla.menuAsignar.setVisible(true);
 			}
 		});

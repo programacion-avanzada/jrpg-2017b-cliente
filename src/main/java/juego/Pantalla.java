@@ -86,8 +86,8 @@ public class Pantalla {
 					if (Estado.getEstado().esEstadoDeJuego()) {
 						if (menuAsignar == null) {
 							menuAsignar = new MenuAsignarSkills(cliente);
-							menuAsignar.setVisible(true);
 						}
+						menuAsignar.setVisible(true);
 					}
 				} else if (e.getKeyCode() == KeyEvent.VK_S) {
 					if (Estado.getEstado().esEstadoDeJuego()) {
