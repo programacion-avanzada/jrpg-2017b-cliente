@@ -3,6 +3,7 @@ package juego;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,10 +13,12 @@ import chat.MiChat;
 import cliente.Cliente;
 import cliente.EscuchaMensajes;
 import dominio.Personaje;
+import entidades.Entidad;
 import estados.Estado;
 import estados.EstadoBatalla;
 import estados.EstadoJuego;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 
 public class Juego implements Runnable {
@@ -34,6 +37,7 @@ public class Juego implements Runnable {
 	// Estados
 	private Estado estadoJuego;
 	private Estado estadoBatalla;
+	private Estado estadoBatallaNpc;
 
 	// HandlerMouse
 	private HandlerMouse handlerMouse;
@@ -44,10 +48,21 @@ public class Juego implements Runnable {
 	// Conexion
 	private Cliente cliente;
 	private EscuchaMensajes escuchaMensajes;
+	
+	// El player
 	private PaquetePersonaje paquetePersonaje;
 	private PaqueteMovimiento ubicacionPersonaje;
+	
+	// Personajes conectados
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
+	
+	// NPCs
+	private Map<Integer, PaqueteNpc> paquetesNpcs;
+	private Map<Integer, PaqueteMovimiento> ubicacionNpcs;
+	
+	private NpcManager npcManager;
+
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
 
 
@@ -59,13 +74,13 @@ public class Juego implements Runnable {
 		this.ANCHO = ancho;
 		this.cliente = cliente;
 		this.paquetePersonaje = pp;
-
+		
 		// Inicializo la ubicacion del personaje
 		ubicacionPersonaje = new PaqueteMovimiento();
 		ubicacionPersonaje.setIdPersonaje(paquetePersonaje.getId());
 		ubicacionPersonaje.setFrame(0);
 		ubicacionPersonaje.setDireccion(6);
-
+		
 		// Creo el escucha de mensajes
 		escuchaMensajes = new EscuchaMensajes(this);
 		escuchaMensajes.start();
@@ -153,7 +168,7 @@ public class Juego implements Runnable {
 		stop();
 	}
 
-	public synchronized void start() { // Inicia el juego
+	public synchronized void start() throws IOException { // Inicia el juego
 		if (corriendo)
 			return;
 
@@ -204,6 +219,16 @@ public class Juego implements Runnable {
 		this.estadoBatalla = estadoBatalla;
 	}
 
+	public Estado getEstadoBatallaNpc()
+	{
+		return estadoBatallaNpc;
+	}
+
+	public void setEstadoBatallaNpc(Estado estadoBatallaNpc)
+	{
+		this.estadoBatallaNpc = estadoBatallaNpc;
+	}
+
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -244,7 +269,38 @@ public class Juego implements Runnable {
 		this.ubicacionPersonajes = ubicacionPersonajes;
 	}
 
+	public Map<Integer, PaqueteNpc> getPaquetesNpcs()
+	{
+		return paquetesNpcs;
+	}
+
+	public void setPaquetesNpcs(Map<Integer, PaqueteNpc> paquetesNpcs)
+	{
+		this.paquetesNpcs = paquetesNpcs;
+	}
+
+	public Map<Integer, PaqueteMovimiento> getUbicacionNpcs()
+	{
+		return ubicacionNpcs;
+	}
+
+	public void setUbicacionNpcs(Map<Integer, PaqueteMovimiento> ubicacionNpcs)
+	{
+		this.ubicacionNpcs = ubicacionNpcs;
+	}
+	
+	public NpcManager getNpcManager()
+	{
+		return npcManager;
+	}
+
+	public void setNpcManager(NpcManager npcManager)
+	{
+		this.npcManager = npcManager;
+	}
+
 	public Map<String, MiChat> getChatsActivos() {
 		return chatsActivos;
 	}
+	
 }

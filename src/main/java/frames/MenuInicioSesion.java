@@ -124,7 +124,6 @@ public class MenuInicioSesion extends JFrame {
 	private void logIn(final Cliente cliente) {
 		synchronized(cliente){
 			cliente.setAccion(Comando.INICIOSESION);
-
 			cliente.getPaqueteUsuario().setUsername(textField.getText());
 			cliente.getPaqueteUsuario().setPassword(String.valueOf(passwordField.getPassword()));
 

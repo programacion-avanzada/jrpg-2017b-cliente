@@ -198,6 +198,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		}
 	}
 	
+
 	/**
 	 * 
 	 * @return bonus de fuerza total de los items que tiene el personaje
@@ -211,6 +212,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		return fuerzaStat;
 	}
 	
+
 	/**
 	 * 
 	 * @return bonus de destreza total de los items que tiene el personaje
@@ -224,6 +226,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		return destrezaItem;
 	}
 	
+
 	/**
 	 * 
 	 * @return bonus de inteligencia total de los items que tiene el personaje
@@ -231,8 +234,8 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public final int getInteligenciaItem(){
 		int inteligenciaItem = 0;
 		
-		for (Item item : items) {
-			inteligenciaItem += item.getBonusInteligencia();
+		for (Item item : items) {		
+      inteligenciaItem += item.getBonusInteligencia();
 		}
 		return inteligenciaItem;
 	}

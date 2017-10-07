@@ -55,6 +55,7 @@ public class MenuAsignarSkills extends JFrame {
 		puntosDestreza = puntosDestrezaInicial;
 		puntosInteligencia = puntosInteligenciaInicial;
 		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,7 +64,7 @@ public class MenuAsignarSkills extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("recursos//1up.png"));
 		setTitle("Asignar");
 		setBounds(100, 100, 298, 294);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		getContentPane().setLayout(null);
 		setVisible(true);
 		setLocationRelativeTo(null);
@@ -73,8 +74,7 @@ public class MenuAsignarSkills extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				Pantalla.menuAsignar = null;
-				dispose();
+				cerrarMenuAsignarSkills();
 			}
 		});
 		contentPane.setLayout(null);
@@ -151,8 +151,7 @@ public class MenuAsignarSkills extends JFrame {
 
 				}
 				JOptionPane.showMessageDialog(null,"Se han actualizado tus atributos.");
-				Pantalla.menuAsignar = null;
-				dispose();
+				cerrarMenuAsignarSkills();
 			}
 		});
 		buttonConfirm.setBounds(176, 112, 97, 25);
@@ -163,8 +162,7 @@ public class MenuAsignarSkills extends JFrame {
 		buttonCancel.setIcon(icono_c);
 		buttonCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Pantalla.menuAsignar = null;
-				dispose();
+				cerrarMenuAsignarSkills();
 			}
 		});
 		buttonCancel.setBounds(176, 146, 97, 25);
@@ -180,18 +178,20 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMinus1.setEnabled(false);
 		buttonMinus2.setEnabled(false);
 		
-		if(puntosAsignar == 0){
+
+		if(puntosAsignar == 0)
+		{
 			buttonMore.setEnabled(false);
 			buttonMore1.setEnabled(false);
 			buttonMore2.setEnabled(false);
 		}
 		
-		buttonMinus.setBounds(12, 92, 34, 25);
-		contentPane.add(buttonMinus);
+
 		ImageIcon icono_1 = new ImageIcon("recursos//botonMenoss.png");
 		buttonMinus.setIcon(icono_1);
 		buttonMinus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				if(puntosFuerza > getMinusFuerza(cliente)){
 					puntosFuerza--;
 					if(puntosAsignar == 0){
@@ -318,7 +318,6 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMore.setBounds(118, 92, 34, 25);
 		contentPane.add(buttonMore);
 		
-		
 		buttonMore1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(puntosAsignar != 0 && !labelDestreza.getText().equals("200")){
@@ -371,6 +370,7 @@ public class MenuAsignarSkills extends JFrame {
 		imageLabel.setBounds(5, 5, 282, 259);
 		imageLabel.setVisible(true);
 		contentPane.add(imageLabel);
+
 		//  BOTON RESET DE PUNTOS SKILLS
 		JButton buttonRestart = new JButton("Reiniciar");
 		ImageIcon icono_restart = new ImageIcon("recursos//botonMenu.png");

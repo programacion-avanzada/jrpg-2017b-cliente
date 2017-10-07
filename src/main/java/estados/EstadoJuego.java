@@ -16,11 +16,16 @@ import com.google.gson.Gson;
 
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
+import interfaz.MenuInfoNpc;
 import interfaz.MenuInfoPersonaje;
 import juego.Juego;
+import juego.NpcManager;
 import juego.Pantalla;
 import mensajeria.Comando;
+import mensajeria.Paquete;
+import mensajeria.PaqueteDeNpcs;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
@@ -34,6 +39,9 @@ public class EstadoJuego extends Estado {
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private boolean haySolicitud;
 	private int tipoSolicitud;
+	
+	// NPCs
+	private NpcManager npcManager;
 
 	private final Gson gson = new Gson();
 
@@ -41,13 +49,30 @@ public class EstadoJuego extends Estado {
 
 	MenuInfoPersonaje menuEnemigo;
 
-	public EstadoJuego(Juego juego) {
+	public EstadoJuego(Juego juego) throws IOException {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
 		paquetePersonaje = juego.getPersonaje();
 		entidadPersonaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.personaje.get(juego.getPersonaje().getRaza()), 150);
+		//ente = new Entidad(juego, mundo, 256, 256, "Lucas Videla", 128, 128, Recursos.personaje.get("Orco"), 15);
 		miniaturaPersonaje = Recursos.personaje.get(paquetePersonaje.getRaza()).get(5)[0];
-
+		
+		// Inicializo NpcManager
+		npcManager = new NpcManager(juego, mundo);
+		juego.setNpcManager(npcManager);
+		
+		// Si soy el primero en entrar al server, genero los npcs en mi cliente y los envío al server
+		// si no, traigo los npcs del server.
+		if(juego.getPaquetesNpcs() == null)
+		{
+			npcManager.spawnInicial(10);
+			PaqueteDeNpcs paqueteDeNpcs = new PaqueteDeNpcs(juego.getPaquetesNpcs(), juego.getUbicacionNpcs());
+			paqueteDeNpcs.setComando(Comando.ACTUALIZARNPCS);
+			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteDeNpcs));
+		}
+		else
+			npcManager.actualizar();
+		
 		try {
 			// Le envio al servidor que me conecte al mapa y mi posicion
 			juego.getPersonaje().setComando(Comando.CONEXION);
@@ -70,16 +95,21 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mundo.graficar(g);
 		//entidadPersonaje.graficar(g);
+		juego.getNpcManager().graficarNpcs(g);
 		graficarPersonajes(g);
 		mundo.graficarObstaculos(g);
 		entidadPersonaje.graficarNombre(g);
+		juego.getNpcManager().graficarNombresNpcs(g);
+		
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
 		g.drawImage(Recursos.mochila, 738, 545, 59, 52, null);
 		g.drawImage(Recursos.menu, 3, 562, 102, 35, null);
 		g.drawImage(Recursos.chat, 3, 524, 102, 35, null);
 		if(haySolicitud)
+		{
 			menuEnemigo.graficar(g, tipoSolicitud);
+		}
 
 	}
 
@@ -91,11 +121,13 @@ public class EstadoJuego extends Estado {
 			Iterator<Integer> it = personajesConectados.keySet().iterator();
 			int key;
 			PaqueteMovimiento actual;
+			
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
 			while (it.hasNext()) {
 				key = it.next();
 				actual = ubicacionPersonajes.get(key);
+				
 				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
 						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
 						g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
@@ -122,7 +154,8 @@ public class EstadoJuego extends Estado {
 		return null;
 	}
 
-	public void setHaySolicitud(boolean b, PaquetePersonaje enemigo, int tipoSolicitud) {
+	public void setHaySolicitud(boolean b, Paquete enemigo, int tipoSolicitud) 
+	{
 		haySolicitud = b;
 		// menu que mostrara al enemigo
 		menuEnemigo = new MenuInfoPersonaje(300, 50, enemigo);

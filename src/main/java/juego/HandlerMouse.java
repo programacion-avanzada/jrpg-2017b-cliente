@@ -18,15 +18,7 @@ public class HandlerMouse implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getButton() == MouseEvent.BUTTON1) {
-			posMouse[0] = e.getX();
-			posMouse[1] = e.getY();
-			nuevoClick = true;
-		} else if(e.getButton() == MouseEvent.BUTTON3) {
-			posMouseRecorrido[0] = e.getX();
-			posMouseRecorrido[1] = e.getY();
-			nuevoRecorrido = true;
-		}
+		
 	}
 
 	@Override
@@ -45,8 +37,17 @@ public class HandlerMouse implements MouseListener {
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-
+	public void mouseReleased(MouseEvent e) {
+		//System.out.println("MOUSE RELEASED");
+		if(e.getButton() == MouseEvent.BUTTON1) {
+			posMouse[0] = e.getX();
+			posMouse[1] = e.getY();
+			nuevoClick = true;
+		} else if(e.getButton() == MouseEvent.BUTTON3) {
+			posMouseRecorrido[0] = e.getX();
+			posMouseRecorrido[1] = e.getY();
+			nuevoRecorrido = true;
+		}
 	}
 
 	public int[] getPosMouse() {

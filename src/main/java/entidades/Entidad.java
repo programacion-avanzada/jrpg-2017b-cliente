@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import chat.VentanaContactos;
 import estados.Estado;
+import estados.EstadoBatallaNpc;
 import frames.MenuEscape;
 import frames.MenuInventario;
 import interfaz.MenuInfoPersonaje;
@@ -87,6 +88,7 @@ public class Entidad {
 	private Mundo mundo;
 	private String nombre;
 	private int[] tilePersonajes;
+	private int[] tileNpc;
 	private int idEnemigo;
 	
 	//Ubicacion para abrir comerciar.
@@ -99,11 +101,11 @@ public class Entidad {
 	 * @param mundo mundo con el que se instancia Entidad
 	 * @param ancho ancho
 	 * @param alto alto
-	 * @param nombre nombre del personaje
+	 * @param nombre nombre de la entidad
 	 * @param spawnX tile X donde spawnea
 	 * @param spawnY tile Y donde spawnea
-	 * @param animaciones animaciones del personaje
-	 * @param velAnimacion velocidad de animacion del personaje
+	 * @param animaciones animaciones de la entidad
+	 * @param velAnimacion velocidad de animacion de la entidad
 	 */
 	public Entidad(final Juego juego, final Mundo mundo, final int ancho, final int alto, 
 			final String nombre, final float spawnX, final float spawnY,
@@ -115,9 +117,12 @@ public class Entidad {
 		this.mundo = mundo;
 		xOffset = ancho / 2;
 		yOffset = alto / 2;
+		
 		x = (int) (spawnX / 64) * 64;
 		y = (int) (spawnY / 32) * 32;
-
+		//x = spawnX;
+		//y = spawnY;
+		
 		moverIzq = new Animacion(velAnimacion, animaciones.get(0));
 		moverArribaIzq = new Animacion(velAnimacion, animaciones.get(1));
 		moverArriba = new Animacion(velAnimacion, animaciones.get(2));
@@ -190,9 +195,12 @@ public class Entidad {
 		}
 		// Tomo el click izquierdo 
 		if (juego.getHandlerMouse().getNuevoClick()) {
+			
 			if (juego.getEstadoJuego().getHaySolicitud()) {
 
-				if (juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])) {
+				if (juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])
+						&& !juego.getEstadoJuego().getMenuEnemigo().esNPC()) 
+				{
 					if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], 
 							posMouse[1])) {
 						// Pregunto si menuBatallar o menuComerciar, sino no me interesa hacer esto
@@ -226,11 +234,13 @@ public class Entidad {
 									JOptionPane.showMessageDialog(null, "Fallo la conexión "
 											+ "con el servidor");
 								}
-							} else {
+							} 
+							else {
 								JOptionPane.showMessageDialog(null, "El otro usuario se encuentra "
 										+ "dentro de la zona de comercio");	
 							}				
-						} else {
+						} 
+						else {
 							// PREGUNTO SI EL MENU EMERGENTE ES DE TIPO COMERCIO
 							if (juego.getEstadoJuego().getTipoSolicitud() == 
 									MenuInfoPersonaje.menuComerciar) {
@@ -248,10 +258,12 @@ public class Entidad {
 											JOptionPane.showMessageDialog(null, "Fallo la conexión "
 													+ "con el servidor");
 										}	
-									} else {
+									} 
+									else {
 										JOptionPane.showMessageDialog(null, "Ya te encuentras comerciando!");
 									}
-								} else {
+								} 
+								else {
 									JOptionPane.showMessageDialog(null, "El otro usuario no se encuentra "
 											+ "dentro de la zona de comercio");
 								}
@@ -259,57 +271,145 @@ public class Entidad {
 						}
 						juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
 
-
-					} else if (juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(
+					} 
+					else if (juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(
 							posMouse[0], posMouse[1])) {
 						juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
 					}
-				} else {
+				} 
+				else if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], posMouse[1])
+						&& juego.getEstadoJuego().getMenuEnemigo().esNPC())
+				{
+					if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuBatallar)
+					{
+						PaqueteBatalla pBatalla = new PaqueteBatalla();
+						
+						pBatalla.setId(juego.getPersonaje().getId());
+						pBatalla.setIdEnemigo(juego.getEstadoJuego().getMenuEnemigo().getNpc().getId() * -1);
+						
+						juego.getPersonaje().setEstado(Estado.estadoBatallaNpc);
+						Estado.setEstado(null);
+						juego.setEstadoBatallaNpc(new EstadoBatallaNpc(juego, pBatalla));
+						Estado.setEstado(juego.getEstadoBatallaNpc());
+						
+						try {
+							juego.getCliente().getSalida().writeObject(gson.toJson
+									(pBatalla));
+						} catch (IOException e) {
+							JOptionPane.showMessageDialog(null, "Fallo la conexión "
+									+ "con el servidor");
+						}
+					}
+				}
+				else 
+				{
 					juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
 				}
-			} else {
-				Iterator<Integer> it = juego.getUbicacionPersonajes().
-						keySet().iterator();
-				int key;
-				int []tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - 
-						xOffset,posMouse[1] + juego.getCamara().getyOffset() - yOffset);
-				PaqueteMovimiento actual;
-
-				while (it.hasNext()) {
-					key = it.next();
-					actual = juego.getUbicacionPersonajes().get(key);
-					tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
-					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
-							&& juego.getPersonajesConectados().get(actual.
-									getIdPersonaje()) != null
-							&& juego.getPersonajesConectados().get(actual.
-									getIdPersonaje()).getEstado() == Estado.estadoJuego) {
-
-						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == 
-								tilePersonajes[1]) {
-							idEnemigo = actual.getIdPersonaje();
-							float XY[] = Mundo.isoA2D(x,y);
-							// ESTA ESTE PARA NO MOVERME HASTA EL LUGAR.
-							if(XY[0] >= 44 && XY[0] <= 71 && XY[1] >= 0 && XY[1] <= 29) {
-								// SI ESTOY DENTRO DE LA ZONA DE COMERCIO SETEO QUE SE ABRA EL MENU
-								// DE COMERCIO
-								juego.getEstadoJuego().setHaySolicitud(true, juego.
-										getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.
-										menuComerciar);
-							} else {
-								// SI ESTOY DENTRO DE LA ZONA DE BATALLA SETEO QUE SE ABRA EL MENU
-								// DE BATALLA
-								juego.getEstadoJuego().setHaySolicitud(true,juego.
-										getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.
-										menuBatallar);		
+			} 
+			else 
+			{
+				// Me fijo si hizo click en alguno de los personajes
+				{
+					Iterator<Integer> it = juego.getUbicacionPersonajes().
+							keySet().iterator();
+					int key;
+					int []tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - 
+							xOffset,posMouse[1] + juego.getCamara().getyOffset() - yOffset);
+					PaqueteMovimiento actual;
+	
+					while (it.hasNext()) 
+					{
+						key = it.next();
+						actual = juego.getUbicacionPersonajes().get(key);
+						tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
+	
+						if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
+								&& juego.getPersonajesConectados().get(actual.
+										getIdPersonaje()) != null
+								&& juego.getPersonajesConectados().get(actual.
+										getIdPersonaje()).getEstado() == Estado.estadoJuego) 
+						{
+	
+							if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == 
+									tilePersonajes[1]) {
+								idEnemigo = actual.getIdPersonaje();
+								float XY[] = Mundo.isoA2D(x,y);
+								
+								// ESTA ESTE PARA NO MOVERME HASTA EL LUGAR.
+								if(XY[0] >= 44 && XY[0] <= 71 && XY[1] >= 0 && XY[1] <= 29) 
+								{
+									// SI ESTOY DENTRO DE LA ZONA DE COMERCIO SETEO QUE SE ABRA EL MENU
+									// DE COMERCIO
+									juego.getEstadoJuego().setHaySolicitud(true, juego.
+											getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.
+											menuComerciar);
+								} 
+								else 
+								{
+									// SI ESTOY DENTRO DE LA ZONA DE BATALLA SETEO QUE SE ABRA EL MENU
+									// DE BATALLA
+									juego.getEstadoJuego().setHaySolicitud(true,juego.
+											getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.
+											menuBatallar);		
+									
+								}
+								//juego.getHandlerMouse().setNuevoClick(false);
 							}
-							juego.getHandlerMouse().setNuevoClick(false);
+						}
+					}
+				}
+				
+				// Vuelvo a preguntar si hay solicitud
+				// Si hay es porque hizo click en un personaje y salgo.
+				// Si no, me fijo si hizo click en un NPC
+				// Quedó medio desprolijo, si llegamos con tiempo a la entrega deberíamos acomodarlo.
+				if(!juego.getEstadoJuego().getHaySolicitud())
+				{
+					Iterator<Integer> it = juego.getNpcManager().getEntidadesNpcs().
+							keySet().iterator();
+					int key;
+					int []tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - 
+							xOffset,posMouse[1] + juego.getCamara().getyOffset() - yOffset);
+					Entidad actual;
+
+					while (it.hasNext()) 
+					{
+						key = it.next();
+						actual = juego.getNpcManager().getEntidadesNpcs().get(key);
+						tileNpc = Mundo.mouseATile(actual.getX(), actual.getY());
+
+						if (actual != null)
+						{
+							if (tileMoverme[0] == tileNpc[0] && tileMoverme[1] == tileNpc[1] 
+									&& juego.getPaquetesNpcs().get(actual.getIdEnemigo()).getEstado() == Estado.estadoJuego) 
+							{
+								juego.getEstadoJuego().setHaySolicitud(true, juego.getPaquetesNpcs().get(actual.getIdEnemigo()), MenuInfoPersonaje.menuBatallar);	
+								
+								/*PaqueteBatalla pBatalla = new PaqueteBatalla();
+								
+								pBatalla.setId(juego.getPersonaje().getId());
+								pBatalla.setIdEnemigo(actual.idEnemigo * -1);
+								
+								juego.getPersonaje().setEstado(Estado.estadoBatallaNpc);
+								Estado.setEstado(null);
+								juego.setEstadoBatallaNpc(new EstadoBatallaNpc(juego, pBatalla));
+								Estado.setEstado(juego.getEstadoBatallaNpc());
+								
+								try {
+									juego.getCliente().getSalida().writeObject(gson.toJson
+											(pBatalla));
+								} catch (IOException e) {
+									JOptionPane.showMessageDialog(null, "Fallo la conexión "
+											+ "con el servidor");
+								}*/
+							}
 						}
 					}
 				}
 			}
+			
+			juego.getHandlerMouse().setNuevoClick(false);
 		}
-
 
 		if (juego.getHandlerMouse().getNuevoRecorrido() && !juego.getEstadoJuego().getHaySolicitud()) {
 
@@ -460,7 +560,7 @@ public class Entidad {
 		g.setFont(new Font("Book Antiqua", Font.BOLD, 15));
 	    Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
 	}
-	/**Obtiene el frameActual del personaje
+	/**Obtiene el frameActual de la entidad
 	 */
 	private BufferedImage getFrameAnimacionActual() {
 		if (movimientoHacia == horizontalIzq) {
@@ -483,12 +583,21 @@ public class Entidad {
 
 		return Recursos.orco.get(6)[0];
 	}
+	
 	/**Pide la direccion donde va
 	 * @return devuelve el movimiento hacia donde va
 	 */
-	private int getDireccion() {
+	public int getDireccion() {
 		return movimientoHacia;
 	}
+	
+	/**Setea la dirección hacia donde va
+	 * @param dir int dirección
+	 */
+	public void setDireccion(int dir) {
+		this.movimientoHacia = dir;
+	}
+	
 	/**Obtiene el frame donde esta el personaje
 	 */
 	private int getFrame() {
@@ -512,7 +621,7 @@ public class Entidad {
 
 		return 0;
 	}
-	/**Envia la posicion del personaje
+	/**Envia la posicion de la entidad
 	 */
 	private void enviarPosicion() {
 		juego.getUbicacionPersonaje().setPosX(x);
@@ -609,9 +718,9 @@ public class Entidad {
 
 		return camino;
 	}
-	/**Pregunta si los personajes estan en diagonal
-	 * @param nodoUno personaje 1
-	 * @param nodoDos personaje 2
+	/**Pregunta si las entidades están en diagonal
+	 * @param nodoUno entidad 1
+	 * @param nodoDos entidad 2
 	 * @return true or false
 	 */
 	private boolean estanEnDiagonal(final Nodo nodoUno, final Nodo nodoDos) {
@@ -620,25 +729,25 @@ public class Entidad {
 		return true;
 	}
 	/**Pide el valor de X 
-	 * @return devuelve la ubicacion en X
+	 * @return devuelve la ubicación en X
 	 */
 	public float getX() {
 		return x;
 	}
 	/**Setea el valor de X
-	 * @param x valor nuevo de la ubicacion en X
+	 * @param x valor nuevo de la ubicación en X
 	 */
 	public void setX(final float x) {
 		this.x = x;
 	}
 	/**Pide el valor de Y 
-	 * @return devuelve la ubicacion en Y
+	 * @return devuelve la ubicación en Y
 	 */
 	public float getY() {
 		return y;
 	}
 	/**Setea el valor de Y
-	 * @param y valor nuevo de la ubicacion en Y
+	 * @param y valor nuevo de la ubicación en Y
 	 */
 	public void setY(final float y) {
 		this.y = y;
@@ -678,5 +787,13 @@ public class Entidad {
 	 */
 	public int getYOffset() {
 		return yOffset;
+	}
+	public int getIdEnemigo()
+	{
+		return idEnemigo;
+	}
+	public void setIdEnemigo(int idEnemigo)
+	{
+		this.idEnemigo = idEnemigo;
 	}
 }
