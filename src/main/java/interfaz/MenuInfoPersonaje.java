@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 
 import dominio.Personaje;
 import juego.Pantalla;
+import mensajeria.Paquete;
+import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 import recursos.Recursos;
 
@@ -27,11 +29,25 @@ public class MenuInfoPersonaje {
 	private int x;
 	private int y;
 	private PaquetePersonaje personaje;
+	private PaqueteNpc npc;
+	private boolean esNPC;
 
-	public MenuInfoPersonaje(int x, int y, PaquetePersonaje personaje){
+	// A lo mejor más adelante conviene hacer un MenuInfoNpc
+	public MenuInfoPersonaje(int x, int y, Paquete personaje)
+	{
 		this.x = x;
 		this.y = y;
-		this.personaje = personaje;
+
+		if(personaje instanceof PaquetePersonaje)
+		{
+			this.personaje = (PaquetePersonaje)personaje;
+			esNPC = false;
+		}
+		else
+		{
+			this.npc = (PaqueteNpc)personaje;
+			esNPC = true;
+		}
 	}
 
 	public void graficar(Graphics g, int tipoMenu){
@@ -39,13 +55,26 @@ public class MenuInfoPersonaje {
 		// dibujo el menu
 		g.drawImage(menu, x, y, null);
 
-		// dibujo el personaje
-		g.drawImage(Recursos.personaje.get(personaje.getRaza()).get(6)[0], x + menu.getWidth() / 2  - anchoPersonaje / 2, y + 70, 128, 128, null);
+		if(!esNPC)
+		{
+			// dibujo el personaje
+			g.drawImage(Recursos.personaje.get(personaje.getRaza()).get(6)[0], x + menu.getWidth() / 2  - anchoPersonaje / 2, y + 70, 128, 128, null);
 
-		// muestro el nombre
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Book Antiqua", 1, 20));
-		Pantalla.centerString(g, new Rectangle(x, y + 15, menu.getWidth(), 0), personaje.getNombre());
+			// muestro el nombre
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Book Antiqua", 1, 20));
+			Pantalla.centerString(g, new Rectangle(x, y + 15, menu.getWidth(), 0), personaje.getNombre());
+		}
+		else
+		{
+			// dibujo el npc
+			g.drawImage(Recursos.personaje.get(npc.getRaza()).get(6)[0], x + menu.getWidth() / 2  - anchoPersonaje / 2, y + 70, 128, 128, null);
+
+			// muestro el nombre
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Book Antiqua", 1, 20));
+			Pantalla.centerString(g, new Rectangle(x, y + 15, menu.getWidth(), 0), npc.getNombre());
+		}
 
 		// Grafico la leyenda segun el tipo de menu
 		switch(tipoMenu){
@@ -71,7 +100,6 @@ public class MenuInfoPersonaje {
 				graficarMenuComerciar(g);
 				break;
 		}
-
 
 		// muestro los botones
 		g.setFont(new Font("Book Antiqua", 1, 20));
@@ -122,21 +150,36 @@ public class MenuInfoPersonaje {
 
 	}
 
-	public void graficarMenuInformacion(Graphics g){
+	public void graficarMenuInformacion(Graphics g)
+	{
+		if(!esNPC)
+		{
+			// muestro los nombres de los atributos
+			g.setColor(Color.BLACK);
+			Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), personaje.getRaza());
+			g.drawString("Casta: ", x + 30, y + 260);
+			g.drawString("Nivel: ", x + 30, y + 290);
+			g.drawString("Experiencia: ", x + 30, y + 320);
 
-		// muestro los nombres de los atributos
-		g.setColor(Color.BLACK);
-		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), personaje.getRaza());
-		g.drawString("Casta: ", x + 30, y + 260);
-		g.drawString("Nivel: ", x + 30, y + 290);
-		g.drawString("Experiencia: ", x + 30, y + 320);
+			// muestro los atributos
+			g.setFont(new Font("Book Antiqua", 0, 20));
+			g.drawString(personaje.getCasta(), x + 100, y + 260);
+			g.drawString(personaje.getNivel() + " ", x + 100, y + 290);
+			g.drawString(personaje.getExperiencia() + " / " + Personaje.getTablaDeNiveles()[personaje.getNivel() + 1], x + 150, y + 320);
+		}
+		else
+		{
+			// muestro los nombres de los atributos
+			g.setColor(Color.BLACK);
+			Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), npc.getRaza());
+			g.drawString("Casta: ", x + 30, y + 260);
+			g.drawString("Nivel: ", x + 30, y + 290);
 
-		// muestro los atributos
-		g.setFont(new Font("Book Antiqua", 0, 20));
-		g.drawString(personaje.getCasta(), x + 100, y + 260);
-		g.drawString(personaje.getNivel() + " ", x + 100, y + 290);
-		g.drawString(personaje.getExperiencia() + " / " + Personaje.getTablaDeNiveles()[personaje.getNivel() + 1], x + 150, y + 320);
-
+			// muestro los atributos
+			g.setFont(new Font("Book Antiqua", 0, 20));
+			g.drawString(npc.getCasta(), x + 100, y + 260);
+			g.drawString(npc.getNivel() + " ", x + 100, y + 290);
+		}
 	}
 	
 	private void graficarMenuItem(Graphics g) {
@@ -153,21 +196,24 @@ public class MenuInfoPersonaje {
 
 	}
 	
-	private void graficarMenuComerciar(Graphics g){
+	private void graficarMenuComerciar(Graphics g)
+	{
+		if(!esNPC)
+		{
+			// muestro los nombres de los atributos
+			g.setColor(Color.BLACK);
+			Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), personaje.getRaza());
+			g.drawString("Casta: ", x + 30, y + 260);
+			g.drawString("Nivel: ", x + 30, y + 290);
+			g.drawString("Experiencia: ", x + 30, y + 320);
 
-		// muestro los nombres de los atributos
-		g.setColor(Color.BLACK);
-		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), personaje.getRaza());
-		g.drawString("Casta: ", x + 30, y + 260);
-		g.drawString("Nivel: ", x + 30, y + 290);
-		g.drawString("Experiencia: ", x + 30, y + 320);
-
-		// muestro los atributos
-		g.setFont(new Font("Book Antiqua", 0, 20));
-		g.drawString(personaje.getCasta(), x + 100, y + 260);
-		g.drawString(personaje.getNivel() + " ", x + 100, y + 290);
-		g.drawString(personaje.getExperiencia() + " / " + Personaje.getTablaDeNiveles()[personaje.getNivel() + 1], x + 150, y + 320);
-
+			// muestro los atributos
+			g.setFont(new Font("Book Antiqua", 0, 20));
+			g.drawString(personaje.getCasta(), x + 100, y + 260);
+			g.drawString(personaje.getNivel() + " ", x + 100, y + 290);
+			g.drawString(personaje.getExperiencia() + " / " + Personaje.getTablaDeNiveles()[personaje.getNivel() + 1], x + 150, y + 320);
+		}
+		
 	}
 
 	public boolean clickEnBoton(int mouseX, int mouseY){
@@ -186,5 +232,35 @@ public class MenuInfoPersonaje {
 		if(mouseX >= x && mouseX <= x + menu.getWidth() && mouseY >= y  && mouseY <= y + menu.getHeight())
 			return true;
 		return false;
+	}
+
+	public boolean esNPC()
+	{
+		return esNPC;
+	}
+
+	public void setEsNPC(boolean esNPC)
+	{
+		this.esNPC = esNPC;
+	}
+
+	public PaquetePersonaje getPersonaje()
+	{
+		return personaje;
+	}
+
+	public void setPersonaje(PaquetePersonaje personaje)
+	{
+		this.personaje = personaje;
+	}
+
+	public PaqueteNpc getNpc()
+	{
+		return npc;
+	}
+
+	public void setNpc(PaqueteNpc npc)
+	{
+		this.npc = npc;
 	}
 }

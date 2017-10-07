@@ -27,6 +27,8 @@ public class NpcManager
 	   
 	   ubicacionNpcs: 	Paquetes que llevan la información sobre la posición de los npcs.
 	   
+	   esos paquetes están en juego debido a que deben ser sincronizados con el server.
+	   
 	   entidadesNpcs: 	Son las entidades que se instancian para cada npc y se encargan de dibujar
 	   					en la pantalla el gráfico, de registrar los clicks para batallar etc.
 	   					
@@ -64,7 +66,7 @@ public class NpcManager
 		coords = Mundo.dosDaIso(posX, posY);
 		
 		paquetesNpcs.put(id, new PaqueteNpc(id, nivel, nombre, raza, casta));
-		ubicacionNpcs.put(id, new PaqueteMovimiento(id, posX, posY));
+		ubicacionNpcs.put(id, new PaqueteMovimiento(id, posX, posY, dir));
 		
 		Entidad ente = new Entidad(juego, mundo, 64, 64, nombre, coords[0], coords[1], Recursos.personaje.get(raza), 150);
 		ente.setIdEnemigo(id);
@@ -106,13 +108,17 @@ public class NpcManager
 		//Tile tile;
 		Random random = new Random();
 		
+		// Generación aleatoria
+		String[] castas = {"Guerrero", "Asesino", "Hechicero"};
+		String[] razas = {"Humano", "Orco", "Elfo"};
+		
 		for (int i = 1; i <= cant; i++)
 		{
 			// determino una posición aleatoria para hacer aparecer al chobi
 			do
 			{
 				// este hermoso algoritmo lo que hace básicamente es tirar una posición aleatoria
-				// y luego se fija si la zona de 2 tiles a la redonda esta totalmente despejada
+				// y luego se fija si la zona de 2 tiles a la redonda está totalmente despejada
 				// Gracias Lucas por tanto, perdon por tan poco.
 				puedoSpawnear = true;
 				posX = random.nextInt(mundo.obtenerAncho() - 18) + 13;
@@ -130,7 +136,7 @@ public class NpcManager
 				
 			} while (!puedoSpawnear);
 			
-			spawnNpc(i, random.nextInt(10) + 1, "Lucas Videla " + i, "Humano", "Guerrero", posX, posY, random.nextInt(8));
+			spawnNpc(i, random.nextInt(10) + 1, generarNombre(), razas[random.nextInt(razas.length)], castas[random.nextInt(castas.length)], posX, posY, random.nextInt(8));
 		}
 	}
 	
@@ -147,8 +153,6 @@ public class NpcManager
 			int key;
 			Entidad actual;
 			
-			/*g.setColor(Color.WHITE);
-			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));*/
 			while (it.hasNext()) 
 			{
 				key = it.next();
@@ -158,6 +162,12 @@ public class NpcManager
 					actual.graficar(g);
 			}
 		}
+		
+		/*for (Entidad actual : entidadesNpcs.values())
+		{
+			if(paquetesNpcs.get(actual.getIdEnemigo()).getEstado() == Estado.estadoJuego)
+				actual.graficar(g);
+		}*/
 	}
 	
 	/**
@@ -208,9 +218,10 @@ public class NpcManager
 				float[] coords = new float[2];
 				coords = Mundo.dosDaIso(actualUbicacion.getPosX(), actualUbicacion.getPosY());
 				
+				//System.out.println(actualUbicacion.getDireccion());
 				Entidad ente = new Entidad(juego, mundo, 64, 64, actualNpc.getNombre(), coords[0], coords[1], Recursos.personaje.get(actualNpc.getRaza()), 150);
 				ente.setIdEnemigo(key);
-				ente.setDireccion(6);
+				ente.setDireccion(actualUbicacion.getDireccion());
 				entidadesNpcs.put(key, ente);
 			}
 		}
@@ -226,6 +237,20 @@ public class NpcManager
 		this.entidadesNpcs = entidadesNpcs;
 	}
 
+	public String generarNombre()
+	{
+		Random random = new Random();
+		
+		String[] prefijos = {"Kaiser", "Sir", "Lord", "Commander", "Emperor", "Baron", "Duke",
+							"Dauphin", "Count", "Prince", "Yeoman"};
+		String[] nombres = {"Alton", "Dave", "William", "Vladimir", "Bradford", "Wilhelm", "Edmund",
+							"Alexander", "Richard", "Greyson"};
+		String[] sufijos = {"Destroyer", "Conqueror", "Impaler", "Butcher", "Ripper", "Soulless",
+							"Ravager", "Streetcleaner", "Extremist", "Fanatic", "Sadist"};
+		
+		return prefijos[random.nextInt(prefijos.length)] + " " + nombres[random.nextInt(nombres.length)] + " the " + sufijos[random.nextInt(sufijos.length)];
+	}
+	
 	/*public Map<Integer, PaqueteNpc> getPaquetesNpcs()
 	{
 		return paquetesNpcs;

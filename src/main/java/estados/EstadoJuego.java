@@ -16,13 +16,16 @@ import com.google.gson.Gson;
 
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
+import interfaz.MenuInfoNpc;
 import interfaz.MenuInfoPersonaje;
 import juego.Juego;
 import juego.NpcManager;
 import juego.Pantalla;
 import mensajeria.Comando;
+import mensajeria.Paquete;
 import mensajeria.PaqueteDeNpcs;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
@@ -50,7 +53,7 @@ public class EstadoJuego extends Estado {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
 		paquetePersonaje = juego.getPersonaje();
-		entidadPersonaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.personaje.get(juego.getPersonaje().getRaza()), 15);
+		entidadPersonaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.personaje.get(juego.getPersonaje().getRaza()), 150);
 		//ente = new Entidad(juego, mundo, 256, 256, "Lucas Videla", 128, 128, Recursos.personaje.get("Orco"), 15);
 		miniaturaPersonaje = Recursos.personaje.get(paquetePersonaje.getRaza()).get(5)[0];
 		
@@ -58,9 +61,11 @@ public class EstadoJuego extends Estado {
 		npcManager = new NpcManager(juego, mundo);
 		juego.setNpcManager(npcManager);
 		
+		// Si soy el primero en entrar al server, genero los npcs en mi cliente y los envío al server
+		// si no, traigo los npcs del server.
 		if(juego.getPaquetesNpcs() == null)
 		{
-			npcManager.spawnInicial(100);
+			npcManager.spawnInicial(10);
 			PaqueteDeNpcs paqueteDeNpcs = new PaqueteDeNpcs(juego.getPaquetesNpcs(), juego.getUbicacionNpcs());
 			paqueteDeNpcs.setComando(Comando.ACTUALIZARNPCS);
 			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteDeNpcs));
@@ -102,7 +107,9 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.menu, 3, 562, 102, 35, null);
 		g.drawImage(Recursos.chat, 3, 524, 102, 35, null);
 		if(haySolicitud)
+		{
 			menuEnemigo.graficar(g, tipoSolicitud);
+		}
 
 	}
 
@@ -147,7 +154,8 @@ public class EstadoJuego extends Estado {
 		return null;
 	}
 
-	public void setHaySolicitud(boolean b, PaquetePersonaje enemigo, int tipoSolicitud) {
+	public void setHaySolicitud(boolean b, Paquete enemigo, int tipoSolicitud) 
+	{
 		haySolicitud = b;
 		// menu que mostrara al enemigo
 		menuEnemigo = new MenuInfoPersonaje(300, 50, enemigo);

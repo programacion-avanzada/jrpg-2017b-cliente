@@ -198,8 +198,9 @@ public class Entidad {
 			
 			if (juego.getEstadoJuego().getHaySolicitud()) {
 
-				if (juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])) {
-					
+				if (juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])
+						&& !juego.getEstadoJuego().getMenuEnemigo().esNPC()) 
+				{
 					if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], 
 							posMouse[1])) {
 						// Pregunto si menuBatallar o menuComerciar, sino no me interesa hacer esto
@@ -276,7 +277,32 @@ public class Entidad {
 						juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
 					}
 				} 
-				else {
+				else if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], posMouse[1])
+						&& juego.getEstadoJuego().getMenuEnemigo().esNPC())
+				{
+					if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuBatallar)
+					{
+						PaqueteBatalla pBatalla = new PaqueteBatalla();
+						
+						pBatalla.setId(juego.getPersonaje().getId());
+						pBatalla.setIdEnemigo(juego.getEstadoJuego().getMenuEnemigo().getNpc().getId() * -1);
+						
+						juego.getPersonaje().setEstado(Estado.estadoBatallaNpc);
+						Estado.setEstado(null);
+						juego.setEstadoBatallaNpc(new EstadoBatallaNpc(juego, pBatalla));
+						Estado.setEstado(juego.getEstadoBatallaNpc());
+						
+						try {
+							juego.getCliente().getSalida().writeObject(gson.toJson
+									(pBatalla));
+						} catch (IOException e) {
+							JOptionPane.showMessageDialog(null, "Fallo la conexión "
+									+ "con el servidor");
+						}
+					}
+				}
+				else 
+				{
 					juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
 				}
 			} 
@@ -357,7 +383,9 @@ public class Entidad {
 							if (tileMoverme[0] == tileNpc[0] && tileMoverme[1] == tileNpc[1] 
 									&& juego.getPaquetesNpcs().get(actual.getIdEnemigo()).getEstado() == Estado.estadoJuego) 
 							{
-								PaqueteBatalla pBatalla = new PaqueteBatalla();
+								juego.getEstadoJuego().setHaySolicitud(true, juego.getPaquetesNpcs().get(actual.getIdEnemigo()), MenuInfoPersonaje.menuBatallar);	
+								
+								/*PaqueteBatalla pBatalla = new PaqueteBatalla();
 								
 								pBatalla.setId(juego.getPersonaje().getId());
 								pBatalla.setIdEnemigo(actual.idEnemigo * -1);
@@ -373,7 +401,7 @@ public class Entidad {
 								} catch (IOException e) {
 									JOptionPane.showMessageDialog(null, "Fallo la conexión "
 											+ "con el servidor");
-								}
+								}*/
 							}
 						}
 					}

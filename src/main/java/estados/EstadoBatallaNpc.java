@@ -77,7 +77,6 @@ public class EstadoBatallaNpc extends Estado {
 		paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
 		paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
 		paqueteFinalizarBatalla.setIdEnemigo(paqueteEnemigo.getId() * -1);
-		//System.out.println("Batallar: " + paqueteEnemigo.getId() * -1);
 
 		// por defecto batalla perdida
 		juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
@@ -178,9 +177,10 @@ public class EstadoBatallaNpc extends Estado {
 						if(!personaje.estaVivo()) // EL PERSONAJE MUERE
 						{
 							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
+							paqueteFinalizarBatalla.setGanadorBatalla(paqueteEnemigo.getId());
 							
 							juego.getPersonaje().setEstado(Estado.estadoJuego);
-							//finalizarBatalla();
+							finalizarBatalla();
 							Estado.setEstado(juego.getEstadoJuego());
 						}
 						
@@ -263,19 +263,24 @@ public class EstadoBatallaNpc extends Estado {
 		{
 			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
 
-			paquetePersonaje.setSaludTope(personaje.getSaludTope());
-			paquetePersonaje.setEnergiaTope(personaje.getEnergiaTope());
-			paquetePersonaje.setNivel(personaje.getNivel());
-			paquetePersonaje.setExperiencia(personaje.getExperiencia());
-			paquetePersonaje.setDestreza(personaje.getDestreza());
-			paquetePersonaje.setFuerza(personaje.getFuerza());
-			paquetePersonaje.setInteligencia(personaje.getInteligencia());
-			
-			paquetePersonaje.setPuntosSkill(personaje.getPuntosSkill());
-			paquetePersonaje.removerBonus();
+			// si gana el humano
+			if (paqueteFinalizarBatalla.getGanadorBatalla() == paquetePersonaje.getId())
+			{
+				paquetePersonaje.setSaludTope(personaje.getSaludTope());
+				paquetePersonaje.setEnergiaTope(personaje.getEnergiaTope());
+				paquetePersonaje.setNivel(personaje.getNivel());
+				paquetePersonaje.setExperiencia(personaje.getExperiencia());
+				paquetePersonaje.setDestreza(personaje.getDestreza());
+				paquetePersonaje.setFuerza(personaje.getFuerza());
+				paquetePersonaje.setInteligencia(personaje.getInteligencia());
+				
+				paquetePersonaje.setPuntosSkill(personaje.getPuntosSkill());
+				paquetePersonaje.removerBonus();
 
-			paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
-			juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
+				paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
+				juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
+			}
+			
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
 		}

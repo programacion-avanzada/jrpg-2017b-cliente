@@ -25,6 +25,15 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 		this.posY = posY;
 		setComando(Comando.MOVIMIENTO);
 	}
+	
+	public PaqueteMovimiento(int idPersonaje, float posX, float posY, int direccion) 
+	{
+		this.id = idPersonaje;
+		this.posX = posX;
+		this.posY = posY;
+		this.direccion = direccion;
+		setComando(Comando.MOVIMIENTO);
+	}
 
 	public int getIdPersonaje() {
 		return id;

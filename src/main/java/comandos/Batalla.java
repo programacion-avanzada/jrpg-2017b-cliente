@@ -7,11 +7,10 @@ import mensajeria.PaqueteBatalla;
 public class Batalla extends ComandosEscucha {
 
 	@Override
-	public void ejecutar() {
-		
+	public void ejecutar()
+	{
 		PaqueteBatalla paqueteBatalla = (PaqueteBatalla) gson.fromJson(cadenaLeida, PaqueteBatalla.class);
 		
-		System.out.println("Llegó al cliente: " + paqueteBatalla.getIdEnemigo());
 		if (paqueteBatalla.getIdEnemigo() > 0) // Batalló contra otro personaje
 		{
 			juego.getPersonaje().setEstado(Estado.estadoBatalla);
@@ -21,9 +20,9 @@ public class Batalla extends ComandosEscucha {
 		}
 		else // Batalló contra otro NPC
 		{
+			System.out.println("Recibío el cliente: " + paqueteBatalla.getIdEnemigo());
 			juego.getPaquetesNpcs().get(paqueteBatalla.getIdEnemigo() * -1).setEstado(Estado.estadoBatallaNpc);
 		}
-
 	}
 
 }
