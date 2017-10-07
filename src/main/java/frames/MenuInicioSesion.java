@@ -124,19 +124,8 @@ public class MenuInicioSesion extends JFrame {
 	private void logIn(final Cliente cliente) {
 		synchronized(cliente){
 			cliente.setAccion(Comando.INICIOSESION);
-			if(textField.getText().equals("")){
-				cliente.getPaqueteUsuario().setUsername("Ben");
-				cliente.getPaqueteUsuario().setPassword(String.valueOf("123456"));
-			}
-			else if(textField.getText().equals("a")){
-				cliente.getPaqueteUsuario().setUsername("asd");
-				cliente.getPaqueteUsuario().setPassword(String.valueOf("asd"));
-			}
-			else{
-				cliente.getPaqueteUsuario().setUsername(textField.getText());
-				cliente.getPaqueteUsuario().setPassword(String.valueOf(passwordField.getPassword()));
-			}
-
+			cliente.getPaqueteUsuario().setUsername(textField.getText());
+			cliente.getPaqueteUsuario().setPassword(String.valueOf(passwordField.getPassword()));
 
 			cliente.notify();
 			dispose();
