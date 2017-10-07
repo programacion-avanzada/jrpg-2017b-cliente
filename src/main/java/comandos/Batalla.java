@@ -20,7 +20,6 @@ public class Batalla extends ComandosEscucha {
 		}
 		else // Batalló contra otro NPC
 		{
-			System.out.println("Recibío el cliente: " + paqueteBatalla.getIdEnemigo());
 			juego.getPaquetesNpcs().get(paqueteBatalla.getIdEnemigo() * -1).setEstado(Estado.estadoBatallaNpc);
 		}
 	}

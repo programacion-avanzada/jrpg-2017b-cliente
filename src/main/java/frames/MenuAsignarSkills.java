@@ -188,6 +188,9 @@ public class MenuAsignarSkills extends JFrame {
 		
 
 		ImageIcon icono_1 = new ImageIcon("recursos//botonMenoss.png");
+		buttonMinus.setBounds(12, 92, 34, 25);
+		contentPane.add(buttonMinus);
+		
 		buttonMinus.setIcon(icono_1);
 		buttonMinus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -450,5 +453,11 @@ public class MenuAsignarSkills extends JFrame {
 				intDes = 15;
 			}
 			return intDes+cliente.getPaquetePersonaje().getDestrezaItem();
+		}
+		
+		private void cerrarMenuAsignarSkills ()
+		{
+			Pantalla.menuAsignar = null;
+			dispose();
 		}
 }

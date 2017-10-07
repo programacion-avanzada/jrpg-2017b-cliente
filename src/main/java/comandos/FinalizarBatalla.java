@@ -18,7 +18,6 @@ public class FinalizarBatalla extends ComandosEscucha{
 				juego.getNpcManager().despawnNpc(paqueteFinalizarBatalla.getIdEnemigo() * -1);
 			else
 			{
-				System.out.println("entre a setear estado");
 				juego.getPaquetesNpcs().get(paqueteFinalizarBatalla.getIdEnemigo() * -1).setEstado(Estado.estadoJuego);
 			}
 			
