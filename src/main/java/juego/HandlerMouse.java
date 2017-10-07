@@ -10,7 +10,6 @@ public class HandlerMouse implements MouseListener {
 	private boolean nuevoRecorrido;
 	private boolean nuevoClick;
 
-
 	public HandlerMouse() {
 		posMouse = new int[2];
 		posMouseRecorrido = new int[2];
@@ -18,11 +17,11 @@ public class HandlerMouse implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getButton() == MouseEvent.BUTTON1) {
+		if (e.getButton() == MouseEvent.BUTTON1) {
 			posMouse[0] = e.getX();
 			posMouse[1] = e.getY();
 			nuevoClick = true;
-		} else if(e.getButton() == MouseEvent.BUTTON3) {
+		} else if (e.getButton() == MouseEvent.BUTTON3) {
 			posMouseRecorrido[0] = e.getX();
 			posMouseRecorrido[1] = e.getY();
 			nuevoRecorrido = true;

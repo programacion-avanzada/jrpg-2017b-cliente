@@ -14,13 +14,14 @@ public class Comercio extends ComandosEscucha {
 	public void ejecutar() {
 		PaqueteComerciar paqueteComerciar;
 		paqueteComerciar = gson.fromJson(cadenaLeida, PaqueteComerciar.class);
-		// Cuando recibo el paquete de comercio actualizado intercambio user/ destino
+		// Cuando recibo el paquete de comercio actualizado intercambio user/
+		// destino
 		paqueteComerciar.setIdEnemigo(paqueteComerciar.getId());
 		paqueteComerciar.setId(juego.getCliente().getPaquetePersonaje().getId());
-		
+
 		if (paqueteComerciar.isSolicitudDeComercio()) {
 			if (juego.getCliente().getM1() != null) {
-				paqueteComerciar.setMensaje(Paquete.msjFracaso);		
+				paqueteComerciar.setMensaje(Paquete.msjFracaso);
 			} else {
 				juego.getCliente().setPaqueteComercio(paqueteComerciar);
 				juego.getCliente().setM1(new MenuComerciar(juego.getCliente()));
@@ -33,7 +34,7 @@ public class Comercio extends ComandosEscucha {
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "No se envio la solicitud de comercio");
 			}
-			
+
 		} else {
 			if (paqueteComerciar.getMensaje().equals(Paquete.msjFracaso)) {
 				JOptionPane.showMessageDialog(null, "Ya esta comerciando");
@@ -45,7 +46,7 @@ public class Comercio extends ComandosEscucha {
 				}
 			}
 		}
-		
+
 	}
 
 }

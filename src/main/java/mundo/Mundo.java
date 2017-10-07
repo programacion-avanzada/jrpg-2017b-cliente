@@ -1,9 +1,19 @@
 package mundo;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import estados.Estado;
 import juego.Juego;
+import juego.Pantalla;
+import mensajeria.PaqueteMovimiento;
+import mensajeria.PaquetePersonaje;
+import recursos.Recursos;
 
 public class Mundo {
 	private Juego juego;
@@ -35,7 +45,7 @@ public class Mundo {
 
 	}
 
-	public void graficar(Graphics g) {
+	public void graficarSuelo(Graphics g) {
 		xOffset = juego.getEstadoJuego().getPersonaje().getxOffset();
 		yOffset = juego.getEstadoJuego().getPersonaje().getYOffset();
 
@@ -51,44 +61,152 @@ public class Mundo {
 				if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)) {
 					int map = juego.getPersonaje().getMapa();
 					if (map == 1) {
-						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 					} else if (map == 2) {
-						Tile.aris[Tile.arisBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+						Tile.aris[Tile.arisBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 					} else if (map == 3) {
-						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 					}
-					if(!getTile(j,i).esSolido())
-						getTile(j,i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32 ),64,64);
+					if (!getTile(j, i).esSolido())
+						getTile(j, i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 				}
 			}
 		}
 	}
 
 	public void graficarObstaculos(Graphics g) {
+		Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
+		Map<Integer, PaquetePersonaje> personajesConectados;
+		int jPersonaje;
+		int iPersonaje;
+		boolean haySolidoArriba;
+		boolean haySolidoAbajo;
 		Tile obst;
 		for (int i = 0; i < alto; i++) {
 			for (int j = 0; j < ancho; j++) {
-				iso = dosDaIso(j, i);
-				// Grafico al personaje
-				if(Estado.getEstado() == juego.getEstadoJuego())
-					if (Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
-							juego.getUbicacionPersonaje().getPosY())[0] == j
-							&& Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
-									juego.getUbicacionPersonaje().getPosY())[1] == i )
-						juego.getEstadoJuego().getPersonaje().graficar(g);
 
-				// Grafico los obstaculos
-				if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)
-						&& getTile(j, i).esSolido()) {
+				// Se grafican los obstáculos sólidos
+				iso = dosDaIso(j, i);
+				if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo) && getTile(j, i).esSolido()) {
 					obst = getTile(j, i);
-					obst.graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-							(int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto()/2), obst.getAncho(),
-							obst.getAlto());
+					obst.graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()), (int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto() / 2), obst.getAncho(), obst.getAlto());
 				}
+
+				// Se grafica el personaje, teniendo en cuenta si es adyacente a
+				// un obstáculo sólido
+				jPersonaje = Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[0];
+				iPersonaje = Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY())[1];
+
+				/*
+				 * Parche temporal
+				 *
+				 * Bug a solucionar: Las coordenadas del personaje no se actualizan apropiadamente luego de un movimiento
+				 *
+				 * Será necesario remover el parche una vez solucionado el bug
+				 */
+				if (juego.getUbicacionPersonaje().getDireccion() == 0) {
+					iPersonaje++;
+				}
+				if (juego.getUbicacionPersonaje().getDireccion() == 4) {
+					jPersonaje++;
+				}
+				if (juego.getUbicacionPersonaje().getDireccion() == 5) {
+					jPersonaje++;
+				}
+				if (juego.getUbicacionPersonaje().getDireccion() == 6) {
+					jPersonaje++;
+					iPersonaje++;
+				}
+				if (juego.getUbicacionPersonaje().getDireccion() == 7) {
+					iPersonaje++;
+				}
+				/*
+				 * -------------------------------------------------
+				 */
+
+				try {
+					haySolidoAbajo = getTile(jPersonaje + 1, iPersonaje).esSolido();
+				} catch (Exception e) {
+					haySolidoAbajo = false;
+				}
+
+				try {
+					haySolidoArriba = getTile(jPersonaje - 1, iPersonaje).esSolido();
+				} catch (Exception e) {
+					haySolidoArriba = false;
+				}
+
+				if (((haySolidoAbajo == haySolidoArriba) && (j == jPersonaje && i == iPersonaje)) || ((haySolidoAbajo && !haySolidoArriba) && (j == jPersonaje && i == iPersonaje - 1)) || ((haySolidoArriba && !haySolidoAbajo) && (j == jPersonaje && i == iPersonaje + 1))) {
+					juego.getEstadoJuego().getPersonaje().graficar(g);
+					juego.getEstadoJuego().getPersonaje().graficarNombre(g);
+				}
+
+				// Se grafican los otros personajes, teniendo en cuenta si son
+				// adyacentes a un obstáculo sólido, y teniendo en cuenta si
+				// están en el mismo mapa
+				if (juego.getPersonajesConectados() != null) {
+					personajesConectados = new HashMap(juego.getPersonajesConectados());
+					ubicacionPersonajes = new HashMap(juego.getUbicacionPersonajes());
+					Iterator<Integer> it = personajesConectados.keySet().iterator();
+					int key;
+					PaqueteMovimiento actual;
+					g.setColor(Color.WHITE);
+					g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+					while (it.hasNext()) {
+						key = it.next();
+						actual = ubicacionPersonajes.get(key);
+						if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego && personajesConectados.get(actual.getIdPersonaje()).getMapa() == juego.getPersonaje().getMapa()) {
+
+							jPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[0];
+							iPersonaje = Mundo.mouseATile(actual.getPosX(), actual.getPosY())[1];
+
+							/*
+							 * Parche temporal
+							 *
+							 * Bug a solucionar: Las coordenadas del personaje no se actualizan apropiadamente luego de un movimiento
+							 *
+							 * Será necesario remover el parche una vez solucionado el bug
+							 */
+							if (juego.getUbicacionPersonaje().getDireccion() == 0) {
+								iPersonaje++;
+							}
+							if (juego.getUbicacionPersonaje().getDireccion() == 4) {
+								jPersonaje++;
+							}
+							if (juego.getUbicacionPersonaje().getDireccion() == 5) {
+								jPersonaje++;
+							}
+							if (juego.getUbicacionPersonaje().getDireccion() == 6) {
+								jPersonaje++;
+								iPersonaje++;
+							}
+							if (juego.getUbicacionPersonaje().getDireccion() == 7) {
+								iPersonaje++;
+							}
+							/*
+							 * -------------------------------------------------
+							 */
+
+							try {
+								haySolidoAbajo = getTile(jPersonaje + 1, iPersonaje).esSolido();
+							} catch (Exception e) {
+								haySolidoAbajo = false;
+							}
+
+							try {
+								haySolidoArriba = getTile(jPersonaje - 1, iPersonaje).esSolido();
+							} catch (Exception e) {
+								haySolidoArriba = false;
+							}
+
+							if (((haySolidoAbajo == haySolidoArriba) && (j == jPersonaje && i == iPersonaje)) || ((haySolidoAbajo && !haySolidoArriba) && (j == jPersonaje && i == iPersonaje - 1)) || ((haySolidoArriba && !haySolidoAbajo) && (j == jPersonaje && i == iPersonaje + 1))) {
+								Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
+								g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset()), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+							}
+						}
+					}
+				}
+
 			}
 		}
 	}
@@ -156,9 +274,7 @@ public class Mundo {
 						// Y ademas el de arriba ni el de la derecha lo son, lo
 						// uno
 						// Tiene que ser a partir de la segunda fila
-						if (y > 0 && !Tile.tiles[tilesInv[x + 1][y - 1]].esSolido()
-								&& !Tile.tiles[tilesInv[x + 1][y]].esSolido()
-								&& !Tile.tiles[tilesInv[x][y - 1]].esSolido()) {
+						if (y > 0 && !Tile.tiles[tilesInv[x + 1][y - 1]].esSolido() && !Tile.tiles[tilesInv[x + 1][y]].esSolido() && !Tile.tiles[tilesInv[x][y - 1]].esSolido()) {
 							nodos[x][y].agregarAdyacente(nodos[x + 1][y - 1]);
 							nodos[x + 1][y - 1].agregarAdyacente(nodos[x][y]);
 						}
@@ -171,9 +287,7 @@ public class Mundo {
 						// Y ademas el de abajo ni el de la derecha lo son, lo
 						// uno
 						// Debe ser antes de la ultima fila
-						if (y < yFinal - 1 && !Tile.tiles[tilesInv[x + 1][y + 1]].esSolido()
-								&& !Tile.tiles[tilesInv[x + 1][y]].esSolido()
-								&& !Tile.tiles[tilesInv[x][y + 1]].esSolido()) {
+						if (y < yFinal - 1 && !Tile.tiles[tilesInv[x + 1][y + 1]].esSolido() && !Tile.tiles[tilesInv[x + 1][y]].esSolido() && !Tile.tiles[tilesInv[x][y + 1]].esSolido()) {
 							nodos[x][y].agregarAdyacente(nodos[x + 1][y + 1]);
 							nodos[x + 1][y + 1].agregarAdyacente(nodos[x][y]);
 						}

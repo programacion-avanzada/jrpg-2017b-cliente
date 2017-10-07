@@ -9,11 +9,11 @@ public class PaqueteUsuario extends Paquete implements Serializable, Cloneable {
 	private String password;
 	private boolean inicioSesion;
 
-	public PaqueteUsuario(){
+	public PaqueteUsuario() {
 
 	}
 
-	public PaqueteUsuario(int pj, String user, String pw){
+	public PaqueteUsuario(int pj, String user, String pw) {
 		idPj = pj;
 		username = user;
 		password = pw;
@@ -58,6 +58,5 @@ public class PaqueteUsuario extends Paquete implements Serializable, Cloneable {
 		obj = super.clone();
 		return obj;
 	}
-
 
 }

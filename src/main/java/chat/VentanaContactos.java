@@ -22,7 +22,7 @@ import juego.Juego;
 import juego.Pantalla;
 import mensajeria.PaquetePersonaje;
 
-public class VentanaContactos extends JFrame {	
+public class VentanaContactos extends JFrame {
 	private JPanel contentPane;
 	private DefaultListModel<String> modelo = new DefaultListModel<String>();
 	private static JList<String> list = new JList<String>();
@@ -38,7 +38,7 @@ public class VentanaContactos extends JFrame {
 		setBounds(100, 100, 327, 273);
 		setLocationRelativeTo(null);
 		setTitle("Usuarios");
-		
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -55,13 +55,13 @@ public class VentanaContactos extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		botonMc = new JButton("Multichat");
 		botonMc.setIcon(new ImageIcon("recursos//multichatButton.png"));
 		botonMc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(modelo.size() != 0) {
-					if(!juego.getChatsActivos().containsKey("Sala")) {
+				if (modelo.size() != 0) {
+					if (!juego.getChatsActivos().containsKey("Sala")) {
 						MiChat chat = new MiChat(juego);
 						juego.getChatsActivos().put("Sala", chat);
 						chat.setTitle("Sala");
@@ -73,7 +73,7 @@ public class VentanaContactos extends JFrame {
 		});
 		botonMc.setBounds(119, 208, 89, 23);
 		contentPane.add(botonMc);
-		
+
 		// Cargo la lista de contactos
 		actualizarLista(juego);
 		// Pregunto si la ventana sala esta abierta y cancelo el boton multichat
@@ -82,36 +82,35 @@ public class VentanaContactos extends JFrame {
 		} else {
 			botonMc.setEnabled(true);
 		}
-		
+
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (arg0.getClickCount() == 2) {
-					if(list.getSelectedValue() != null) {
-						if(!juego.getChatsActivos().containsKey(list.getSelectedValue())) {
+					if (list.getSelectedValue() != null) {
+						if (!juego.getChatsActivos().containsKey(list.getSelectedValue())) {
 							if (juego.getCliente() != null) {
 								MiChat chat = new MiChat(juego);
 								juego.getChatsActivos().put(list.getSelectedValue(), chat);
 								chat.setTitle(list.getSelectedValue());
 								chat.setVisible(true);
-							}	
+							}
 						}
 					}
 				}
 			}
 		});
 
-
 		list.setModel(modelo);
 		scrollPane.setViewportView(list);
-		
+
 		background = new JLabel(new ImageIcon("recursos//background.jpg"));
 		background.setBounds(-16, 0, 352, 254);
 		contentPane.add(background);
 	}
 
 	private void actualizarLista(final Juego juego) {
-		if(juego.getCliente() != null) {
+		if (juego.getCliente() != null) {
 			synchronized (juego.getCliente()) {
 				modelo.removeAllElements();
 				if (juego.getPersonajesConectados() != null) {
@@ -124,11 +123,11 @@ public class VentanaContactos extends JFrame {
 			}
 		}
 	}
-	
+
 	public static JList<String> getList() {
 		return list;
 	}
-	
+
 	public static JButton getBotonMc() {
 		return botonMc;
 	}

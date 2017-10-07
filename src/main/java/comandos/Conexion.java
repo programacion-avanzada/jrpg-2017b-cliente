@@ -4,14 +4,12 @@ import java.util.Map;
 
 import javax.swing.DefaultListModel;
 
-import cliente.Cliente;
 import chat.VentanaContactos;
 import mensajeria.PaqueteDePersonajes;
 import mensajeria.PaquetePersonaje;
 
 public class Conexion extends ComandosEscucha {
 
-	
 	@Override
 	public void ejecutar() {
 		PaqueteDePersonajes pdp = (PaqueteDePersonajes) gson.fromJson(cadenaLeida, PaqueteDePersonajes.class);

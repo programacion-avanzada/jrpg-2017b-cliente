@@ -6,6 +6,8 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,28 +18,26 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import cliente.Cliente;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class MenuInicio extends JFrame {
 
 	private JPanel contentPane;
 
 	public MenuInicio() {
+		// Se inicializa ícono y cursor
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0), "custom cursor"));
+
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					Cliente cliente = new Cliente();
 					cliente.start();
 					dispose();
 				}
 			}
 		});
-		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -55,7 +55,6 @@ public class MenuInicio extends JFrame {
 		lblLogo.setIcon(new ImageIcon(MenuCarga.class.getResource("/frames/WOME.png")));
 		lblLogo.setBounds(109, 39, 216, 90);
 		contentPane.add(lblLogo);
-
 
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 0, 444, 271);
@@ -90,7 +89,7 @@ public class MenuInicio extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		JButton btnIniciarSesion = new JButton("Salir");
 		btnIniciarSesion.setBounds(127, 202, 191, 23);
 		layeredPane.add(btnIniciarSesion, new Integer(1));
@@ -102,7 +101,7 @@ public class MenuInicio extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		JLabel lblBackground = new JLabel("");
 
 		lblBackground.setBounds(0, 0, 444, 271);

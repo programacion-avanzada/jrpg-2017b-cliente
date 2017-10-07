@@ -6,9 +6,9 @@ public class Nodo {
 	private int y;
 	private int indice;
 	private int cantidadDeAdyacentes;
-	private Nodo [] nodosAdyacentes;
+	private Nodo[] nodosAdyacentes;
 
-	public Nodo(int indice, int x, int y){
+	public Nodo(int indice, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.indice = indice;
@@ -16,27 +16,27 @@ public class Nodo {
 		nodosAdyacentes = new Nodo[8];
 	}
 
-	public int obtenerX(){
+	public int obtenerX() {
 		return x;
 	}
 
-	public int obtenerY(){
+	public int obtenerY() {
 		return y;
 	}
 
-	public int obtenerIndice(){
+	public int obtenerIndice() {
 		return indice;
 	}
 
-	public Nodo [] obtenerNodosAdyacentes(){
+	public Nodo[] obtenerNodosAdyacentes() {
 		return nodosAdyacentes;
 	}
 
-	public void agregarAdyacente(Nodo nodo){
+	public void agregarAdyacente(Nodo nodo) {
 		nodosAdyacentes[cantidadDeAdyacentes++] = nodo;
 	}
 
-	public int obtenerCantidadDeAdyacentes(){
+	public int obtenerCantidadDeAdyacentes() {
 		return cantidadDeAdyacentes;
 	}
 }

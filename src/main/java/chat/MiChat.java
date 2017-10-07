@@ -36,12 +36,12 @@ public class MiChat extends JFrame {
 	private DefaultCaret caret;
 
 	/**
-	 * Create the frame. 
+	 * Create the frame.
 	 */
 	public MiChat(final Juego juego) {
 		this.juego = juego;
 		setTitle("Mi Chat");
-		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setResizable(false);
@@ -49,16 +49,16 @@ public class MiChat extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(10, 11, 414, 201);
 		contentPane.add(scrollPane);
-		
+
 		chat = new JTextArea();
 		chat.setEditable(false);
 		scrollPane.setViewportView(chat);
-		caret = (DefaultCaret)chat.getCaret();
+		caret = (DefaultCaret) chat.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
 		texto = new JTextField();
@@ -66,34 +66,35 @@ public class MiChat extends JFrame {
 			public void windowOpened(WindowEvent e) {
 				texto.requestFocus();
 			}
+
 			@Override
 			public void windowClosing(WindowEvent e) {
 				if (getTitle() == "Sala") {
 					if (Pantalla.ventContac != null) {
-						VentanaContactos.getBotonMc().setEnabled(true);						
+						VentanaContactos.getBotonMc().setEnabled(true);
 					}
 				}
 				juego.getChatsActivos().remove(getTitle());
 			}
 		});
-		
-		//SI TOCO ENTER
+
+		// SI TOCO ENTER
 		texto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!texto.getText().equals("")) {
+				if (!texto.getText().equals("")) {
 					chat.append("Me: " + texto.getText() + "\n");
-					
+
 					juego.getCliente().getPaqueteMensaje().setUserEmisor(juego.getPersonaje().getNombre());
 					juego.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
 					juego.getCliente().getPaqueteMensaje().setMensaje(texto.getText());
-					
+
 					// MANDO EL COMANDO PARA QUE ENVIE EL MSJ
 					juego.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
 					// El user receptor en espacio indica que es para todos
-					if(getTitle() == "Sala"){
+					if (getTitle() == "Sala") {
 						juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
 					}
-					
+
 					try {
 						juego.getCliente().getSalida().writeObject(gson.toJson(juego.getCliente().getPaqueteMensaje()));
 					} catch (IOException e1) {
@@ -104,26 +105,26 @@ public class MiChat extends JFrame {
 				texto.requestFocus();
 			}
 		});
-		
-		//SI TOCO ENVIAR
+
+		// SI TOCO ENVIAR
 		JButton enviar = new JButton("ENVIAR");
 		enviar.setIcon(new ImageIcon("recursos//enviarButton.png"));
 		enviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!texto.getText().equals("")) {
+				if (!texto.getText().equals("")) {
 					chat.append("Me: " + texto.getText() + "\n");
-					
+
 					juego.getCliente().getPaqueteMensaje().setUserEmisor(juego.getPersonaje().getNombre());
 					juego.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
 					juego.getCliente().getPaqueteMensaje().setMensaje(texto.getText());
-					
+
 					// MANDO EL COMANDO PARA QUE ENVIE EL MSJ
 					juego.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
 					// El user receptor en espacio indica que es para todos
-					if(getTitle() == "Sala"){
+					if (getTitle() == "Sala") {
 						juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
 					}
-					
+
 					try {
 						juego.getCliente().getSalida().writeObject(gson.toJson(juego.getCliente().getPaqueteMensaje()));
 					} catch (IOException e1) {
@@ -137,14 +138,14 @@ public class MiChat extends JFrame {
 		});
 		enviar.setBounds(334, 225, 81, 23);
 		contentPane.add(enviar);
-		
+
 		texto.setBounds(10, 223, 314, 27);
 		contentPane.add(texto);
 		texto.setColumns(10);
 		background.setBounds(-20, 0, 480, 283);
 		contentPane.add(background);
 	}
-	
+
 	public JTextArea getChat() {
 		return chat;
 	}

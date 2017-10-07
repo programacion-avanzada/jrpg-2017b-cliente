@@ -4,44 +4,43 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import cliente.*;
-import mensajeria.Comando;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import cliente.Cliente;
+import mensajeria.Comando;
 
 public class MenuJugar extends JFrame {
 
 	private JPanel contentPane;
 
 	public MenuJugar(final Cliente cliente) {
+		// Se inicializa ícono y cursor
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0), "custom cursor"));
+
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					MenuInicioSesion menuInicioSesion = new MenuInicioSesion(cliente);
 					menuInicioSesion.setVisible(true);
 					dispose();
 				}
 			}
 		});
-		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -49,7 +48,7 @@ public class MenuJugar extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.setAccion(Comando.SALIR);
 					cliente.notify();
 				}
@@ -121,5 +120,3 @@ public class MenuJugar extends JFrame {
 		layeredPane.add(lblBackground, new Integer(0));
 	}
 }
-
-

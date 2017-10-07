@@ -1,9 +1,21 @@
 package frames;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
@@ -11,30 +23,20 @@ import javax.swing.border.EmptyBorder;
 import cliente.Cliente;
 import mensajeria.Comando;
 
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.Toolkit;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.ActionEvent;
-import javax.swing.JLayeredPane;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
 public class MenuMapas extends JFrame {
 	public static int numberMap = 0;
 	private JPanel contentPane;
 
 	public MenuMapas(final Cliente cliente) {
+		// Se inicializa ícono y cursor
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0), "custom cursor"));
+
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					synchronized(cliente){
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					synchronized (cliente) {
 						cliente.getPaquetePersonaje().setMapa(1);
 						numberMap = 1;
 						cliente.notify();
@@ -43,10 +45,6 @@ public class MenuMapas extends JFrame {
 				}
 			}
 		});
-		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
 
 		setTitle("Elegir Mapa");
 		setBounds(100, 100, 450, 300);
@@ -55,7 +53,7 @@ public class MenuMapas extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.setAccion(Comando.SALIR);
 					cliente.notify();
 				}
@@ -114,7 +112,7 @@ public class MenuMapas extends JFrame {
 		btnEodrim.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.getPaquetePersonaje().setMapa(3);
 					cliente.notify();
 				}
@@ -132,7 +130,7 @@ public class MenuMapas extends JFrame {
 		btnAris.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.getPaquetePersonaje().setMapa(2);
 					numberMap = 2;
 					cliente.notify();
@@ -150,7 +148,7 @@ public class MenuMapas extends JFrame {
 		btnAubenor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				synchronized(cliente){
+				synchronized (cliente) {
 					cliente.getPaquetePersonaje().setMapa(1);
 					numberMap = 1;
 					cliente.notify();
@@ -160,4 +158,3 @@ public class MenuMapas extends JFrame {
 		});
 	}
 }
-

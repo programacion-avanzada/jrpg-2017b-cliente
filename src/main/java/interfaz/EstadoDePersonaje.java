@@ -18,7 +18,7 @@ public class EstadoDePersonaje {
 	private static final int ALTOMINIATURA = 64;
 	private static final int ANCHOMINIATURA = 64;
 
-	public static void dibujarEstadoDePersonaje(Graphics g, int x, int y, Personaje personaje, BufferedImage miniaturaPersonaje){
+	public static void dibujarEstadoDePersonaje(Graphics g, int x, int y, Personaje personaje, BufferedImage miniaturaPersonaje) {
 
 		int drawBarra = 0;
 
@@ -26,7 +26,7 @@ public class EstadoDePersonaje {
 
 		g.drawImage(miniaturaPersonaje, x + 10, y + 9, ANCHOMINIATURA, ALTOMINIATURA, null);
 
-		if(personaje.getSalud() == personaje.getSaludTope()) {
+		if (personaje.getSalud() == personaje.getSaludTope()) {
 			drawBarra = ANCHOBARRA;
 		} else {
 			drawBarra = (personaje.getSalud() * ANCHOBARRA) / personaje.getSaludTope();
@@ -34,10 +34,10 @@ public class EstadoDePersonaje {
 
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		g.drawImage(Recursos.barraSalud,  x + 80, y + 26, drawBarra, ALTOSALUD, null);
+		g.drawImage(Recursos.barraSalud, x + 80, y + 26, drawBarra, ALTOSALUD, null);
 		g.drawString(String.valueOf(personaje.getSalud()) + " / " + String.valueOf(personaje.getSaludTope()), x + 132, y + 37);
 
-		if(personaje.getEnergia() == personaje.getEnergiaTope()) {
+		if (personaje.getEnergia() == personaje.getEnergiaTope()) {
 			drawBarra = ANCHOBARRA;
 		} else {
 			drawBarra = (personaje.getEnergia() * ANCHOBARRA) / personaje.getEnergiaTope();
@@ -46,7 +46,7 @@ public class EstadoDePersonaje {
 		g.drawImage(Recursos.barraEnergia, x + 80, y + 42, drawBarra, ALTOENERGIA, null);
 		g.drawString(String.valueOf(personaje.getEnergia()) + " / " + String.valueOf(personaje.getEnergiaTope()), x + 132, y + 52);
 
-		if(personaje.getExperiencia() == Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
+		if (personaje.getExperiencia() == Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
 			drawBarra = ANCHOBARRA;
 		} else {
 			drawBarra = (personaje.getExperiencia() * ANCHOBARRA) / Personaje.getTablaDeNiveles()[personaje.getNivel() + 1];
@@ -59,10 +59,9 @@ public class EstadoDePersonaje {
 		g.setColor(Color.GREEN);
 		g.drawString(String.valueOf(personaje.getNivel()), x + 59, y + 70);
 
-
 	}
 
-	public static void dibujarEstadoDePersonaje(Graphics g, int x, int y, PaquetePersonaje personaje, BufferedImage miniaturaPersonaje){
+	public static void dibujarEstadoDePersonaje(Graphics g, int x, int y, PaquetePersonaje personaje, BufferedImage miniaturaPersonaje) {
 
 		int drawBarra = 0;
 
@@ -78,7 +77,7 @@ public class EstadoDePersonaje {
 		g.drawImage(Recursos.barraEnergia, x + 80, y + 42, ANCHOBARRA, ALTOENERGIA, null);
 		g.drawString(String.valueOf(personaje.getEnergiaTope()) + " / " + String.valueOf(personaje.getEnergiaTope()), x + 132, y + 52);
 
-		if(personaje.getExperiencia() == Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
+		if (personaje.getExperiencia() == Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
 			drawBarra = ANCHOBARRA;
 		} else {
 			drawBarra = (personaje.getExperiencia() * ANCHOBARRA) / Personaje.getTablaDeNiveles()[personaje.getNivel() + 1];
