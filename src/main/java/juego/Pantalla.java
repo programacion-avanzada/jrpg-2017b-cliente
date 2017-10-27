@@ -43,6 +43,8 @@ public class Pantalla {
 	public static MenuStats menuStats;
 	public static MenuEscape menuEscp;
 	public static VentanaContactos ventContac;
+	
+	public static JFrame menu;
 		
 	private final Gson gson = new Gson();
 
@@ -79,26 +81,21 @@ public class Pantalla {
 			public void keyReleased(KeyEvent e) {
 				if(Estado.getEstado().esEstadoDeJuego()) {
 					if (e.getKeyCode() == KeyEvent.VK_I && menuInventario == null) {
-						menuInventario = new MenuInventario(cliente);
-						menuInventario.setVisible(true);	
+						menu = new MenuInventario(cliente);
 					}  
 					if (e.getKeyCode() == KeyEvent.VK_A && menuAsignar == null) {	
-						menuAsignar = new MenuAsignarSkills(cliente);
-						menuAsignar.setVisible(true); 
+						menu = new MenuAsignarSkills(cliente);						
 					}  
 					if (e.getKeyCode() == KeyEvent.VK_S && menuStats == null) {
-						menuStats = new MenuStats(cliente);
-						menuStats.setVisible(true);
+						menu = new MenuStats(cliente);
 					} 
 					if (e.getKeyCode() == KeyEvent.VK_ESCAPE && menuEscp == null) {
-								menuEscp = new MenuEscape(cliente);
-								menuEscp.setVisible(true);
-						
+						menu = new MenuEscape(cliente);
 					}
 					if (e.getKeyCode() == KeyEvent.VK_C && ventContac == null) {
-						ventContac = new VentanaContactos(cliente.getJuego());
-						ventContac.setVisible(true);						
+						menu = new VentanaContactos(cliente.getJuego());
 					}
+					menu.setVisible(true);
 				}
 			}
 		});
