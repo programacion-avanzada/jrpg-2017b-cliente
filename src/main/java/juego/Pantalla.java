@@ -81,21 +81,25 @@ public class Pantalla {
 			public void keyReleased(KeyEvent e) {
 				if(Estado.getEstado().esEstadoDeJuego()) {
 					if (e.getKeyCode() == KeyEvent.VK_I && menuInventario == null) {
-						menu = new MenuInventario(cliente);
+						menuInventario = new MenuInventario(cliente); 
+						menuInventario.setVisible(true);
 					}  
 					if (e.getKeyCode() == KeyEvent.VK_A && menuAsignar == null) {	
-						menu = new MenuAsignarSkills(cliente);						
+						menuAsignar = new MenuAsignarSkills(cliente);
+						menuAsignar.setVisible(true);
 					}  
 					if (e.getKeyCode() == KeyEvent.VK_S && menuStats == null) {
-						menu = new MenuStats(cliente);
+						menuStats = new MenuStats(cliente);
+						menuStats.setVisible(true);
 					} 
 					if (e.getKeyCode() == KeyEvent.VK_ESCAPE && menuEscp == null) {
-						menu = new MenuEscape(cliente);
+						menuEscp = new MenuEscape(cliente);
+						menuEscp.setVisible(true);
 					}
 					if (e.getKeyCode() == KeyEvent.VK_C && ventContac == null) {
-						menu = new VentanaContactos(cliente.getJuego());
+						ventContac = new VentanaContactos(cliente.getJuego());
+						ventContac.setVisible(true);
 					}
-					menu.setVisible(true);
 				}
 			}
 		});
