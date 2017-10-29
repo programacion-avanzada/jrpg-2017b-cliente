@@ -43,6 +43,8 @@ public class Pantalla {
 	public static MenuStats menuStats;
 	public static MenuEscape menuEscp;
 	public static VentanaContactos ventContac;
+	
+	public static JFrame menu;
 		
 	private final Gson gson = new Gson();
 
@@ -77,41 +79,27 @@ public class Pantalla {
 		pantalla.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_I) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuInventario == null) {
-							menuInventario = new MenuInventario(cliente);
-							menuInventario.setVisible(true);
-						}
-					}
-				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuAsignar == null) {
-							menuAsignar = new MenuAsignarSkills(cliente);
-							menuAsignar.setVisible(true);
-						}
+				if(Estado.getEstado().esEstadoDeJuego()) {
+					if (e.getKeyCode() == KeyEvent.VK_I && menuInventario == null) {
+						menuInventario = new MenuInventario(cliente); 
+						menuInventario.setVisible(true);
+					}  
+					if (e.getKeyCode() == KeyEvent.VK_A && menuAsignar == null) {	
+						menuAsignar = new MenuAsignarSkills(cliente);
+						menuAsignar.setVisible(true);
+					}  
+					if (e.getKeyCode() == KeyEvent.VK_S && menuStats == null) {
+						menuStats = new MenuStats(cliente);
+						menuStats.setVisible(true);
 					} 
-				} else if (e.getKeyCode() == KeyEvent.VK_S) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuStats == null) {
-							menuStats = new MenuStats(cliente);
-							menuStats.setVisible(true);
-						}
+					if (e.getKeyCode() == KeyEvent.VK_ESCAPE && menuEscp == null) {
+						menuEscp = new MenuEscape(cliente);
+						menuEscp.setVisible(true);
 					}
-				} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuEscp == null) {
-							menuEscp = new MenuEscape(cliente);
-							menuEscp.setVisible(true);
-						}
+					if (e.getKeyCode() == KeyEvent.VK_C && ventContac == null) {
+						ventContac = new VentanaContactos(cliente.getJuego());
+						ventContac.setVisible(true);
 					}
-				} else if (e.getKeyCode() == KeyEvent.VK_C) {
-//					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (ventContac == null) {
-							ventContac = new VentanaContactos(cliente.getJuego());
-							ventContac.setVisible(true);
-						}
-//					}
 				}
 			}
 		});
