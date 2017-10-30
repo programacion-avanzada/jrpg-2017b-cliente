@@ -5,19 +5,19 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
-import dominio.Asesino;
 import dominio.Casta;
-import dominio.Elfo;
-import dominio.Guerrero;
-import dominio.Hechicero;
-import dominio.Humano;
 import dominio.NonPlayableCharacter;
-import dominio.Orco;
+import dominio.NpcBandido;
+import dominio.NpcBrujo;
+import dominio.NpcBruto;
+import dominio.NpcVampiro;
 import dominio.Personaje;
 import interfaz.EstadoDeNpc;
 import interfaz.EstadoDePersonaje;
@@ -25,9 +25,7 @@ import interfaz.MenuBatalla;
 import interfaz.MenuInfoPersonaje;
 import juego.Juego;
 import mensajeria.Comando;
-import mensajeria.PaqueteAtacar;
 import mensajeria.PaqueteBatalla;
-import mensajeria.PaqueteDeNpcs;
 import mensajeria.PaqueteFinalizarBatalla;
 import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
@@ -45,6 +43,7 @@ public class EstadoBatallaNpc extends Estado {
 	private PaqueteNpc paqueteEnemigo;
 	private PaqueteFinalizarBatalla paqueteFinalizarBatalla;
 	private boolean miTurno;
+	private Timer timer;
 
 	private boolean haySpellSeleccionada;
 	private boolean seRealizoAccion;
@@ -77,6 +76,8 @@ public class EstadoBatallaNpc extends Estado {
 		paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
 		paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
 		paqueteFinalizarBatalla.setIdEnemigo(paqueteEnemigo.getId() * -1);
+		
+		timer = new Timer();
 
 		// por defecto batalla perdida
 		juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
@@ -161,7 +162,6 @@ public class EstadoBatallaNpc extends Estado {
 							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuSubirNivel);
 						}
 						
-						//juego.getNpcManager().despawnNpc(paqueteEnemigo.getId());
 						paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
 
 						juego.getPersonaje().setEstado(Estado.estadoJuego);
@@ -172,23 +172,27 @@ public class EstadoBatallaNpc extends Estado {
 					else 
 					{
 						// BATALLAR VS NPC
-						enemigo.atacar(personaje);
-						
-						if(!personaje.estaVivo()) // EL PERSONAJE MUERE
-						{
-							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
-							paqueteFinalizarBatalla.setGanadorBatalla(paqueteEnemigo.getId());
+						setMiTurno(false);
+						timer.schedule(new TimerTask() {
 							
-							juego.getPersonaje().setEstado(Estado.estadoJuego);
-							finalizarBatalla();
-							Estado.setEstado(juego.getEstadoJuego());
-						}
+							  @Override
+							  public void run() 
+							  {
+								  enemigo.jugarTurno(personaje);
+								  if(!personaje.estaVivo()) // EL PERSONAJE MUERE
+								  {
+									juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
+									paqueteFinalizarBatalla.setGanadorBatalla(paqueteEnemigo.getId());
+											
+									juego.getPersonaje().setEstado(Estado.estadoJuego);
+									finalizarBatalla();
+									Estado.setEstado(juego.getEstadoJuego());
+								  }
+									
+								  setMiTurno(true);
+							  }
+							}, 2*1000);
 						
-						setMiTurno(true);
-						/*paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(), personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(), personaje.getDefensa(), enemigo.getDefensa(), personaje.getCasta().getProbabilidadEvitarDaño(), enemigo.getCasta().getProbabilidadEvitarDaño());
-						enviarAtaque(paqueteAtacar);
-						miTurno = false;
-						menuBatalla.setHabilitado(false);*/
 					}
 				} else if(haySpellSeleccionada && !seRealizoAccion){
 					JOptionPane.showMessageDialog(null, "No posees la energía suficiente para realizar esta habilidad.");
@@ -242,19 +246,13 @@ public class EstadoBatallaNpc extends Estado {
 			JOptionPane.showMessageDialog(null, "Error al crear la batalla");
 		}
 		
-		/*nombre = paqueteEnemigo.getNombre();
-		salud = paqueteEnemigo.getSaludTope();
-		energia = paqueteEnemigo.getEnergiaTope();
-		fuerza = paqueteEnemigo.getFuerza();
-		destreza = paqueteEnemigo.getDestreza();
-		inteligencia = paqueteEnemigo.getInteligencia();
-		experiencia = paqueteEnemigo.getExperiencia();
-		nivel = paqueteEnemigo.getNivel();
-		id = paqueteEnemigo.getId();*/
-		
-		// Esto hay que modificarlo una vez tengamos más npcs...
-		// Pero por ahora, el npc más primitivo posible:
-		enemigo = new NonPlayableCharacter(paqueteEnemigo.getNombre(), paqueteEnemigo.getNivel(), paqueteEnemigo.getNivel());
+		try {
+			System.out.println("dominio" + ".Npc" + paqueteEnemigo.getCasta());
+			enemigo = (NonPlayableCharacter) Class.forName("dominio" + ".Npc" + paqueteEnemigo.getCasta()).
+					getConstructor(String.class, Integer.TYPE).newInstance(paqueteEnemigo.getNombre(), paqueteEnemigo.getNivel());
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			JOptionPane.showMessageDialog(null, "Error al crear la batalla");
+		}
 	}
 
 	private void finalizarBatalla() 

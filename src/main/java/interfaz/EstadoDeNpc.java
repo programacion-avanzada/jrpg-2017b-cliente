@@ -12,7 +12,7 @@ public class EstadoDeNpc {
 
 	private static final int ANCHOBARRA = 122;
 	private static final int ALTOSALUD = 14;
-	//private static final int ALTOENERGIA = 14;
+	private static final int ALTOENERGIA = 14;
 	//private static final int ALTOEXPERIENCIA = 6;
 	private static final int ALTOMINIATURA = 64;
 	private static final int ANCHOMINIATURA = 64;
@@ -35,15 +35,14 @@ public class EstadoDeNpc {
 		g.drawImage(Recursos.barraSalud,  x + 80, y + 26, drawBarra, ALTOSALUD, null);
 		g.drawString(String.valueOf(npc.getSalud()) + " / " + String.valueOf(npc.getSaludTope()), x + 132, y + 37);
 
-		// Por ahora los npcs no tienen energía
-		/*if(npc.getEnergia() == npc.getEnergiaTope()) {
+		if(npc.getEnergia() == npc.getEnergiaTope()) {
 			drawBarra = ANCHOBARRA;
 		} else {
 			drawBarra = (npc.getEnergia() * ANCHOBARRA) / npc.getEnergiaTope();
 		}
 
 		g.drawImage(Recursos.barraEnergia, x + 80, y + 42, drawBarra, ALTOENERGIA, null);
-		g.drawString(String.valueOf(npc.getEnergia()) + " / " + String.valueOf(npc.getEnergiaTope()), x + 132, y + 52);*/
+		g.drawString(String.valueOf(npc.getEnergia()) + " / " + String.valueOf(npc.getEnergiaTope()), x + 132, y + 52);
 		
 		
 		g.setFont(new Font("Tahoma", Font.PLAIN, 10));

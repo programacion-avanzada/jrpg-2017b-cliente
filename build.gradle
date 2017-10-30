@@ -51,11 +51,22 @@ dependencies {
 
 // Tareas
 
-
 checkstyle {
 	configFile = new File(rootDir, "src/test/resources/sun_checks.xml")
 	ignoreFailures = true
 }
+
+/*checkstyleMain {
+    enabled = true
+}
+
+build.finalizedBy(checkstyleMain)
+
+tasks.withType(Checkstyle) {
+  reports {
+    html.destination rootProject.file("build/reports/checkstyle.html")
+  }
+}*/
 
 /*cobertura {
     coverageFormats = ['html', 'xml']
