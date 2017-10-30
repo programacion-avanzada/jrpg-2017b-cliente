@@ -4,82 +4,80 @@ import java.io.Serializable;
 
 public class PaqueteMovimiento extends Paquete implements Serializable, Cloneable {
 
-	private int id;
-	private float posX;
-	private float posY;
-	private int direccion;
-	private int frame;
+    private int id;
+    private float posX;
+    private float posY;
+    private int direccion;
+    private int frame;
 
-	public PaqueteMovimiento() {
-		setComando(Comando.MOVIMIENTO);
-	}
+    public PaqueteMovimiento() {
+	setComando(Comando.MOVIMIENTO);
+    }
 
-	public PaqueteMovimiento(int idPersonaje) {
-		id = idPersonaje;
-		setComando(Comando.MOVIMIENTO);
-	}
+    public PaqueteMovimiento(int idPersonaje) {
+	id = idPersonaje;
+	setComando(Comando.MOVIMIENTO);
+    }
 
-	public PaqueteMovimiento(int idPersonaje, float posX, float posY) {
-		this.id = idPersonaje;
-		this.posX = posX;
-		this.posY = posY;
-		setComando(Comando.MOVIMIENTO);
-	}
-	
-	public PaqueteMovimiento(int idPersonaje, float posX, float posY, int direccion) 
-	{
-		this.id = idPersonaje;
-		this.posX = posX;
-		this.posY = posY;
-		this.direccion = direccion;
-		setComando(Comando.MOVIMIENTO);
-	}
+    public PaqueteMovimiento(int idPersonaje, float posX, float posY) {
+	this.id = idPersonaje;
+	this.posX = posX;
+	this.posY = posY;
+	setComando(Comando.MOVIMIENTO);
+    }
 
-	public int getIdPersonaje() {
-		return id;
-	}
+    public PaqueteMovimiento(int idPersonaje, float posX, float posY, int direccion) {
+	this.id = idPersonaje;
+	this.posX = posX;
+	this.posY = posY;
+	this.direccion = direccion;
+	setComando(Comando.MOVIMIENTO);
+    }
 
-	public void setIdPersonaje(int idPersonaje) {
-		this.id = idPersonaje;
-	}
+    public int getIdPersonaje() {
+	return id;
+    }
 
-	public float getPosX() {
-		return posX;
-	}
+    public void setIdPersonaje(int idPersonaje) {
+	this.id = idPersonaje;
+    }
 
-	public void setPosX(float posX) {
-		this.posX = posX;
-	}
+    public float getPosX() {
+	return posX;
+    }
 
-	public float getPosY() {
-		return posY;
-	}
+    public void setPosX(float posX) {
+	this.posX = posX;
+    }
 
-	public void setPosY(float posY) {
-		this.posY = posY;
-	}
+    public float getPosY() {
+	return posY;
+    }
 
-	public int getDireccion() {
-		return direccion;
-	}
+    public void setPosY(float posY) {
+	this.posY = posY;
+    }
 
-	public void setDireccion(int direccion) {
-		this.direccion = direccion;
-	}
+    public int getDireccion() {
+	return direccion;
+    }
 
-	public int getFrame() {
-		return frame;
-	}
+    public void setDireccion(int direccion) {
+	this.direccion = direccion;
+    }
 
-	public void setFrame(int frame) {
-		this.frame = frame;
-	}
+    public int getFrame() {
+	return frame;
+    }
 
-	@Override
-	public Object clone() {
-		Object obj = null;
-		obj = super.clone();
-		return obj;
-	}
+    public void setFrame(int frame) {
+	this.frame = frame;
+    }
+
+    @Override
+    public Object clone() {
+	Object obj = null;
+	obj = super.clone();
+	return obj;
+    }
 }
-
