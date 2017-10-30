@@ -103,21 +103,15 @@ public class MenuInfoNpc {
      */
 
     public boolean clickEnBoton(int mouseX, int mouseY) {
-	if (mouseX >= x + 50 && mouseX <= x + 250 && mouseY >= y + 380 && mouseY <= y + 405)
-	    return true;
-	return false;
+	return (mouseX >= x + 50 && mouseX <= x + 250 && mouseY >= y + 380 && mouseY <= y + 405);
     }
 
     public boolean clickEnCerrar(int mouseX, int mouseY) {
-	if (mouseX >= x + menu.getWidth() - 24 && mouseX <= x + menu.getWidth() + 4 && mouseY >= y + 12
-		&& mouseY <= y + 36)
-	    return true;
-	return false;
+	return (mouseX >= x + menu.getWidth() - 24 && mouseX <= x + menu.getWidth() + 4 && mouseY >= y + 12
+		&& mouseY <= y + 36);
     }
 
     public boolean clickEnMenu(int mouseX, int mouseY) {
-	if (mouseX >= x && mouseX <= x + menu.getWidth() && mouseY >= y && mouseY <= y + menu.getHeight())
-	    return true;
-	return false;
+	return (mouseX >= x && mouseX <= x + menu.getWidth() && mouseY >= y && mouseY <= y + menu.getHeight());
     }
 }

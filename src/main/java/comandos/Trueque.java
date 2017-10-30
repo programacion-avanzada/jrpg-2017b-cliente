@@ -12,6 +12,7 @@ import dominio.Personaje;
 import mensajeria.Comando;
 import mensajeria.PaqueteComerciar;
 import mensajeria.PaquetePersonaje;
+import mensajeria.PaquetePersonaje;
 
 public class Trueque extends ComandosEscucha {
 
