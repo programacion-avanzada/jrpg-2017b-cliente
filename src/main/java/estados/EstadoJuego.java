@@ -65,7 +65,7 @@ public class EstadoJuego extends Estado {
 		// si no, traigo los npcs del server.
 		if(juego.getPaquetesNpcs() == null)
 		{
-			npcManager.spawnInicial(10);
+			npcManager.spawnInicial(100);
 			PaqueteDeNpcs paqueteDeNpcs = new PaqueteDeNpcs(juego.getPaquetesNpcs(), juego.getUbicacionNpcs());
 			paqueteDeNpcs.setComando(Comando.ACTUALIZARNPCS);
 			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteDeNpcs));

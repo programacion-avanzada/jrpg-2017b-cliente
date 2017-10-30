@@ -30,7 +30,7 @@ public class MenuBatalla {
 		else
 			g.drawImage(Recursos.menuBatallaDeshabilitado, x, y, null);
 
-		// Dibujo los boones
+		// Dibujo los botones
 		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesRaza()[0]), botones[0][0], botones[0][1], anchoBoton, anchoBoton, null);
 		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesRaza()[1]), botones[1][0], botones[1][1], anchoBoton, anchoBoton, null);
 		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesCasta()[0]), botones[2][0], botones[2][1], anchoBoton, anchoBoton, null);

@@ -109,7 +109,7 @@ public class NpcManager
 		Random random = new Random();
 		
 		// Generación aleatoria
-		String[] castas = {"Guerrero", "Asesino", "Hechicero"};
+		String[] castas = {"Bandido", "Bruto", "Vampiro", "Brujo"};
 		String[] razas = {"Humano", "Orco", "Elfo"};
 		
 		for (int i = 1; i <= cant; i++)
@@ -119,7 +119,7 @@ public class NpcManager
 			{
 				// este hermoso algoritmo lo que hace básicamente es tirar una posición aleatoria
 				// y luego se fija si la zona de 2 tiles a la redonda está totalmente despejada
-				// Gracias Lucas por tanto, perdon por tan poco.
+				// Gracias Lucas por tanto, perdón por tan poco.
 				puedoSpawnear = true;
 				posX = random.nextInt(mundo.obtenerAncho() - 18) + 13;
 				posY = random.nextInt(mundo.obtenerAlto() - 18) + 13;
