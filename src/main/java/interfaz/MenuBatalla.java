@@ -31,7 +31,7 @@ public class MenuBatalla {
 	else
 	    g.drawImage(Recursos.getMenuBatallaDeshabilitado(), x, y, null);
 
-	// Dibujo los boones
+	// Dibujo los botones
 	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesRaza()[0]), botones[0][0], botones[0][1],
 		anchoBoton, anchoBoton, null);
 	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesRaza()[1]), botones[1][0], botones[1][1],
@@ -42,8 +42,8 @@ public class MenuBatalla {
 		anchoBoton, anchoBoton, null);
 	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesCasta()[2]), botones[4][0], botones[4][1],
 		anchoBoton, anchoBoton, null);
-	g.drawImage(Recursos.getHabilidades().get("Ser Energizado"), botones[5][0], botones[5][1], anchoBoton, anchoBoton,
-		null);
+	g.drawImage(Recursos.getHabilidades().get("Ser Energizado"), botones[5][0], botones[5][1], anchoBoton,
+		anchoBoton, null);
 
 	// Dibujo las leyendas
 	g.setFont(new Font("Book Antiqua", 1, 14));

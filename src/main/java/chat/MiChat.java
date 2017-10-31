@@ -39,6 +39,7 @@ public class MiChat extends JFrame {
 
     /**
      * Create the frame.
+     * 
      * @param juego
      */
     public MiChat(final Juego juego) {
@@ -150,6 +151,7 @@ public class MiChat extends JFrame {
 
     /**
      * Retorna la referencia al jTextArea del chat
+     * 
      * @return JtextArea
      */
     public JTextArea getChat() {

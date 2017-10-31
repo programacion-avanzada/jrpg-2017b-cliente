@@ -63,8 +63,8 @@ public class MenuInfoPersonaje {
 	    Pantalla.centerString(g, new Rectangle(x, y + 15, menu.getWidth(), 0), personaje.getNombre());
 	} else {
 	    // dibujo el npc
-	    g.drawImage(Recursos.getPersonaje().get(npc.getRaza()).get(6)[0], x + menu.getWidth() / 2 - anchoPersonaje / 2,
-		    y + 70, 128, 128, null);
+	    g.drawImage(Recursos.getPersonaje().get(npc.getRaza()).get(6)[0],
+		    x + menu.getWidth() / 2 - anchoPersonaje / 2, y + 70, 128, 128, null);
 
 	    // muestro el nombre
 	    g.setColor(Color.WHITE);

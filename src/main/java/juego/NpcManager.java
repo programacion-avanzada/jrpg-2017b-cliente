@@ -70,8 +70,8 @@ public class NpcManager {
 	paquetesNpcs.put(id, new PaqueteNpc(id, nivel, nombre, raza, casta));
 	ubicacionNpcs.put(id, new PaqueteMovimiento(id, posX, posY, dir));
 
-	Entidad ente = new Entidad(juego, mundo, 64, 64, nombre, coords[0], coords[1], Recursos.getPersonaje().get(raza),
-		150);
+	Entidad ente = new Entidad(juego, mundo, 64, 64, nombre, coords[0], coords[1],
+		Recursos.getPersonaje().get(raza), 150);
 	ente.setIdEnemigo(id);
 	ente.setDireccion(dir);
 	entidadesNpcs.put(id, ente);
@@ -114,7 +114,7 @@ public class NpcManager {
 	Random random = new Random();
 
 	// Generación aleatoria
-	String[] castas = { "Guerrero", "Asesino", "Hechicero" };
+	String[] castas = { "Bandido", "Bruto", "Vampiro", "Brujo" };
 	String[] razas = { "Humano", "Orco", "Elfo" };
 
 	for (int i = 1; i <= cant; i++) {
@@ -124,7 +124,7 @@ public class NpcManager {
 		// posición aleatoria
 		// y luego se fija si la zona de 2 tiles a la redonda está
 		// totalmente despejada
-		// Gracias Lucas por tanto, perdon por tan poco.
+		// Gracias Lucas por tanto, perdón por tan poco.
 		puedoSpawnear = true;
 		posX = random.nextInt(mundo.obtenerAncho() - 18) + 13;
 		posY = random.nextInt(mundo.obtenerAlto() - 18) + 13;
@@ -255,15 +255,10 @@ public class NpcManager {
 
     /*
      * public Map<Integer, PaqueteNpc> getPaquetesNpcs() { return paquetesNpcs;
-     * }
-     * 
-     * public void setPaquetesNpcs(Map<Integer, PaqueteNpc> paquetesNpcs) {
-     * this.paquetesNpcs = paquetesNpcs; }
-     * 
-     * public Map<Integer, PaqueteMovimiento> getUbicacionNpcs() { return
-     * ubicacionNpcs; }
-     * 
-     * public void setUbicacionNpcs(Map<Integer, PaqueteMovimiento>
-     * ubicacionNpcs) { this.ubicacionNpcs = ubicacionNpcs; }
+     * } public void setPaquetesNpcs(Map<Integer, PaqueteNpc> paquetesNpcs) {
+     * this.paquetesNpcs = paquetesNpcs; } public Map<Integer,
+     * PaqueteMovimiento> getUbicacionNpcs() { return ubicacionNpcs; } public
+     * void setUbicacionNpcs(Map<Integer, PaqueteMovimiento> ubicacionNpcs) {
+     * this.ubicacionNpcs = ubicacionNpcs; }
      */
 }

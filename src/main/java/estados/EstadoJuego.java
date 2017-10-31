@@ -76,7 +76,7 @@ public class EstadoJuego extends Estado {
 	// y los envío al server
 	// si no, traigo los npcs del server.
 	if (juego.getPaquetesNpcs() == null) {
-	    npcManager.spawnInicial(10);
+	    npcManager.spawnInicial(100);
 	    PaqueteDeNpcs paqueteDeNpcs = new PaqueteDeNpcs(juego.getPaquetesNpcs(), juego.getUbicacionNpcs());
 	    paqueteDeNpcs.setComando(Comando.ACTUALIZARNPCS);
 	    juego.getCliente().getSalida().writeObject(gson.toJson(paqueteDeNpcs));
@@ -93,7 +93,6 @@ public class EstadoJuego extends Estado {
 	} catch (IOException e) {
 	    JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor al ingresar al mundo");
 	}
-
     }
 
     @Override
@@ -116,7 +115,7 @@ public class EstadoJuego extends Estado {
 	g.drawImage(Recursos.getMarco(), 0, 0, juego.getAncho(), juego.getAlto(), null);
 	EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
 	g.drawImage(Recursos.getMochila(), 738, 545, 59, 52, null);
-	g.drawImage(Recursos.getMochila(), 3, 562, 102, 35, null);
+	g.drawImage(Recursos.getMenu(), 3, 562, 102, 35, null);
 	g.drawImage(Recursos.getChat(), 3, 524, 102, 35, null);
 	if (haySolicitud) {
 	    menuEnemigo.graficar(g, tipoSolicitud);
@@ -127,8 +126,8 @@ public class EstadoJuego extends Estado {
     public void graficarPersonajes(Graphics g) {
 
 	if (juego.getPersonajesConectados() != null) {
-	    personajesConectados = new HashMap<Integer, PaquetePersonaje>(juego.getPersonajesConectados());
-	    ubicacionPersonajes = new HashMap<Integer, PaqueteMovimiento>(juego.getUbicacionPersonajes());
+	    personajesConectados = new HashMap(juego.getPersonajesConectados());
+	    ubicacionPersonajes = new HashMap(juego.getUbicacionPersonajes());
 	    Iterator<Integer> it = personajesConectados.keySet().iterator();
 	    int key;
 	    PaqueteMovimiento actual;
@@ -159,13 +158,6 @@ public class EstadoJuego extends Estado {
 	return entidadPersonaje;
     }
 
-    public void setHaySolicitud(boolean b, Paquete enemigo, int tipoSolicitud) {
-	haySolicitud = b;
-	// menu que mostrara al enemigo
-	menuEnemigo = new MenuInfoPersonaje(300, 50, enemigo);
-	this.tipoSolicitud = tipoSolicitud;
-    }
-
     private void inicializarMundos() {
 	mundos = new HashMap<Integer, String>();
 	mundos.put(aubenor, "Aubenor");
@@ -175,6 +167,13 @@ public class EstadoJuego extends Estado {
 
     private String getMundo() {
 	return mundos.get(juego.getPersonaje().getMapa());
+    }
+
+    public void setHaySolicitud(boolean b, Paquete enemigo, int tipoSolicitud) {
+	haySolicitud = b;
+	// menu que mostrara al enemigo
+	menuEnemigo = new MenuInfoPersonaje(300, 50, enemigo);
+	this.tipoSolicitud = tipoSolicitud;
     }
 
     public boolean getHaySolicitud() {
