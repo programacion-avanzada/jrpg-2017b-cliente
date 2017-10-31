@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DefaultCaret;
 
@@ -31,21 +32,24 @@ import mensajeria.Comando;
 public class MiChat extends JFrame {
 
     private JPanel contentPane;
+
     private JTextField texto;
+
     private JTextArea chat;
+
     private final Gson gson = new Gson();
     private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
+
     private DefaultCaret caret;
 
     /**
      * Create the frame.
-     * 
      * @param juego
      */
     public MiChat(final Juego juego) {
 	setTitle("Mi Chat");
 
-	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	setBounds(100, 100, 450, 300);
 	setResizable(false);
 	contentPane = new JPanel();
@@ -66,12 +70,13 @@ public class MiChat extends JFrame {
 
 	texto = new JTextField();
 	this.addWindowListener(new WindowAdapter() {
-	    public void windowOpened(WindowEvent e) {
+	    @Override
+	    public void windowOpened(final WindowEvent e) {
 		texto.requestFocus();
 	    }
 
 	    @Override
-	    public void windowClosing(WindowEvent e) {
+	    public void windowClosing(final WindowEvent e) {
 		if (getTitle() == "Sala") {
 		    if (Pantalla.ventContac != null) {
 			VentanaContactos.getBotonMc().setEnabled(true);
@@ -83,7 +88,8 @@ public class MiChat extends JFrame {
 
 	// SI TOCO ENTER
 	texto.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		if (!texto.getText().equals("")) {
 		    chat.append("Me: " + texto.getText() + "\n");
 
@@ -113,7 +119,8 @@ public class MiChat extends JFrame {
 	JButton enviar = new JButton("ENVIAR");
 	enviar.setIcon(new ImageIcon("recursos//enviarButton.png"));
 	enviar.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		if (!texto.getText().equals("")) {
 		    chat.append("Me: " + texto.getText() + "\n");
 
@@ -151,7 +158,6 @@ public class MiChat extends JFrame {
 
     /**
      * Retorna la referencia al jTextArea del chat
-     * 
      * @return JtextArea
      */
     public JTextArea getChat() {

@@ -18,6 +18,10 @@ public class Conexion extends ComandosEscucha {
 	actualizarLista(pdp);
     }
 
+    /**
+     * Actualizar lista.
+     * @param pdp the pdp
+     */
     private void actualizarLista(final PaqueteDePersonajes pdp) {
 	DefaultListModel<String> modelo = new DefaultListModel<String>();
 	VentanaContactos.getList().removeAll();

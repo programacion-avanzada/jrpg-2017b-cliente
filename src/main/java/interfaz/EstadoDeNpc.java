@@ -17,8 +17,8 @@ public class EstadoDeNpc {
     private static final int ALTOMINIATURA = 64;
     private static final int ANCHOMINIATURA = 64;
 
-    public static void dibujarEstadoDeNpc(Graphics g, int x, int y, NonPlayableCharacter npc,
-	    BufferedImage miniaturaPersonaje) {
+    public static void dibujarEstadoDeNpc(final Graphics g, final int x, final int y, final NonPlayableCharacter npc,
+	    final BufferedImage miniaturaPersonaje) {
 
 	int drawBarra = 0;
 
@@ -26,10 +26,11 @@ public class EstadoDeNpc {
 
 	g.drawImage(miniaturaPersonaje, x + 10, y + 9, ANCHOMINIATURA, ALTOMINIATURA, null);
 
-	if (npc.getSalud() == npc.getSaludTope())
+	if (npc.getSalud() == npc.getSaludTope()) {
 	    drawBarra = ANCHOBARRA;
-	else
+	} else {
 	    drawBarra = (npc.getSalud() * ANCHOBARRA) / npc.getSaludTope();
+	}
 
 	g.setColor(Color.WHITE);
 	g.setFont(new Font("Tahoma", Font.PLAIN, 10));

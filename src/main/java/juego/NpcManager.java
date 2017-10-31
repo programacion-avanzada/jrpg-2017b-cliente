@@ -11,9 +11,11 @@ import estados.Estado;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaqueteNpc;
 import mundo.Mundo;
-import mundo.Tile;
 import recursos.Recursos;
 
+/**
+ * Clase encargada del manejo de los NPC
+ */
 public class NpcManager {
     // private final int CANTIDAD_NPCS = 10;
 
@@ -22,37 +24,39 @@ public class NpcManager {
     // Distancia mínima desde el spawn de un npc hacia cualquier jugador: 416
     // (mas o menos)
 
-    /*
+    /**
      * hay 3 maps: paquetesNpcs: Paquetes que llevan la información de los npcs
-     * relacionada a stats.
-     * 
-     * ubicacionNpcs: Paquetes que llevan la información sobre la posición de
-     * los npcs.
-     * 
-     * esos paquetes están en juego debido a que deben ser sincronizados con el
-     * server.
-     * 
-     * entidadesNpcs: Son las entidades que se instancian para cada npc y se
-     * encargan de dibujar en la pantalla el gráfico, de registrar los clicks
-     * para batallar etc.
-     * 
-     * Las entidades solamente son instanciadas del lado del cliente, mientras
-     * que los paquetes se utilizaran luego para coordinar con el server para
-     * que todos vean los mismos npcs. (eso todavía no está implementado pero es
-     * la idea)
+     * relacionada a stats. ubicacionNpcs: Paquetes que llevan la información
+     * sobre la posición de los npcs. esos paquetes están en juego debido a que
+     * deben ser sincronizados con el server. entidadesNpcs: Son las entidades
+     * que se instancian para cada npc y se encargan de dibujar en la pantalla
+     * el gráfico, de registrar los clicks para batallar etc. Las entidades
+     * solamente son instanciadas del lado del cliente, mientras que los
+     * paquetes se utilizaran luego para coordinar con el server para que todos
+     * vean los mismos npcs. (eso todavía no está implementado pero es la idea)
      */
 
     private Map<Integer, Entidad> entidadesNpcs;
+
+    /** The paquetes npcs. */
     private Map<Integer, PaqueteNpc> paquetesNpcs;
+
+    /** The ubicacion npcs. */
     private Map<Integer, PaqueteMovimiento> ubicacionNpcs;
+
+    /** The juego. */
     private Juego juego;
+
+    /** The mundo. */
     private Mundo mundo;
 
-    /*
-     * Inicializa el NpcManager
-     * 
+    /**
+     * Constructor parametrizado del npcManager Inicializa las entidades,
+     * paquetes y ubicaciones
+     * @param juego juego donde trabajara el manager
+     * @param mundo mundo donde trabajara el manager
      */
-    public NpcManager(Juego juego, Mundo mundo) {
+    public NpcManager(final Juego juego, final Mundo mundo) {
 	entidadesNpcs = new HashMap<Integer, Entidad>();
 	paquetesNpcs = juego.getPaquetesNpcs();
 	ubicacionNpcs = juego.getUbicacionNpcs();
@@ -60,10 +64,19 @@ public class NpcManager {
 	this.mundo = mundo;
     }
 
-    /*
-     * Aparece a un Npc individual.
+    /**
+     * Metodo para spawnear los NPC
+     * @param id identificador del NPC
+     * @param nivel nivel del NCP
+     * @param nombre nombre del NPC
+     * @param raza raza del NPC
+     * @param casta casta del NPC
+     * @param posX posicion en X donde aparecera el NPC
+     * @param posY posicon en Y donde aparecera el NPC
+     * @param dir direccion de vista del sprite del NPC
      */
-    public void spawnNpc(int id, int nivel, String nombre, String raza, String casta, float posX, float posY, int dir) {
+    public void spawnNpc(final int id, final int nivel, final String nombre, final String raza, final String casta,
+	    final float posX, final float posY, final int dir) {
 	float[] coords = new float[2];
 	coords = Mundo.dosDaIso(posX, posY);
 
@@ -79,29 +92,24 @@ public class NpcManager {
 
     /**
      * Borra a un npc.
-     * 
-     * @param id
-     *            id del npc a borrar
+     * @param id id del npc a borrar
      * @return boolean falso si no lo pudo borrar
      */
 
-    public boolean despawnNpc(int id) {
-	if (paquetesNpcs.remove(id) == null)
+    public boolean despawnNpc(final int id) {
+	if (paquetesNpcs.remove(id) == null) {
 	    return false;
-
+	}
 	ubicacionNpcs.remove(id);
 	entidadesNpcs.remove(id);
-
 	return true;
     }
 
     /**
      * Hace aparecer una determinada cantidad de npcs en el mapa.
-     * 
-     * @param cant
-     *            Cantidad de npcs a spawnear
+     * @param cant Cantidad de npcs a spawnear
      */
-    public void spawnInicial(int cant) {
+    public void spawnInicial(final int cant) {
 	paquetesNpcs = new HashMap<Integer, PaqueteNpc>();
 	ubicacionNpcs = new HashMap<Integer, PaqueteMovimiento>();
 
@@ -114,8 +122,8 @@ public class NpcManager {
 	Random random = new Random();
 
 	// Generación aleatoria
-	String[] castas = { "Bandido", "Bruto", "Vampiro", "Brujo" };
-	String[] razas = { "Humano", "Orco", "Elfo" };
+	String[] castas = {"Bandido", "Bruto", "Vampiro", "Brujo" };
+	String[] razas = {"Humano", "Orco", "Elfo" };
 
 	for (int i = 1; i <= cant; i++) {
 	    // determino una posición aleatoria para hacer aparecer al chobi
@@ -132,8 +140,9 @@ public class NpcManager {
 
 		for (int j = -1; j < 2; j++) {
 		    for (int k = -1; k < 2; k++) {
-			if (mundo.getTile(posX + j, posY + k).esSolido())
+			if (mundo.getTile(posX + j, posY + k).esSolido()) {
 			    puedoSpawnear = false;
+			}
 		    }
 		}
 
@@ -146,11 +155,9 @@ public class NpcManager {
 
     /**
      * Grafica los sprites de los npcs en el mundo.
-     * 
-     * @param g
-     *            Graphics del juego
+     * @param g Graphics del juego
      */
-    public void graficarNpcs(Graphics g) {
+    public void graficarNpcs(final Graphics g) {
 	// recorro el árbol de entidades de los npcs y los voy graficando
 	if (entidadesNpcs != null && !entidadesNpcs.isEmpty()) {
 	    Iterator<Integer> it = entidadesNpcs.keySet().iterator();
@@ -161,8 +168,9 @@ public class NpcManager {
 		key = it.next();
 		actual = entidadesNpcs.get(key);
 
-		if (paquetesNpcs.get(key).getEstado() == Estado.estadoJuego)
+		if (paquetesNpcs.get(key).getEstado() == Estado.estadoJuego) {
 		    actual.graficar(g);
+		}
 	    }
 	}
 
@@ -175,31 +183,29 @@ public class NpcManager {
 
     /**
      * Grafica los nombres de los npcs en el mundo.
-     * 
-     * @param g
-     *            Graphics del juego
+     * @param g Graphics del juego
      */
-    public void graficarNombresNpcs(Graphics g) {
+    public void graficarNombresNpcs(final Graphics g) {
 	// recorro el árbol de entidades de los npcs y los voy graficando
 	if (entidadesNpcs != null && !entidadesNpcs.isEmpty()) {
 	    Iterator<Integer> it = entidadesNpcs.keySet().iterator();
 	    int key;
 	    Entidad actual;
 
-	    /*
-	     * g.setColor(Color.WHITE); g.setFont(new Font("Book Antiqua",
-	     * Font.PLAIN, 15));
-	     */
 	    while (it.hasNext()) {
 		key = it.next();
 		actual = entidadesNpcs.get(key);
 
-		if (paquetesNpcs.get(key).getEstado() == Estado.estadoJuego)
+		if (paquetesNpcs.get(key).getEstado() == Estado.estadoJuego) {
 		    actual.graficarNombre(g);
+		}
 	    }
 	}
     }
 
+    /**
+     * Metodo para eliminar los npc muerto y reconstruirlo
+     */
     public void actualizar() {
 	entidadesNpcs = new HashMap<Integer, Entidad>();
 
@@ -231,22 +237,34 @@ public class NpcManager {
 	}
     }
 
+    /**
+     * Metodo para obtener el mapa de Entidades NPC
+     * @return retorna el mapa de las entidades de los NPC
+     */
     public Map<Integer, Entidad> getEntidadesNpcs() {
 	return entidadesNpcs;
     }
 
-    public void setEntidadesNpcs(Map<Integer, Entidad> entidadesNpcs) {
+    /**
+     * Metodo para setear el mapa de las entidades NPC
+     * @param entidadesNpcs mapa a setear
+     */
+    public void setEntidadesNpcs(final Map<Integer, Entidad> entidadesNpcs) {
 	this.entidadesNpcs = entidadesNpcs;
     }
 
+    /**
+     * Metodo para generar nombres random de NPC
+     * @return cadena con el nombre generado
+     */
     public String generarNombre() {
 	Random random = new Random();
 
-	String[] prefijos = { "Kaiser", "Sir", "Lord", "Commander", "Emperor", "Baron", "Duke", "Dauphin", "Count",
+	String[] prefijos = {"Kaiser", "Sir", "Lord", "Commander", "Emperor", "Baron", "Duke", "Dauphin", "Count",
 		"Prince", "Yeoman" };
-	String[] nombres = { "Alton", "Dave", "William", "Vladimir", "Bradford", "Wilhelm", "Edmund", "Alexander",
+	String[] nombres = {"Alton", "Dave", "William", "Vladimir", "Bradford", "Wilhelm", "Edmund", "Alexander",
 		"Richard", "Greyson" };
-	String[] sufijos = { "Destroyer", "Conqueror", "Impaler", "Butcher", "Ripper", "Soulless", "Ravager",
+	String[] sufijos = {"Destroyer", "Conqueror", "Impaler", "Butcher", "Ripper", "Soulless", "Ravager",
 		"Streetcleaner", "Extremist", "Fanatic", "Sadist" };
 
 	return prefijos[random.nextInt(prefijos.length)] + " " + nombres[random.nextInt(nombres.length)] + " the "

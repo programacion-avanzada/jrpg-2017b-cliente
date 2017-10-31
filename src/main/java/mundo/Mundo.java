@@ -25,17 +25,30 @@ public class Mundo {
 
     private Grafo grafoDeTilesNoSolidos;
 
-    public Mundo(Juego juego, String pathMap, String pathObstac) {
+    /**
+     * Instantiates a new mundo.
+     * @param juego the juego
+     * @param pathMap the path map
+     * @param pathObstac the path obstac
+     */
+    public Mundo(final Juego juego, final String pathMap, final String pathObstac) {
 	this.juego = juego;
 	cargarMundo(pathMap, pathObstac);
 	mundoAGrafo();
     }
 
+    /**
+     * Actualizar.
+     */
     public void actualizar() {
 
     }
 
-    public void graficar(Graphics g) {
+    /**
+     * Graficar.
+     * @param g the g
+     */
+    public void graficar(final Graphics g) {
 	xOffset = juego.getEstadoJuego().getPersonaje().getxOffset();
 	yOffset = juego.getEstadoJuego().getPersonaje().getYOffset();
 
@@ -60,26 +73,33 @@ public class Mundo {
 			Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
 				(int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 		    }
-		    if (!getTile(j, i).esSolido())
+		    if (!getTile(j, i).esSolido()) {
 			getTile(j, i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
 				(int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
+		    }
 		}
 	    }
 	}
     }
 
-    public void graficarObstaculos(Graphics g) {
+    /**
+     * Graficar obstaculos.
+     * @param g the g
+     */
+    public void graficarObstaculos(final Graphics g) {
 	Tile obst;
 	for (int i = 0; i < alto; i++) {
 	    for (int j = 0; j < ancho; j++) {
 		iso = dosDaIso(j, i);
 		// Grafico al personaje
-		if (Estado.getEstado() == juego.getEstadoJuego())
+		if (Estado.getEstado() == juego.getEstadoJuego()) {
 		    if (Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
 			    juego.getUbicacionPersonaje().getPosY())[0] == j
 			    && Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
-				    juego.getUbicacionPersonaje().getPosY())[1] == i)
+				    juego.getUbicacionPersonaje().getPosY())[1] == i) {
 			juego.getEstadoJuego().getPersonaje().graficar(g);
+		    }
+		}
 
 		// Grafico los obstaculos
 		if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)
@@ -93,7 +113,13 @@ public class Mundo {
 	}
     }
 
-    public Tile getTile(int x, int y) {
+    /**
+     * Gets the tile.
+     * @param x the x
+     * @param y the y
+     * @return the tile
+     */
+    public Tile getTile(final int x, final int y) {
 	Tile t = Tile.tiles[tiles[x][y]];
 	if (t == null) {
 	    int map = juego.getPersonaje().getMapa();
@@ -108,7 +134,12 @@ public class Mundo {
 	return t;
     }
 
-    private void cargarMundo(String pathMapa, String pathObstaculos) {
+    /**
+     * Cargar mundo.
+     * @param pathMapa the path mapa
+     * @param pathObstaculos the path obstaculos
+     */
+    private void cargarMundo(final String pathMapa, final String pathObstaculos) {
 	String archivo = Utilitarias.archivoAString(pathMapa);
 	String[] tokens = archivo.split("\\s+");
 	ancho = Utilitarias.parseInt(tokens[0]);
@@ -129,14 +160,19 @@ public class Mundo {
 
     }
 
+    /**
+     * Mundo A grafo.
+     */
     private void mundoAGrafo() {
 	// Creo una matriz de nodos
 	Nodo[][] nodos = new Nodo[ancho][alto];
 	int indice = 0;
 	// Lleno la matriz con los nodos
-	for (int y = 0; y < alto; y++)
-	    for (int x = 0; x < ancho; x++)
+	for (int y = 0; y < alto; y++) {
+	    for (int x = 0; x < ancho; x++) {
 		nodos[y][x] = new Nodo(indice++, x, y);
+	    }
+	}
 	// Variables finales
 	int xFinal = ancho;
 	int yFinal = alto;
@@ -185,24 +221,44 @@ public class Mundo {
 	grafoDeTilesNoSolidos = new Grafo(ancho * alto);
 	indice = 0;
 	// Paso la matriz a un array
-	for (int i = 0; i < ancho; i++)
-	    for (int j = 0; j < alto; j++)
+	for (int i = 0; i < ancho; i++) {
+	    for (int j = 0; j < alto; j++) {
 		grafoDeTilesNoSolidos.agregarNodo(nodos[i][j]);
+	    }
+	}
     }
 
+    /**
+     * Obtener grafo de tiles no solidos.
+     * @return the grafo
+     */
     public Grafo obtenerGrafoDeTilesNoSolidos() {
 	return grafoDeTilesNoSolidos;
     }
 
+    /**
+     * Obtener ancho.
+     * @return the int
+     */
     public int obtenerAncho() {
 	return ancho;
     }
 
+    /**
+     * Obtener alto.
+     * @return the int
+     */
     public int obtenerAlto() {
 	return alto;
     }
 
-    public static float[] isoA2D(float x, float y) {
+    /**
+     * Iso A 2 D.
+     * @param x the x
+     * @param y the y
+     * @return the float[]
+     */
+    public static float[] isoA2D(final float x, final float y) {
 	float[] dosD = new float[2];
 
 	dosD[0] = (x / (Tile.ANCHO / 2) + y / (Tile.ALTO / 2)) / 2;
@@ -211,7 +267,13 @@ public class Mundo {
 	return dosD;
     }
 
-    public static float[] dosDaIso(float x, float y) {
+    /**
+     * Dos da iso.
+     * @param x the x
+     * @param y the y
+     * @return the float[]
+     */
+    public static float[] dosDaIso(final float x, final float y) {
 	float[] iso = new float[2];
 
 	iso[0] = (x - y) * (Tile.ANCHO / 2);
@@ -220,7 +282,13 @@ public class Mundo {
 	return iso;
     }
 
-    public static int[] mouseATile(float x, float y) {
+    /**
+     * Mouse A tile.
+     * @param x the x
+     * @param y the y
+     * @return the int[]
+     */
+    public static int[] mouseATile(final float x, final float y) {
 	int tile[] = new int[2];
 
 	tile[0] = (int) Math.floor((y / Tile.ALTO) + (x / Tile.ANCHO)) + 1;

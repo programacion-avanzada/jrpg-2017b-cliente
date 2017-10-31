@@ -14,7 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -38,7 +37,7 @@ public class MenuInicioSesion extends JFrame {
 
 	addWindowListener(new WindowAdapter() {
 	    @Override
-	    public void windowClosing(WindowEvent e) {
+	    public void windowClosing(final WindowEvent e) {
 		synchronized (cliente) {
 		    cliente.setAccion(Comando.SALIR);
 		    cliente.notify();
@@ -82,7 +81,7 @@ public class MenuInicioSesion extends JFrame {
 	textField = new JTextField();
 	textField.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent arg0) {
+	    public void actionPerformed(final ActionEvent arg0) {
 		logIn(cliente);
 	    }
 	});
@@ -93,7 +92,7 @@ public class MenuInicioSesion extends JFrame {
 	passwordField = new JPasswordField();
 	passwordField.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		logIn(cliente);
 	    }
 	});
@@ -108,7 +107,7 @@ public class MenuInicioSesion extends JFrame {
 	btnConectar.setIcon(new ImageIcon(MenuInicioSesion.class.getResource("/frames/BotonMenu.png")));
 	btnConectar.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		logIn(cliente);
 
 	    }

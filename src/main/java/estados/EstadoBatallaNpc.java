@@ -14,10 +14,6 @@ import com.google.gson.Gson;
 
 import dominio.Casta;
 import dominio.NonPlayableCharacter;
-import dominio.NpcBandido;
-import dominio.NpcBrujo;
-import dominio.NpcBruto;
-import dominio.NpcVampiro;
 import dominio.Personaje;
 import interfaz.EstadoDeNpc;
 import interfaz.EstadoDePersonaje;
@@ -55,7 +51,12 @@ public class EstadoBatallaNpc extends Estado {
 
     private MenuBatalla menuBatalla;
 
-    public EstadoBatallaNpc(Juego juego, PaqueteBatalla paqueteBatalla) {
+    /**
+     * Instantiates a new estado batalla npc.
+     * @param juego the juego
+     * @param paqueteBatalla the paquete batalla
+     */
+    public EstadoBatallaNpc(final Juego juego, final PaqueteBatalla paqueteBatalla) {
 	// El paquete de batalla va a tener la id del jugador y la id del npc
 	// pero negativa
 
@@ -80,7 +81,7 @@ public class EstadoBatallaNpc extends Estado {
 	timer = new Timer();
 
 	// por defecto batalla perdida
-	juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
+	juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.MENUPERDERBATALLA);
 
 	// limpio la accion del mouse
 	juego.getHandlerMouse().setNuevoClick(false);
@@ -154,12 +155,12 @@ public class EstadoBatallaNpc extends Estado {
 		    if (!enemigo.estaVivo()) // EL NPC MUERE
 		    {
 			juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
-				MenuInfoPersonaje.menuGanarBatalla);
+				MenuInfoPersonaje.MENUGANARBATALLA);
 			if (personaje.ganarExperiencia(enemigo.getNivel() * 40)) {
 			    juego.getPersonaje().setNivel(personaje.getNivel());
 			    juego.getPersonaje().setPuntosSkill(personaje.getPuntosSkill() + 3);
 			    juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
-				    MenuInfoPersonaje.menuSubirNivel);
+				    MenuInfoPersonaje.MENUSUBIRNIVEL);
 			}
 
 			paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
@@ -179,7 +180,7 @@ public class EstadoBatallaNpc extends Estado {
 				if (!personaje.estaVivo()) // EL PERSONAJE MUERE
 				{
 				    juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
-					    MenuInfoPersonaje.menuPerderBatalla);
+					    MenuInfoPersonaje.MENUPERDERBATALLA);
 				    paqueteFinalizarBatalla.setGanadorBatalla(paqueteEnemigo.getId());
 
 				    juego.getPersonaje().setEstado(Estado.estadoJuego);
@@ -204,7 +205,7 @@ public class EstadoBatallaNpc extends Estado {
     }
 
     @Override
-    public void graficar(Graphics g) {
+    public void graficar(final Graphics g) {
 	g.setColor(Color.BLACK);
 	g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
 	mundo.graficar(g);
@@ -221,6 +222,9 @@ public class EstadoBatallaNpc extends Estado {
 	EstadoDeNpc.dibujarEstadoDeNpc(g, 550, 5, enemigo, miniaturaEnemigo);
     }
 
+    /**
+     * Crear personajes.
+     */
     private void crearPersonajes() {
 	String nombre = paquetePersonaje.getNombre();
 	int salud = paquetePersonaje.getSaludTope();
@@ -255,6 +259,9 @@ public class EstadoBatallaNpc extends Estado {
 	}
     }
 
+    /**
+     * Finalizar batalla.
+     */
     private void finalizarBatalla() {
 	try {
 	    juego.getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
@@ -281,24 +288,44 @@ public class EstadoBatallaNpc extends Estado {
 	}
     }
 
+    /**
+     * Gets the paquete personaje.
+     * @return the paquete personaje
+     */
     public PaquetePersonaje getPaquetePersonaje() {
 	return paquetePersonaje;
     }
 
+    /**
+     * Gets the paquete enemigo.
+     * @return the paquete enemigo
+     */
     public PaqueteNpc getPaqueteEnemigo() {
 	return paqueteEnemigo;
     }
 
-    public void setMiTurno(boolean b) {
+    /**
+     * Sets the mi turno.
+     * @param b the new mi turno
+     */
+    public void setMiTurno(final boolean b) {
 	miTurno = b;
 	menuBatalla.setHabilitado(b);
 	juego.getHandlerMouse().setNuevoClick(false);
     }
 
+    /**
+     * Gets the personaje.
+     * @return the personaje
+     */
     public Personaje getPersonaje() {
 	return personaje;
     }
 
+    /**
+     * Gets the enemigo.
+     * @return the enemigo
+     */
     public NonPlayableCharacter getEnemigo() {
 	return enemigo;
     }

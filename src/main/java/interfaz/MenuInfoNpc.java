@@ -12,15 +12,15 @@ import recursos.Recursos;
 
 public class MenuInfoNpc {
 
-    private static final int anchoPersonaje = 128;
+    private static final int ANCHOPERSONAJE = 128;
     private static final BufferedImage menu = Recursos.getMenuEnemigo();
-    public static final int menuBatallar = 0;
-    public static final int menuInformacion = 1;
-    public static final int menuSubirNivel = 2;
-    public static final int menuGanarBatalla = 3;
-    public static final int menuPerderBatalla = 4;
-    public static final int menuGanarItem = 5;
-    public static final int menuComerciar = 6;
+    public static final int MENUBATALLAR = 0;
+    public static final int MENUINFORMACION = 1;
+    public static final int MENUSUBIRNIVEL = 2;
+    public static final int MENUGANARBATALLA = 3;
+    public static final int MENUPERDERBATALLA = 4;
+    public static final int MENUGANARITEM = 5;
+    public static final int MENUCOMERCIAR = 6;
     private static final String[] leyendaBoton = { "Batallar", "Volver", "Aceptar", "Aceptar", "Aceptar", "Aceptar",
 	    "Comerciar" };
 
@@ -28,19 +28,19 @@ public class MenuInfoNpc {
     private int y;
     private PaqueteNpc npc;
 
-    public MenuInfoNpc(int x, int y, PaqueteNpc npc) {
+    public MenuInfoNpc(final int x, final int y, final PaqueteNpc npc) {
 	this.x = x;
 	this.y = y;
 	this.npc = npc;
     }
 
-    public void graficar(Graphics g, int tipoMenu) {
+    public void graficar(final Graphics g, final int tipoMenu) {
 
 	// dibujo el menu
 	g.drawImage(menu, x, y, null);
 
 	// dibujo el personaje
-	g.drawImage(Recursos.getPersonaje().get(npc.getRaza()).get(6)[0], x + menu.getWidth() / 2 - anchoPersonaje / 2,
+	g.drawImage(Recursos.getPersonaje().get(npc.getRaza()).get(6)[0], x + menu.getWidth() / 2 - ANCHOPERSONAJE / 2,
 		y + 70, 128, 128, null);
 
 	// muestro el nombre
@@ -50,12 +50,14 @@ public class MenuInfoNpc {
 
 	// Grafico la leyenda segun el tipo de menu
 	switch (tipoMenu) {
-	case menuBatallar:
+	case MENUBATALLAR:
 	    graficarMenuInformacion(g);
 	    break;
-	case menuInformacion:
+	case MENUINFORMACION:
 	    graficarMenuInformacion(g);
 	    break;
+	    default:
+		break;
 	/*
 	 * case menuComerciar: graficarMenuComerciar(g); break;
 	 */
@@ -68,7 +70,7 @@ public class MenuInfoNpc {
 	Pantalla.centerString(g, new Rectangle(x + 50, y + 380, 200, 25), leyendaBoton[tipoMenu]);
     }
 
-    public void graficarMenuInformacion(Graphics g) {
+    public void graficarMenuInformacion(final Graphics g) {
 
 	// muestro los nombres de los atributos
 	g.setColor(Color.BLACK);
@@ -102,16 +104,16 @@ public class MenuInfoNpc {
      * }
      */
 
-    public boolean clickEnBoton(int mouseX, int mouseY) {
+    public boolean clickEnBoton(final int mouseX, final int mouseY) {
 	return (mouseX >= x + 50 && mouseX <= x + 250 && mouseY >= y + 380 && mouseY <= y + 405);
     }
 
-    public boolean clickEnCerrar(int mouseX, int mouseY) {
+    public boolean clickEnCerrar(final int mouseX, final int mouseY) {
 	return (mouseX >= x + menu.getWidth() - 24 && mouseX <= x + menu.getWidth() + 4 && mouseY >= y + 12
 		&& mouseY <= y + 36);
     }
 
-    public boolean clickEnMenu(int mouseX, int mouseY) {
+    public boolean clickEnMenu(final int mouseX, final int mouseY) {
 	return (mouseX >= x && mouseX <= x + menu.getWidth() && mouseY >= y && mouseY <= y + menu.getHeight());
     }
 }

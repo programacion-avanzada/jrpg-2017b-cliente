@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import estados.Estado;
 
+/**
+ * Clase que contine los datos empaquetados del NPC
+ */
 public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
     // Por ahora tiene todo lo mismo que un personaje para poder tratarlos de
     // forma similar.
@@ -27,8 +30,22 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
     private int experienciaOtorga;
 
     // Constructor no útil por el momento.
-    public PaqueteNpc(int id, int saludTope, int energiaTope, int fuerza, int destreza, int inteligencia, int nivel,
-	    int experienciaOtorga, String nombre, String raza, String casta) {
+    /**
+     * @param id id del NPC
+     * @param saludTope salud maxima del NPC
+     * @param energiaTope energia maxima del NPC
+     * @param fuerza fuerza del NPC
+     * @param destreza destreza del NPC
+     * @param inteligencia inteligencia del NPC
+     * @param nivel nivel del NPC
+     * @param experienciaOtorga experiencia que otorga ganar al NPC
+     * @param nombre nombre del NPC
+     * @param raza raza del NPC
+     * @param casta casta del NPC
+     */
+    public PaqueteNpc(final int id, final int saludTope, final int energiaTope, final int fuerza, final int destreza,
+	    final int inteligencia, final int nivel, final int experienciaOtorga, final String nombre,
+	    final String raza, final String casta) {
 	super();
 	this.id = id;
 	this.saludTope = saludTope;
@@ -44,7 +61,15 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
 	this.estado = Estado.estadoJuego;
     }
 
-    public PaqueteNpc(int id, int nivel, String nombre, String raza, String casta) {
+    /**
+     * Constructor del paquete NPC
+     * @param id id del NPC
+     * @param nivel nivel del NPC
+     * @param nombre nombre del NPC
+     * @param raza raza del NPC
+     * @param casta casta del NPC
+     */
+    public PaqueteNpc(final int id, final int nivel, final String nombre, final String raza, final String casta) {
 	super();
 	this.id = id;
 	this.nivel = nivel;
@@ -54,107 +79,185 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
 	this.estado = Estado.estadoJuego;
     }
 
+    /**
+     * @return nombre del NPC
+     */
     public String getNombre() {
 	return nombre;
     }
 
-    public void setNombre(String nombre) {
+    /**
+     * @param nombre nombre del NPC
+     */
+    public void setNombre(final String nombre) {
 	this.nombre = nombre;
     }
 
+    /**
+     * @return identificador del NPC
+     */
     public int getId() {
 	return id;
     }
 
-    public void setId(int id) {
+    /**
+     * @param id identificador del NPC
+     */
+    public void setId(final int id) {
 	this.id = id;
     }
 
+    /**
+     * @return salud maxima del NPC
+     */
     public int getSaludTope() {
 	return saludTope;
     }
 
-    public void setSaludTope(int saludTope) {
+    /**
+     * @param saludTope salud maxima del NPC
+     */
+    public void setSaludTope(final int saludTope) {
 	this.saludTope = saludTope;
     }
 
+    /**
+     * @return energia maxima del NPC
+     */
     public int getEnergiaTope() {
 	return energiaTope;
     }
 
-    public void setEnergiaTope(int energiaTope) {
+    /**
+     * @param energiaTope energia maxima del NPC
+     */
+    public void setEnergiaTope(final int energiaTope) {
 	this.energiaTope = energiaTope;
     }
 
+    /**
+     * @return fuerza del NPC
+     */
     public int getFuerza() {
 	return fuerza;
     }
 
-    public void setFuerza(int fuerza) {
+    /**
+     * @param fuerza fuerza del NPC
+     */
+    public void setFuerza(final int fuerza) {
 	this.fuerza = fuerza;
     }
 
+    /**
+     * @return destreza del NPC
+     */
     public int getDestreza() {
 	return destreza;
     }
 
-    public void setDestreza(int destreza) {
+    /**
+     * @param destreza destreza del NPC
+     */
+    public void setDestreza(final int destreza) {
 	this.destreza = destreza;
     }
 
+    /**
+     * @return inteligencia del NPC
+     */
     public int getInteligencia() {
 	return inteligencia;
     }
 
-    public void setInteligencia(int inteligencia) {
+    /**
+     * @param inteligencia inteligencia del NPC
+     */
+    public void setInteligencia(final int inteligencia) {
 	this.inteligencia = inteligencia;
     }
 
+    /**
+     * @return nivel del NPC
+     */
     public int getNivel() {
 	return nivel;
     }
 
-    public void setNivel(int nivel) {
+    /**
+     * @param nivel nivel del NPC
+     */
+    public void setNivel(final int nivel) {
 	this.nivel = nivel;
     }
 
+    /**
+     * @return exp que otorga ganarle al NPC
+     */
     public int getExperienciaOtorga() {
 	return experienciaOtorga;
     }
 
-    public void setExperienciaOtorga(int experienciaOtorga) {
+    /**
+     * @param experienciaOtorga exp que otorga ganarle al NPC
+     */
+    public void setExperienciaOtorga(final int experienciaOtorga) {
 	this.experienciaOtorga = experienciaOtorga;
     }
 
+    /**
+     * @return mapa del NPC
+     */
     public int getIdMapa() {
 	return idMapa;
     }
 
-    public void setIdMapa(int idMapa) {
+    /**
+     * @param idMapa mapa del NPC
+     */
+    public void setIdMapa(final int idMapa) {
 	this.idMapa = idMapa;
     }
 
+    /**
+     * @return estado del NPC
+     */
     public int getEstado() {
 	return estado;
     }
 
-    public void setEstado(int estado) {
+    /**
+     * @param estado estado del NPC
+     */
+    public void setEstado(final int estado) {
 	this.estado = estado;
     }
 
+    /**
+     * @return casta del NPC
+     */
     public String getCasta() {
 	return casta;
     }
 
-    public void setCasta(String casta) {
+    /**
+     * @param casta casta del NPC
+     */
+    public void setCasta(final String casta) {
 	this.casta = casta;
     }
 
+    /**
+     * @return raza del NPC
+     */
     public String getRaza() {
 	return raza;
     }
 
-    public void setRaza(String raza) {
+    /**
+     * @param raza raza del NPC
+     */
+    public void setRaza(final String raza) {
 	this.raza = raza;
     }
 }

@@ -39,7 +39,7 @@ public abstract class Comando {
     protected final Gson gson = new Gson();
     protected String cadenaLeida;
 
-    public void setCadena(String cadenaLeida) {
+    public void setCadena(final String cadenaLeida) {
 	this.cadenaLeida = cadenaLeida;
     }
 

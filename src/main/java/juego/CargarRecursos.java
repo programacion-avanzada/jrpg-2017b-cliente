@@ -9,14 +9,25 @@ import cliente.Cliente;
 import mensajeria.Comando;
 import recursos.Recursos;
 
+/**
+ * The Class CargarRecursos.
+ */
 public class CargarRecursos extends Thread {
 
+    /** The cliente. */
     private Cliente cliente;
 
-    public CargarRecursos(Cliente cliente) {
+    /**
+     * Instantiates a new cargar recursos.
+     * @param cliente the cliente
+     */
+    public CargarRecursos(final Cliente cliente) {
 	this.cliente = cliente;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Thread#run()
+     */
     @Override
     public void run() {
 	synchronized (cliente) {

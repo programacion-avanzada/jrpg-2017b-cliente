@@ -55,7 +55,6 @@ public class Cliente extends Thread {
 
     /**
      * Pide la accion
-     * 
      * @return Devuelve la accion
      */
     public int getAccion() {
@@ -64,9 +63,7 @@ public class Cliente extends Thread {
 
     /**
      * Setea la accion
-     * 
-     * @param accion
-     *            accion a setear
+     * @param accion accion a setear
      */
     public void setAccion(final int accion) {
 	this.accion = accion;
@@ -100,7 +97,12 @@ public class Cliente extends Thread {
 	}
     }
 
-    public Cliente(String ip, int puerto) {
+    /**
+     * Instantiates a new cliente.
+     * @param ip the ip
+     * @param puerto the puerto
+     */
+    public Cliente(final String ip, final int puerto) {
 	try {
 	    cliente = new Socket(ip, puerto);
 	    miIp = cliente.getInetAddress().getHostAddress();
@@ -202,7 +204,6 @@ public class Cliente extends Thread {
 
     /**
      * Pide el cliente
-     * 
      * @return Devuelve el cliente
      */
     public Socket getSocket() {
@@ -211,9 +212,7 @@ public class Cliente extends Thread {
 
     /**
      * Setea el cliente
-     * 
-     * @param cliente
-     *            cliente a setear
+     * @param cliente cliente a setear
      */
     public void setSocket(final Socket cliente) {
 	this.cliente = cliente;
@@ -221,7 +220,6 @@ public class Cliente extends Thread {
 
     /**
      * Pide la ip
-     * 
      * @return Devuelve la ip
      */
     public String getMiIp() {
@@ -230,9 +228,7 @@ public class Cliente extends Thread {
 
     /**
      * Setea la ip
-     * 
-     * @param miIp
-     *            ip a setear
+     * @param miIp ip a setear
      */
     public void setMiIp(final String miIp) {
 	this.miIp = miIp;
@@ -240,7 +236,6 @@ public class Cliente extends Thread {
 
     /**
      * Pide la entrada
-     * 
      * @return Devuelve la entrada
      */
     public ObjectInputStream getEntrada() {
@@ -249,9 +244,7 @@ public class Cliente extends Thread {
 
     /**
      * Setea la entrada
-     * 
-     * @param entrada
-     *            entrada a setear
+     * @param entrada entrada a setear
      */
     public void setEntrada(final ObjectInputStream entrada) {
 	this.entrada = entrada;
@@ -259,7 +252,6 @@ public class Cliente extends Thread {
 
     /**
      * Pide la salida
-     * 
      * @return Devuelve la salida
      */
     public ObjectOutputStream getSalida() {
@@ -268,9 +260,7 @@ public class Cliente extends Thread {
 
     /**
      * Setea la salida
-     * 
-     * @param salida
-     *            salida a setear
+     * @param salida salida a setear
      */
     public void setSalida(final ObjectOutputStream salida) {
 	this.salida = salida;
@@ -278,7 +268,6 @@ public class Cliente extends Thread {
 
     /**
      * Pide el paquete usuario
-     * 
      * @return Devuelve el paquete usuario
      */
     public PaqueteUsuario getPaqueteUsuario() {
@@ -287,7 +276,6 @@ public class Cliente extends Thread {
 
     /**
      * Pide el paquete personaje
-     * 
      * @return Devuelve el paquete personaje
      */
     public PaquetePersonaje getPaquetePersonaje() {
@@ -296,7 +284,6 @@ public class Cliente extends Thread {
 
     /**
      * Pide el juego
-     * 
      * @return Devuelve el juego
      */
     public Juego getJuego() {
@@ -305,77 +292,140 @@ public class Cliente extends Thread {
 
     /**
      * Pide el menu de carga
-     * 
      * @return Devuelve el menu de carga
      */
     public MenuCarga getMenuCarga() {
 	return menuCarga;
     }
 
-    public void actualizarItems(PaquetePersonaje paqueteActualizado) {
+    /**
+     * Actualizar items.
+     * @param paqueteActualizado the paquete actualizado
+     */
+    public void actualizarItems(final PaquetePersonaje paqueteActualizado) {
 	if (paquetePersonaje.getCantItems() != 0
 		&& paquetePersonaje.getCantItems() != paqueteActualizado.getCantItems()) {
 	    paquetePersonaje.anadirItem(paqueteActualizado.getItems().get(paqueteActualizado.getItems().size() - 1));
 	}
     }
 
+    /**
+     * Gets the ip.
+     * @return the ip
+     */
     public String getIp() {
 	return ip;
     }
 
-    public void actualizarPersonaje(PaquetePersonaje pP) {
+    /**
+     * Actualizar personaje.
+     * @param pP the p P
+     */
+    public void actualizarPersonaje(final PaquetePersonaje pP) {
 	paquetePersonaje = pP;
     }
 
+    /**
+     * Gets the wome.
+     * @return the wome
+     */
     public Juego getWome() {
 	return wome;
     }
 
-    public void setWome(Juego wome) {
+    /**
+     * Sets the wome.
+     * @param wome the new wome
+     */
+    public void setWome(final Juego wome) {
 	this.wome = wome;
     }
 
+    /**
+     * Gets the puerto.
+     * @return the puerto
+     */
     public int getPuerto() {
 	return puerto;
     }
 
-    public void setPaqueteUsuario(PaqueteUsuario paqueteUsuario) {
+    /**
+     * Sets the paquete usuario.
+     * @param paqueteUsuario the new paquete usuario
+     */
+    public void setPaqueteUsuario(final PaqueteUsuario paqueteUsuario) {
 	this.paqueteUsuario = paqueteUsuario;
     }
 
-    public void setPaquetePersonaje(PaquetePersonaje paquetePersonaje) {
+    /**
+     * Sets the paquete personaje.
+     * @param paquetePersonaje the new paquete personaje
+     */
+    public void setPaquetePersonaje(final PaquetePersonaje paquetePersonaje) {
 	this.paquetePersonaje = paquetePersonaje;
     }
 
-    public void setIp(String ip) {
+    /**
+     * Sets the ip.
+     * @param ip the new ip
+     */
+    public void setIp(final String ip) {
 	this.ip = ip;
     }
 
-    public void setMenuCarga(MenuCarga menuCarga) {
+    /**
+     * Sets the menu carga.
+     * @param menuCarga the new menu carga
+     */
+    public void setMenuCarga(final MenuCarga menuCarga) {
 	this.menuCarga = menuCarga;
     }
 
+    /**
+     * Gets the m1.
+     * @return the m1
+     */
     public MenuComerciar getM1() {
 	return m1;
     }
 
-    public void setM1(MenuComerciar m1) {
+    /**
+     * Sets the m1.
+     * @param m1 the new m1
+     */
+    public void setM1(final MenuComerciar m1) {
 	this.m1 = m1;
     }
 
+    /**
+     * Gets the paquete comercio.
+     * @return the paquete comercio
+     */
     public PaqueteComerciar getPaqueteComercio() {
 	return paqueteComercio;
     }
 
-    public void setPaqueteComercio(PaqueteComerciar paqueteComercio) {
+    /**
+     * Sets the paquete comercio.
+     * @param paqueteComercio the new paquete comercio
+     */
+    public void setPaqueteComercio(final PaqueteComerciar paqueteComercio) {
 	this.paqueteComercio = paqueteComercio;
     }
 
+    /**
+     * Gets the paquete mensaje.
+     * @return the paquete mensaje
+     */
     public PaqueteMensaje getPaqueteMensaje() {
 	return paqueteMensaje;
     }
 
-    public void setPaqueteMensaje(PaqueteMensaje paqueteMensaje) {
+    /**
+     * Sets the paquete mensaje.
+     * @param paqueteMensaje the new paquete mensaje
+     */
+    public void setPaqueteMensaje(final PaqueteMensaje paqueteMensaje) {
 	this.paqueteMensaje = paqueteMensaje;
     }
 }

@@ -57,10 +57,11 @@ public class MenuCreacionPj extends JFrame {
 	// En caso de cerrar
 	addWindowListener(new WindowAdapter() {
 	    @Override
-	    public void windowClosing(WindowEvent e) {
+	    public void windowClosing(final WindowEvent e) {
 		personaje.setNombre(nombre.getText());
-		if (nombre.getText().equals(""))
+		if (nombre.getText().equals("")) {
 		    personaje.setNombre("nameless");
+		}
 		personaje.setRaza((String) cbxRaza.getSelectedItem());
 		personaje.setSaludTope(Integer.parseInt(vecSalud[cbxRaza.getSelectedIndex()]));
 		personaje.setEnergiaTope(Integer.parseInt(vecEnergia[cbxRaza.getSelectedIndex()]));
@@ -152,7 +153,8 @@ public class MenuCreacionPj extends JFrame {
 
 	nombre = new JTextField();
 	nombre.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
+	    @Override
+	    public void actionPerformed(final ActionEvent arg0) {
 		crearPj(cliente, personaje, gson, vecSalud, vecEnergia, vecFuerza, vecDestreza, vecInteligencia);
 	    }
 	});
@@ -175,7 +177,7 @@ public class MenuCreacionPj extends JFrame {
 
 	btnAceptar.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		crearPj(cliente, personaje, gson, vecSalud, vecEnergia, vecFuerza, vecDestreza, vecInteligencia);
 
 	    }
@@ -199,7 +201,7 @@ public class MenuCreacionPj extends JFrame {
 	layeredPane.add(cbxCasta, new Integer(1));
 	cbxCasta.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		fuerza.setText(vecFuerza[cbxCasta.getSelectedIndex()]);
 		destreza.setText(vecDestreza[cbxCasta.getSelectedIndex()]);
 		inteligencia.setText(vecInteligencia[cbxCasta.getSelectedIndex()]);
@@ -214,7 +216,7 @@ public class MenuCreacionPj extends JFrame {
 	layeredPane.add(cbxRaza, new Integer(1));
 	cbxRaza.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		salud.setText(vecSalud[cbxRaza.getSelectedIndex()]);
 		energia.setText(vecEnergia[cbxRaza.getSelectedIndex()]);
 	    }
@@ -229,12 +231,13 @@ public class MenuCreacionPj extends JFrame {
 	lblBackground.setIcon(new ImageIcon(MenuCreacionPj.class.getResource("/frames/menuBackground.jpg")));
     }
 
-    protected void crearPj(Cliente cliente, PaquetePersonaje personaje, Gson gson, String[] vecSalud,
-	    String[] vecEnergia, String[] vecFuerza, String[] vecDestreza, String[] vecInteligencia) {
+    protected void crearPj(final Cliente cliente, final PaquetePersonaje personaje, final Gson gson, final String[] vecSalud,
+	    final String[] vecEnergia, final String[] vecFuerza, final String[] vecDestreza, final String[] vecInteligencia) {
 
 	personaje.setNombre(nombre.getText());
-	if (nombre.getText().equals(""))
+	if (nombre.getText().equals("")) {
 	    personaje.setNombre("nameless");
+	}
 	personaje.setRaza((String) cbxRaza.getSelectedItem());
 	personaje.setSaludTope(Integer.parseInt(vecSalud[cbxRaza.getSelectedIndex()]));
 	personaje.setEnergiaTope(Integer.parseInt(vecEnergia[cbxRaza.getSelectedIndex()]));

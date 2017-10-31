@@ -19,17 +19,18 @@ public class MenuBatalla {
     private boolean habilitado;
     private Personaje personaje;
 
-    public MenuBatalla(boolean habilitado, Personaje personaje) {
+    public MenuBatalla(final boolean habilitado, final Personaje personaje) {
 	this.habilitado = habilitado;
 	this.personaje = personaje;
     }
 
-    public void graficar(Graphics g) {
+    public void graficar(final Graphics g) {
 
-	if (habilitado)
+	if (habilitado) {
 	    g.drawImage(Recursos.getMenuBatalla(), x, y, null);
-	else
+	} else {
 	    g.drawImage(Recursos.getMenuBatallaDeshabilitado(), x, y, null);
+	}
 
 	// Dibujo los botones
 	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesRaza()[0]), botones[0][0], botones[0][1],
@@ -56,32 +57,36 @@ public class MenuBatalla {
 
 	// Dibujo el turno de quien es
 	g.setColor(Color.WHITE);
-	if (habilitado)
+	if (habilitado) {
 	    Pantalla.centerString(g, new Rectangle(x, y + 5, Recursos.getMenuBatalla().getWidth(), 20), "Mi Turno");
-	else
+	} else {
 	    Pantalla.centerString(g, new Rectangle(x, y + 5, Recursos.getMenuBatalla().getWidth(), 20), "Turno Rival");
+	}
 
     }
 
-    public int getBotonClickeado(int mouseX, int mouseY) {
-	if (!habilitado)
+    public int getBotonClickeado(final int mouseX, final int mouseY) {
+	if (!habilitado) {
 	    return 0;
+	}
 	for (int i = 0; i < botones.length; i++) {
 	    if (mouseX >= botones[i][0] && mouseX <= botones[i][0] + anchoBoton && mouseY >= botones[i][1]
-		    && mouseY <= botones[i][1] + anchoBoton)
+		    && mouseY <= botones[i][1] + anchoBoton) {
 		return i + 1;
+	    }
 	}
 	return 0;
     }
 
-    public boolean clickEnMenu(int mouseX, int mouseY) {
+    public boolean clickEnMenu(final int mouseX, final int mouseY) {
 	if (mouseX >= x && mouseX <= x + Recursos.getMenuBatalla().getWidth() && mouseY >= y
-		&& mouseY <= y + Recursos.getMenuBatalla().getHeight())
+		&& mouseY <= y + Recursos.getMenuBatalla().getHeight()) {
 	    return habilitado;
+	}
 	return false;
     }
 
-    public void setHabilitado(boolean b) {
+    public void setHabilitado(final boolean b) {
 	habilitado = b;
     }
 }

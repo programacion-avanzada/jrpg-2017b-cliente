@@ -30,6 +30,7 @@ import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
 
+// TODO: Auto-generated Javadoc
 public class EstadoBatalla extends Estado {
 
     private Mundo mundo;
@@ -52,7 +53,12 @@ public class EstadoBatalla extends Estado {
 
     private MenuBatalla menuBatalla;
 
-    public EstadoBatalla(Juego juego, PaqueteBatalla paqueteBatalla) {
+    /**
+     * Instantiates a new estado batalla.
+     * @param juego the juego
+     * @param paqueteBatalla the paquete batalla
+     */
+    public EstadoBatalla(final Juego juego, final PaqueteBatalla paqueteBatalla) {
 	super(juego);
 	mundo = new Mundo(juego, "recursos/mundoBatalla.txt", "recursos/mundoBatallaCapaDos.txt");
 	miTurno = paqueteBatalla.isMiTurno();
@@ -72,7 +78,7 @@ public class EstadoBatalla extends Estado {
 	paqueteFinalizarBatalla.setIdEnemigo(enemigo.getIdPersonaje());
 
 	// por defecto batalla perdida
-	juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
+	juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.MENUPERDERBATALLA);
 
 	// limpio la accion del mouse
 	juego.getHandlerMouse().setNuevoClick(false);
@@ -145,12 +151,12 @@ public class EstadoBatalla extends Estado {
 		if (haySpellSeleccionada && seRealizoAccion) {
 		    if (!enemigo.estaVivo()) {
 			juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
-				MenuInfoPersonaje.menuGanarBatalla);
+				MenuInfoPersonaje.MENUGANARBATALLA);
 			if (personaje.ganarExperiencia(enemigo.getNivel() * 40)) {
 			    juego.getPersonaje().setNivel(personaje.getNivel());
 			    juego.getPersonaje().setPuntosSkill(personaje.getPuntosSkill());
 			    juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
-				    MenuInfoPersonaje.menuSubirNivel);
+				    MenuInfoPersonaje.MENUSUBIRNIVEL);
 			}
 			paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
 			finalizarBatalla();
@@ -178,7 +184,7 @@ public class EstadoBatalla extends Estado {
     }
 
     @Override
-    public void graficar(Graphics g) {
+    public void graficar(final Graphics g) {
 	g.setColor(Color.BLACK);
 	g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
 	mundo.graficar(g);
@@ -196,6 +202,9 @@ public class EstadoBatalla extends Estado {
 
     }
 
+    /**
+     * Crear personajes.
+     */
     private void crearPersonajes() {
 	String nombre = paquetePersonaje.getNombre();
 	int salud = paquetePersonaje.getSaludTope();
@@ -248,7 +257,11 @@ public class EstadoBatalla extends Estado {
 	}
     }
 
-    public void enviarAtaque(PaqueteAtacar paqueteAtacar) {
+    /**
+     * Enviar ataque.
+     * @param paqueteAtacar the paquete atacar
+     */
+    public void enviarAtaque(final PaqueteAtacar paqueteAtacar) {
 	try {
 	    juego.getCliente().getSalida().writeObject(gson.toJson(paqueteAtacar));
 	} catch (IOException e) {
@@ -256,6 +269,9 @@ public class EstadoBatalla extends Estado {
 	}
     }
 
+    /**
+     * Finalizar batalla.
+     */
     private void finalizarBatalla() {
 	try {
 	    juego.getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
@@ -293,24 +309,44 @@ public class EstadoBatalla extends Estado {
 	}
     }
 
+    /**
+     * Gets the paquete personaje.
+     * @return the paquete personaje
+     */
     public PaquetePersonaje getPaquetePersonaje() {
 	return paquetePersonaje;
     }
 
+    /**
+     * Gets the paquete enemigo.
+     * @return the paquete enemigo
+     */
     public PaquetePersonaje getPaqueteEnemigo() {
 	return paqueteEnemigo;
     }
 
-    public void setMiTurno(boolean b) {
+    /**
+     * Sets the mi turno.
+     * @param b the new mi turno
+     */
+    public void setMiTurno(final boolean b) {
 	miTurno = b;
 	menuBatalla.setHabilitado(b);
 	juego.getHandlerMouse().setNuevoClick(false);
     }
 
+    /**
+     * Gets the personaje.
+     * @return the personaje
+     */
     public Personaje getPersonaje() {
 	return personaje;
     }
 
+    /**
+     * Gets the enemigo.
+     * @return the enemigo
+     */
     public Personaje getEnemigo() {
 	return enemigo;
     }

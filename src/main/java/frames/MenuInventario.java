@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 import com.google.gson.Gson;
 
@@ -22,7 +23,7 @@ public class MenuInventario extends JFrame {
     public MenuInventario(final Cliente cliente) {
 	cancelar.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		try {
 		    Gson gson = new Gson();
 		    cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARINVENTARIO);
@@ -36,7 +37,7 @@ public class MenuInventario extends JFrame {
 	});
 	this.setTitle("Inventario");
 	this.setUndecorated(true);
-	this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	try {
 	    this.setLayout(new BorderLayout());
 	    this.add(new Inventario(cliente.getPaquetePersonaje()));

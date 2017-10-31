@@ -23,14 +23,28 @@ public class Tile {
     protected int ancho;
     protected int alto;
 
-    public Tile(BufferedImage textura, int id, boolean esSolido) {
+    /**
+     * Instantiates a new tile.
+     * @param textura the textura
+     * @param id the id
+     * @param esSolido the es solido
+     */
+    public Tile(final BufferedImage textura, final int id, final boolean esSolido) {
 	this.textura = textura;
 	this.id = id;
 	tiles[id] = this;
 	this.esSolido = esSolido;
     }
 
-    public Tile(BufferedImage textura, int id, boolean esSolido, int ancho, int alto) {
+    /**
+     * Instantiates a new tile.
+     * @param textura the textura
+     * @param id the id
+     * @param esSolido the es solido
+     * @param ancho the ancho
+     * @param alto the alto
+     */
+    public Tile(final BufferedImage textura, final int id, final boolean esSolido, final int ancho, final int alto) {
 	this.textura = textura;
 	this.id = id;
 	tiles[id] = this;
@@ -39,34 +53,71 @@ public class Tile {
 	this.esSolido = esSolido;
     }
 
+    /**
+     * Actualizar.
+     */
     public void actualizar() {
 
     }
 
-    public void graficar(Graphics g, int x, int y) {
+    /**
+     * Graficar.
+     * @param g the g
+     * @param x the x
+     * @param y the y
+     */
+    public void graficar(final Graphics g, final int x, final int y) {
 	g.drawImage(textura, x, y, ANCHO, ALTO, null);
     }
 
-    public void graficar(Graphics g, int x, int y, int width, int height) {
+    /**
+     * Graficar.
+     * @param g the g
+     * @param x the x
+     * @param y the y
+     * @param width the width
+     * @param height the height
+     */
+    public void graficar(final Graphics g, final int x, final int y, final int width, final int height) {
 	g.drawImage(textura, x, y, width, height, null);
     }
 
-    public void setSolido(boolean solidez) {
+    /**
+     * Sets the solido.
+     * @param solidez the new solido
+     */
+    public void setSolido(final boolean solidez) {
 	esSolido = solidez;
     }
 
+    /**
+     * Es solido.
+     * @return true, if successful
+     */
     public boolean esSolido() {
 	return esSolido;
     }
 
+    /**
+     * Gets the id.
+     * @return the id
+     */
     public int getId() {
 	return id;
     }
 
+    /**
+     * Gets the ancho.
+     * @return the ancho
+     */
     public int getAncho() {
 	return ancho;
     }
 
+    /**
+     * Gets the alto.
+     * @return the alto
+     */
     public int getAlto() {
 	return alto;
     }

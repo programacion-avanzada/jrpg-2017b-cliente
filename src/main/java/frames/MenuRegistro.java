@@ -37,7 +37,7 @@ public class MenuRegistro extends JFrame {
 
 	addWindowListener(new WindowAdapter() {
 	    @Override
-	    public void windowClosing(WindowEvent e) {
+	    public void windowClosing(final WindowEvent e) {
 		synchronized (cliente) {
 		    cliente.setAccion(Comando.SALIR);
 		    cliente.notify();
@@ -84,7 +84,7 @@ public class MenuRegistro extends JFrame {
 	pwPassword = new JPasswordField();
 	pwPassword.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		logIn(cliente);
 		dispose();
 	    }
@@ -95,7 +95,7 @@ public class MenuRegistro extends JFrame {
 	txtUsuario = new JTextField();
 	txtUsuario.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		logIn(cliente);
 		dispose();
 	    }
@@ -110,7 +110,7 @@ public class MenuRegistro extends JFrame {
 	labelBackground.setIcon(new ImageIcon(MenuRegistro.class.getResource("/frames/menuBackground.jpg")));
 	btnRegistrarse.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		logIn(cliente);
 		dispose();
 	    }
@@ -121,7 +121,7 @@ public class MenuRegistro extends JFrame {
 	return txtUsuario;
     }
 
-    public void settxtUsuario(JTextField txtUsuario) {
+    public void settxtUsuario(final JTextField txtUsuario) {
 	this.txtUsuario = txtUsuario;
     }
 
@@ -129,7 +129,7 @@ public class MenuRegistro extends JFrame {
 	return pwPassword;
     }
 
-    public void setPasswordField(JPasswordField pwPassword) {
+    public void setPasswordField(final JPasswordField pwPassword) {
 	this.pwPassword = pwPassword;
     }
 

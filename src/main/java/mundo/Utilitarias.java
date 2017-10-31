@@ -8,7 +8,12 @@ import javax.swing.JOptionPane;
 
 public class Utilitarias {
 
-    public static String archivoAString(String path) {
+    /**
+     * Archivo A string.
+     * @param path the path
+     * @return the string
+     */
+    public static String archivoAString(final String path) {
 	StringBuilder builder = new StringBuilder();
 
 	try {
@@ -27,7 +32,12 @@ public class Utilitarias {
 	return builder.toString();
     }
 
-    public static int parseInt(String numero) {
+    /**
+     * Parses the int.
+     * @param numero the numero
+     * @return the int
+     */
+    public static int parseInt(final String numero) {
 	try {
 	    return Integer.parseInt(numero);
 	} catch (NumberFormatException e) {

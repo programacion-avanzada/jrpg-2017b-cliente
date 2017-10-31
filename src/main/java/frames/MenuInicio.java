@@ -26,7 +26,7 @@ public class MenuInicio extends JFrame {
     public MenuInicio() {
 	addKeyListener(new KeyAdapter() {
 	    @Override
-	    public void keyPressed(KeyEvent e) {
+	    public void keyPressed(final KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 		    Cliente cliente = new Cliente();
 		    cliente.start();
@@ -83,7 +83,7 @@ public class MenuInicio extends JFrame {
 	btnRegistrar.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
 	btnRegistrar.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		Cliente cliente = new Cliente();
 		cliente.start();
 		dispose();
@@ -97,7 +97,7 @@ public class MenuInicio extends JFrame {
 	btnIniciarSesion.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
 	btnIniciarSesion.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		dispose();
 	    }
 	});
@@ -109,7 +109,7 @@ public class MenuInicio extends JFrame {
 	layeredPane.add(lblBackground, new Integer(0));
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 	new MenuInicio().setVisible(true);
     }
 

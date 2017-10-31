@@ -30,7 +30,7 @@ public class MenuJugar extends JFrame {
     public MenuJugar(final Cliente cliente) {
 	addKeyListener(new KeyAdapter() {
 	    @Override
-	    public void keyPressed(KeyEvent e) {
+	    public void keyPressed(final KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 		    MenuInicioSesion menuInicioSesion = new MenuInicioSesion(cliente);
 		    menuInicioSesion.setVisible(true);
@@ -48,7 +48,7 @@ public class MenuJugar extends JFrame {
 	// En caso de cerrar la ventana
 	addWindowListener(new WindowAdapter() {
 	    @Override
-	    public void windowClosing(WindowEvent e) {
+	    public void windowClosing(final WindowEvent e) {
 		synchronized (cliente) {
 		    cliente.setAccion(Comando.SALIR);
 		    cliente.notify();
@@ -94,7 +94,7 @@ public class MenuJugar extends JFrame {
 	btnRegistrar.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
 	btnRegistrar.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		MenuRegistro menuRegistro = new MenuRegistro(cliente);
 		menuRegistro.setVisible(true);
 		dispose();
@@ -108,7 +108,7 @@ public class MenuJugar extends JFrame {
 	btnIniciarSesion.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
 	btnIniciarSesion.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		MenuInicioSesion menuInicioSesion = new MenuInicioSesion(cliente);
 		menuInicioSesion.setVisible(true);
 		dispose();

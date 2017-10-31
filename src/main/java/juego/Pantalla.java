@@ -32,22 +32,46 @@ import frames.MenuStats;
 import mensajeria.Comando;
 import mensajeria.Paquete;
 
+/**
+ * The Class Pantalla.
+ */
 public class Pantalla {
 
+    /** The pantalla. */
     private JFrame pantalla;
+
+    /** The canvas. */
     private Canvas canvas;
 
+    /** The menu inventario. */
     // Menus
     public static MenuInventario menuInventario;
+
+    /** The menu asignar. */
     public static MenuAsignarSkills menuAsignar;
+
+    /** The menu stats. */
     public static MenuStats menuStats;
+
+    /** The menu escp. */
     public static MenuEscape menuEscp;
+
+    /** The vent contac. */
     public static VentanaContactos ventContac;
 
+    /** The menu. */
     public static JFrame menu;
 
+    /** The gson. */
     private final Gson gson = new Gson();
 
+    /**
+     * Instantiates a new pantalla.
+     * @param NOMBRE the nombre
+     * @param ANCHO the ancho
+     * @param ALTO the alto
+     * @param cliente the cliente
+     */
     public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
 	pantalla = new JFrame(NOMBRE);
 	pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
@@ -60,7 +84,7 @@ public class Pantalla {
 	pantalla.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 	pantalla.addWindowListener(new WindowAdapter() {
 	    @Override
-	    public void windowClosing(WindowEvent evt) {
+	    public void windowClosing(final WindowEvent evt) {
 		try {
 		    Paquete p = new Paquete();
 		    p.setComando(Comando.DESCONECTAR);
@@ -78,7 +102,7 @@ public class Pantalla {
 	});
 	pantalla.addKeyListener(new KeyAdapter() {
 	    @Override
-	    public void keyReleased(KeyEvent e) {
+	    public void keyReleased(final KeyEvent e) {
 		if (Estado.getEstado().esEstadoDeJuego()) {
 		    if (e.getKeyCode() == KeyEvent.VK_I && menuInventario == null) {
 			menuInventario = new MenuInventario(cliente);
@@ -118,19 +142,36 @@ public class Pantalla {
 	pantalla.pack();
     }
 
+    /**
+     * Gets the canvas.
+     * @return the canvas
+     */
     public Canvas getCanvas() {
 	return canvas;
     }
 
+    /**
+     * Gets the frame.
+     * @return the frame
+     */
     public JFrame getFrame() {
 	return pantalla;
     }
 
+    /**
+     * Mostrar.
+     */
     public void mostrar() {
 	pantalla.setVisible(true);
     }
 
-    public static void centerString(Graphics g, Rectangle r, String s) {
+    /**
+     * Center string.
+     * @param g the g
+     * @param r the r
+     * @param s the s
+     */
+    public static void centerString(final Graphics g, final Rectangle r, final String s) {
 	FontRenderContext frc = new FontRenderContext(null, true, true);
 
 	Rectangle2D r2D = g.getFont().getStringBounds(s, frc);

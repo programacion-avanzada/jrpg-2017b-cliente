@@ -16,21 +16,44 @@ public abstract class Estado {
 
     protected Juego juego;
 
+    /**
+     * Instantiates a new estado.
+     * @param juego the juego
+     */
     public Estado(Juego juego) {
 	this.juego = juego;
     }
 
+    /**
+     * Actualizar.
+     */
     public abstract void actualizar();
 
+    /**
+     * Graficar.
+     * @param g the g
+     */
     public abstract void graficar(Graphics g);
 
+    /**
+     * Sets the estado.
+     * @param estado the new estado
+     */
     public static void setEstado(Estado estado) {
 	estadoActual = estado;
     }
 
+    /**
+     * Gets the estado.
+     * @return the estado
+     */
     public static Estado getEstado() {
 	return estadoActual;
     }
 
+    /**
+     * Es estado de juego.
+     * @return true, if successful
+     */
     public abstract boolean esEstadoDeJuego();
 }

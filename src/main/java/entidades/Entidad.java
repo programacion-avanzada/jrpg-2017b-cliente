@@ -103,25 +103,15 @@ public class Entidad {
 
     /**
      * Constructor de la clase Entidad
-     * 
-     * @param juego
-     *            juego con el que se instancia Entidad
-     * @param mundo
-     *            mundo con el que se instancia Entidad
-     * @param ancho
-     *            ancho
-     * @param alto
-     *            alto
-     * @param nombre
-     *            nombre de la entidad
-     * @param spawnX
-     *            tile X donde spawnea
-     * @param spawnY
-     *            tile Y donde spawnea
-     * @param animaciones
-     *            animaciones de la entidad
-     * @param velAnimacion
-     *            velocidad de animacion de la entidad
+     * @param juego juego con el que se instancia Entidad
+     * @param mundo mundo con el que se instancia Entidad
+     * @param ancho ancho
+     * @param alto alto
+     * @param nombre nombre de la entidad
+     * @param spawnX tile X donde spawnea
+     * @param spawnY tile Y donde spawnea
+     * @param animaciones animaciones de la entidad
+     * @param velAnimacion velocidad de animacion de la entidad
      */
     public Entidad(final Juego juego, final Mundo mundo, final int ancho, final int alto, final String nombre,
 	    final float spawnX, final float spawnY, final LinkedList<BufferedImage[]> animaciones,
@@ -185,7 +175,7 @@ public class Entidad {
 	getEntrada();
 	mover();
 
-	juego.getCamara().Centrar(this);
+	juego.getCamara().centrar(this);
     }
 
     /**
@@ -228,26 +218,26 @@ public class Entidad {
 		    if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], posMouse[1])) {
 			// Pregunto si menuBatallar o menuComerciar, sino no me
 			// interesa hacer esto
-			if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuBatallar
-				|| juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuComerciar) {
+			if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENUBATALLAR
+				|| juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENUCOMERCIAR) {
 			    // Guardo las poss con el que quiero comerciar
 			    xComercio = juego.getUbicacionPersonajes().get(idEnemigo).getPosX();
 			    yComercio = juego.getUbicacionPersonajes().get(idEnemigo).getPosY();
 			    comercio = Mundo.isoA2D(xComercio, yComercio);
 			}
 			// pregunto si el menu emergente es de tipo batalla
-			if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuBatallar) {
+			if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENUBATALLAR) {
 			    // ME FIJO SI CON EL QUE QUIERO BATALLAR ESTA EN LA
 			    // ZONA DE COMERCIO
 			    if (!((int) comercio[0] >= 44 && (int) comercio[0] <= 71 && (int) comercio[1] >= 0
 				    && (int) comercio[1] <= 29)) {
-				juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+				juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 				PaqueteBatalla pBatalla = new PaqueteBatalla();
 
 				pBatalla.setId(juego.getPersonaje().getId());
 				pBatalla.setIdEnemigo(idEnemigo);
 
-				juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+				juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 
 				try {
 				    juego.getCliente().getSalida().writeObject(gson.toJson(pBatalla));
@@ -260,7 +250,7 @@ public class Entidad {
 			    }
 			} else {
 			    // PREGUNTO SI EL MENU EMERGENTE ES DE TIPO COMERCIO
-			    if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuComerciar) {
+			    if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENUCOMERCIAR) {
 				if ((int) comercio[0] >= 44 && (int) comercio[0] <= 71 && (int) comercio[1] >= 0
 					&& (int) comercio[1] <= 29) {
 				    if (juego.getCliente().getM1() == null) {
@@ -284,14 +274,14 @@ public class Entidad {
 				}
 			    }
 			}
-			juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+			juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 
 		    } else if (juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1])) {
-			juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+			juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 		    }
 		} else if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], posMouse[1])
 			&& juego.getEstadoJuego().getMenuEnemigo().esNPC()) {
-		    if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuBatallar) {
+		    if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENUBATALLAR) {
 			PaqueteBatalla pBatalla = new PaqueteBatalla();
 
 			pBatalla.setId(juego.getPersonaje().getId());
@@ -309,7 +299,7 @@ public class Entidad {
 			}
 		    }
 		} else {
-		    juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+		    juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 		}
 	    } else {
 		// Me fijo si hizo click en alguno de los personajes
@@ -341,14 +331,14 @@ public class Entidad {
 				    // DE COMERCIO
 				    juego.getEstadoJuego().setHaySolicitud(true,
 					    juego.getPersonajesConectados().get(idEnemigo),
-					    MenuInfoPersonaje.menuComerciar);
+					    MenuInfoPersonaje.MENUCOMERCIAR);
 				} else {
 				    // SI ESTOY DENTRO DE LA ZONA DE BATALLA
 				    // SETEO QUE SE ABRA EL MENU
 				    // DE BATALLA
 				    juego.getEstadoJuego().setHaySolicitud(true,
 					    juego.getPersonajesConectados().get(idEnemigo),
-					    MenuInfoPersonaje.menuBatallar);
+					    MenuInfoPersonaje.MENUBATALLAR);
 
 				}
 				// juego.getHandlerMouse().setNuevoClick(false);
@@ -379,23 +369,19 @@ public class Entidad {
 				    .get(actual.getIdEnemigo()).getEstado() == Estado.estadoJuego) {
 				juego.getEstadoJuego().setHaySolicitud(true,
 					juego.getPaquetesNpcs().get(actual.getIdEnemigo()),
-					MenuInfoPersonaje.menuBatallar);
+					MenuInfoPersonaje.MENUBATALLAR);
 
 				/*
 				 * PaqueteBatalla pBatalla = new
 				 * PaqueteBatalla();
-				 * 
 				 * pBatalla.setId(juego.getPersonaje().getId());
 				 * pBatalla.setIdEnemigo(actual.idEnemigo * -1);
-				 * 
 				 * juego.getPersonaje().setEstado(Estado.
 				 * estadoBatallaNpc); Estado.setEstado(null);
 				 * juego.setEstadoBatallaNpc(new
 				 * EstadoBatallaNpc(juego, pBatalla));
 				 * Estado.setEstado(juego.getEstadoBatallaNpc())
-				 * ;
-				 * 
-				 * try {
+				 * ; try {
 				 * juego.getCliente().getSalida().writeObject(
 				 * gson.toJson (pBatalla)); } catch (IOException
 				 * e) { JOptionPane.showMessageDialog(null,
@@ -419,7 +405,7 @@ public class Entidad {
 
 	    pilaMovimiento = null;
 
-	    juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+	    juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 	}
 
 	if (!enMovimiento && tileMoverme != null) {
@@ -571,10 +557,11 @@ public class Entidad {
     private BufferedImage getFrameAnimacionActual() {
 	Animacion animacionActual = animaciones.get(movimientoHacia);
 
-	if (animacionActual != null)
+	if (animacionActual != null) {
 	    return animacionActual.getFrameActual();
-	else
+	} else {
 	    return Recursos.getOrco().get(6)[0];
+	}
     }
 
     private void inicializarMapaAnimaciones() {
@@ -591,7 +578,6 @@ public class Entidad {
 
     /**
      * Pide la direccion donde va
-     * 
      * @return devuelve el movimiento hacia donde va
      */
     public int getDireccion() {
@@ -600,11 +586,9 @@ public class Entidad {
 
     /**
      * Setea la dirección hacia donde va
-     * 
-     * @param dir
-     *            int dirección
+     * @param dir int dirección
      */
-    public void setDireccion(int dir) {
+    public void setDireccion(final int dir) {
 	this.movimientoHacia = dir;
     }
 
@@ -614,10 +598,11 @@ public class Entidad {
     private int getFrame() {
 	Animacion animacion = animaciones.get(movimientoHacia);
 
-	if (animacion != null)
+	if (animacion != null) {
 	    return animacion.getFrame();
-	else
+	} else {
 	    return 0;
+	}
     }
 
     /**
@@ -638,15 +623,10 @@ public class Entidad {
 
     /**
      * Busca el camino más corto a recorrer para llegar a una posición
-     * 
-     * @param xInicial
-     *            ubicacion en X inicial
-     * @param yInicial
-     *            ubicacion en Y inicial
-     * @param xFinal
-     *            ubicacion en X final
-     * @param yFinal
-     *            ubicacion en Y final
+     * @param xInicial ubicacion en X inicial
+     * @param yInicial ubicacion en Y inicial
+     * @param xFinal ubicacion en X final
+     * @param yFinal ubicacion en Y final
      * @return la pila de tiles a recorrer
      */
     private PilaDeTiles caminoMasCorto(final int xInicial, final int yInicial, final int xFinal, final int yFinal) {
@@ -728,11 +708,8 @@ public class Entidad {
 
     /**
      * Pregunta si las entidades están en diagonal
-     * 
-     * @param nodoUno
-     *            entidad 1
-     * @param nodoDos
-     *            entidad 2
+     * @param nodoUno entidad 1
+     * @param nodoDos entidad 2
      * @return true or false
      */
     private boolean estanEnDiagonal(final Nodo nodoUno, final Nodo nodoDos) {
@@ -742,7 +719,6 @@ public class Entidad {
 
     /**
      * Pide el valor de X
-     * 
      * @return devuelve la ubicación en X
      */
     public float getX() {
@@ -751,9 +727,7 @@ public class Entidad {
 
     /**
      * Setea el valor de X
-     * 
-     * @param x
-     *            valor nuevo de la ubicación en X
+     * @param x valor nuevo de la ubicación en X
      */
     public void setX(final float x) {
 	this.x = x;
@@ -761,7 +735,6 @@ public class Entidad {
 
     /**
      * Pide el valor de Y
-     * 
      * @return devuelve la ubicación en Y
      */
     public float getY() {
@@ -770,9 +743,7 @@ public class Entidad {
 
     /**
      * Setea el valor de Y
-     * 
-     * @param y
-     *            valor nuevo de la ubicación en Y
+     * @param y valor nuevo de la ubicación en Y
      */
     public void setY(final float y) {
 	this.y = y;
@@ -780,7 +751,6 @@ public class Entidad {
 
     /**
      * Pide el ancho
-     * 
      * @return devuelve el ancho
      */
     public int getAncho() {
@@ -789,9 +759,7 @@ public class Entidad {
 
     /**
      * Setea el ancho
-     * 
-     * @param ancho
-     *            nuevo ancho a setear
+     * @param ancho nuevo ancho a setear
      */
     public void setAncho(final int ancho) {
 	this.ancho = ancho;
@@ -799,7 +767,6 @@ public class Entidad {
 
     /**
      * Pide el alto
-     * 
      * @return devuelve el alto
      */
     public int getAlto() {
@@ -808,9 +775,7 @@ public class Entidad {
 
     /**
      * Setea el alto
-     * 
-     * @param alto
-     *            nuevo alto a setear
+     * @param alto nuevo alto a setear
      */
     public void setAlto(final int alto) {
 	this.alto = alto;
@@ -818,7 +783,6 @@ public class Entidad {
 
     /**
      * Pide el offset de X
-     * 
      * @return devuelve el offset de X
      */
     public int getxOffset() {
@@ -827,18 +791,23 @@ public class Entidad {
 
     /**
      * Pide el offset de Y
-     * 
      * @return devuelve el offset de Y
      */
     public int getYOffset() {
 	return yOffset;
     }
 
+    /**
+     * @return id del enemigo
+     */
     public int getIdEnemigo() {
 	return idEnemigo;
     }
 
-    public void setIdEnemigo(int idEnemigo) {
+    /**
+     * @param idEnemigo id del enemigo
+     */
+    public void setIdEnemigo(final int idEnemigo) {
 	this.idEnemigo = idEnemigo;
     }
 }

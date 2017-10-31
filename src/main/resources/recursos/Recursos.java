@@ -466,7 +466,7 @@ public class Recursos {
      * @param elementosCargados
      * @param menuCarga
      */
-    private static void actualizarBarraDeCarga(int elementosCargados, MenuCarga menuCarga) {
+    private static void actualizarBarraDeCarga(final int elementosCargados, final MenuCarga menuCarga) {
 	menuCarga.setBarraCargando(elementosCargados * aNCHOBARRA / eLEMENTOS);
     }
 

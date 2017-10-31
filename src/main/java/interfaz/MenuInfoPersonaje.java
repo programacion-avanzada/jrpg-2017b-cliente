@@ -15,15 +15,15 @@ import recursos.Recursos;
 
 public class MenuInfoPersonaje {
 
-    private static final int anchoPersonaje = 128;
+    private static final int ANCHOPERSONAJE = 128;
     private static final BufferedImage menu = Recursos.getMenuEnemigo();
-    public static final int menuBatallar = 0;
-    public static final int menuInformacion = 1;
-    public static final int menuSubirNivel = 2;
-    public static final int menuGanarBatalla = 3;
-    public static final int menuPerderBatalla = 4;
-    public static final int menuGanarItem = 5;
-    public static final int menuComerciar = 6;
+    public static final int MENUBATALLAR = 0;
+    public static final int MENUINFORMACION = 1;
+    public static final int MENUSUBIRNIVEL = 2;
+    public static final int MENUGANARBATALLA = 3;
+    public static final int MENUPERDERBATALLA = 4;
+    public static final int MENUGANARITEM = 5;
+    public static final int MENUCOMERCIAR = 6;
     private static final String[] leyendaBoton = { "Batallar", "Volver", "Aceptar", "Aceptar", "Aceptar", "Aceptar",
 	    "Comerciar" };
 
@@ -34,7 +34,7 @@ public class MenuInfoPersonaje {
     private boolean esNPC;
 
     // A lo mejor más adelante conviene hacer un MenuInfoNpc
-    public MenuInfoPersonaje(int x, int y, Paquete personaje) {
+    public MenuInfoPersonaje(final int x, final int y, final Paquete personaje) {
 	this.x = x;
 	this.y = y;
 
@@ -47,7 +47,7 @@ public class MenuInfoPersonaje {
 	}
     }
 
-    public void graficar(Graphics g, int tipoMenu) {
+    public void graficar(final Graphics g, final int tipoMenu) {
 
 	// dibujo el menu
 	g.drawImage(menu, x, y, null);
@@ -55,7 +55,7 @@ public class MenuInfoPersonaje {
 	if (!esNPC) {
 	    // dibujo el personaje
 	    g.drawImage(Recursos.getPersonaje().get(personaje.getRaza()).get(6)[0],
-		    x + menu.getWidth() / 2 - anchoPersonaje / 2, y + 70, 128, 128, null);
+		    x + menu.getWidth() / 2 - ANCHOPERSONAJE / 2, y + 70, 128, 128, null);
 
 	    // muestro el nombre
 	    g.setColor(Color.WHITE);
@@ -64,7 +64,7 @@ public class MenuInfoPersonaje {
 	} else {
 	    // dibujo el npc
 	    g.drawImage(Recursos.getPersonaje().get(npc.getRaza()).get(6)[0],
-		    x + menu.getWidth() / 2 - anchoPersonaje / 2, y + 70, 128, 128, null);
+		    x + menu.getWidth() / 2 - ANCHOPERSONAJE / 2, y + 70, 128, 128, null);
 
 	    // muestro el nombre
 	    g.setColor(Color.WHITE);
@@ -74,25 +74,25 @@ public class MenuInfoPersonaje {
 
 	// Grafico la leyenda segun el tipo de menu
 	switch (tipoMenu) {
-	case menuBatallar:
+	case MENUBATALLAR:
 	    graficarMenuInformacion(g);
 	    break;
-	case menuInformacion:
+	case MENUINFORMACION:
 	    graficarMenuInformacion(g);
 	    break;
-	case menuSubirNivel:
+	case MENUSUBIRNIVEL:
 	    graficarMenuSubirNivel(g);
 	    break;
-	case menuGanarBatalla:
+	case MENUGANARBATALLA:
 	    graficarMenuGanarBatalla(g);
 	    break;
-	case menuPerderBatalla:
+	case MENUPERDERBATALLA:
 	    graficarMenuPerderBatalla(g);
 	    break;
-	case menuGanarItem:
+	case MENUGANARITEM:
 	    graficarMenuItem(g);
 	    break;
-	case menuComerciar:
+	case MENUCOMERCIAR:
 	    graficarMenuComerciar(g);
 	    break;
 	}
@@ -104,7 +104,7 @@ public class MenuInfoPersonaje {
 	Pantalla.centerString(g, new Rectangle(x + 50, y + 380, 200, 25), leyendaBoton[tipoMenu]);
     }
 
-    private void graficarMenuPerderBatalla(Graphics g) {
+    private void graficarMenuPerderBatalla(final Graphics g) {
 
 	// Informo que perdió la batalla
 	g.setColor(Color.BLACK);
@@ -117,7 +117,7 @@ public class MenuInfoPersonaje {
 	Pantalla.centerString(g, new Rectangle(x, y + 310, menu.getWidth(), 0), "mejorar tus atributos.");
     }
 
-    private void graficarMenuGanarBatalla(Graphics g) {
+    private void graficarMenuGanarBatalla(final Graphics g) {
 
 	// Informo que ganó la batalla
 	g.setColor(Color.BLACK);
@@ -132,7 +132,7 @@ public class MenuInfoPersonaje {
 
     }
 
-    private void graficarMenuSubirNivel(Graphics g) {
+    private void graficarMenuSubirNivel(final Graphics g) {
 
 	// Informo que subió de nivel
 	g.setColor(Color.BLACK);
@@ -146,7 +146,7 @@ public class MenuInfoPersonaje {
 
     }
 
-    public void graficarMenuInformacion(Graphics g) {
+    public void graficarMenuInformacion(final Graphics g) {
 	if (!esNPC) {
 	    // muestro los nombres de los atributos
 	    g.setColor(Color.BLACK);
@@ -175,7 +175,7 @@ public class MenuInfoPersonaje {
 	}
     }
 
-    private void graficarMenuItem(Graphics g) {
+    private void graficarMenuItem(final Graphics g) {
 
 	// Informo que subió de nivel
 	g.setColor(Color.BLACK);
@@ -189,7 +189,7 @@ public class MenuInfoPersonaje {
 
     }
 
-    private void graficarMenuComerciar(Graphics g) {
+    private void graficarMenuComerciar(final Graphics g) {
 	if (!esNPC) {
 	    // muestro los nombres de los atributos
 	    g.setColor(Color.BLACK);
@@ -208,22 +208,25 @@ public class MenuInfoPersonaje {
 
     }
 
-    public boolean clickEnBoton(int mouseX, int mouseY) {
-	if (mouseX >= x + 50 && mouseX <= x + 250 && mouseY >= y + 380 && mouseY <= y + 405)
+    public boolean clickEnBoton(final int mouseX, final int mouseY) {
+	if (mouseX >= x + 50 && mouseX <= x + 250 && mouseY >= y + 380 && mouseY <= y + 405) {
 	    return true;
+	}
 	return false;
     }
 
-    public boolean clickEnCerrar(int mouseX, int mouseY) {
+    public boolean clickEnCerrar(final int mouseX, final int mouseY) {
 	if (mouseX >= x + menu.getWidth() - 24 && mouseX <= x + menu.getWidth() + 4 && mouseY >= y + 12
-		&& mouseY <= y + 36)
+		&& mouseY <= y + 36) {
 	    return true;
+	}
 	return false;
     }
 
-    public boolean clickEnMenu(int mouseX, int mouseY) {
-	if (mouseX >= x && mouseX <= x + menu.getWidth() && mouseY >= y && mouseY <= y + menu.getHeight())
+    public boolean clickEnMenu(final int mouseX, final int mouseY) {
+	if (mouseX >= x && mouseX <= x + menu.getWidth() && mouseY >= y && mouseY <= y + menu.getHeight()) {
 	    return true;
+	}
 	return false;
     }
 
@@ -231,7 +234,7 @@ public class MenuInfoPersonaje {
 	return esNPC;
     }
 
-    public void setEsNPC(boolean esNPC) {
+    public void setEsNPC(final boolean esNPC) {
 	this.esNPC = esNPC;
     }
 
@@ -239,7 +242,7 @@ public class MenuInfoPersonaje {
 	return personaje;
     }
 
-    public void setPersonaje(PaquetePersonaje personaje) {
+    public void setPersonaje(final PaquetePersonaje personaje) {
 	this.personaje = personaje;
     }
 
@@ -247,7 +250,7 @@ public class MenuInfoPersonaje {
 	return npc;
     }
 
-    public void setNpc(PaqueteNpc npc) {
+    public void setNpc(final PaqueteNpc npc) {
 	this.npc = npc;
     }
 }

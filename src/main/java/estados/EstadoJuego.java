@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
-import interfaz.MenuInfoNpc;
 import interfaz.MenuInfoPersonaje;
 import juego.Juego;
 import juego.NpcManager;
@@ -25,7 +24,6 @@ import mensajeria.Comando;
 import mensajeria.Paquete;
 import mensajeria.PaqueteDeNpcs;
 import mensajeria.PaqueteMovimiento;
-import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
@@ -55,7 +53,12 @@ public class EstadoJuego extends Estado {
     private static final int eodrim = 3;
     private Map<Integer, String> mundos;
 
-    public EstadoJuego(Juego juego) throws IOException {
+    /**
+     * Instantiates a new estado juego.
+     * @param juego the juego
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
+    public EstadoJuego(final Juego juego) throws IOException {
 	super(juego);
 	// Inicializo el map de mundos
 	this.inicializarMundos();
@@ -80,8 +83,9 @@ public class EstadoJuego extends Estado {
 	    PaqueteDeNpcs paqueteDeNpcs = new PaqueteDeNpcs(juego.getPaquetesNpcs(), juego.getUbicacionNpcs());
 	    paqueteDeNpcs.setComando(Comando.ACTUALIZARNPCS);
 	    juego.getCliente().getSalida().writeObject(gson.toJson(paqueteDeNpcs));
-	} else
+	} else {
 	    npcManager.actualizar();
+	}
 
 	try {
 	    // Le envio al servidor que me conecte al mapa y mi posicion
@@ -102,7 +106,7 @@ public class EstadoJuego extends Estado {
     }
 
     @Override
-    public void graficar(Graphics g) {
+    public void graficar(final Graphics g) {
 	g.drawImage(Recursos.getBackground(), 0, 0, juego.getAncho(), juego.getAlto(), null);
 	mundo.graficar(g);
 	// entidadPersonaje.graficar(g);
@@ -123,7 +127,11 @@ public class EstadoJuego extends Estado {
 
     }
 
-    public void graficarPersonajes(Graphics g) {
+    /**
+     * Graficar personajes.
+     * @param g the g
+     */
+    public void graficarPersonajes(final Graphics g) {
 
 	if (juego.getPersonajesConectados() != null) {
 	    personajesConectados = new HashMap(juego.getPersonajesConectados());
@@ -154,10 +162,17 @@ public class EstadoJuego extends Estado {
 	}
     }
 
+    /**
+     * Gets the personaje.
+     * @return the personaje
+     */
     public Entidad getPersonaje() {
 	return entidadPersonaje;
     }
 
+    /**
+     * Inicializar mundos.
+     */
     private void inicializarMundos() {
 	mundos = new HashMap<Integer, String>();
 	mundos.put(aubenor, "Aubenor");
@@ -165,29 +180,54 @@ public class EstadoJuego extends Estado {
 	mundos.put(eodrim, "Eodrim");
     }
 
+    /**
+     * Gets the mundo.
+     * @return the mundo
+     */
     private String getMundo() {
 	return mundos.get(juego.getPersonaje().getMapa());
     }
 
-    public void setHaySolicitud(boolean b, Paquete enemigo, int tipoSolicitud) {
+    /**
+     * Setea el hay solicitud.
+     * @param b the b
+     * @param enemigo the enemigo
+     * @param tipoSolicitud the tipo solicitud
+     */
+    public void setHaySolicitud(final boolean b, final Paquete enemigo, final int tipoSolicitud) {
 	haySolicitud = b;
 	// menu que mostrara al enemigo
 	menuEnemigo = new MenuInfoPersonaje(300, 50, enemigo);
 	this.tipoSolicitud = tipoSolicitud;
     }
 
+    /**
+     * Gets the hay solicitud.
+     * @return the hay solicitud
+     */
     public boolean getHaySolicitud() {
 	return haySolicitud;
     }
 
+    /**
+     * Actualizar personaje.
+     */
     public void actualizarPersonaje() {
 	paquetePersonaje = juego.getPersonaje();
     }
 
+    /**
+     * Gets the menu enemigo.
+     * @return the menu enemigo
+     */
     public MenuInfoPersonaje getMenuEnemigo() {
 	return menuEnemigo;
     }
 
+    /**
+     * Gets the tipo solicitud.
+     * @return the tipo solicitud
+     */
     public int getTipoSolicitud() {
 	return tipoSolicitud;
     }

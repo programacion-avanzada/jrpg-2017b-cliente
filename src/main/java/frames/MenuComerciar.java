@@ -25,6 +25,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.google.gson.Gson;
@@ -52,7 +53,7 @@ public class MenuComerciar extends JFrame {
      * Create the frame.
      */
     public MenuComerciar(final Cliente cliente) {
-	this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	this.setResizable(false);
 	this.setBounds(100, 100, 610, 363);
 	this.setLocationRelativeTo(null);
@@ -65,7 +66,7 @@ public class MenuComerciar extends JFrame {
 
 	addWindowListener(new WindowAdapter() {
 	    @Override
-	    public void windowClosing(WindowEvent e) {
+	    public void windowClosing(final WindowEvent e) {
 		cliente.setM1(null);
 		dispose();
 	    }
@@ -82,7 +83,8 @@ public class MenuComerciar extends JFrame {
 	final JButton btnCancelar = new JButton("Cancelar");
 	btnCancelar.setIcon(new ImageIcon("recursos//volver.png"));
 	btnCancelar.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		cliente.setM1(null);
 		dispose();
 	    }
@@ -250,7 +252,8 @@ public class MenuComerciar extends JFrame {
 	final JButton btnAgregar = new JButton("-->");
 	btnAgregar.setIcon(new ImageIcon("recursos//flechaDer.png"));
 	btnAgregar.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
+	    @Override
+	    public void actionPerformed(final ActionEvent arg0) {
 		if (listMisItems.getSelectedValue() != null) {
 		    dar.addElement(listMisItems.getSelectedValue());
 		    if (obtener.size() != 0) {
@@ -293,7 +296,8 @@ public class MenuComerciar extends JFrame {
 	final JButton btnSacar = new JButton("<--");
 	btnSacar.setIcon(new ImageIcon("recursos//flechaIzq.png"));
 	btnSacar.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
+	    @Override
+	    public void actionPerformed(final ActionEvent arg0) {
 		if (listADar.getSelectedValue() != null) {
 		    misItems.addElement(listADar.getSelectedValue());
 		    for (Item item : cliente.getPaquetePersonaje().getItems()) {
@@ -341,7 +345,7 @@ public class MenuComerciar extends JFrame {
 	// List Listener para cargar stats del item mio clickeado
 	listMisItems.addMouseListener(new MouseAdapter() {
 	    @Override
-	    public void mouseClicked(MouseEvent arg0) {
+	    public void mouseClicked(final MouseEvent arg0) {
 		if (arg0.getClickCount() == 1) {
 		    if (listMisItems.getSelectedValue() != null) {
 			for (Item item : cliente.getPaquetePersonaje().getItems()) {
@@ -361,7 +365,7 @@ public class MenuComerciar extends JFrame {
 	// List Listener para cargar stats del item del enemigo clickeado
 	listAObtener.addMouseListener(new MouseAdapter() {
 	    @Override
-	    public void mouseClicked(MouseEvent arg0) {
+	    public void mouseClicked(final MouseEvent arg0) {
 		if (arg0.getClickCount() == 1) {
 		    if (obtener.size() != 0) {
 			// cambiar la variable del for each a la lista que va a
@@ -400,7 +404,8 @@ public class MenuComerciar extends JFrame {
 	contentPane.add(cantListo);
 
 	chckbxListo.addItemListener(new ItemListener() {
-	    public void itemStateChanged(ItemEvent arg0) {
+	    @Override
+	    public void itemStateChanged(final ItemEvent arg0) {
 		if (chckbxListo.isSelected()) {
 		    // Si ya la persona con la que voy a comerciar esta en LISTO
 		    if (cantListos == 1) {
@@ -483,7 +488,7 @@ public class MenuComerciar extends JFrame {
 	return cantListos;
     }
 
-    public void setCantListos(int cantListos) {
+    public void setCantListos(final int cantListos) {
 	this.cantListos = cantListos;
     }
 
@@ -491,7 +496,7 @@ public class MenuComerciar extends JFrame {
 	return cantListo;
     }
 
-    public void setObtener(DefaultListModel<String> obtener) {
+    public void setObtener(final DefaultListModel<String> obtener) {
 	this.obtener = obtener;
     }
 

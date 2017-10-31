@@ -1,6 +1,5 @@
 package frames;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -15,15 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.google.gson.Gson;
 
 import cliente.Cliente;
-import dominio.Casta;
-import dominio.MadreDeTodo;
-import dominio.Peleable;
-import dominio.Personaje;
 import juego.Pantalla;
 import mensajeria.Comando;
 import java.awt.event.WindowAdapter;
@@ -55,7 +51,7 @@ public class MenuAsignarSkills extends JFrame {
 	puntosDestreza = puntosDestrezaInicial;
 	puntosInteligencia = puntosInteligenciaInicial;
 
-	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	setBounds(100, 100, 450, 300);
 	contentPane = new JPanel();
 	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,7 +69,7 @@ public class MenuAsignarSkills extends JFrame {
 
 	addWindowListener(new WindowAdapter() {
 	    @Override
-	    public void windowClosing(WindowEvent arg0) {
+	    public void windowClosing(final WindowEvent arg0) {
 		cerrarMenuAsignarSkills();
 	    }
 	});
@@ -135,7 +131,8 @@ public class MenuAsignarSkills extends JFrame {
 	buttonConfirm.setIcon(icono_confirm);
 	buttonConfirm.setEnabled(false);
 	buttonConfirm.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		puntosAsignarInicial = puntosAsignar;
 		int bonusF = puntosFuerza - puntosFuerzaInicial;
 		int bonusD = puntosDestreza - puntosDestrezaInicial;
@@ -161,7 +158,8 @@ public class MenuAsignarSkills extends JFrame {
 	ImageIcon icono_c = new ImageIcon("recursos//botonCancelar.png");
 	buttonCancel.setIcon(icono_c);
 	buttonCancel.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
+	    @Override
+	    public void actionPerformed(final ActionEvent arg0) {
 		cerrarMenuAsignarSkills();
 	    }
 	});
@@ -190,7 +188,8 @@ public class MenuAsignarSkills extends JFrame {
 
 	buttonMinus.setIcon(icono_1);
 	buttonMinus.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 
 		if (puntosFuerza > getMinusFuerza(cliente)) {
 		    puntosFuerza--;
@@ -223,7 +222,8 @@ public class MenuAsignarSkills extends JFrame {
 	});
 
 	buttonMinus1.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		if (puntosDestreza > getMinusDestreza(cliente)) {
 		    puntosDestreza--;
 		    if (puntosAsignar == 0) {
@@ -258,7 +258,8 @@ public class MenuAsignarSkills extends JFrame {
 	contentPane.add(buttonMinus1);
 
 	buttonMinus2.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		if (puntosInteligencia > getMinusInteligencia(cliente)) {
 		    puntosInteligencia--;
 		    if (puntosAsignar == 0) {
@@ -293,7 +294,8 @@ public class MenuAsignarSkills extends JFrame {
 	contentPane.add(buttonMinus2);
 
 	buttonMore.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		if (puntosAsignar != 0 && !labelFuerza.getText().equals("200")) {
 		    puntosFuerza++;
 		    puntosAsignar--;
@@ -318,7 +320,8 @@ public class MenuAsignarSkills extends JFrame {
 	contentPane.add(buttonMore);
 
 	buttonMore1.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		if (puntosAsignar != 0 && !labelDestreza.getText().equals("200")) {
 		    puntosDestreza++;
 		    puntosAsignar--;
@@ -342,7 +345,8 @@ public class MenuAsignarSkills extends JFrame {
 	contentPane.add(buttonMore1);
 
 	buttonMore2.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		if (puntosAsignar != 0 && !labelInteligencia.getText().equals("200")) {
 		    puntosInteligencia++;
 		    puntosAsignar--;
@@ -374,7 +378,8 @@ public class MenuAsignarSkills extends JFrame {
 	JButton buttonRestart = new JButton("Reiniciar");
 	ImageIcon icono_restart = new ImageIcon("recursos//botonMenu.png");
 	buttonRestart.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent paramActionEvent) {
+	    @Override
+	    public void actionPerformed(final ActionEvent paramActionEvent) {
 		// Puntos skills disponibles
 		puntosAsignar = (cliente.getPaquetePersonaje().getNivel() - 1) * 3;
 		labelPuntos.setText(String.valueOf(puntosAsignar));
@@ -420,7 +425,7 @@ public class MenuAsignarSkills extends JFrame {
      * @param cliente
      * @return bonus de fuerza total de los items incluyendo el bonus por casta
      */
-    private int getMinusFuerza(Cliente cliente) {
+    private int getMinusFuerza(final Cliente cliente) {
 	int fueIni = 10;
 	if (cliente.getPaquetePersonaje().getCasta().equals("Guerrero")) {
 	    fueIni = 15;
@@ -434,7 +439,7 @@ public class MenuAsignarSkills extends JFrame {
      * @return bonus de inteligencia total de los items incluyendo el bonus por
      *         casta
      */
-    private int getMinusInteligencia(Cliente cliente) {
+    private int getMinusInteligencia(final Cliente cliente) {
 	int intIni = 10;
 	if (cliente.getPaquetePersonaje().getCasta().equals("Hechicero")) {
 	    intIni = 15;
@@ -448,7 +453,7 @@ public class MenuAsignarSkills extends JFrame {
      * @return bonus de destreza total de los items incluyendo el bonus por
      *         casta
      */
-    private int getMinusDestreza(Cliente cliente) {
+    private int getMinusDestreza(final Cliente cliente) {
 	int intDes = 10;
 	if (cliente.getPaquetePersonaje().getCasta().equals("Asesino")) {
 	    intDes = 15;

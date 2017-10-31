@@ -8,7 +8,13 @@ public class Nodo {
     private int cantidadDeAdyacentes;
     private Nodo[] nodosAdyacentes;
 
-    public Nodo(int indice, int x, int y) {
+    /**
+     * Instantiates a new nodo.
+     * @param indice the indice
+     * @param x the x
+     * @param y the y
+     */
+    public Nodo(final int indice, final int x, final int y) {
 	this.x = x;
 	this.y = y;
 	this.indice = indice;
@@ -16,26 +22,50 @@ public class Nodo {
 	nodosAdyacentes = new Nodo[8];
     }
 
+    /**
+     * Obtener X.
+     * @return the int
+     */
     public int obtenerX() {
 	return x;
     }
 
+    /**
+     * Obtener Y.
+     * @return the int
+     */
     public int obtenerY() {
 	return y;
     }
 
+    /**
+     * Obtener indice.
+     * @return the int
+     */
     public int obtenerIndice() {
 	return indice;
     }
 
+    /**
+     * Obtener nodos adyacentes.
+     * @return the nodo[]
+     */
     public Nodo[] obtenerNodosAdyacentes() {
 	return nodosAdyacentes;
     }
 
-    public void agregarAdyacente(Nodo nodo) {
+    /**
+     * Agregar adyacente.
+     * @param nodo the nodo
+     */
+    public void agregarAdyacente(final Nodo nodo) {
 	nodosAdyacentes[cantidadDeAdyacentes++] = nodo;
     }
 
+    /**
+     * Obtener cantidad de adyacentes.
+     * @return the int
+     */
     public int obtenerCantidadDeAdyacentes() {
 	return cantidadDeAdyacentes;
     }

@@ -31,7 +31,7 @@ public class MenuCarga extends JFrame {
 	// En caso de cerrar la ventana
 	addWindowListener(new WindowAdapter() {
 	    @Override
-	    public void windowClosing(WindowEvent e) {
+	    public void windowClosing(final WindowEvent e) {
 		synchronized (cliente) {
 		    cliente.setAccion(Comando.SALIR);
 		    cliente.notify();
@@ -71,7 +71,7 @@ public class MenuCarga extends JFrame {
 	lblBackground.setIcon(new ImageIcon(MenuCarga.class.getResource("/frames/menuBackground.jpg")));
     }
 
-    public void setBarraCargando(int ancho) {
+    public void setBarraCargando(final int ancho) {
 	barraCargando.setSize(ancho, 27);
     }
 }

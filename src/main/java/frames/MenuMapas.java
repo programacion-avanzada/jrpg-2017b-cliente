@@ -32,7 +32,7 @@ public class MenuMapas extends JFrame {
     public MenuMapas(final Cliente cliente) {
 	addKeyListener(new KeyAdapter() {
 	    @Override
-	    public void keyPressed(KeyEvent e) {
+	    public void keyPressed(final KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 		    synchronized (cliente) {
 			cliente.getPaquetePersonaje().setMapa(1);
@@ -54,7 +54,7 @@ public class MenuMapas extends JFrame {
 	// En caso de cerrar
 	addWindowListener(new WindowAdapter() {
 	    @Override
-	    public void windowClosing(WindowEvent e) {
+	    public void windowClosing(final WindowEvent e) {
 		synchronized (cliente) {
 		    cliente.setAccion(Comando.SALIR);
 		    cliente.notify();
@@ -113,7 +113,7 @@ public class MenuMapas extends JFrame {
 	btnEodrim.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
 	btnEodrim.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		synchronized (cliente) {
 		    cliente.getPaquetePersonaje().setMapa(3);
 		    cliente.notify();
@@ -131,7 +131,7 @@ public class MenuMapas extends JFrame {
 	btnAris.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
 	btnAris.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		synchronized (cliente) {
 		    cliente.getPaquetePersonaje().setMapa(2);
 		    numberMap = 2;
@@ -149,7 +149,7 @@ public class MenuMapas extends JFrame {
 	lblBackground.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/menuBackground.jpg")));
 	btnAubenor.addActionListener(new ActionListener() {
 	    @Override
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		synchronized (cliente) {
 		    cliente.getPaquetePersonaje().setMapa(1);
 		    numberMap = 1;

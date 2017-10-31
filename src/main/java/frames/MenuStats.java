@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import cliente.Cliente;
@@ -36,7 +37,7 @@ public class MenuStats extends JFrame {
     public MenuStats(final Cliente cliente) {
 	paquetePersonaje = cliente.getPaquetePersonaje();
 
-	this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	this.setResizable(false);
 	this.setBounds(100, 100, 346, 321);
 	this.setLocationRelativeTo(null);
@@ -49,7 +50,7 @@ public class MenuStats extends JFrame {
 
 	addWindowListener(new WindowAdapter() {
 	    @Override
-	    public void windowClosing(WindowEvent e) {
+	    public void windowClosing(final WindowEvent e) {
 		Pantalla.menuStats = null;
 		dispose();
 	    }
@@ -222,7 +223,8 @@ public class MenuStats extends JFrame {
 	JButton btnVolver = new JButton("Volver");
 	btnVolver.setIcon(new ImageIcon("recursos//volver.png"));
 	btnVolver.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		Pantalla.menuStats = null;
 		dispose();
 	    }

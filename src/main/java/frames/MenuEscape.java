@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.google.gson.Gson;
@@ -33,7 +34,7 @@ public class MenuEscape extends JFrame {
      * Create the frame.
      */
     public MenuEscape(final Cliente cliente) {
-	this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	this.setUndecorated(true);
 	this.setResizable(false);
 	this.setBounds(100, 100, 180, 270);
@@ -49,7 +50,8 @@ public class MenuEscape extends JFrame {
 	verStats.setToolTipText("Presiona S para ver estadísticas");
 	verStats.setBounds(29, 13, 125, 25);
 	verStats.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		dispose();
 		Pantalla.menuEscp = null;
 		if (Pantalla.menuStats == null) {
@@ -65,7 +67,8 @@ public class MenuEscape extends JFrame {
 	asignarSkills.setToolTipText("Presiona A para asignar skills");
 	asignarSkills.setBounds(29, 66, 125, 25);
 	asignarSkills.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		dispose();
 		Pantalla.menuEscp = null;
 		if (Pantalla.menuAsignar == null) {
@@ -81,7 +84,8 @@ public class MenuEscape extends JFrame {
 	inventario.setToolTipText("Presiona I para abrir inventario");
 	inventario.setBounds(29, 121, 125, 25);
 	inventario.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		dispose();
 		Pantalla.menuEscp = null;
 		if (Estado.getEstado().esEstadoDeJuego()) {
@@ -98,7 +102,8 @@ public class MenuEscape extends JFrame {
 	desconectarse.setBounds(29, 175, 125, 25);
 	desconectarse.setIcon(new ImageIcon("recursos//desconectarse.png"));
 	desconectarse.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
 		try {
 		    Paquete p = new Paquete();
 		    p.setComando(Comando.DESCONECTAR);
@@ -120,7 +125,8 @@ public class MenuEscape extends JFrame {
 	volver.setIcon(new ImageIcon("recursos//volver.png"));
 	volver.setBounds(29, 227, 125, 25);
 	volver.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
+	    @Override
+	    public void actionPerformed(final ActionEvent arg0) {
 		Pantalla.menuEscp = null;
 		dispose();
 	    }

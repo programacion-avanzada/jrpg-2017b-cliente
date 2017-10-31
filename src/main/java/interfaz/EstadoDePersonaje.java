@@ -18,8 +18,8 @@ public class EstadoDePersonaje {
     private static final int ALTOMINIATURA = 64;
     private static final int ANCHOMINIATURA = 64;
 
-    public static void dibujarEstadoDePersonaje(Graphics g, int x, int y, Personaje personaje,
-	    BufferedImage miniaturaPersonaje) {
+    public static void dibujarEstadoDePersonaje(final Graphics g, final int x, final int y, final Personaje personaje,
+	    final BufferedImage miniaturaPersonaje) {
 
 	int drawBarra = 0;
 
@@ -66,8 +66,8 @@ public class EstadoDePersonaje {
 
     }
 
-    public static void dibujarEstadoDePersonaje(Graphics g, int x, int y, PaquetePersonaje personaje,
-	    BufferedImage miniaturaPersonaje) {
+    public static void dibujarEstadoDePersonaje(final Graphics g, final int x, final int y, final PaquetePersonaje personaje,
+	    final BufferedImage miniaturaPersonaje) {
 
 	int drawBarra = 0;
 

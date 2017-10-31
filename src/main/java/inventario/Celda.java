@@ -24,7 +24,13 @@ public class Celda extends JPanel {
     private JLabel label;
     private Item it;
 
-    public Celda(Item item, PaquetePersonaje paquetePersonaje) throws IOException {
+    /**
+     * Instantiates a new celda.
+     * @param item the item
+     * @param paquetePersonaje the paquete personaje
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
+    public Celda(final Item item, final PaquetePersonaje paquetePersonaje) throws IOException {
 	this.item = item.getFoto();
 	it = item;
 	this.paquetePersonaje = paquetePersonaje;
@@ -32,12 +38,19 @@ public class Celda extends JPanel {
 	actionListenersYLabel(item);
     }
 
+    /**
+     * Instantiates a new celda.
+     */
     public Celda() {
 	label = new JLabel(new ImageIcon(Recursos.getNoItem().getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
 	add(label);
     }
 
-    private void actionListenersYLabel(Item item) {
+    /**
+     * Action listeners Y label.
+     * @param item the item
+     */
+    private void actionListenersYLabel(final Item item) {
 	StringBuilder s = new StringBuilder();
 
 	s.append("<html>" + item.getNombre() + "<br>");
@@ -70,6 +83,9 @@ public class Celda extends JPanel {
 
     }
 
+    /**
+     * Reset label.
+     */
     protected void resetLabel() {
 	label.setIcon(new ImageIcon(Recursos.getNoItem().getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
 	label.setToolTipText(null);
@@ -83,12 +99,17 @@ public class Celda extends JPanel {
 	return new Dimension(60, 60);
     }
 
+    /**
+     * Gets the label.
+     * @return the label
+     */
     public JLabel getLabel() {
 	return label;
     }
 
     MouseListener mouseListener = new MouseAdapter() {
-	public void mouseClicked(MouseEvent e) {
+	@Override
+	public void mouseClicked(final MouseEvent e) {
 	    Object[] options = { "Tirar", "Cancelar" };
 	    if (e.getClickCount() == 2) {
 		int answer = JOptionPane.showOptionDialog(getParent(), "¿Qué desea hacer?", "Item: " + it.getNombre(),

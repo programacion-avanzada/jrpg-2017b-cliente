@@ -18,7 +18,12 @@ public class Inventario extends JPanel {
     private static final int CANTFILAS = 3;
     private ArrayList<Item> items;
 
-    public Inventario(PaquetePersonaje paquetePersonaje) throws IOException {
+    /**
+     * Instantiates a new inventario.
+     * @param paquetePersonaje the paquete personaje
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
+    public Inventario(final PaquetePersonaje paquetePersonaje) throws IOException {
 	setLayout(new GridBagLayout());
 	items = new ArrayList<Item>(paquetePersonaje.getItems());
 	GridBagConstraints gbc = new GridBagConstraints();
