@@ -10,7 +10,7 @@ public abstract class ComandosEscucha extends Comando {
      * Sets the juego.
      * @param juego the new juego
      */
-    public void setJuego(Juego juego) {
+    public void setJuego(final Juego juego) {
 	this.juego = juego;
     }
 

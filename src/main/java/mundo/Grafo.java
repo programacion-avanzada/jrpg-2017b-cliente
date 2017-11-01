@@ -8,7 +8,7 @@ public class Grafo {
 
     /**
      * Instantiates a new grafo.
-     * @param cantidadDeNodosTotal the cantidad de nodos total
+     * @param cantidadDeNodosTotal  cantidad de nodos total
      */
     public Grafo(final int cantidadDeNodosTotal) {
 	cantidadDeNodos = 0;
@@ -18,7 +18,7 @@ public class Grafo {
 
     /**
      * Agregar nodo.
-     * @param nodo the nodo
+     * @param nodo  nodo
      */
     public void agregarNodo(final Nodo nodo) {
 	nodos[cantidadDeNodos++] = nodo;
@@ -26,8 +26,8 @@ public class Grafo {
 
     /**
      * Agregar adyacentes.
-     * @param nodoUno the nodo uno
-     * @param nodoDos the nodo dos
+     * @param nodoUno  nodo uno
+     * @param nodoDos  nodo dos
      */
     public void agregarAdyacentes(final Nodo nodoUno, final Nodo nodoDos) {
 	nodoUno.agregarAdyacente(nodoDos);
@@ -35,7 +35,7 @@ public class Grafo {
 
     /**
      * Obtener nodos.
-     * @return the nodo[]
+     * @return  nodo[]
      */
     public Nodo[] obtenerNodos() {
 	return nodos;
@@ -43,7 +43,7 @@ public class Grafo {
 
     /**
      * Obtener cantidad de nodos.
-     * @return the int
+     * @return  int
      */
     public int obtenerCantidadDeNodos() {
 	return cantidadDeNodos;
@@ -51,7 +51,7 @@ public class Grafo {
 
     /**
      * Obtener cantidad de nodos total.
-     * @return the int
+     * @return  int
      */
     public int obtenerCantidadDeNodosTotal() {
 	return cantidadDeNodosTotal;

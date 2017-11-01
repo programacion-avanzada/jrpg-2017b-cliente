@@ -4,24 +4,24 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class Tile {
-
-    public static Tile[] tiles = new Tile[256];
-    public static Tile[] aubenor;
-    public static Tile[] aris;
+    private static final int TAM_TILES = 256;
+    private static Tile[] tiles = new Tile[TAM_TILES];
+    private static Tile[] aubenor;
+    private static Tile[] aris;
     // es el piso de aubenor por defecto si queres llamarlo asi, es gris
-    public static int arisBase = 3;
-    public static int aubenorBase = 3;
+    private static final int ARISBASE = 3;
+    private static final int AUBENORBASE = 3;
 
     public static final int ANCHO = 64;
     public static final int ALTO = 32;
 
-    protected BufferedImage textura;
-    protected final int id;
+    private BufferedImage textura;
+    private final int id;
 
     private boolean esSolido;
 
-    protected int ancho;
-    protected int alto;
+    private int ancho;
+    private int alto;
 
     /**
      * Instantiates a new tile.
@@ -120,6 +120,55 @@ public class Tile {
      */
     public int getAlto() {
 	return alto;
+    }
+
+    /**
+     * @return the tiles
+     */
+    public static Tile[] getTiles() {
+        return tiles;
+    }
+
+    /**
+     * @return the arisbase
+     */
+    public static int getArisbase() {
+        return ARISBASE;
+    }
+
+    /**
+     * @return the aubenorbase
+     */
+    public static int getAubenorbase() {
+        return AUBENORBASE;
+    }
+
+    /**
+     * @return the aubenor
+     */
+    public static Tile[] getAubenor() {
+        return aubenor;
+    }
+
+    /**
+     * @return the aris
+     */
+    public static Tile[] getAris() {
+        return aris;
+    }
+
+    /**
+     * @param aris the aris to set
+     */
+    public static void setAris(Tile[] aris) {
+        Tile.aris = aris;
+    }
+
+    /**
+     * @param aubenor the aubenor to set
+     */
+    public static void setAubenor(Tile[] aubenor) {
+        Tile.aubenor = aubenor;
     }
 
 }

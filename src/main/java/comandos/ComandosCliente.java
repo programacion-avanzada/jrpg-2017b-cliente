@@ -10,7 +10,7 @@ public abstract class ComandosCliente extends Comando {
      * Sets the cliente.
      * @param cliente the new cliente
      */
-    public void setCliente(Cliente cliente) {
+    public void setCliente(final Cliente cliente) {
 	this.cliente = cliente;
     }
 

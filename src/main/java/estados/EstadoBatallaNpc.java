@@ -28,7 +28,28 @@ import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
 
+/**
+ * Estado de batalla contra otro NPC
+ */
 public class EstadoBatallaNpc extends Estado {
+    private static final int TIEMPO_ESPERA = 750;
+    private static final int MAX_ENERGIA = 10;
+    private static final int X_IMAGEN_RECURSO = 175;
+    private static final int SIETE = 7;
+    private static final int TRES = 3;
+    private static final int X_IMAGEN = 25;
+    private static final int Y_IMAGEN = 5;
+    private static final int CINCO = 5;
+    private static final int Y_IMAGEN_ENEMY = 75;
+    private static final int X_IMAGEN_ENEMY = 550;
+    private static final int TAM_IMAGEN = 256;
+    private static final int MULTIPILCADOR_EXP = 40;
+    private static final int HABILIDAD_6 = 6;
+    private static final int HABILIDAD_5 = 5;
+    private static final int HABILIDAD_4 = 4;
+    private static final int HABLIDIAD_3 = 3;
+    private static final int Y_OFFSET = 150;
+    private static final int X_OFFSET = -350;
 
     private Mundo mundo;
     private Personaje personaje;
@@ -71,8 +92,8 @@ public class EstadoBatallaNpc extends Estado {
 
 	menuBatalla = new MenuBatalla(miTurno, personaje);
 
-	miniaturaEnemigo = Recursos.getPersonaje().get(paqueteEnemigo.getRaza()).get(5)[0];
-	miniaturaPersonaje = Recursos.getPersonaje().get(personaje.getNombreRaza()).get(5)[0];
+	miniaturaEnemigo = Recursos.getPersonaje().get(paqueteEnemigo.getRaza()).get(CINCO)[0];
+	miniaturaPersonaje = Recursos.getPersonaje().get(personaje.getNombreRaza()).get(CINCO)[0];
 
 	paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
 	paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
@@ -91,8 +112,8 @@ public class EstadoBatallaNpc extends Estado {
     @Override
     public void actualizar() {
 
-	juego.getCamara().setxOffset(-350);
-	juego.getCamara().setyOffset(150);
+	juego.getCamara().setxOffset(X_OFFSET);
+	juego.getCamara().setyOffset(Y_OFFSET);
 
 	seRealizoAccion = false;
 	haySpellSeleccionada = false;
@@ -120,7 +141,7 @@ public class EstadoBatallaNpc extends Estado {
 			haySpellSeleccionada = true;
 		    }
 
-		    if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 3) {
+		    if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == HABLIDIAD_3) {
 			if (personaje.puedeAtacar()) {
 			    seRealizoAccion = true;
 			    personaje.habilidadCasta1(enemigo);
@@ -128,7 +149,7 @@ public class EstadoBatallaNpc extends Estado {
 			haySpellSeleccionada = true;
 		    }
 
-		    if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 4) {
+		    if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == HABILIDAD_4) {
 			if (personaje.puedeAtacar()) {
 			    seRealizoAccion = true;
 			    personaje.habilidadCasta2(enemigo);
@@ -136,7 +157,7 @@ public class EstadoBatallaNpc extends Estado {
 			haySpellSeleccionada = true;
 		    }
 
-		    if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 5) {
+		    if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == HABILIDAD_5) {
 			if (personaje.puedeAtacar()) {
 			    seRealizoAccion = true;
 			    personaje.habilidadCasta3(enemigo);
@@ -144,28 +165,29 @@ public class EstadoBatallaNpc extends Estado {
 			haySpellSeleccionada = true;
 		    }
 
-		    if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 6) {
+		    if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == HABILIDAD_6) {
 			seRealizoAccion = true;
-			personaje.serEnergizado(10);
+			personaje.serEnergizado(MAX_ENERGIA);
 			haySpellSeleccionada = true;
 		    }
 		}
 
 		if (haySpellSeleccionada && seRealizoAccion) {
-		    if (!enemigo.estaVivo()) // EL NPC MUERE
-		    {
+		    if (!enemigo.estaVivo()) {
+			// EL NPC MUERE
+
 			juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
 				MenuInfoPersonaje.MENUGANARBATALLA);
-			if (personaje.ganarExperiencia(enemigo.getNivel() * 40)) {
+			if (personaje.ganarExperiencia(enemigo.getNivel() * MULTIPILCADOR_EXP)) {
 			    juego.getPersonaje().setNivel(personaje.getNivel());
-			    juego.getPersonaje().setPuntosSkill(personaje.getPuntosSkill() + 3);
+			    juego.getPersonaje().setPuntosSkill(personaje.getPuntosSkill() + TRES);
 			    juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
 				    MenuInfoPersonaje.MENUSUBIRNIVEL);
 			}
 
 			paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
 
-			juego.getPersonaje().setEstado(Estado.estadoJuego);
+			juego.getPersonaje().setEstado(Estado.getEstadoJuego());
 			finalizarBatalla();
 			Estado.setEstado(juego.getEstadoJuego());
 
@@ -177,20 +199,20 @@ public class EstadoBatallaNpc extends Estado {
 			    @Override
 			    public void run() {
 				enemigo.jugarTurno(personaje);
-				if (!personaje.estaVivo()) // EL PERSONAJE MUERE
-				{
+				if (!personaje.estaVivo()) {
+				    // EL PERSONAJE MUERE
 				    juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
 					    MenuInfoPersonaje.MENUPERDERBATALLA);
 				    paqueteFinalizarBatalla.setGanadorBatalla(paqueteEnemigo.getId());
 
-				    juego.getPersonaje().setEstado(Estado.estadoJuego);
+				    juego.getPersonaje().setEstado(Estado.getEstadoJuego());
 				    finalizarBatalla();
 				    Estado.setEstado(juego.getEstadoJuego());
 				}
 
 				setMiTurno(true);
 			    }
-			}, 2 * 1000);
+			}, 2 * TIEMPO_ESPERA);
 
 		    }
 		} else if (haySpellSeleccionada && !seRealizoAccion) {
@@ -210,16 +232,18 @@ public class EstadoBatallaNpc extends Estado {
 	g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
 	mundo.graficar(g);
 
-	g.drawImage(Recursos.getPersonaje().get(paquetePersonaje.getRaza()).get(3)[0], 0, 175, 256, 256, null);
-	g.drawImage(Recursos.getPersonaje().get(paqueteEnemigo.getRaza()).get(7)[0], 550, 75, 256, 256, null);
+	g.drawImage(Recursos.getPersonaje().get(paquetePersonaje.getRaza()).get(TRES)[0], 0, X_IMAGEN_RECURSO,
+		TAM_IMAGEN, TAM_IMAGEN, null);
+	g.drawImage(Recursos.getPersonaje().get(paqueteEnemigo.getRaza()).get(SIETE)[0], X_IMAGEN_ENEMY, Y_IMAGEN_ENEMY,
+		TAM_IMAGEN, TAM_IMAGEN, null);
 
 	mundo.graficarObstaculos(g);
 	menuBatalla.graficar(g);
 
 	g.setColor(Color.GREEN);
 
-	EstadoDePersonaje.dibujarEstadoDePersonaje(g, 25, 5, personaje, miniaturaPersonaje);
-	EstadoDeNpc.dibujarEstadoDeNpc(g, 550, 5, enemigo, miniaturaEnemigo);
+	EstadoDePersonaje.dibujarEstadoDePersonaje(g, X_IMAGEN, Y_IMAGEN, personaje, miniaturaPersonaje);
+	EstadoDeNpc.dibujarEstadoDeNpc(g, X_IMAGEN_ENEMY, Y_IMAGEN, enemigo, miniaturaEnemigo);
     }
 
     /**

@@ -28,6 +28,42 @@ import mensajeria.PaquetePersonaje;
  */
 public class VentanaContactos extends JFrame {
 
+    private static final int CLICKS = 2;
+
+    private static final int ALTO_VENTANA = 273;
+
+    private static final int ANCHO_VENTANA = 327;
+
+    private static final int Y_VENTANA = 100;
+
+    private static final int X_VENTANA = 100;
+
+    private static final int ALTO_SCROLL = 188;
+
+    private static final int ANCHO_SCROLL = 299;
+
+    private static final int Y_SCROLL = 11;
+
+    private static final int X_SCROLL = 10;
+
+    private static final int ALTO_BOTONMC = 23;
+
+    private static final int ANCHO_BOTONMC = 89;
+
+    private static final int Y_BOTONMC = 208;
+
+    private static final int X_BOTONMC = 119;
+
+    private static final int ALTO_IMAGEBACK = 254;
+
+    private static final int ANCHO_IMAGEBACK = 352;
+
+    private static final int Y_IMAGEBACK = 0;
+
+    private static final int X_IMAGEBAK = -16;
+
+    private static final int BORDE = 5;
+
     private JPanel contentPane;
 
     private DefaultListModel<String> modelo = new DefaultListModel<String>();
@@ -45,17 +81,17 @@ public class VentanaContactos extends JFrame {
     public VentanaContactos(final Juego juego) {
 	setResizable(false);
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-	setBounds(100, 100, 327, 273);
+	setBounds(X_VENTANA, Y_VENTANA, ANCHO_VENTANA, ALTO_VENTANA);
 	setLocationRelativeTo(null);
 	setTitle("Usuarios");
 
 	contentPane = new JPanel();
-	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	contentPane.setBorder(new EmptyBorder(BORDE, BORDE, BORDE, BORDE));
 	setContentPane(contentPane);
 	contentPane.setLayout(null);
 
 	JScrollPane scrollPane = new JScrollPane();
-	scrollPane.setBounds(10, 11, 299, 188);
+	scrollPane.setBounds(X_SCROLL, Y_SCROLL, ANCHO_SCROLL, ALTO_SCROLL);
 	contentPane.add(scrollPane);
 
 	addWindowListener(new WindowAdapter() {
@@ -82,7 +118,7 @@ public class VentanaContactos extends JFrame {
 		}
 	    }
 	});
-	botonMc.setBounds(119, 208, 89, 23);
+	botonMc.setBounds(X_BOTONMC, Y_BOTONMC, ANCHO_BOTONMC, ALTO_BOTONMC);
 	contentPane.add(botonMc);
 
 	// Cargo la lista de contactos
@@ -97,7 +133,7 @@ public class VentanaContactos extends JFrame {
 	list.addMouseListener(new MouseAdapter() {
 	    @Override
 	    public void mouseClicked(final MouseEvent arg0) {
-		if (arg0.getClickCount() == 2) {
+		if (arg0.getClickCount() == CLICKS) {
 		    if (list.getSelectedValue() != null) {
 			if (!juego.getChatsActivos().containsKey(list.getSelectedValue())) {
 			    if (juego.getCliente() != null) {
@@ -116,7 +152,7 @@ public class VentanaContactos extends JFrame {
 	scrollPane.setViewportView(list);
 
 	background = new JLabel(new ImageIcon("recursos//background.jpg"));
-	background.setBounds(-16, 0, 352, 254);
+	background.setBounds(X_IMAGEBAK, Y_IMAGEBACK, ANCHO_IMAGEBACK, ALTO_IMAGEBACK);
 	contentPane.add(background);
     }
 

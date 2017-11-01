@@ -5,7 +5,12 @@ import javax.swing.JOptionPane;
 import dominio.Item;
 import mensajeria.PaqueteComerciar;
 
+/**
+ * Comando utilizado para la realizacion del comercio entre personajes
+ */
 public class ActualizarComercio extends ComandosEscucha {
+
+    private static final int MAXIMO_ITEMS = 9;
 
     @Override
     public void ejecutar() {
@@ -18,10 +23,10 @@ public class ActualizarComercio extends ComandosEscucha {
 	sizeAObtener = paqueteComerciar.getItemsADar().size();
 	cuentaSize = sizeMisItems - sizeADar + sizeAObtener;
 	if (sizeADar != 0) {
-	    if (cuentaSize <= 9) {
+	    if (cuentaSize <= MAXIMO_ITEMS) {
 		juego.getCliente().getM1().getChckbxListo().setEnabled(true);
 		juego.getCliente().getM1().getLeyenda().setVisible(false);
-	    } else if (cuentaSize > 9) {
+	    } else if (cuentaSize > MAXIMO_ITEMS) {
 		juego.getCliente().getM1().getChckbxListo().setEnabled(false);
 		juego.getCliente().getM1().getLeyenda().setVisible(true);
 	    }

@@ -5,7 +5,23 @@ import java.awt.Graphics;
 import estados.Estado;
 import juego.Juego;
 
+/**
+ * Clase Mundo
+ * Encargada de cargar los recursos del mundo
+ * a la pantalla.
+ * Pasar las posiciones entre 2D a Isometricas
+ * y biceversa
+ * Caputrar las posiciones del click en el mapa
+ */
 public class Mundo {
+    private static final int AUBENOR_MAP = 3;
+    private static final int ARIS_MAP = 2;
+    private static final int DOS = 2;
+    private static final int ALTO_TILE = 64;
+    private static final int ANCHO_TILE = 64;
+    private static final int MINIMO_Y = 60;
+    private static final int MINIMO_X = 30;
+    private static final int DESPLAZAMIENTO_CAMARA = 32;
     private Juego juego;
     private int ancho;
     private int alto;
@@ -14,7 +30,7 @@ public class Mundo {
     private int xOffset;
     private int yOffset;
 
-    private float[] iso = new float[2];
+    private float[] iso = new float[DOS];
     private int[][] tiles;
     private int[][] tilesInv;
 
@@ -45,17 +61,17 @@ public class Mundo {
     }
 
     /**
-     * Graficar.
+     * Metodo para graficar el mapa
      * @param g the g
      */
     public void graficar(final Graphics g) {
 	xOffset = juego.getEstadoJuego().getPersonaje().getxOffset();
 	yOffset = juego.getEstadoJuego().getPersonaje().getYOffset();
 
-	xMinimo = (int) (juego.getCamara().getxOffset() - xOffset - 30);
-	xMaximo = xMinimo + juego.getAncho() + xOffset + 30;
-	yMinimo = (int) juego.getCamara().getyOffset() + yOffset - 60;
-	yMaximo = yMinimo + juego.getAlto() + yOffset + 60;
+	xMinimo = (int) (juego.getCamara().getxOffset() - xOffset - MINIMO_X);
+	xMaximo = xMinimo + juego.getAncho() + xOffset + MINIMO_X;
+	yMinimo = (int) juego.getCamara().getyOffset() + yOffset - MINIMO_Y;
+	yMaximo = yMinimo + juego.getAlto() + yOffset + MINIMO_Y;
 
 	// Grafico el el tile base
 	for (int i = 0; i < alto; i++) {
@@ -64,18 +80,22 @@ public class Mundo {
 		if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)) {
 		    int map = juego.getPersonaje().getMapa();
 		    if (map == 1) {
-			Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-				(int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
-		    } else if (map == 2) {
-			Tile.aris[Tile.arisBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-				(int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
-		    } else if (map == 3) {
-			Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-				(int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
+			Tile.getAubenor()[Tile.getAubenorbase()].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+				(int) (iso[1] - juego.getCamara().getyOffset() - DESPLAZAMIENTO_CAMARA), ANCHO_TILE,
+				ALTO_TILE);
+		    } else if (map == ARIS_MAP) {
+			Tile.getAris()[Tile.getArisbase()].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+				(int) (iso[1] - juego.getCamara().getyOffset() - DESPLAZAMIENTO_CAMARA), ANCHO_TILE,
+				ALTO_TILE);
+		    } else if (map == AUBENOR_MAP) {
+			Tile.getAubenor()[Tile.getAubenorbase()].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+				(int) (iso[1] - juego.getCamara().getyOffset() - DESPLAZAMIENTO_CAMARA), ANCHO_TILE,
+				ALTO_TILE);
 		    }
 		    if (!getTile(j, i).esSolido()) {
 			getTile(j, i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-				(int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
+				(int) (iso[1] - juego.getCamara().getyOffset() - DESPLAZAMIENTO_CAMARA), ANCHO_TILE,
+				ALTO_TILE);
 		    }
 		}
 	    }
@@ -106,7 +126,7 @@ public class Mundo {
 			&& getTile(j, i).esSolido()) {
 		    obst = getTile(j, i);
 		    obst.graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-			    (int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto() / 2), obst.getAncho(),
+			    (int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto() / DOS), obst.getAncho(),
 			    obst.getAlto());
 		}
 	    }
@@ -120,15 +140,15 @@ public class Mundo {
      * @return the tile
      */
     public Tile getTile(final int x, final int y) {
-	Tile t = Tile.tiles[tiles[x][y]];
+	Tile t = Tile.getTiles()[tiles[x][y]];
 	if (t == null) {
 	    int map = juego.getPersonaje().getMapa();
 	    if (map == 1) {
-		return Tile.aubenor[Tile.aubenorBase];
-	    } else if (map == 2) {
-		return Tile.aris[Tile.arisBase];
-	    } else if (map == 3) {
-		return Tile.aubenor[Tile.aubenorBase];
+		return Tile.getAris()[Tile.getAubenorbase()];
+	    } else if (map == ARIS_MAP) {
+		return Tile.getAris()[Tile.getArisbase()];
+	    } else if (map == AUBENOR_MAP) {
+		return Tile.getAubenor()[Tile.getAubenorbase()];
 	    }
 	}
 	return t;
@@ -144,7 +164,7 @@ public class Mundo {
 	String[] tokens = archivo.split("\\s+");
 	ancho = Utilitarias.parseInt(tokens[0]);
 	alto = Utilitarias.parseInt(tokens[1]);
-	spawnX = Utilitarias.parseInt(tokens[2]);
+	spawnX = Utilitarias.parseInt(tokens[DOS]);
 	spawnY = Utilitarias.parseInt(tokens[3]);
 
 	tiles = new int[ancho][alto];
@@ -161,7 +181,8 @@ public class Mundo {
     }
 
     /**
-     * Mundo A grafo.
+     * Mundo A grafo. Se transforma el mundo cargado a un grafo compuesto por
+     * Tile
      */
     private void mundoAGrafo() {
 	// Creo una matriz de nodos
@@ -179,10 +200,10 @@ public class Mundo {
 	// Uno cada nodo con sus adyacentes
 	for (int x = 0; x < yFinal; x++) {
 	    for (int y = 0; y < xFinal; y++) {
-		if (!Tile.tiles[tilesInv[x][y]].esSolido()) {
+		if (!Tile.getTiles()[tilesInv[x][y]].esSolido()) {
 		    // Si no es la ultima fila y el tile de abajo es no solido,
 		    // lo uno
-		    if (y < yFinal - 1 && !Tile.tiles[tilesInv[x][y + 1]].esSolido()) {
+		    if (y < yFinal - 1 && !Tile.getTiles()[tilesInv[x][y + 1]].esSolido()) {
 			nodos[x][y].agregarAdyacente(nodos[x][y + 1]);
 			nodos[x][y + 1].agregarAdyacente(nodos[x][y]);
 		    }
@@ -192,14 +213,14 @@ public class Mundo {
 			// Y ademas el de arriba ni el de la derecha lo son, lo
 			// uno
 			// Tiene que ser a partir de la segunda fila
-			if (y > 0 && !Tile.tiles[tilesInv[x + 1][y - 1]].esSolido()
-				&& !Tile.tiles[tilesInv[x + 1][y]].esSolido()
-				&& !Tile.tiles[tilesInv[x][y - 1]].esSolido()) {
+			if (y > 0 && !Tile.getTiles()[tilesInv[x + 1][y - 1]].esSolido()
+				&& !Tile.getTiles()[tilesInv[x + 1][y]].esSolido()
+				&& !Tile.getTiles()[tilesInv[x][y - 1]].esSolido()) {
 			    nodos[x][y].agregarAdyacente(nodos[x + 1][y - 1]);
 			    nodos[x + 1][y - 1].agregarAdyacente(nodos[x][y]);
 			}
 			// Si el de la derecha no es un tile solido lo uno
-			if (!Tile.tiles[tilesInv[x + 1][y]].esSolido()) {
+			if (!Tile.getTiles()[tilesInv[x + 1][y]].esSolido()) {
 			    nodos[x][y].agregarAdyacente(nodos[x + 1][y]);
 			    nodos[x + 1][y].agregarAdyacente(nodos[x][y]);
 			}
@@ -207,9 +228,9 @@ public class Mundo {
 			// Y ademas el de abajo ni el de la derecha lo son, lo
 			// uno
 			// Debe ser antes de la ultima fila
-			if (y < yFinal - 1 && !Tile.tiles[tilesInv[x + 1][y + 1]].esSolido()
-				&& !Tile.tiles[tilesInv[x + 1][y]].esSolido()
-				&& !Tile.tiles[tilesInv[x][y + 1]].esSolido()) {
+			if (y < yFinal - 1 && !Tile.getTiles()[tilesInv[x + 1][y + 1]].esSolido()
+				&& !Tile.getTiles()[tilesInv[x + 1][y]].esSolido()
+				&& !Tile.getTiles()[tilesInv[x][y + 1]].esSolido()) {
 			    nodos[x][y].agregarAdyacente(nodos[x + 1][y + 1]);
 			    nodos[x + 1][y + 1].agregarAdyacente(nodos[x][y]);
 			}
@@ -230,7 +251,7 @@ public class Mundo {
 
     /**
      * Obtener grafo de tiles no solidos.
-     * @return the grafo
+     * @return grafo
      */
     public Grafo obtenerGrafoDeTilesNoSolidos() {
 	return grafoDeTilesNoSolidos;
@@ -238,7 +259,7 @@ public class Mundo {
 
     /**
      * Obtener ancho.
-     * @return the int
+     * @return ancho
      */
     public int obtenerAncho() {
 	return ancho;
@@ -246,50 +267,50 @@ public class Mundo {
 
     /**
      * Obtener alto.
-     * @return the int
+     * @return alto
      */
     public int obtenerAlto() {
 	return alto;
     }
 
     /**
-     * Iso A 2 D.
-     * @param x the x
-     * @param y the y
-     * @return the float[]
+     * Transforma isometrica a 2D
+     * @param x pos en x isometrica
+     * @param y pos en y isometrica
+     * @return float[] de las coordenadas en 2D
      */
     public static float[] isoA2D(final float x, final float y) {
-	float[] dosD = new float[2];
+	float[] dosD = new float[DOS];
 
-	dosD[0] = (x / (Tile.ANCHO / 2) + y / (Tile.ALTO / 2)) / 2;
-	dosD[1] = (y / (Tile.ALTO / 2) - (x / (Tile.ANCHO / 2))) / 2;
+	dosD[0] = (x / (Tile.ANCHO / DOS) + y / (Tile.ALTO / DOS)) / DOS;
+	dosD[1] = (y / (Tile.ALTO / DOS) - (x / (Tile.ANCHO / DOS))) / DOS;
 
 	return dosD;
     }
 
     /**
-     * Dos da iso.
-     * @param x the x
-     * @param y the y
-     * @return the float[]
+     * Transforma las posiciones en 2D a Isometricas
+     * @param x pos en x 2D
+     * @param y pos en y 2D
+     * @return float[] coordenadas en Isometricas
      */
     public static float[] dosDaIso(final float x, final float y) {
-	float[] iso = new float[2];
+	float[] iso = new float[DOS];
 
-	iso[0] = (x - y) * (Tile.ANCHO / 2);
-	iso[1] = (x + y) * (Tile.ALTO / 2);
+	iso[0] = (x - y) * (Tile.ANCHO / DOS);
+	iso[1] = (x + y) * (Tile.ALTO / DOS);
 
 	return iso;
     }
 
     /**
-     * Mouse A tile.
-     * @param x the x
-     * @param y the y
-     * @return the int[]
+     * Capturar la posicion del mouse y obtener el Tile que se clickeo
+     * @param x pos en X del click
+     * @param y pos en Y del click
+     * @return int[] tile calculado
      */
     public static int[] mouseATile(final float x, final float y) {
-	int tile[] = new int[2];
+	int[] tile = new int[DOS];
 
 	tile[0] = (int) Math.floor((y / Tile.ALTO) + (x / Tile.ANCHO)) + 1;
 	tile[1] = (int) Math.floor((-x / Tile.ANCHO) + (y / Tile.ALTO)) + 1;

@@ -26,6 +26,39 @@ import mensajeria.Comando;
 
 public class MenuRegistro extends JFrame {
 
+    private static final int ALTO_MENU = 300;
+    private static final int ANCHO_MENU = 450;
+    private static final int Y_MENU = 100;
+    private static final int X_MENU = 100;
+    private static final int ALTO_PANE = 271;
+    private static final int ANCHO_PANE = 444;
+    private static final int ALTO_LB_USSER = 19;
+    private static final int ANCHO_LB_USSER = 57;
+    private static final int Y_LB_USSER = 70;
+    private static final int X_LB_USSER = 113;
+    private static final int ALTO_LB_PASS = 17;
+    private static final int ANCHO_LB_PASS = 65;
+    private static final int Y_LB_PASS = 121;
+    private static final int X_LB_PASS = 113;
+    private static final int ALTO_LB_REG = 23;
+    private static final int ANCHO_LB_REG = 82;
+    private static final int Y_LB_REG = 182;
+    private static final int X_LB_REG = 186;
+    private static final int TXT_TAM = 15;
+    private static final int ALTO_BTN_REG = 23;
+    private static final int ANCHO_BTN_REG = 153;
+    private static final int Y_BTN_REG = 182;
+    private static final int X_BTN_REG = 143;
+    private static final int ALTO_TXT_PASS = 20;
+    private static final int ANCHO_TXT_PASS = 118;
+    private static final int Y_TXT_PASS = 120;
+    private static final int X_TXT_PASS = 199;
+    private static final int ALTO_TXT_USUARIO = 20;
+    private static final int ANCHO_TXT_USUARIO = 118;
+    private static final int Y_TXT_USUARIO = 69;
+    private static final int X_TXT_USUARIO = 199;
+    private static final int ALTO_BACK = 271;
+    private static final int ANCHO_BACK = 444;
     private JTextField txtUsuario;
     private JPasswordField pwPassword;
 
@@ -49,34 +82,34 @@ public class MenuRegistro extends JFrame {
 	setTitle("WOME - Registrarse");
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setResizable(false);
-	setBounds(100, 100, 450, 300);
+	setBounds(X_MENU, Y_MENU, ANCHO_MENU, ALTO_MENU);
 	getContentPane().setLayout(null);
 	setLocationRelativeTo(null);
 
 	JLayeredPane layeredPane = new JLayeredPane();
-	layeredPane.setBounds(0, 0, 444, 271);
+	layeredPane.setBounds(0, 0, ANCHO_PANE, ALTO_PANE);
 	getContentPane().add(layeredPane);
 
 	JLabel lblUsuario = new JLabel("Usuario");
-	lblUsuario.setBounds(113, 70, 57, 19);
+	lblUsuario.setBounds(X_LB_USSER, Y_LB_USSER, ANCHO_LB_USSER, ALTO_LB_USSER);
 	layeredPane.add(lblUsuario, new Integer(1));
 	lblUsuario.setForeground(Color.WHITE);
-	lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
+	lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, TXT_TAM));
 
 	JLabel lblPassword = new JLabel("Password");
-	lblPassword.setBounds(113, 121, 65, 17);
+	lblPassword.setBounds(X_LB_PASS, Y_LB_PASS, ANCHO_LB_PASS, ALTO_LB_PASS);
 	layeredPane.add(lblPassword, new Integer(1));
 	lblPassword.setForeground(Color.WHITE);
-	lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+	lblPassword.setFont(new Font("Tahoma", Font.PLAIN, TXT_TAM));
 
 	JLabel lblRegistrarse = new JLabel("Registrarse");
-	lblRegistrarse.setBounds(186, 182, 82, 23);
+	lblRegistrarse.setBounds(X_LB_REG, Y_LB_REG, ANCHO_LB_REG, ALTO_LB_REG);
 	layeredPane.add(lblRegistrarse, new Integer(2));
 	lblRegistrarse.setForeground(Color.WHITE);
-	lblRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, 15));
+	lblRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, TXT_TAM));
 
 	JButton btnRegistrarse = new JButton("");
-	btnRegistrarse.setBounds(143, 182, 153, 23);
+	btnRegistrarse.setBounds(X_BTN_REG, Y_BTN_REG, ANCHO_BTN_REG, ALTO_BTN_REG);
 	layeredPane.add(btnRegistrarse, new Integer(1));
 	btnRegistrarse.setFocusable(false);
 	btnRegistrarse.setIcon(new ImageIcon(MenuRegistro.class.getResource("/frames/BotonMenu.png")));
@@ -89,7 +122,7 @@ public class MenuRegistro extends JFrame {
 		dispose();
 	    }
 	});
-	pwPassword.setBounds(199, 120, 118, 20);
+	pwPassword.setBounds(X_TXT_PASS, Y_TXT_PASS, ANCHO_TXT_PASS, ALTO_TXT_PASS);
 	layeredPane.add(pwPassword, new Integer(1));
 
 	txtUsuario = new JTextField();
@@ -100,12 +133,12 @@ public class MenuRegistro extends JFrame {
 		dispose();
 	    }
 	});
-	txtUsuario.setBounds(199, 69, 118, 20);
+	txtUsuario.setBounds(X_TXT_USUARIO, Y_TXT_USUARIO, ANCHO_TXT_USUARIO, ALTO_TXT_USUARIO);
 	layeredPane.add(txtUsuario, new Integer(1));
 	txtUsuario.setColumns(10);
 
 	JLabel labelBackground = new JLabel("");
-	labelBackground.setBounds(0, 0, 444, 271);
+	labelBackground.setBounds(0, 0, ANCHO_BACK, ALTO_BACK);
 	layeredPane.add(labelBackground, new Integer(0));
 	labelBackground.setIcon(new ImageIcon(MenuRegistro.class.getResource("/frames/menuBackground.jpg")));
 	btnRegistrarse.addActionListener(new ActionListener() {

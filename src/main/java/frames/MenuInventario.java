@@ -17,9 +17,19 @@ import inventario.Inventario;
 import juego.Pantalla;
 import mensajeria.Comando;
 
+/**
+ * Menu inventario para ver los items
+ * que el personaje tiene
+ */
 public class MenuInventario extends JFrame {
+    private static final int Y_LOCACION = 140;
+    private static final int X_LOCACION = 900;
+    private static final int TAMANIO = 600;
     private JButton cancelar = new JButton("Exit");
 
+    /**
+     * @param cliente cliente que ingresa al menu Inventario
+     */
     public MenuInventario(final Cliente cliente) {
 	cancelar.addActionListener(new ActionListener() {
 	    @Override
@@ -46,10 +56,10 @@ public class MenuInventario extends JFrame {
 	    JOptionPane.showMessageDialog(null, "Falló al iniciar el inventario");
 
 	}
-	this.setBounds(600, 600, 600, 600);
+	this.setBounds(TAMANIO, TAMANIO, TAMANIO, TAMANIO);
 	this.pack();
 	this.setLocationRelativeTo(null);
-	this.setLocation(900, 140);
+	this.setLocation(X_LOCACION, Y_LOCACION);
 	this.setResizable(false);
 	this.setVisible(true);
     }

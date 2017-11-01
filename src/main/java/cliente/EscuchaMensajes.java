@@ -1,7 +1,6 @@
 package cliente;
 
 import java.io.ObjectInputStream;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JOptionPane;

@@ -35,6 +35,70 @@ import recursos.Recursos;
  */
 public class Entidad {
 
+    private static final int OFFSET_Y_GRAFICAR = 4;
+
+    private static final int ALTO_PANTALLA = 10;
+
+    private static final int DOSCERO = 20;
+
+    private static final int MOVER_ABAJO_IZQ = 7;
+
+    private static final int MOVER_ABAJO_DER = 5;
+
+    private static final int MOVER_DER = 4;
+
+    private static final int MOVER_ARRIBA_DER = 3;
+
+    private static final int MOVER_IZQ = 0;
+
+    private static final int MOVER_ARRIBA_IZQ = 1;
+
+    private static final double VALOR_SUMAR_DIJKSTRA = 1.5;
+
+    private static final int TAM_NOMBRE_LETRA = 15;
+
+    private static final int MAX1_MOUSE_COMERCIAR = 29;
+
+    private static final int MAX0_MOUSE_COMERCIAR = 71;
+
+    private static final int MIN0_MOUSE_COMERCIAR = 44;
+
+    private static final int MAX1_MOUSE_CONTACTOS = 559;
+
+    private static final int MIN1_MOUSE_CONTACTOS = 524;
+
+    private static final int MAX0_MOUSE_CONTACTOS = 105;
+
+    private static final int MIN0_MOUSE_CONTACTOS = 3;
+
+    private static final int MAX1_MOUSE_SALIR = 597;
+
+    private static final int MIN1_MOUSE_SALIR = 562;
+
+    private static final int MAX0_MOUSE_SALIR = 105;
+
+    private static final int MIN0_MOUSE_SALIR = 3;
+
+    private static final int MAX1_MOUSE_MENUINVENTARIO = 597;
+
+    private static final int MIN1_MOUSE_MENUINVENTARIO = 545;
+
+    private static final int MAX0_MOUSE_MENUINVENTARIO = 797;
+
+    private static final int MIN0_MOUSE_MENUINVENTARIO = 738;
+
+    private static final int SEIS = 6;
+
+    private static final int MOVER_ABAJO = SEIS;
+
+    private static final int DOS = 2;
+
+    private static final int MOVER_ARRIBA = DOS;
+
+    private static final int SEISCUATRO = 64;
+
+    private static final int TRESDOS = 32;
+
     Juego juego;
 
     // Tamaño de la entidad
@@ -58,15 +122,15 @@ public class Entidad {
     private int[] posMouse;
 
     // Movimiento Actual
-    private static final int horizontalDer = 4;
-    private static final int horizontalIzq = 0;
-    private static final int verticalSup = 2;
-    private static final int verticalInf = 6;
-    private static final int diagonalInfIzq = 7;
-    private static final int diagonalInfDer = 5;
-    private static final int diagonalSupDer = 3;
-    private static final int diagonalSupIzq = 1;
-    private int movimientoHacia = 6;
+    private static final int HORIZONTALDER = 4;
+    private static final int HORIZONTALIZQ = 0;
+    private static final int VERTICALSUP = 2;
+    private static final int VERTICALINF = 6;
+    private static final int DIAGONALINFIZQ = 7;
+    private static final int DIAGONALINFDER = 5;
+    private static final int DIAGONALSUPDER = 3;
+    private static final int DIAGONALSUPIZQ = 1;
+    private int movimientoHacia = SEIS;
     private boolean enMovimiento;
 
     private Map<Integer, Animacion> animaciones;
@@ -121,22 +185,22 @@ public class Entidad {
 	this.alto = alto;
 	this.nombre = nombre;
 	this.mundo = mundo;
-	xOffset = ancho / 2;
-	yOffset = alto / 2;
+	xOffset = ancho / DOS;
+	yOffset = alto / DOS;
 
-	x = (int) (spawnX / 64) * 64;
-	y = (int) (spawnY / 32) * 32;
+	x = (int) (spawnX / SEISCUATRO) * SEISCUATRO;
+	y = (int) (spawnY / TRESDOS) * TRESDOS;
 	// x = spawnX;
 	// y = spawnY;
 
-	moverIzq = new Animacion(velAnimacion, animaciones.get(0));
-	moverArribaIzq = new Animacion(velAnimacion, animaciones.get(1));
-	moverArriba = new Animacion(velAnimacion, animaciones.get(2));
-	moverArribaDer = new Animacion(velAnimacion, animaciones.get(3));
-	moverDer = new Animacion(velAnimacion, animaciones.get(4));
-	moverAbajoDer = new Animacion(velAnimacion, animaciones.get(5));
-	moverAbajo = new Animacion(velAnimacion, animaciones.get(6));
-	moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(7));
+	moverIzq = new Animacion(velAnimacion, animaciones.get(MOVER_IZQ));
+	moverArribaIzq = new Animacion(velAnimacion, animaciones.get(MOVER_ARRIBA_IZQ));
+	moverArriba = new Animacion(velAnimacion, animaciones.get(MOVER_ARRIBA));
+	moverArribaDer = new Animacion(velAnimacion, animaciones.get(MOVER_ARRIBA_DER));
+	moverDer = new Animacion(velAnimacion, animaciones.get(MOVER_DER));
+	moverAbajoDer = new Animacion(velAnimacion, animaciones.get(MOVER_ABAJO_DER));
+	moverAbajo = new Animacion(velAnimacion, animaciones.get(MOVER_ABAJO));
+	moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(MOVER_ABAJO_IZQ));
 
 	this.inicializarMapaAnimaciones();
 
@@ -184,24 +248,27 @@ public class Entidad {
     public void getEntrada() {
 	posMouseRecorrido = juego.getHandlerMouse().getPosMouseRecorrido();
 	posMouse = juego.getHandlerMouse().getPosMouse();
-	if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 738 && posMouse[0] <= 797 && posMouse[1] >= 545
-		&& posMouse[1] <= 597) {
+	if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= MIN0_MOUSE_MENUINVENTARIO
+		&& posMouse[0] <= MAX0_MOUSE_MENUINVENTARIO && posMouse[1] >= MIN1_MOUSE_MENUINVENTARIO
+		&& posMouse[1] <= MAX1_MOUSE_MENUINVENTARIO) {
 	    if (Pantalla.menuInventario == null) {
 		Pantalla.menuInventario = new MenuInventario(juego.getCliente());
 		Pantalla.menuInventario.setVisible(true);
 	    }
 	    juego.getHandlerMouse().setNuevoClick(false);
 	}
-	if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 3 && posMouse[0] <= 105 && posMouse[1] >= 562
-		&& posMouse[1] <= 597) {
+	if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= MIN0_MOUSE_SALIR
+		&& posMouse[0] <= MAX0_MOUSE_SALIR && posMouse[1] >= MIN1_MOUSE_SALIR
+		&& posMouse[1] <= MAX1_MOUSE_SALIR) {
 	    if (Pantalla.menuEscp == null) {
 		Pantalla.menuEscp = new MenuEscape(juego.getCliente());
 		Pantalla.menuEscp.setVisible(true);
 	    }
 	    juego.getHandlerMouse().setNuevoClick(false);
 	}
-	if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 3 && posMouse[0] <= 105 && posMouse[1] >= 524
-		&& posMouse[1] <= 559) {
+	if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= MIN0_MOUSE_CONTACTOS
+		&& posMouse[0] <= MAX0_MOUSE_CONTACTOS && posMouse[1] >= MIN1_MOUSE_CONTACTOS
+		&& posMouse[1] <= MAX1_MOUSE_CONTACTOS) {
 	    if (Pantalla.ventContac == null) {
 		Pantalla.ventContac = new VentanaContactos(juego);
 		Pantalla.ventContac.setVisible(true);
@@ -229,8 +296,8 @@ public class Entidad {
 			if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENUBATALLAR) {
 			    // ME FIJO SI CON EL QUE QUIERO BATALLAR ESTA EN LA
 			    // ZONA DE COMERCIO
-			    if (!((int) comercio[0] >= 44 && (int) comercio[0] <= 71 && (int) comercio[1] >= 0
-				    && (int) comercio[1] <= 29)) {
+			    if (!((int) comercio[0] >= MIN0_MOUSE_COMERCIAR && (int) comercio[0] <= MAX0_MOUSE_COMERCIAR
+				    && (int) comercio[1] >= 0 && (int) comercio[1] <= MAX1_MOUSE_COMERCIAR)) {
 				juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 				PaqueteBatalla pBatalla = new PaqueteBatalla();
 
@@ -251,8 +318,9 @@ public class Entidad {
 			} else {
 			    // PREGUNTO SI EL MENU EMERGENTE ES DE TIPO COMERCIO
 			    if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENUCOMERCIAR) {
-				if ((int) comercio[0] >= 44 && (int) comercio[0] <= 71 && (int) comercio[1] >= 0
-					&& (int) comercio[1] <= 29) {
+				if ((int) comercio[0] >= MIN0_MOUSE_COMERCIAR
+					&& (int) comercio[0] <= MAX0_MOUSE_COMERCIAR && (int) comercio[1] >= 0
+					&& (int) comercio[1] <= MAX1_MOUSE_COMERCIAR) {
 				    if (juego.getCliente().getM1() == null) {
 					juego.getCliente().setPaqueteComercio(new PaqueteComerciar());
 					juego.getCliente().getPaqueteComercio().setId(juego.getPersonaje().getId());
@@ -287,7 +355,7 @@ public class Entidad {
 			pBatalla.setId(juego.getPersonaje().getId());
 			pBatalla.setIdEnemigo(juego.getEstadoJuego().getMenuEnemigo().getNpc().getId() * -1);
 
-			juego.getPersonaje().setEstado(Estado.estadoBatallaNpc);
+			juego.getPersonaje().setEstado(Estado.getEstadoBatallaNpc());
 			Estado.setEstado(null);
 			juego.setEstadoBatallaNpc(new EstadoBatallaNpc(juego, pBatalla));
 			Estado.setEstado(juego.getEstadoBatallaNpc());
@@ -302,8 +370,8 @@ public class Entidad {
 		    juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 		}
 	    } else {
-		// Me fijo si hizo click en alguno de los personajes
 		{
+		    // Me fijo si hizo click en alguno de los personajes
 		    Iterator<Integer> it = juego.getUbicacionPersonajes().keySet().iterator();
 		    int key;
 		    int[] tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
@@ -318,14 +386,15 @@ public class Entidad {
 			if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
 				&& juego.getPersonajesConectados().get(actual.getIdPersonaje()) != null
 				&& juego.getPersonajesConectados().get(actual.getIdPersonaje())
-					.getEstado() == Estado.estadoJuego) {
+					.getEstado() == Estado.getEstadoJuego()) {
 
 			    if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
 				idEnemigo = actual.getIdPersonaje();
-				float XY[] = Mundo.isoA2D(x, y);
+				float xY[] = Mundo.isoA2D(x, y);
 
 				// ESTA ESTE PARA NO MOVERME HASTA EL LUGAR.
-				if (XY[0] >= 44 && XY[0] <= 71 && XY[1] >= 0 && XY[1] <= 29) {
+				if (xY[0] >= MIN0_MOUSE_COMERCIAR && xY[0] <= MAX0_MOUSE_COMERCIAR && xY[1] >= 0
+					&& xY[1] <= MAX1_MOUSE_COMERCIAR) {
 				    // SI ESTOY DENTRO DE LA ZONA DE COMERCIO
 				    // SETEO QUE SE ABRA EL MENU
 				    // DE COMERCIO
@@ -366,7 +435,7 @@ public class Entidad {
 
 			if (actual != null) {
 			    if (tileMoverme[0] == tileNpc[0] && tileMoverme[1] == tileNpc[1] && juego.getPaquetesNpcs()
-				    .get(actual.getIdEnemigo()).getEstado() == Estado.estadoJuego) {
+				    .get(actual.getIdEnemigo()).getEstado() == Estado.getEstadoJuego()) {
 				juego.getEstadoJuego().setHaySolicitud(true,
 					juego.getPaquetesNpcs().get(actual.getIdEnemigo()),
 					MenuInfoPersonaje.MENUBATALLAR);
@@ -449,7 +518,7 @@ public class Entidad {
 		return;
 	    }
 
-	    tileFinal = new int[2];
+	    tileFinal = new int[MOVER_ARRIBA];
 	    tileFinal[0] = nodoActualTile.obtenerX();
 	    tileFinal[1] = nodoActualTile.obtenerY();
 
@@ -457,28 +526,28 @@ public class Entidad {
 	    yFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[1];
 
 	    if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] - 1) {
-		movimientoHacia = verticalSup;
+		movimientoHacia = VERTICALSUP;
 	    }
 	    if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] + 1) {
-		movimientoHacia = verticalInf;
+		movimientoHacia = VERTICALINF;
 	    }
 	    if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] + 1) {
-		movimientoHacia = horizontalIzq;
+		movimientoHacia = HORIZONTALIZQ;
 	    }
 	    if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] - 1) {
-		movimientoHacia = horizontalDer;
+		movimientoHacia = HORIZONTALDER;
 	    }
 	    if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1]) {
-		movimientoHacia = diagonalSupIzq;
+		movimientoHacia = DIAGONALSUPIZQ;
 	    }
 	    if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1]) {
-		movimientoHacia = diagonalInfDer;
+		movimientoHacia = DIAGONALINFDER;
 	    }
 	    if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] - 1) {
-		movimientoHacia = diagonalSupDer;
+		movimientoHacia = DIAGONALSUPDER;
 	    }
 	    if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] + 1) {
-		movimientoHacia = diagonalInfIzq;
+		movimientoHacia = DIAGONALINFIZQ;
 	    }
 	    enMovimiento = true;
 	}
@@ -494,40 +563,40 @@ public class Entidad {
 
 	double paso = 1;
 
-	if (enMovimiento && !(x == xFinal && y == yFinal - 32)) {
-	    if (movimientoHacia == verticalSup) {
+	if (enMovimiento && !(x == xFinal && y == yFinal - TRESDOS)) {
+	    if (movimientoHacia == VERTICALSUP) {
 		dy -= paso;
-	    } else if (movimientoHacia == verticalInf) {
+	    } else if (movimientoHacia == VERTICALINF) {
 		dy += paso;
-	    } else if (movimientoHacia == horizontalDer) {
+	    } else if (movimientoHacia == HORIZONTALDER) {
 		dx += paso;
-	    } else if (movimientoHacia == horizontalIzq) {
+	    } else if (movimientoHacia == HORIZONTALIZQ) {
 		dx -= paso;
-	    } else if (movimientoHacia == diagonalInfDer) {
+	    } else if (movimientoHacia == DIAGONALINFDER) {
 		dx += paso;
-		dy += paso / 2;
-	    } else if (movimientoHacia == diagonalInfIzq) {
+		dy += paso / MOVER_ARRIBA;
+	    } else if (movimientoHacia == DIAGONALINFIZQ) {
 		dx -= paso;
-		dy += paso / 2;
-	    } else if (movimientoHacia == diagonalSupDer) {
+		dy += paso / MOVER_ARRIBA;
+	    } else if (movimientoHacia == DIAGONALSUPDER) {
 		dx += paso;
-		dy -= paso / 2;
-	    } else if (movimientoHacia == diagonalSupIzq) {
+		dy -= paso / MOVER_ARRIBA;
+	    } else if (movimientoHacia == DIAGONALSUPIZQ) {
 		dx -= paso;
-		dy -= paso / 2;
+		dy -= paso / MOVER_ARRIBA;
 	    }
 
 	    x += dx;
 	    y += dy;
 
 	    // Le envio la posicion
-	    if (intervaloEnvio == 2) {
+	    if (intervaloEnvio == MOVER_ARRIBA) {
 		enviarPosicion();
 		intervaloEnvio = 0;
 	    }
 	    intervaloEnvio++;
 
-	    if (x == xFinal && y == yFinal - 32) {
+	    if (x == xFinal && y == yFinal - TRESDOS) {
 		enMovimiento = false;
 	    }
 	}
@@ -535,24 +604,27 @@ public class Entidad {
 
     /**
      * Grafica el frame del personaje
+     * @param g objeto que se graficara
      */
     public void graficar(final Graphics g) {
 	drawX = (int) (x - juego.getCamara().getxOffset());
 	drawY = (int) (y - juego.getCamara().getyOffset());
-	g.drawImage(getFrameAnimacionActual(), drawX, drawY + 4, ancho, alto, null);
+	g.drawImage(getFrameAnimacionActual(), drawX, drawY + OFFSET_Y_GRAFICAR, ancho, alto, null);
     }
 
     /**
      * Grafica el nombre
+     * @param g objeto que se graficara
      */
     public void graficarNombre(final Graphics g) {
 	g.setColor(Color.WHITE);
-	g.setFont(new Font("Book Antiqua", Font.BOLD, 15));
-	Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
+	g.setFont(new Font("Book Antiqua", Font.BOLD, TAM_NOMBRE_LETRA));
+	Pantalla.centerString(g, new java.awt.Rectangle(drawX + TRESDOS, drawY - DOSCERO, 0, ALTO_PANTALLA), nombre);
     }
 
     /**
      * Obtiene el frameActual de la entidad
+     * @return Retorna el gramde de la animacion actual
      */
     private BufferedImage getFrameAnimacionActual() {
 	Animacion animacionActual = animaciones.get(movimientoHacia);
@@ -560,20 +632,23 @@ public class Entidad {
 	if (animacionActual != null) {
 	    return animacionActual.getFrameActual();
 	} else {
-	    return Recursos.getOrco().get(6)[0];
+	    return Recursos.getOrco().get(MOVER_ABAJO)[0];
 	}
     }
 
+    /**
+     * Metodo que inicializa el mapa de animaciones
+     */
     private void inicializarMapaAnimaciones() {
 	animaciones = new HashMap<Integer, Animacion>();
-	animaciones.put(horizontalIzq, moverIzq);
-	animaciones.put(horizontalDer, moverDer);
-	animaciones.put(verticalSup, moverArriba);
-	animaciones.put(verticalInf, moverAbajo);
-	animaciones.put(diagonalInfIzq, moverAbajoIzq);
-	animaciones.put(diagonalInfDer, moverAbajoDer);
-	animaciones.put(diagonalSupIzq, moverArribaIzq);
-	animaciones.put(diagonalSupDer, moverArribaDer);
+	animaciones.put(HORIZONTALIZQ, moverIzq);
+	animaciones.put(HORIZONTALDER, moverDer);
+	animaciones.put(VERTICALSUP, moverArriba);
+	animaciones.put(VERTICALINF, moverAbajo);
+	animaciones.put(DIAGONALINFIZQ, moverAbajoIzq);
+	animaciones.put(DIAGONALINFDER, moverAbajoDer);
+	animaciones.put(DIAGONALSUPIZQ, moverArribaIzq);
+	animaciones.put(DIAGONALSUPDER, moverArribaDer);
     }
 
     /**
@@ -594,6 +669,7 @@ public class Entidad {
 
     /**
      * Obtiene el frame donde esta el personaje
+     * @return Retorna el framde la animacion
      */
     private int getFrame() {
 	Animacion animacion = animaciones.get(movimientoHacia);
@@ -623,21 +699,22 @@ public class Entidad {
 
     /**
      * Busca el camino más corto a recorrer para llegar a una posición
-     * @param xInicial ubicacion en X inicial
-     * @param yInicial ubicacion en Y inicial
-     * @param xFinal ubicacion en X final
-     * @param yFinal ubicacion en Y final
+     * @param xInicialParam ubicacion en X inicial
+     * @param yInicialParam ubicacion en Y inicial
+     * @param xFinalParam ubicacion en X final
+     * @param yFinalParam ubicacion en Y final
      * @return la pila de tiles a recorrer
      */
-    private PilaDeTiles caminoMasCorto(final int xInicial, final int yInicial, final int xFinal, final int yFinal) {
+    private PilaDeTiles caminoMasCorto(final int xInicialParam, final int yInicialParam, final int xFinalParam,
+	    final int yFinalParam) {
 	Grafo grafoLibres = mundo.obtenerGrafoDeTilesNoSolidos();
 	// Transformo las coordenadas iniciales y finales en indices
-	int nodoInicial = (yInicial - grafoLibres.obtenerNodos()[0].obtenerY())
-		* (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xInicial
+	int nodoInicial = (yInicialParam - grafoLibres.obtenerNodos()[0].obtenerY())
+		* (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xInicialParam
 		- grafoLibres.obtenerNodos()[0].obtenerX();
 
-	int nodoFinal = (yFinal - grafoLibres.obtenerNodos()[0].obtenerY())
-		* (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xFinal
+	int nodoFinal = (yFinalParam - grafoLibres.obtenerNodos()[0].obtenerY())
+		* (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xFinalParam
 		- grafoLibres.obtenerNodos()[0].obtenerX();
 
 	// Hago todo
@@ -657,7 +734,7 @@ public class Entidad {
 	for (int i = 0; i < grafoLibres.obtenerNodos()[nodoInicial].obtenerCantidadDeAdyacentes(); i++) {
 	    if (estanEnDiagonal(grafoLibres.obtenerNodos()[nodoInicial],
 		    grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
-		vecCostos[adyacentes[i].obtenerIndice()] = 1.5;
+		vecCostos[adyacentes[i].obtenerIndice()] = VALOR_SUMAR_DIJKSTRA;
 	    } else {
 		vecCostos[adyacentes[i].obtenerIndice()] = 1;
 	    }
@@ -687,7 +764,7 @@ public class Entidad {
 		double valorASumar = 1;
 		if (estanEnDiagonal(grafoLibres.obtenerNodos()[indiceMinimo],
 			grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
-		    valorASumar = 1.5;
+		    valorASumar = VALOR_SUMAR_DIJKSTRA;
 		}
 		if (vecCostos[indiceMinimo] + valorASumar < vecCostos[adyacentes[i].obtenerIndice()]) {
 		    vecCostos[adyacentes[i].obtenerIndice()] = vecCostos[indiceMinimo] + valorASumar;

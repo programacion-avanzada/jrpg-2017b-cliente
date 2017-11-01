@@ -168,7 +168,7 @@ public class NpcManager {
 		key = it.next();
 		actual = entidadesNpcs.get(key);
 
-		if (paquetesNpcs.get(key).getEstado() == Estado.estadoJuego) {
+		if (paquetesNpcs.get(key).getEstado() == Estado.getEstadoJuego()) {
 		    actual.graficar(g);
 		}
 	    }
@@ -196,7 +196,7 @@ public class NpcManager {
 		key = it.next();
 		actual = entidadesNpcs.get(key);
 
-		if (paquetesNpcs.get(key).getEstado() == Estado.estadoJuego) {
+		if (paquetesNpcs.get(key).getEstado() == Estado.getEstadoJuego()) {
 		    actual.graficarNombre(g);
 		}
 	    }

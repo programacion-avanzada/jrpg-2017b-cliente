@@ -14,11 +14,8 @@ public class Animacion {
 
     /**
      * Constructor de la clase
-     * 
-     * @param velocidad
-     *            velocidad con la cual se actualiza
-     * @param frames
-     *            imagen de frame
+     * @param velocidad velocidad con la cual se actualiza
+     * @param frames imagen de frame
      */
     public Animacion(final int velocidad, final BufferedImage[] frames) {
 	this.velocidad = velocidad;
@@ -53,7 +50,6 @@ public class Animacion {
 
     /**
      * Pide el frame actual
-     * 
      * @return devuelve el valor del frame en un indice
      */
     public BufferedImage getFrameActual() {
@@ -62,7 +58,6 @@ public class Animacion {
 
     /**
      * Pide el frame
-     * 
      * @return devuelve el indice del frame
      */
     public int getFrame() {

@@ -28,8 +28,38 @@ import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
 
+/**
+ * Estado de juego, el personaje
+ * no se encuentra batallando
+ */
 public class EstadoJuego extends Estado {
 
+    private static final int Y_MENU_INFO = 50;
+    private static final int X_MENU_INFO = 300;
+    private static final int CANT_NPC_SPAWN = 100;
+    private static final int ALTO_CAMERA = 64;
+    private static final int ANCHO_CAMERA = 64;
+    private static final int TAMANIO_LETRA = 15;
+    private static final int Y_OFFSET_CAMERA = 20;
+    private static final int X_OFFSET_CENTER_STRING = 32;
+    private static final int ALTO_CHAT = 35;
+    private static final int ANCHO_CHAT = 102;
+    private static final int Y_CHAT = 524;
+    private static final int X_CHAT = 3;
+    private static final int ALTO_MENU = 35;
+    private static final int ANCHO_MENU = 102;
+    private static final int Y_MENU = 562;
+    private static final int X_MENU = 3;
+    private static final int CINCO = 5;
+    private static final int ALTO_MOCHILA = 52;
+    private static final int ANCHO_MOCHILA = 59;
+    private static final int Y_MOCHILA = 545;
+    private static final int X_MOCHILA = 738;
+    private static final int Y_ESTADO_PERSONAJE = 5;
+    private static final int X_ESTADO_PERSONAJE = 5;
+    private static final int VEL_ANIMACION = 150;
+    private static final int Y_ENTIDAD = 64;
+    private static final int X_ENTIDAD = 64;
     private Entidad entidadPersonaje;
     private PaquetePersonaje paquetePersonaje;
     private Mundo mundo;
@@ -45,12 +75,12 @@ public class EstadoJuego extends Estado {
 
     private BufferedImage miniaturaPersonaje;
 
-    MenuInfoPersonaje menuEnemigo;
+    private MenuInfoPersonaje menuEnemigo;
 
     // Mundos
-    private static final int aubenor = 1;
-    private static final int aris = 2;
-    private static final int eodrim = 3;
+    private static final int AUBENOR = 1;
+    private static final int ARIS = 2;
+    private static final int EODRIM = 3;
     private Map<Integer, String> mundos;
 
     /**
@@ -65,11 +95,11 @@ public class EstadoJuego extends Estado {
 
 	mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
 	paquetePersonaje = juego.getPersonaje();
-	entidadPersonaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0,
-		Recursos.getPersonaje().get(juego.getPersonaje().getRaza()), 150);
+	entidadPersonaje = new Entidad(juego, mundo, X_ENTIDAD, Y_ENTIDAD, juego.getPersonaje().getNombre(), 0, 0,
+		Recursos.getPersonaje().get(juego.getPersonaje().getRaza()), VEL_ANIMACION);
 	// ente = new Entidad(juego, mundo, 256, 256, "Lucas Videla", 128, 128,
 	// Recursos.personaje.get("Orco"), 15);
-	miniaturaPersonaje = Recursos.getPersonaje().get(paquetePersonaje.getRaza()).get(5)[0];
+	miniaturaPersonaje = Recursos.getPersonaje().get(paquetePersonaje.getRaza()).get(CINCO)[0];
 
 	// Inicializo NpcManager
 	npcManager = new NpcManager(juego, mundo);
@@ -79,7 +109,7 @@ public class EstadoJuego extends Estado {
 	// y los envío al server
 	// si no, traigo los npcs del server.
 	if (juego.getPaquetesNpcs() == null) {
-	    npcManager.spawnInicial(100);
+	    npcManager.spawnInicial(CANT_NPC_SPAWN);
 	    PaqueteDeNpcs paqueteDeNpcs = new PaqueteDeNpcs(juego.getPaquetesNpcs(), juego.getUbicacionNpcs());
 	    paqueteDeNpcs.setComando(Comando.ACTUALIZARNPCS);
 	    juego.getCliente().getSalida().writeObject(gson.toJson(paqueteDeNpcs));
@@ -90,7 +120,7 @@ public class EstadoJuego extends Estado {
 	try {
 	    // Le envio al servidor que me conecte al mapa y mi posicion
 	    juego.getPersonaje().setComando(Comando.CONEXION);
-	    juego.getPersonaje().setEstado(Estado.estadoJuego);
+	    juego.getPersonaje().setEstado(Estado.getEstadoJuego());
 	    juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
 	    juego.getCliente().getSalida()
 		    .writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
@@ -117,10 +147,11 @@ public class EstadoJuego extends Estado {
 	juego.getNpcManager().graficarNombresNpcs(g);
 
 	g.drawImage(Recursos.getMarco(), 0, 0, juego.getAncho(), juego.getAlto(), null);
-	EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
-	g.drawImage(Recursos.getMochila(), 738, 545, 59, 52, null);
-	g.drawImage(Recursos.getMenu(), 3, 562, 102, 35, null);
-	g.drawImage(Recursos.getChat(), 3, 524, 102, 35, null);
+	EstadoDePersonaje.dibujarEstadoDePersonaje(g, X_ESTADO_PERSONAJE, Y_ESTADO_PERSONAJE, paquetePersonaje,
+		miniaturaPersonaje);
+	g.drawImage(Recursos.getMochila(), X_MOCHILA, Y_MOCHILA, ANCHO_MOCHILA, ALTO_MOCHILA, null);
+	g.drawImage(Recursos.getMenu(), X_MENU, Y_MENU, ANCHO_MENU, ALTO_MENU, null);
+	g.drawImage(Recursos.getChat(), X_CHAT, Y_CHAT, ANCHO_CHAT, ALTO_CHAT, null);
 	if (haySolicitud) {
 	    menuEnemigo.graficar(g, tipoSolicitud);
 	}
@@ -141,22 +172,23 @@ public class EstadoJuego extends Estado {
 	    PaqueteMovimiento actual;
 
 	    g.setColor(Color.WHITE);
-	    g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+	    g.setFont(new Font("Book Antiqua", Font.PLAIN, TAMANIO_LETRA));
 	    while (it.hasNext()) {
 		key = it.next();
 		actual = ubicacionPersonajes.get(key);
 
 		if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
-			&& personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+			&& personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.getEstadoJuego()) {
 		    Pantalla.centerString(g,
-			    new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32),
-				    (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10),
+			    new Rectangle(
+				    (int) (actual.getPosX() - juego.getCamara().getxOffset() + X_OFFSET_CENTER_STRING),
+				    (int) (actual.getPosY() - juego.getCamara().getyOffset() - Y_OFFSET_CAMERA), 0, 10),
 			    personajesConectados.get(actual.getIdPersonaje()).getNombre());
 		    g.drawImage(
 			    Recursos.getPersonaje().get(personajesConectados.get(actual.getIdPersonaje()).getRaza())
 				    .get(actual.getDireccion())[actual.getFrame()],
 			    (int) (actual.getPosX() - juego.getCamara().getxOffset()),
-			    (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+			    (int) (actual.getPosY() - juego.getCamara().getyOffset()), ANCHO_CAMERA, ALTO_CAMERA, null);
 		}
 	    }
 	}
@@ -175,9 +207,9 @@ public class EstadoJuego extends Estado {
      */
     private void inicializarMundos() {
 	mundos = new HashMap<Integer, String>();
-	mundos.put(aubenor, "Aubenor");
-	mundos.put(aris, "Aris");
-	mundos.put(eodrim, "Eodrim");
+	mundos.put(AUBENOR, "Aubenor");
+	mundos.put(ARIS, "Aris");
+	mundos.put(EODRIM, "Eodrim");
     }
 
     /**
@@ -192,13 +224,13 @@ public class EstadoJuego extends Estado {
      * Setea el hay solicitud.
      * @param b the b
      * @param enemigo the enemigo
-     * @param tipoSolicitud the tipo solicitud
+     * @param tipoSolicitudParam the tipo solicitud
      */
-    public void setHaySolicitud(final boolean b, final Paquete enemigo, final int tipoSolicitud) {
+    public void setHaySolicitud(final boolean b, final Paquete enemigo, final int tipoSolicitudParam) {
 	haySolicitud = b;
 	// menu que mostrara al enemigo
-	menuEnemigo = new MenuInfoPersonaje(300, 50, enemigo);
-	this.tipoSolicitud = tipoSolicitud;
+	menuEnemigo = new MenuInfoPersonaje(X_MENU_INFO, Y_MENU_INFO, enemigo);
+	this.tipoSolicitud = tipoSolicitudParam;
     }
 
     /**

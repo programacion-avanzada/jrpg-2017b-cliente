@@ -58,7 +58,7 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
 	this.nombre = nombre;
 	this.raza = raza;
 	this.casta = casta;
-	this.estado = Estado.estadoJuego;
+	this.estado = Estado.getEstadoJuego();
     }
 
     /**
@@ -76,7 +76,7 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
 	this.nombre = nombre;
 	this.raza = raza;
 	this.casta = casta;
-	this.estado = Estado.estadoJuego;
+	this.estado = Estado.getEstadoJuego();
     }
 
     /**

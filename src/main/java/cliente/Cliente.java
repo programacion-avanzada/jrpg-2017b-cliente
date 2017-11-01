@@ -29,6 +29,8 @@ import mensajeria.PaqueteUsuario;
  */
 public class Cliente extends Thread {
 
+    private static final int RESOLUCION_INICIAL2 = 600;
+    private static final int RESOLUCION_INCIAL1 = 800;
     private Socket cliente;
     private String miIp;
     private ObjectInputStream entrada;
@@ -179,7 +181,8 @@ public class Cliente extends Thread {
 		    salida.writeObject(gson.toJson(paquetePersonaje));
 
 		    // Instancio el juego y cargo los recursos
-		    wome = new Juego("World Of the Middle Earth", 800, 600, this, paquetePersonaje);
+		    wome = new Juego("World Of the Middle Earth", RESOLUCION_INCIAL1, RESOLUCION_INICIAL2, this,
+			    paquetePersonaje);
 
 		    // Muestro el menu de carga
 		    menuCarga = new MenuCarga(this);
@@ -212,10 +215,10 @@ public class Cliente extends Thread {
 
     /**
      * Setea el cliente
-     * @param cliente cliente a setear
+     * @param clienteParam cliente a setear
      */
-    public void setSocket(final Socket cliente) {
-	this.cliente = cliente;
+    public void setSocket(final Socket clienteParam) {
+	this.cliente = clienteParam;
     }
 
     /**

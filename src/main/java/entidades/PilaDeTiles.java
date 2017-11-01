@@ -5,7 +5,7 @@ package entidades;
  */
 public class PilaDeTiles {
 
-    NodoDePila ptrPila;
+    private NodoDePila ptrPila;
 
     /**
      * Constructor de la Clase Nodo de Tiles
@@ -16,9 +16,7 @@ public class PilaDeTiles {
 
     /**
      * Establece el nuevo siguiente
-     * 
-     * @param nodo
-     *            nuevo nodo siguiente
+     * @param nodo nuevo nodo siguiente
      */
     public void push(final NodoDePila nodo) {
 	nodo.establecerSiguiente(ptrPila);
@@ -27,7 +25,6 @@ public class PilaDeTiles {
 
     /**
      * Pide el tope
-     * 
      * @return un nodo de pila con el tope de la pila
      */
     public NodoDePila pop() {

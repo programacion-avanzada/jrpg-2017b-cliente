@@ -31,6 +31,48 @@ import mensajeria.Comando;
  */
 public class MiChat extends JFrame {
 
+    private static final int ALTO_CHAT = 300;
+
+    private static final int ANCHO_CHAT = 450;
+
+    private static final int Y_CHAT = 100;
+
+    private static final int X_CHAT = 100;
+
+    private static final int ALTO_SCROLL = 201;
+
+    private static final int ANCHO_SCROLL = 414;
+
+    private static final int Y_SCROLL = 11;
+
+    private static final int X_SCROLL = 10;
+
+    private static final int ALTO_ENVIAR = 23;
+
+    private static final int ANCHO_ENVIAR = 81;
+
+    private static final int Y_ENVIAR = 225;
+
+    private static final int X_ENVIAR = 334;
+
+    private static final int ALTO_TEXTO = 27;
+
+    private static final int ANCHO_TEXTO = 314;
+
+    private static final int Y_TEXTO = 223;
+
+    private static final int X_TEXTO = 10;
+
+    private static final int COLUMNAS = 10;
+
+    private static final int ALTO_BACK = 283;
+
+    private static final int ANCHO_BACK = 480;
+
+    private static final int X_BACK = -20;
+
+    private static final int BORDE = 5;
+
     private JPanel contentPane;
 
     private JTextField texto;
@@ -44,22 +86,22 @@ public class MiChat extends JFrame {
 
     /**
      * Create the frame.
-     * @param juego
+     * @param juego que llama al chat
      */
     public MiChat(final Juego juego) {
 	setTitle("Mi Chat");
 
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-	setBounds(100, 100, 450, 300);
+	setBounds(X_CHAT, Y_CHAT, ANCHO_CHAT, ALTO_CHAT);
 	setResizable(false);
 	contentPane = new JPanel();
-	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	contentPane.setBorder(new EmptyBorder(BORDE, BORDE, BORDE, BORDE));
 	setContentPane(contentPane);
 	contentPane.setLayout(null);
 
 	JScrollPane scrollPane = new JScrollPane();
 	scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-	scrollPane.setBounds(10, 11, 414, 201);
+	scrollPane.setBounds(X_SCROLL, Y_SCROLL, ANCHO_SCROLL, ALTO_SCROLL);
 	contentPane.add(scrollPane);
 
 	chat = new JTextArea();
@@ -146,13 +188,13 @@ public class MiChat extends JFrame {
 		texto.requestFocus();
 	    }
 	});
-	enviar.setBounds(334, 225, 81, 23);
+	enviar.setBounds(X_ENVIAR, Y_ENVIAR, ANCHO_ENVIAR, ALTO_ENVIAR);
 	contentPane.add(enviar);
 
-	texto.setBounds(Integer.valueOf(10), 223, 314, 27);
+	texto.setBounds(X_TEXTO, Y_TEXTO, ANCHO_TEXTO, ALTO_TEXTO);
 	contentPane.add(texto);
-	texto.setColumns(10);
-	background.setBounds(-20, 0, 480, 283);
+	texto.setColumns(COLUMNAS);
+	background.setBounds(X_BACK, 0, ANCHO_BACK, ALTO_BACK);
 	contentPane.add(background);
     }
 
