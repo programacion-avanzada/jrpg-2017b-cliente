@@ -17,12 +17,26 @@ import recursos.Recursos;
  * Clase encargada del manejo de los NPC
  */
 public class NpcManager {
+    private static final int POS_NPC = 8;
+
+    private static final int NIVEL_NPC = 10;
+
+    private static final int OFFSET_RANDOM = 13;
+
+    private static final int RANDOM_LIMITE = 18;
+
     // private final int CANTIDAD_NPCS = 10;
 
     // Esta clase se encarga del spawn y despawn de NPCs.
 
     // Distancia mínima desde el spawn de un npc hacia cualquier jugador: 416
     // (mas o menos)
+
+    private static final int VEL_ANIMACION = 150;
+
+    private static final int ALTO_ENTIDAD = 64;
+
+    private static final int ANCHO_ENTIDAD = 64;
 
     /**
      * hay 3 maps: paquetesNpcs: Paquetes que llevan la información de los npcs
@@ -83,8 +97,8 @@ public class NpcManager {
 	paquetesNpcs.put(id, new PaqueteNpc(id, nivel, nombre, raza, casta));
 	ubicacionNpcs.put(id, new PaqueteMovimiento(id, posX, posY, dir));
 
-	Entidad ente = new Entidad(juego, mundo, 64, 64, nombre, coords[0], coords[1],
-		Recursos.getPersonaje().get(raza), 150);
+	Entidad ente = new Entidad(juego, mundo, ANCHO_ENTIDAD, ALTO_ENTIDAD, nombre, coords[0], coords[1],
+		Recursos.getPersonaje().get(raza), VEL_ANIMACION);
 	ente.setIdEnemigo(id);
 	ente.setDireccion(dir);
 	entidadesNpcs.put(id, ente);
@@ -134,8 +148,8 @@ public class NpcManager {
 		// totalmente despejada
 		// Gracias Lucas por tanto, perdón por tan poco.
 		puedoSpawnear = true;
-		posX = random.nextInt(mundo.obtenerAncho() - 18) + 13;
-		posY = random.nextInt(mundo.obtenerAlto() - 18) + 13;
+		posX = random.nextInt(mundo.obtenerAncho() - RANDOM_LIMITE) + OFFSET_RANDOM;
+		posY = random.nextInt(mundo.obtenerAlto() - RANDOM_LIMITE) + 13;
 		// tile = mundo.getTile(posX, posY);
 
 		for (int j = -1; j < 2; j++) {
@@ -148,8 +162,8 @@ public class NpcManager {
 
 	    } while (!puedoSpawnear);
 
-	    spawnNpc(i, random.nextInt(10) + 1, generarNombre(), razas[random.nextInt(razas.length)],
-		    castas[random.nextInt(castas.length)], posX, posY, random.nextInt(8));
+	    spawnNpc(i, random.nextInt(NIVEL_NPC) + 1, generarNombre(), razas[random.nextInt(razas.length)],
+		    castas[random.nextInt(castas.length)], posX, posY, random.nextInt(POS_NPC));
 	}
     }
 
@@ -228,8 +242,8 @@ public class NpcManager {
 		coords = Mundo.dosDaIso(actualUbicacion.getPosX(), actualUbicacion.getPosY());
 
 		// System.out.println(actualUbicacion.getDireccion());
-		Entidad ente = new Entidad(juego, mundo, 64, 64, actualNpc.getNombre(), coords[0], coords[1],
-			Recursos.getPersonaje().get(actualNpc.getRaza()), 150);
+		Entidad ente = new Entidad(juego, mundo, ANCHO_ENTIDAD, ALTO_ENTIDAD, actualNpc.getNombre(), coords[0], coords[1],
+			Recursos.getPersonaje().get(actualNpc.getRaza()), VEL_ANIMACION);
 		ente.setIdEnemigo(key);
 		ente.setDireccion(actualUbicacion.getDireccion());
 		entidadesNpcs.put(key, ente);

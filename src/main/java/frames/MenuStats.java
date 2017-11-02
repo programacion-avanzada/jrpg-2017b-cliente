@@ -68,6 +68,7 @@ public class MenuStats extends JFrame {
 
     /**
      * Create the frame.
+     * @param cliente
      */
     public MenuStats(final Cliente cliente) {
 	paquetePersonaje = cliente.getPaquetePersonaje();

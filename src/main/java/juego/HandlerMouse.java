@@ -10,13 +10,13 @@ public class HandlerMouse implements MouseListener {
 
     /** The pos mouse. */
     private int posMouse[];
-    
+
     /** The pos mouse recorrido. */
     private int posMouseRecorrido[];
-    
+
     /** The nuevo recorrido. */
     private boolean nuevoRecorrido;
-    
+
     /** The nuevo click. */
     private boolean nuevoClick;
 
@@ -28,30 +28,25 @@ public class HandlerMouse implements MouseListener {
 	posMouseRecorrido = new int[2];
     }
 
-
     @Override
     public void mouseClicked(final MouseEvent e) {
 
     }
-
 
     @Override
     public void mouseEntered(final MouseEvent arg0) {
 
     }
 
-
     @Override
     public void mouseExited(final MouseEvent arg0) {
 
     }
 
-
     @Override
     public void mousePressed(final MouseEvent arg0) {
 
     }
-
 
     @Override
     public void mouseReleased(final MouseEvent e) {

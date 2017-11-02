@@ -6,12 +6,9 @@ import estados.Estado;
 import juego.Juego;
 
 /**
- * Clase Mundo
- * Encargada de cargar los recursos del mundo
- * a la pantalla.
- * Pasar las posiciones entre 2D a Isometricas
- * y biceversa
- * Caputrar las posiciones del click en el mapa
+ * Clase Mundo Encargada de cargar los recursos del mundo a la pantalla. Pasar
+ * las posiciones entre 2D a Isometricas y biceversa Caputrar las posiciones del
+ * click en el mapa
  */
 public class Mundo {
     private static final int AUBENOR_MAP = 3;
@@ -80,7 +77,8 @@ public class Mundo {
 		if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)) {
 		    int map = juego.getPersonaje().getMapa();
 		    if (map == 1) {
-			Tile.getAubenor()[Tile.getAubenorbase()].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+			Tile.getAubenor()[Tile.getAubenorbase()].graficar(g,
+				(int) (iso[0] - juego.getCamara().getxOffset()),
 				(int) (iso[1] - juego.getCamara().getyOffset() - DESPLAZAMIENTO_CAMARA), ANCHO_TILE,
 				ALTO_TILE);
 		    } else if (map == ARIS_MAP) {
@@ -88,7 +86,8 @@ public class Mundo {
 				(int) (iso[1] - juego.getCamara().getyOffset() - DESPLAZAMIENTO_CAMARA), ANCHO_TILE,
 				ALTO_TILE);
 		    } else if (map == AUBENOR_MAP) {
-			Tile.getAubenor()[Tile.getAubenorbase()].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+			Tile.getAubenor()[Tile.getAubenorbase()].graficar(g,
+				(int) (iso[0] - juego.getCamara().getxOffset()),
 				(int) (iso[1] - juego.getCamara().getyOffset() - DESPLAZAMIENTO_CAMARA), ANCHO_TILE,
 				ALTO_TILE);
 		    }
@@ -165,7 +164,7 @@ public class Mundo {
 	ancho = Utilitarias.parseInt(tokens[0]);
 	alto = Utilitarias.parseInt(tokens[1]);
 	spawnX = Utilitarias.parseInt(tokens[DOS]);
-	spawnY = Utilitarias.parseInt(tokens[3]);
+	spawnY = Utilitarias.parseInt(tokens[2 + 1]);
 
 	tiles = new int[ancho][alto];
 	tilesInv = new int[alto][ancho];
@@ -173,7 +172,7 @@ public class Mundo {
 	for (int y = 0; y < alto; y++) {
 	    for (int x = 0; x < ancho; x++) {
 
-		tiles[x][y] = Utilitarias.parseInt(tokens[(x + y * ancho + 4)]);
+		tiles[x][y] = Utilitarias.parseInt(tokens[(x + y * ancho + 2 + 2)]);
 		tilesInv[y][x] = tiles[x][y];
 	    }
 	}

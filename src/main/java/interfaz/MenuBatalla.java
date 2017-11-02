@@ -11,11 +11,28 @@ import recursos.Recursos;
 
 public class MenuBatalla {
 
-    private static final int x = 100;
-    private static final int y = 380;
-    private static final int anchoBoton = 40;
-    private static final int[][] botones = { { x + 48, y + 72 }, { x + 48, y + 146 }, { x + 221, y + 72 },
-	    { x + 221, y + 146 }, { x + 394, y + 72 }, { x + 394, y + 146 } };
+    private static final int ALTO_IMAGEN = 20;
+    private static final int Y_OFFSET_HABILIDAD_GEN2 = 168;
+    private static final int Y_OFFSET_HABILIDAD_GEN1 = 94;
+    private static final int X_OFFSET_HABILIDAD_GEN3 = 442;
+    private static final int X_OFFSET_HABILIDAD_GEN2 = 268;
+    private static final int X_OFFSET_HABILIDAD_GEN1 = 95;
+    private static final int TAM_FUENTE = 14;
+    private static final int CINCO = 5;
+    private static final int CUATRO = 4;
+    private static final int TRES = 3;
+    private static final int X_OFFSET_3 = 394;
+    private static final int X_OFFSET_2 = 221;
+    private static final int Y_OFFSET_2 = 146;
+    private static final int Y_OFFSET_1 = 72;
+    private static final int X_OFFSET_1 = 48;
+    private static final int ANCHO_BOTON = 40;
+    private static final int X = 100;
+    private static final int Y = 380;
+    private static final int ANCHOBOTON = ANCHO_BOTON;
+    private static final int[][] BOTONES = {{X + X_OFFSET_1, Y + Y_OFFSET_1 }, {X + X_OFFSET_1, Y + Y_OFFSET_2 },
+	    {X + X_OFFSET_2, Y + Y_OFFSET_1 }, {X + X_OFFSET_2, Y + Y_OFFSET_2 }, {X + X_OFFSET_3, Y + Y_OFFSET_1 },
+	    {X + X_OFFSET_3, Y + Y_OFFSET_2 } };
     private boolean habilitado;
     private Personaje personaje;
 
@@ -27,40 +44,42 @@ public class MenuBatalla {
     public void graficar(final Graphics g) {
 
 	if (habilitado) {
-	    g.drawImage(Recursos.getMenuBatalla(), x, y, null);
+	    g.drawImage(Recursos.getMenuBatalla(), X, Y, null);
 	} else {
-	    g.drawImage(Recursos.getMenuBatallaDeshabilitado(), x, y, null);
+	    g.drawImage(Recursos.getMenuBatallaDeshabilitado(), X, Y, null);
 	}
 
 	// Dibujo los botones
-	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesRaza()[0]), botones[0][0], botones[0][1],
-		anchoBoton, anchoBoton, null);
-	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesRaza()[1]), botones[1][0], botones[1][1],
-		anchoBoton, anchoBoton, null);
-	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesCasta()[0]), botones[2][0], botones[2][1],
-		anchoBoton, anchoBoton, null);
-	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesCasta()[1]), botones[3][0], botones[3][1],
-		anchoBoton, anchoBoton, null);
-	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesCasta()[2]), botones[4][0], botones[4][1],
-		anchoBoton, anchoBoton, null);
-	g.drawImage(Recursos.getHabilidades().get("Ser Energizado"), botones[5][0], botones[5][1], anchoBoton,
-		anchoBoton, null);
+	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesRaza()[0]), BOTONES[0][0], BOTONES[0][1],
+		ANCHOBOTON, ANCHOBOTON, null);
+	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesRaza()[1]), BOTONES[1][0], BOTONES[1][1],
+		ANCHOBOTON, ANCHOBOTON, null);
+	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesCasta()[0]), BOTONES[2][0], BOTONES[2][1],
+		ANCHOBOTON, ANCHOBOTON, null);
+	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesCasta()[1]), BOTONES[TRES][0],
+		BOTONES[TRES][1], ANCHOBOTON, ANCHOBOTON, null);
+	g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesCasta()[2]), BOTONES[CUATRO][0],
+		BOTONES[CUATRO][1], ANCHOBOTON, ANCHOBOTON, null);
+	g.drawImage(Recursos.getHabilidades().get("Ser Energizado"), BOTONES[CINCO][0], BOTONES[CINCO][1], ANCHOBOTON,
+		ANCHOBOTON, null);
 
 	// Dibujo las leyendas
-	g.setFont(new Font("Book Antiqua", 1, 14));
-	g.drawString(personaje.getHabilidadesRaza()[0], x + 95, y + 94);
-	g.drawString(personaje.getHabilidadesRaza()[1], x + 95, y + 168);
-	g.drawString(personaje.getHabilidadesCasta()[0], x + 268, y + 94);
-	g.drawString(personaje.getHabilidadesCasta()[1], x + 268, y + 168);
-	g.drawString(personaje.getHabilidadesCasta()[2], x + 442, y + 94);
-	g.drawString("Ser energizado", x + 442, y + 168);
+	g.setFont(new Font("Book Antiqua", 1, TAM_FUENTE));
+	g.drawString(personaje.getHabilidadesRaza()[0], X + X_OFFSET_HABILIDAD_GEN1, Y + Y_OFFSET_HABILIDAD_GEN1);
+	g.drawString(personaje.getHabilidadesRaza()[1], X + X_OFFSET_HABILIDAD_GEN1, Y + Y_OFFSET_HABILIDAD_GEN2);
+	g.drawString(personaje.getHabilidadesCasta()[0], X + X_OFFSET_HABILIDAD_GEN2, Y + Y_OFFSET_HABILIDAD_GEN1);
+	g.drawString(personaje.getHabilidadesCasta()[1], X + X_OFFSET_HABILIDAD_GEN2, Y + Y_OFFSET_HABILIDAD_GEN2);
+	g.drawString(personaje.getHabilidadesCasta()[2], X + X_OFFSET_HABILIDAD_GEN3, Y + Y_OFFSET_HABILIDAD_GEN1);
+	g.drawString("Ser energizado", X + X_OFFSET_HABILIDAD_GEN3, Y + Y_OFFSET_HABILIDAD_GEN2);
 
 	// Dibujo el turno de quien es
 	g.setColor(Color.WHITE);
 	if (habilitado) {
-	    Pantalla.centerString(g, new Rectangle(x, y + 5, Recursos.getMenuBatalla().getWidth(), 20), "Mi Turno");
+	    Pantalla.centerString(g, new Rectangle(X, Y + CINCO, Recursos.getMenuBatalla().getWidth(), ALTO_IMAGEN),
+		    "Mi Turno");
 	} else {
-	    Pantalla.centerString(g, new Rectangle(x, y + 5, Recursos.getMenuBatalla().getWidth(), 20), "Turno Rival");
+	    Pantalla.centerString(g, new Rectangle(X, Y + CINCO, Recursos.getMenuBatalla().getWidth(), ALTO_IMAGEN),
+		    "Turno Rival");
 	}
 
     }
@@ -69,9 +88,9 @@ public class MenuBatalla {
 	if (!habilitado) {
 	    return 0;
 	}
-	for (int i = 0; i < botones.length; i++) {
-	    if (mouseX >= botones[i][0] && mouseX <= botones[i][0] + anchoBoton && mouseY >= botones[i][1]
-		    && mouseY <= botones[i][1] + anchoBoton) {
+	for (int i = 0; i < BOTONES.length; i++) {
+	    if (mouseX >= BOTONES[i][0] && mouseX <= BOTONES[i][0] + ANCHOBOTON && mouseY >= BOTONES[i][1]
+		    && mouseY <= BOTONES[i][1] + ANCHOBOTON) {
 		return i + 1;
 	    }
 	}
@@ -79,8 +98,8 @@ public class MenuBatalla {
     }
 
     public boolean clickEnMenu(final int mouseX, final int mouseY) {
-	if (mouseX >= x && mouseX <= x + Recursos.getMenuBatalla().getWidth() && mouseY >= y
-		&& mouseY <= y + Recursos.getMenuBatalla().getHeight()) {
+	if (mouseX >= X && mouseX <= X + Recursos.getMenuBatalla().getWidth() && mouseY >= Y
+		&& mouseY <= Y + Recursos.getMenuBatalla().getHeight()) {
 	    return habilitado;
 	}
 	return false;

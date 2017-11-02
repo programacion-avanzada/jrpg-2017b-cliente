@@ -2,6 +2,7 @@ package mundo;
 
 public class Nodo {
 
+    private static final int CANT_NODOS = 8;
     private int x;
     private int y;
     private int indice;
@@ -19,7 +20,7 @@ public class Nodo {
 	this.y = y;
 	this.indice = indice;
 	cantidadDeAdyacentes = 0;
-	nodosAdyacentes = new Nodo[8];
+	nodosAdyacentes = new Nodo[CANT_NODOS];
     }
 
     /**

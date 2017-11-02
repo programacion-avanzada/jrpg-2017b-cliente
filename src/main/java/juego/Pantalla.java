@@ -60,26 +60,26 @@ public class Pantalla {
     public static VentanaContactos ventContac;
 
     /** The menu. */
-    public static JFrame menu;
+    private static JFrame menu;
 
     /** The gson. */
     private final Gson gson = new Gson();
 
     /**
      * Instantiates a new pantalla.
-     * @param NOMBRE the nombre
-     * @param ANCHO the ancho
-     * @param ALTO the alto
+     * @param nombre the nombre
+     * @param ancho the ancho
+     * @param alto the alto
      * @param cliente the cliente
      */
-    public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
-	pantalla = new JFrame(NOMBRE);
+    public Pantalla(final String nombre, final int ancho, final int alto, final Cliente cliente) {
+	pantalla = new JFrame(nombre);
 	pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 	pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 		new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0),
 		"custom cursor"));
 
-	pantalla.setSize(ANCHO, ALTO);
+	pantalla.setSize(ancho, alto);
 	pantalla.setResizable(false);
 	pantalla.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 	pantalla.addWindowListener(new WindowAdapter() {
@@ -133,9 +133,9 @@ public class Pantalla {
 	pantalla.setVisible(false);
 
 	canvas = new Canvas();
-	canvas.setPreferredSize(new Dimension(ANCHO, ALTO));
-	canvas.setMaximumSize(new Dimension(ANCHO, ALTO));
-	canvas.setMinimumSize(new Dimension(ANCHO, ALTO));
+	canvas.setPreferredSize(new Dimension(ancho, alto));
+	canvas.setMaximumSize(new Dimension(ancho, alto));
+	canvas.setMinimumSize(new Dimension(ancho, alto));
 	canvas.setFocusable(false);
 
 	pantalla.add(canvas);

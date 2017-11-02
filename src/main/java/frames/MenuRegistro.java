@@ -24,8 +24,10 @@ import javax.swing.JTextField;
 import cliente.Cliente;
 import mensajeria.Comando;
 
+// TODO: Auto-generated Javadoc
 public class MenuRegistro extends JFrame {
 
+    private static final int CANT_COL = 10;
     private static final int ALTO_MENU = 300;
     private static final int ANCHO_MENU = 450;
     private static final int Y_MENU = 100;
@@ -62,6 +64,10 @@ public class MenuRegistro extends JFrame {
     private JTextField txtUsuario;
     private JPasswordField pwPassword;
 
+    /**
+     * Instantiates a new menu registro.
+     * @param cliente the cliente
+     */
     public MenuRegistro(final Cliente cliente) {
 	setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 	setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
@@ -135,7 +141,7 @@ public class MenuRegistro extends JFrame {
 	});
 	txtUsuario.setBounds(X_TXT_USUARIO, Y_TXT_USUARIO, ANCHO_TXT_USUARIO, ALTO_TXT_USUARIO);
 	layeredPane.add(txtUsuario, new Integer(1));
-	txtUsuario.setColumns(10);
+	txtUsuario.setColumns(CANT_COL);
 
 	JLabel labelBackground = new JLabel("");
 	labelBackground.setBounds(0, 0, ANCHO_BACK, ALTO_BACK);
@@ -150,22 +156,42 @@ public class MenuRegistro extends JFrame {
 	});
     }
 
+    /**
+     * Gets the txt usuario.
+     * @return the txt usuario
+     */
     public JTextField gettxtUsuario() {
 	return txtUsuario;
     }
 
+    /**
+     * Sets the txt usuario.
+     * @param txtUsuario the new txt usuario
+     */
     public void settxtUsuario(final JTextField txtUsuario) {
 	this.txtUsuario = txtUsuario;
     }
 
+    /**
+     * Gets the password field.
+     * @return the password field
+     */
     public JPasswordField getPasswordField() {
 	return pwPassword;
     }
 
-    public void setPasswordField(final JPasswordField pwPassword) {
-	this.pwPassword = pwPassword;
+    /**
+     * Sets the password field.
+     * @param pwPasswordParam the new password field
+     */
+    public void setPasswordField(final JPasswordField pwPasswordParam) {
+	this.pwPassword = pwPasswordParam;
     }
 
+    /**
+     * Log in.
+     * @param cliente the cliente
+     */
     private void logIn(final Cliente cliente) {
 	synchronized (cliente) {
 	    cliente.getPaqueteUsuario().setUsername(txtUsuario.getText());

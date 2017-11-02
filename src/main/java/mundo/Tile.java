@@ -126,49 +126,49 @@ public class Tile {
      * @return the tiles
      */
     public static Tile[] getTiles() {
-        return tiles;
+	return tiles;
     }
 
     /**
      * @return the arisbase
      */
     public static int getArisbase() {
-        return ARISBASE;
+	return ARISBASE;
     }
 
     /**
      * @return the aubenorbase
      */
     public static int getAubenorbase() {
-        return AUBENORBASE;
+	return AUBENORBASE;
     }
 
     /**
      * @return the aubenor
      */
     public static Tile[] getAubenor() {
-        return aubenor;
+	return aubenor;
     }
 
     /**
      * @return the aris
      */
     public static Tile[] getAris() {
-        return aris;
+	return aris;
     }
 
     /**
      * @param aris the aris to set
      */
-    public static void setAris(Tile[] aris) {
-        Tile.aris = aris;
+    public static void setAris(final Tile[] aris) {
+	Tile.aris = aris;
     }
 
     /**
      * @param aubenor the aubenor to set
      */
-    public static void setAubenor(Tile[] aubenor) {
-        Tile.aubenor = aubenor;
+    public static void setAubenor(final Tile[] aubenor) {
+	Tile.aubenor = aubenor;
     }
 
 }
