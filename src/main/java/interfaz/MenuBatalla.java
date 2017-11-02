@@ -36,11 +36,18 @@ public class MenuBatalla {
     private boolean habilitado;
     private Personaje personaje;
 
+    /**
+     * @param habilitado parametro habilitado
+     * @param personaje	parametro personaje
+     */
     public MenuBatalla(final boolean habilitado, final Personaje personaje) {
 	this.habilitado = habilitado;
 	this.personaje = personaje;
     }
 
+    /**
+     * @param g parametro g
+     */
     public void graficar(final Graphics g) {
 
 	if (habilitado) {
@@ -84,6 +91,11 @@ public class MenuBatalla {
 
     }
 
+    /**
+     * @param mouseX 	parametro mouseX
+     * @param mouseY	parametro puseY
+     * @return	int
+     */
     public int getBotonClickeado(final int mouseX, final int mouseY) {
 	if (!habilitado) {
 	    return 0;
@@ -97,6 +109,11 @@ public class MenuBatalla {
 	return 0;
     }
 
+    /**
+     * @param mouseX	parametro mouseX
+     * @param mouseY	parametro mouseY
+     * @return	boolean
+     */
     public boolean clickEnMenu(final int mouseX, final int mouseY) {
 	if (mouseX >= X && mouseX <= X + Recursos.getMenuBatalla().getWidth() && mouseY >= Y
 		&& mouseY <= Y + Recursos.getMenuBatalla().getHeight()) {
@@ -105,6 +122,9 @@ public class MenuBatalla {
 	return false;
     }
 
+    /**
+     * @param b	parametro b
+     */
     public void setHabilitado(final boolean b) {
 	habilitado = b;
     }

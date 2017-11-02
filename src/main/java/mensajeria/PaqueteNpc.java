@@ -17,8 +17,8 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
     private String nombre;
     private String raza;
     private int id;
-    private int nivel = 1; // Se usaría solo como un indicador del poder del npc
-
+    private int nivel = 1; 
+    // Se usaría solo como un indicador del poder del npc
     // Por ahora la IA no usa estos stats, a futuro vemos que onda porque la que
     // hay ahora
     // es bastante cavernícola

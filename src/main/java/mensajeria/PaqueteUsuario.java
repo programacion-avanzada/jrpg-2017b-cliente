@@ -2,61 +2,119 @@ package mensajeria;
 
 import java.io.Serializable;
 
+/**
+ * Clase PaqueteUsuario
+ */
 public class PaqueteUsuario extends Paquete implements Serializable, Cloneable {
 
-    private int idPj;
-    private String username;
-    private String password;
-    private boolean inicioSesion;
+	private int idPj;
+	private String username;
+	private String password;
+	private boolean inicioSesion;
 
-    public PaqueteUsuario() {
+	/**
+	 * Constructor
+	 */
+	public PaqueteUsuario() {
 
-    }
+	}
 
-    public PaqueteUsuario(int pj, String user, String pw) {
-	idPj = pj;
-	username = user;
-	password = pw;
-	inicioSesion = false;
-    }
+	/**
+	 * Constructor parametrizado
+	 *
+	 * @param pj parametro pj
+	 * @param user parametro user
+	 * @param pw parametro pw
+	 */
+	public PaqueteUsuario(int pj, String user, String pw) {
+		idPj = pj;
+		username = user;
+		password = pw;
+		inicioSesion = false;
+	}
 
-    public int getIdPj() {
-	return idPj;
-    }
+	/**
+	 * Retorna el id
+	 *
+	 * @return idPj retorna idpj
+	 */
+	public int getIdPj() {
+		return idPj;
+	}
 
-    public void setIdPj(int idPj) {
-	this.idPj = idPj;
-    }
+	/**
+	 * Setea el id
+	 *
+	 * @param idPj parametro idpj
+	 */
+	public void setIdPj(int idPj) {
+		this.idPj = idPj;
+	}
 
-    public String getUsername() {
-	return username;
-    }
+	/**
+	 * Devuelve el nombre de usuario
+	 *
+	 * @return username retorna el nombre de usuario
+	 */
+	public String getUsername() {
+		return username;
+	}
 
-    public void setUsername(String username) {
-	this.username = username;
-    }
+	/**
+	 * Setea el nombre de usuario
+	 *
+	 * @param username parametro nombre de usuario
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getPassword() {
-	return password;
-    }
+	/**
+	 * Retorna el password
+	 *
+	 * @return password retorna el password
+	 */
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-	this.password = password;
-    }
+	/**
+	 * Setea el password
+	 *
+	 * @param password parametro password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public boolean isInicioSesion() {
-	return inicioSesion;
-    }
+	/**
+	 * Verifica si es inicio de sesion
+	 *
+	 * @return inicioSesion retorna el inicio de sesion
+	 */
+	public boolean isInicioSesion() {
+		return inicioSesion;
+	}
 
-    public void setInicioSesion(boolean inicioSesion) {
-	this.inicioSesion = inicioSesion;
-    }
+	/**
+	 * Setea el inicio de la sesion
+	 *
+	 * @param inicioSesion parametro inicioSesion
+	 */
+	public void setInicioSesion(boolean inicioSesion) {
+		this.inicioSesion = inicioSesion;
+	}
 
-    @Override
-    public Object clone() {
-	Object obj = null;
-	obj = super.clone();
-	return obj;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see mensajeria.Paquete#clone()
+	 */
+	@Override
+	public Object clone() {
+		Object obj = null;
+		obj = super.clone();
+		return obj;
+	}
 
 }

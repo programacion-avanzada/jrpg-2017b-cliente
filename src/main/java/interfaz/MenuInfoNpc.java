@@ -10,6 +10,9 @@ import juego.Pantalla;
 import mensajeria.PaqueteNpc;
 import recursos.Recursos;
 
+/**
+ *Clase MenuInfoNpc
+ */
 public class MenuInfoNpc {
 
     private static final int OFFSET_Y_CERRAR_MAX = 36;
@@ -48,12 +51,21 @@ public class MenuInfoNpc {
     private int y;
     private PaqueteNpc npc;
 
+    /**
+     * @param x parametro x
+     * @param y	parametro y
+     * @param npc	parametro npc
+     */
     public MenuInfoNpc(final int x, final int y, final PaqueteNpc npc) {
 	this.x = x;
 	this.y = y;
 	this.npc = npc;
     }
 
+    /**
+     * @param g parametro g
+     * @param tipoMenu	parametro tipoMenu
+     */
     public void graficar(final Graphics g, final int tipoMenu) {
 
 	// dibujo el menu
@@ -92,6 +104,9 @@ public class MenuInfoNpc {
 		LEYENDABOTON[tipoMenu]);
     }
 
+    /**
+     * @param g parametro g
+     */
     public void graficarMenuInformacion(final Graphics g) {
 
 	// muestro los nombres de los atributos

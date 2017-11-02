@@ -2,37 +2,73 @@ package mensajeria;
 
 import java.io.Serializable;
 
+/**
+ * Clase de final de la batalla
+ */
 public class PaqueteFinalizarBatalla extends Paquete implements Serializable, Cloneable {
 
-    private int id;
-    private int idEnemigo;
-    private int ganadorBatalla;
+	private int id;
+	private int idEnemigo;
+	private int ganadorBatalla;
 
-    public PaqueteFinalizarBatalla() {
-	setComando(Comando.FINALIZARBATALLA);
-    }
+	/**
+	 * Constructor de la clase
+	 */
+	public PaqueteFinalizarBatalla() {
+		setComando(Comando.FINALIZARBATALLA);
+	}
 
-    public int getId() {
-	return id;
-    }
+	/**
+	 * Retorna el id
+	 *
+	 * @return id
+	 */
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-	this.id = id;
-    }
+	/**
+	 * Setea el id
+	 *
+	 * @param id de la batalla
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public int getIdEnemigo() {
-	return idEnemigo;
-    }
+	/**
+	 * Retorna el id del enemigo
+	 *
+	 * @return idEnemigo
+	 */
+	public int getIdEnemigo() {
+		return idEnemigo;
+	}
 
-    public void setIdEnemigo(int idEnemigo) {
-	this.idEnemigo = idEnemigo;
-    }
+	/**
+	 * Setea el id del enemigo
+	 *
+	 * @param idEnemigo id del enemigo
+	 */
+	public void setIdEnemigo(int idEnemigo) {
+		this.idEnemigo = idEnemigo;
+	}
 
-    public int getGanadorBatalla() {
-	return ganadorBatalla;
-    }
+	/**
+	 * Devuelve el ganandor de la batalla
+	 *
+	 * @return ganadorBatalla
+	 */
+	public int getGanadorBatalla() {
+		return ganadorBatalla;
+	}
 
-    public void setGanadorBatalla(int ganadorBatalla) {
-	this.ganadorBatalla = ganadorBatalla;
-    }
+	/**
+	 * Setea el ganador de la batalla
+	 *
+	 * @param ganadorBatalla ganador de la batalla
+	 */
+	public void setGanadorBatalla(int ganadorBatalla) {
+		this.ganadorBatalla = ganadorBatalla;
+	}
 }

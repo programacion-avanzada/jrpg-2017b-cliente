@@ -8,6 +8,9 @@ import java.awt.image.BufferedImage;
 import dominio.NonPlayableCharacter;
 import recursos.Recursos;
 
+/**
+ *Clase EstadoDeNpc
+ */
 public class EstadoDeNpc {
 
     private static final int ALTO_BARRA_SALUD = 37;
@@ -28,11 +31,17 @@ public class EstadoDeNpc {
     private static final int ALTOMINIATURA = 64;
     private static final int ANCHOMINIATURA = 64;
 
+    /**
+     * @param g		parametro g
+     * @param x		parametro x
+     * @param y 	parametro y
+     * @param npc	parametro npc
+     * @param miniaturaPersonaje	parametro miniaturaPersonaje
+     */
     public static void dibujarEstadoDeNpc(final Graphics g, final int x, final int y, final NonPlayableCharacter npc,
 	    final BufferedImage miniaturaPersonaje) {
 
 	int drawBarra = 0;
-
 	g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
 
 	g.drawImage(miniaturaPersonaje, x + OFFSET_X_IMAGEN, y + OFFSET_Y_IMAGEN, ANCHOMINIATURA, ALTOMINIATURA, null);

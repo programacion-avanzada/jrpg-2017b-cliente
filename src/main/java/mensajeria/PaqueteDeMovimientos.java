@@ -3,27 +3,48 @@ package mensajeria;
 import java.io.Serializable;
 import java.util.Map;
 
+/**
+ * Clase PaqueteDeMovimientos
+ */
 public class PaqueteDeMovimientos extends Paquete implements Serializable, Cloneable {
 
-    private Map<Integer, PaqueteMovimiento> personajes;
+	private Map<Integer, PaqueteMovimiento> personajes;
 
-    public PaqueteDeMovimientos() {
+	/**
+	 * Constructor
+	 */
+	public PaqueteDeMovimientos() {
 
-    }
+	}
 
-    public PaqueteDeMovimientos(Map<Integer, PaqueteMovimiento> personajes) {
-	this.personajes = personajes;
-    }
+	/**
+	 * Asigna el objeto personajes
+	 * 
+	 * @param personajes mapa de personaje
+	 */
+	public PaqueteDeMovimientos(Map<Integer, PaqueteMovimiento> personajes) {
+		this.personajes = personajes;
+	}
 
-    public Map<Integer, PaqueteMovimiento> getPersonajes() {
-	return personajes;
-    }
+	/**
+	 * Devuelve el objeto personajes
+	 *
+	 * @return personajes
+	 */
+	public Map<Integer, PaqueteMovimiento> getPersonajes() {
+		return personajes;
+	}
 
-    @Override
-    public Object clone() {
-	Object obj = null;
-	obj = super.clone();
-	return obj;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see mensajeria.Paquete#clone()
+	 */
+	@Override
+	public Object clone() {
+		Object obj = null;
+		obj = super.clone();
+		return obj;
+	}
 
 }

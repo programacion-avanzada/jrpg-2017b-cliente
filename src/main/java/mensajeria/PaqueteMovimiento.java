@@ -2,82 +2,163 @@ package mensajeria;
 
 import java.io.Serializable;
 
+/**
+ * Clase PaqueteMovimiento
+ */
 public class PaqueteMovimiento extends Paquete implements Serializable, Cloneable {
 
-    private int id;
-    private float posX;
-    private float posY;
-    private int direccion;
-    private int frame;
+	private int id;
+	private float posX;
+	private float posY;
+	private int direccion;
+	private int frame;
 
-    public PaqueteMovimiento() {
-	setComando(Comando.MOVIMIENTO);
-    }
+	/**
+	 * Constructor
+	 */
+	public PaqueteMovimiento() {
+		setComando(Comando.MOVIMIENTO);
+	}
 
-    public PaqueteMovimiento(int idPersonaje) {
-	id = idPersonaje;
-	setComando(Comando.MOVIMIENTO);
-    }
+	/**
+	 * Constructor parametrizado
+	 *
+	 * @param idPersonaje parametro idPersonaje
+	 */
+	public PaqueteMovimiento(int idPersonaje) {
+		id = idPersonaje;
+		setComando(Comando.MOVIMIENTO);
+	}
 
-    public PaqueteMovimiento(int idPersonaje, float posX, float posY) {
-	this.id = idPersonaje;
-	this.posX = posX;
-	this.posY = posY;
-	setComando(Comando.MOVIMIENTO);
-    }
+	/**
+	 * Constructor parametrizado
+	 *
+	 * @param idPersonaje parametro idPersonaje
+	 * @param posX parametro posX
+	 * @param posY parametro posY
+	 */
+	public PaqueteMovimiento(int idPersonaje, float posX, float posY) {
+		this.id = idPersonaje;
+		this.posX = posX;
+		this.posY = posY;
+		setComando(Comando.MOVIMIENTO);
+	}
 
-    public PaqueteMovimiento(int idPersonaje, float posX, float posY, int direccion) {
-	this.id = idPersonaje;
-	this.posX = posX;
-	this.posY = posY;
-	this.direccion = direccion;
-	setComando(Comando.MOVIMIENTO);
-    }
+	/**
+	 * * Constructor parametrizado
+	 *
+	 * @param idPersonaje parametro idPersonaje
+	 * @param posX parametro posX
+	 * @param posY parametro posY
+	 * @param direccion parametro dirección
+	 */
+	public PaqueteMovimiento(int idPersonaje, float posX, float posY, int direccion) {
+		this.id = idPersonaje;
+		this.posX = posX;
+		this.posY = posY;
+		this.direccion = direccion;
+		setComando(Comando.MOVIMIENTO);
+	}
 
-    public int getIdPersonaje() {
-	return id;
-    }
+	/**
+	 * Retorna el id del personaje
+	 *
+	 * @return id
+	 */
+	public int getIdPersonaje() {
+		return id;
+	}
 
-    public void setIdPersonaje(int idPersonaje) {
-	this.id = idPersonaje;
-    }
+	/**
+	 * Setea el id del personaje
+	 *
+	 * @param idPersonaje parametro idPersonaje
+	 */
+	public void setIdPersonaje(int idPersonaje) {
+		this.id = idPersonaje;
+	}
 
-    public float getPosX() {
-	return posX;
-    }
+	/**
+	 * Retorna la posicion x
+	 *
+	 * @return posx
+	 */
+	public float getPosX() {
+		return posX;
+	}
 
-    public void setPosX(float posX) {
-	this.posX = posX;
-    }
+	/**
+	 * Setea la posicion x
+	 *
+	 * @param posX parametro posX
+	 */
+	public void setPosX(float posX) {
+		this.posX = posX;
+	}
 
-    public float getPosY() {
-	return posY;
-    }
+	/**
+	 * Retorna la posicion de Y
+	 *
+	 * @return posY
+	 */
+	public float getPosY() {
+		return posY;
+	}
 
-    public void setPosY(float posY) {
-	this.posY = posY;
-    }
+	/**
+	 * Setea la posicion Y
+	 *
+	 * @param posY parametro posY
+	 */
+	public void setPosY(float posY) {
+		this.posY = posY;
+	}
 
-    public int getDireccion() {
-	return direccion;
-    }
+	/**
+	 * Retorna la direccion
+	 *
+	 * @return direccion
+	 */
+	public int getDireccion() {
+		return direccion;
+	}
 
-    public void setDireccion(int direccion) {
-	this.direccion = direccion;
-    }
+	/**
+	 * Setea la direccion
+	 *
+	 * @param direccion parametro direccion
+	 */
+	public void setDireccion(int direccion) {
+		this.direccion = direccion;
+	}
 
-    public int getFrame() {
-	return frame;
-    }
+	/**
+	 * Retorna el Frame
+	 *
+	 * @return frame
+	 */
+	public int getFrame() {
+		return frame;
+	}
 
-    public void setFrame(int frame) {
-	this.frame = frame;
-    }
+	/**
+	 * Setea el Frame
+	 *
+	 * @param frame parametro frame
+	 */
+	public void setFrame(int frame) {
+		this.frame = frame;
+	}
 
-    @Override
-    public Object clone() {
-	Object obj = null;
-	obj = super.clone();
-	return obj;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see mensajeria.Paquete#clone()
+	 */
+	@Override
+	public Object clone() {
+		Object obj = null;
+		obj = super.clone();
+		return obj;
+	}
 }

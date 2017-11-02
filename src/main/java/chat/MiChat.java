@@ -32,53 +32,31 @@ import mensajeria.Comando;
 public class MiChat extends JFrame {
 
     private static final int ALTO_CHAT = 300;
-
     private static final int ANCHO_CHAT = 450;
-
     private static final int Y_CHAT = 100;
-
     private static final int X_CHAT = 100;
-
     private static final int ALTO_SCROLL = 201;
-
     private static final int ANCHO_SCROLL = 414;
-
     private static final int Y_SCROLL = 11;
-
     private static final int X_SCROLL = 10;
-
     private static final int ALTO_ENVIAR = 23;
-
     private static final int ANCHO_ENVIAR = 81;
-
     private static final int Y_ENVIAR = 225;
-
     private static final int X_ENVIAR = 334;
-
     private static final int ALTO_TEXTO = 27;
-
     private static final int ANCHO_TEXTO = 314;
-
     private static final int Y_TEXTO = 223;
-
     private static final int X_TEXTO = 10;
-
     private static final int COLUMNAS = 10;
-
     private static final int ALTO_BACK = 283;
-
     private static final int ANCHO_BACK = 480;
-
     private static final int X_BACK = -20;
-
     private static final int BORDE = 5;
-
+    
     private JPanel contentPane;
-
     private JTextField texto;
-
     private JTextArea chat;
-
+    
     private final Gson gson = new Gson();
     private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
 
