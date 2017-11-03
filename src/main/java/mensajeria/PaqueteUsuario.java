@@ -26,7 +26,7 @@ public class PaqueteUsuario extends Paquete implements Serializable, Cloneable {
 	 * @param user parametro user
 	 * @param pw parametro pw
 	 */
-	public PaqueteUsuario(int pj, String user, String pw) {
+	public PaqueteUsuario(final int pj, final String user, final String pw) {
 		idPj = pj;
 		username = user;
 		password = pw;
@@ -47,7 +47,7 @@ public class PaqueteUsuario extends Paquete implements Serializable, Cloneable {
 	 *
 	 * @param idPj parametro idpj
 	 */
-	public void setIdPj(int idPj) {
+	public void setIdPj(final int idPj) {
 		this.idPj = idPj;
 	}
 
@@ -65,7 +65,7 @@ public class PaqueteUsuario extends Paquete implements Serializable, Cloneable {
 	 *
 	 * @param username parametro nombre de usuario
 	 */
-	public void setUsername(String username) {
+	public void setUsername(final String username) {
 		this.username = username;
 	}
 
@@ -83,7 +83,7 @@ public class PaqueteUsuario extends Paquete implements Serializable, Cloneable {
 	 *
 	 * @param password parametro password
 	 */
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 
@@ -101,13 +101,13 @@ public class PaqueteUsuario extends Paquete implements Serializable, Cloneable {
 	 *
 	 * @param inicioSesion parametro inicioSesion
 	 */
-	public void setInicioSesion(boolean inicioSesion) {
+	public void setInicioSesion(final boolean inicioSesion) {
 		this.inicioSesion = inicioSesion;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see mensajeria.Paquete#clone()
 	 */
 	@Override

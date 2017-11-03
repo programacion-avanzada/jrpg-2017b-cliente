@@ -374,7 +374,7 @@ public class Entidad {
 		    // Me fijo si hizo click en alguno de los personajes
 		    Iterator<Integer> it = juego.getUbicacionPersonajes().keySet().iterator();
 		    int key;
-		    int[] tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
+		    int[] tileMovermeLocal = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
 			    posMouse[1] + juego.getCamara().getyOffset() - yOffset);
 		    PaqueteMovimiento actual;
 
@@ -388,7 +388,7 @@ public class Entidad {
 				&& juego.getPersonajesConectados().get(actual.getIdPersonaje())
 					.getEstado() == Estado.getEstadoJuego()) {
 
-			    if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
+			    if (tileMovermeLocal[0] == tilePersonajes[0] && tileMovermeLocal[1] == tilePersonajes[1]) {
 				idEnemigo = actual.getIdPersonaje();
 				float xY[] = Mundo.isoA2D(x, y);
 
