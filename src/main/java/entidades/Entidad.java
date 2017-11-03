@@ -424,7 +424,7 @@ public class Entidad {
 		if (!juego.getEstadoJuego().getHaySolicitud()) {
 		    Iterator<Integer> it = juego.getNpcManager().getEntidadesNpcs().keySet().iterator();
 		    int key;
-		    int[] tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
+		    int[] tileMovermeLocal = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
 			    posMouse[1] + juego.getCamara().getyOffset() - yOffset);
 		    Entidad actual;
 
@@ -434,7 +434,7 @@ public class Entidad {
 			tileNpc = Mundo.mouseATile(actual.getX(), actual.getY());
 
 			if (actual != null) {
-			    if (tileMoverme[0] == tileNpc[0] && tileMoverme[1] == tileNpc[1] && juego.getPaquetesNpcs()
+			    if (tileMovermeLocal[0] == tileNpc[0] && tileMovermeLocal[1] == tileNpc[1] && juego.getPaquetesNpcs()
 				    .get(actual.getIdEnemigo()).getEstado() == Estado.getEstadoJuego()) {
 				juego.getEstadoJuego().setHaySolicitud(true,
 					juego.getPaquetesNpcs().get(actual.getIdEnemigo()),
