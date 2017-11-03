@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 
 import dominio.Item;
 import estados.Estado;
-import sun.text.resources.cldr.es.FormatData_es_EC;
 
 /**
  * Clase PaquetePersonaje
@@ -55,7 +54,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param estado parametro estado
 	 */
-	public void setEstado(int estado) {
+	public void setEstado(final int estado) {
 		this.estado = estado;
 	}
 
@@ -73,7 +72,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param mapa parametro mapa
 	 */
-	public void setMapa(int mapa) {
+	public void setMapa(final int mapa) {
 		idMapa = mapa;
 	}
 
@@ -91,7 +90,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param nivel parametro nivel
 	 */
-	public void setNivel(int nivel) {
+	public void setNivel(final int nivel) {
 		this.nivel = nivel;
 	}
 
@@ -109,7 +108,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param experiencia parametro experiencia
 	 */
-	public void setExperiencia(int experiencia) {
+	public void setExperiencia(final int experiencia) {
 		this.experiencia = experiencia;
 	}
 
@@ -127,7 +126,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param id parametro id
 	 */
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
@@ -145,7 +144,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param casta parametro casta
 	 */
-	public void setCasta(String casta) {
+	public void setCasta(final String casta) {
 		this.casta = casta;
 	}
 
@@ -163,7 +162,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param nombre parametro nombre
 	 */
-	public void setNombre(String nombre) {
+	public void setNombre(final String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -181,7 +180,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param raza parametro raza
 	 */
-	public void setRaza(String raza) {
+	public void setRaza(final String raza) {
 		this.raza = raza;
 	}
 
@@ -199,7 +198,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param saludTope parametro saludoTope
 	 */
-	public void setSaludTope(int saludTope) {
+	public void setSaludTope(final int saludTope) {
 		this.saludTope = saludTope;
 	}
 
@@ -217,7 +216,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param energiaTope parametro energia tope
 	 */
-	public void setEnergiaTope(int energiaTope) {
+	public void setEnergiaTope(final int energiaTope) {
 		this.energiaTope = energiaTope;
 	}
 
@@ -235,7 +234,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param fuerza parametro fuerza
 	 */
-	public void setFuerza(int fuerza) {
+	public void setFuerza(final int fuerza) {
 		this.fuerza = fuerza;
 	}
 
@@ -253,7 +252,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param destreza parametro destreza
 	 */
-	public void setDestreza(int destreza) {
+	public void setDestreza(final int destreza) {
 		this.destreza = destreza;
 	}
 
@@ -271,13 +270,13 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param inteligencia parametro inteligencia
 	 */
-	public void setInteligencia(int inteligencia) {
+	public void setInteligencia(final int inteligencia) {
 		this.inteligencia = inteligencia;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see mensajeria.Paquete#clone()
 	 */
 	@Override
@@ -288,11 +287,11 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	}
 
 	/**
-	 * AÒade item
+	 * AÔøΩade item
 	 *
 	 * @param i parametro item
 	 */
-	public final void anadirItem(Item i) {
+	public final void anadirItem(final Item i) {
 		items.add(i);
 	}
 
@@ -301,7 +300,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param i parametro item
 	 */
-	public final void removerItem(Item i) {
+	public final void removerItem(final Item i) {
 		items.remove(i);
 	}
 
@@ -319,7 +318,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param items parametro items
 	 */
-	public final void setItems(ArrayList<Item> items) {
+	public final void setItems(final ArrayList<Item> items) {
 		this.items = items;
 	}
 
@@ -329,15 +328,15 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 * @param index parametro index
 	 * @return items.get(index).getIdItem
 	 */
-	public final int getItemID(int index) {
+	public final int getItemID(final int index) {
 		return items.get(index).getIdItem();
 	}
 
 	/**
-	 * Subrutina de AÒade item
+	 * Subrutina de AÔøΩade item
 	 *
 	 * @param idItem parametro idItem
-	 * @param nombreI parametro nombre
+	 * @param nombre parametro nombre
 	 * @param wearLocation parametro wearLocation
 	 * @param bonusSalud parametro bonusSalud
 	 * @param bonusEnergia parametro bonusEnergia
@@ -347,15 +346,18 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 * @param foto parametro foto
 	 * @param fotoEquipado parametro fotoEquipado
 	 */
-	public final void anadirItem(int idItem, String nombre, int wearLocation, int bonusSalud, int bonusEnergia,
-			int bonusAtaque, int bonusDefensa, int bonusMagia, String foto, String fotoEquipado) {
+	public final void anadirItem(final int idItem,final  String nombre, final int wearLocation,
+			final int bonusSalud, final int bonusEnergia,
+			final int bonusAtaque, final int bonusDefensa, final int bonusMagia,
+			final String foto, final String fotoEquipado) {
 		try {
-			items.add(new Item(idItem, nombre, wearLocation, bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa,
+			items.add(new Item(idItem, nombre, wearLocation, bonusSalud,
+					bonusEnergia, bonusAtaque, bonusDefensa,
 					bonusMagia, foto, fotoEquipado));
-			useBonus(bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa, bonusMagia);
-		} catch (IOException e) {
+			useBonus(bonusSalud, bonusEnergia, bonusAtaque,
+					bonusDefensa, bonusMagia);
+		} catch (final IOException e) {
 			JOptionPane.showMessageDialog(null, "Fall√≥ al a√±adir item");
-
 		}
 	}
 
@@ -366,8 +368,11 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		// Intente usar un iterator y por alguna raz√≥n no andaba..
 		int i = 0;
 		while (i < items.size()) {
-			sacarBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
-					items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+			sacarBonus(items.get(i).getBonusSalud(),
+					items.get(i).getBonusEnergia(),
+					items.get(i).getBonusFuerza(),
+					items.get(i).getBonusDestreza(),
+					items.get(i).getBonusInteligencia());
 			i++;
 		}
 	}
@@ -377,8 +382,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 */
 	public final int getFuerzaItems() {
 		int fuerzaStat = 0;
-
-		for (Item item : items) {
+		for (final Item item : items) {
 			fuerzaStat += item.getBonusFuerza();
 		}
 		return fuerzaStat;
@@ -390,7 +394,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public final int getDestrezaItem() {
 		int destrezaItem = 0;
 
-		for (Item item : items) {
+		for (final Item item : items) {
 			destrezaItem += item.getBonusDestreza();
 		}
 		return destrezaItem;
@@ -402,7 +406,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public final int getInteligenciaItem() {
 		int inteligenciaItem = 0;
 
-		for (Item item : items) {
+		for (final Item item : items) {
 			inteligenciaItem += item.getBonusInteligencia();
 		}
 		return inteligenciaItem;
@@ -410,41 +414,49 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	/**
 	 * Retira bonus
-	 * 
+	 *
 	 * @param bonusSalud parametro bonusSalud
 	 * @param bonusEnergia parametro bonusEnergia
 	 * @param bonusAtaque parametro bonusAtaque
 	 * @param bonusDefensa parametro bonusDefensa
 	 * @param bonusMagia parametro bonusMagia
 	 */
-	public final void sacarBonus(int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia) {
+	public final void sacarBonus(final int bonusSalud, final int bonusEnergia,
+			final int bonusAtaque, final int bonusDefensa, final int bonusMagia) {
 		saludTope -= bonusSalud;
 		energiaTope -= bonusEnergia;
 		fuerza -= bonusAtaque;
 		destreza -= bonusDefensa;
 		inteligencia -= bonusMagia;
 	}
-
+	
+	/**
+	 * Coloca los bonus
+	 */
 	public final void ponerBonus() {
 		// Intente usar un iterator y por alguna raz√≥n no andaba..
 		int i = 0;
 		while (i < items.size()) {
-			useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
-					items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+			useBonus(items.get(i).getBonusSalud(),
+					items.get(i).getBonusEnergia(),
+					items.get(i).getBonusFuerza(),
+					items.get(i).getBonusDestreza(),
+					items.get(i).getBonusInteligencia());
 			i++;
 		}
 	}
 
 	/**
-	 * Ssar Bonus
-	 * 
+	 * Usar Bonus
+	 *
 	 * @param bonusSalud parametro bonusSalud
 	 * @param bonusEnergia parametro bonusEnergia
 	 * @param bonusAtaque parametro bonusAtaque
 	 * @param bonusDefensa parametro bonusDefensa
 	 * @param bonusMagia parametro bonusMagia
 	 */
-	public void useBonus(int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia) {
+	public void useBonus(final int bonusSalud, final int bonusEnergia,
+			final int bonusAtaque, final int bonusDefensa, final int bonusMagia) {
 		saludTope += bonusSalud;
 		energiaTope += bonusEnergia;
 		fuerza += bonusAtaque;
@@ -460,14 +472,14 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	}
 
 	/**
-	 * AÒade items
+	 * AÔøΩade items
 	 *
 	 * @param idItem parametro idItem
 	 */
-	public void anadirItem(int idItem) {
+	public void anadirItem(final int idItem) {
 		try {
 			items.add(new Item(idItem, null, 0, 0, 0, 0, 0, 0, null, null));
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			JOptionPane.showMessageDialog(null, "Fall√≥ al a√±adir item");
 		}
 
@@ -502,13 +514,14 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	/**
 	 * @param cantItems cantidad de items
 	 */
-	public void ponerBonus(int cantItems) {
+	public void ponerBonus(final int cantItems) {
 		int i = 0;
 		while (i < cantItems) {
-			useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
-					items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+			useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(),
+					items.get(i).getBonusFuerza(), items.get(i).getBonusDestreza(),
+					items.get(i).getBonusInteligencia());
 			i++;
-			// **SI HAS LLEGADO HASTA AC¡ TE HACE FALTA M¡S CAFE**//
+			// **SI HAS LLEGADO HASTA ACÔøΩ TE HACE FALTA MÔøΩS CAFE**//
 		}
 	}
 
@@ -516,10 +529,11 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 * Saca ultimo items
 	 */
 	public void sacarUltimoItem() {
-		int i = items.size() - 1;
+		final int i = items.size() - 1;
 		if (i >= 0) {
-			sacarBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
-					items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+			sacarBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(),
+					items.get(i).getBonusFuerza(), items.get(i).getBonusDestreza(),
+					items.get(i).getBonusInteligencia());
 		}
 	}
 
@@ -527,7 +541,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 * Pone ultimo item
 	 */
 	public void ponerUltimoItem() {
-		int i = items.size() - 1;
+		final int i = items.size() - 1;
 		if (i >= 0) {
 			useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
 					items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
@@ -543,19 +557,19 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	/**
 	 * Actualiza Trueque
-	 * 
-	 * @param items items
+	 *
+	 * @param itemsBis items
 	 */
-	public void actualizarTrueque(ArrayList<Item> items) {
+	public void actualizarTrueque(final ArrayList<Item> itemsBis) {
 		this.items.removeAll(this.items);
-		for (Item item : items) {
+		for (final Item item : itemsBis) {
 			this.items.add(item);
 		}
 	}
 
 	/**
 	 * Retorna puntos Skill
-	 * 
+	 *
 	 * @return puntos Skill
 	 */
 	public int getPuntosSkill() {
@@ -564,14 +578,14 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	/**
 	 * Setea puntos Skill
-	 * 
+	 *
 	 * @param puntosSkill puntos Skill
 	 */
-	public void setPuntosSkill(int puntosSkill) {
+	public void setPuntosSkill(final int puntosSkill) {
 		this.puntosSkill = puntosSkill;
 	}
 }
 /*
- * POR FIN 
+ * POR FIN
  * http://www.topito.com/wp-content/uploads/2013/01/code-21.gif
  */

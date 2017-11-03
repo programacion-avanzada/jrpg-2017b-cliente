@@ -14,10 +14,10 @@ public abstract class Estado {
     private static Estado estadoActual = null;
     private static final int ESTADO_BATALLA_NPC = 3;
     // Tipo de estados
-    private static int estadoOffline = 0;
-    private static int estadoJuego = 1;
-    private static int estadoBatalla = 2;
-    private static int estadoBatallaNpc = ESTADO_BATALLA_NPC;
+    public static int estadoOffline = 0;
+    public static int estadoJuego = 1;
+    public static int estadoBatalla = 2;
+    public static int estadoBatallaNpc = ESTADO_BATALLA_NPC;
 
     protected Juego juego;
 
