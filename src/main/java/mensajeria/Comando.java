@@ -9,13 +9,20 @@ public abstract class Comando {
 	// Nombre del paquete donde se encuentran las clases con las
 	// responsabilidades
 	public static final String NOMBREPAQUETE = "comandos";
-	public static final String[] CLASSNAMES = { "Conexion", "CrearPersonaje", "Desconectar", "InicioSesion",
-			"MostrarMapas", "Movimiento", "Registro", "Salir", "Batalla", "Atacar", "FinalizarBatalla",
-			"ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio",
+	public static final String[] CLASSNAMES = {
+			"Conexion", "CrearPersonaje",
+			"Desconectar", "InicioSesion",
+			"MostrarMapas", "Movimiento", "Registro", "Salir",
+			"Batalla", "Atacar", "FinalizarBatalla",
+			"ActualizarPersonaje", "ActualizarPersonajeLvl",
+			"ActualizarInventario", "Comercio", "ActualizarComercio",
 			"Trueque", "ActualizarTrueque", "Talk", "ActualizarNpcs" };
-	public static final String[] CLASSNAMESBIS = { "Conexion", "CrearPersonaje", "Desconectar", "InicioSesionSet",
-			"MostrarMapas", "Movimiento", "RegistroSet", "SalirSet", "Batalla", "Atacar", "FinalizarBatalla",
-			"ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio",
+	public static final String[] CLASSNAMESBIS = {
+			"Conexion", "CrearPersonaje", "Desconectar",
+			"InicioSesionSet","MostrarMapas", "Movimiento",
+			"RegistroSet", "SalirSet", "Batalla", "Atacar",
+			"FinalizarBatalla","ActualizarPersonaje", "ActualizarPersonajeLvl",
+			"ActualizarInventario", "Comercio", "ActualizarComercio",
 			"Trueque", "ActualizarTrueque", "Talk", "ActualizarNpcs" };
 
 	public static final int CONEXION = 0;
@@ -44,11 +51,11 @@ public abstract class Comando {
 
 	/**
 	 * Setea la cadena leida
-	 * 
-	 * @param cadenaLeida cadena leida
+	 *
+	 * @param cadenaLeidaBis cadena leida
 	 */
-	public void setCadena(final String cadenaLeida) {
-		this.cadenaLeida = cadenaLeida;
+	public void setCadena(final String cadenaLeidaBis) {
+		this.cadenaLeida = cadenaLeidaBis;
 	}
 
 	/**
