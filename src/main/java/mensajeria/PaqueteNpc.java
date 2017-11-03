@@ -17,7 +17,7 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
     private String nombre;
     private String raza;
     private int id;
-    private int nivel = 1; 
+    private int nivel = 1;
     // Se usaría solo como un indicador del poder del npc
     // Por ahora la IA no usa estos stats, a futuro vemos que onda porque la que
     // hay ahora
@@ -43,8 +43,10 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
      * @param raza raza del NPC
      * @param casta casta del NPC
      */
-    public PaqueteNpc(final int id, final int saludTope, final int energiaTope, final int fuerza, final int destreza,
-	    final int inteligencia, final int nivel, final int experienciaOtorga, final String nombre,
+    public PaqueteNpc(final int id, final int saludTope, final int energiaTope,
+    		final int fuerza, final int destreza,
+	    final int inteligencia, final int nivel,
+	    final int experienciaOtorga, final String nombre,
 	    final String raza, final String casta) {
 	super();
 	this.id = id;
@@ -69,7 +71,8 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
      * @param raza raza del NPC
      * @param casta casta del NPC
      */
-    public PaqueteNpc(final int id, final int nivel, final String nombre, final String raza, final String casta) {
+    public PaqueteNpc(final int id, final int nivel, final String nombre,
+    		final String raza, final String casta) {
 	super();
 	this.id = id;
 	this.nivel = nivel;

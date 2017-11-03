@@ -25,7 +25,7 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 	 *
 	 * @param idPersonaje parametro idPersonaje
 	 */
-	public PaqueteMovimiento(int idPersonaje) {
+	public PaqueteMovimiento(final int idPersonaje) {
 		id = idPersonaje;
 		setComando(Comando.MOVIMIENTO);
 	}
@@ -37,7 +37,7 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 	 * @param posX parametro posX
 	 * @param posY parametro posY
 	 */
-	public PaqueteMovimiento(int idPersonaje, float posX, float posY) {
+	public PaqueteMovimiento(final int idPersonaje, final float posX, final float posY) {
 		this.id = idPersonaje;
 		this.posX = posX;
 		this.posY = posY;
@@ -50,9 +50,9 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 	 * @param idPersonaje parametro idPersonaje
 	 * @param posX parametro posX
 	 * @param posY parametro posY
-	 * @param direccion parametro dirección
+	 * @param direccion parametro direcciï¿½n
 	 */
-	public PaqueteMovimiento(int idPersonaje, float posX, float posY, int direccion) {
+	public PaqueteMovimiento(final int idPersonaje, final float posX, final float posY, final int direccion) {
 		this.id = idPersonaje;
 		this.posX = posX;
 		this.posY = posY;
@@ -74,7 +74,7 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 	 *
 	 * @param idPersonaje parametro idPersonaje
 	 */
-	public void setIdPersonaje(int idPersonaje) {
+	public void setIdPersonaje(final int idPersonaje) {
 		this.id = idPersonaje;
 	}
 
@@ -92,7 +92,7 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 	 *
 	 * @param posX parametro posX
 	 */
-	public void setPosX(float posX) {
+	public void setPosX(final float posX) {
 		this.posX = posX;
 	}
 
@@ -110,7 +110,7 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 	 *
 	 * @param posY parametro posY
 	 */
-	public void setPosY(float posY) {
+	public void setPosY(final float posY) {
 		this.posY = posY;
 	}
 
@@ -128,7 +128,7 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 	 *
 	 * @param direccion parametro direccion
 	 */
-	public void setDireccion(int direccion) {
+	public void setDireccion(final int direccion) {
 		this.direccion = direccion;
 	}
 
@@ -146,13 +146,13 @@ public class PaqueteMovimiento extends Paquete implements Serializable, Cloneabl
 	 *
 	 * @param frame parametro frame
 	 */
-	public void setFrame(int frame) {
+	public void setFrame(final int frame) {
 		this.frame = frame;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see mensajeria.Paquete#clone()
 	 */
 	@Override
