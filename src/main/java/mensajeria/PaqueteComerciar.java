@@ -39,7 +39,7 @@ public class PaqueteComerciar extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param solicitudDeComercio parametro solicitudDeComercio
 	 */
-	public void setSolicitudDeComercio(boolean solicitudDeComercio) {
+	public void setSolicitudDeComercio(final boolean solicitudDeComercio) {
 		this.solicitudDeComercio = solicitudDeComercio;
 	}
 
@@ -57,7 +57,7 @@ public class PaqueteComerciar extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param itemsADar parametros itemsADar
 	 */
-	public void setItemsADar(ArrayList<Item> itemsADar) {
+	public void setItemsADar(final ArrayList<Item> itemsADar) {
 		this.itemsADar = itemsADar;
 	}
 
@@ -75,7 +75,7 @@ public class PaqueteComerciar extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param id parametros id
 	 */
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
@@ -93,13 +93,13 @@ public class PaqueteComerciar extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param idEnemigo parametros idEnemigo
 	 */
-	public void setIdEnemigo(int idEnemigo) {
+	public void setIdEnemigo(final int idEnemigo) {
 		this.idEnemigo = idEnemigo;
 	}
 
 	/**
 	 * Retorna si esta listo
-	 * 
+	 *
 	 * @return listo
 	 */
 	public int getListo() {
@@ -134,7 +134,7 @@ public class PaqueteComerciar extends Paquete implements Serializable, Cloneable
 	 *
 	 * @param itemsAObtener parametros ItemsAObtener
 	 */
-	public void setItemsAObtener(ArrayList<Item> itemsAObtener) {
+	public void setItemsAObtener(final ArrayList<Item> itemsAObtener) {
 		this.itemsAObtener = itemsAObtener;
 	}
 }
