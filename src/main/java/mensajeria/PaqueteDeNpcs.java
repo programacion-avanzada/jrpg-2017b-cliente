@@ -20,18 +20,19 @@ public class PaqueteDeNpcs extends Paquete implements Serializable, Cloneable {
 
 	/**
 	 * Constructor parametrizado
-	 * 
+	 *
 	 * @param paquetesNpcs paquete Npcs
-	 * @param ubicacioNpcs ubicaciónNpcs
+	 * @param ubicacioNpcs ubicacion Npcs
 	 */
-	public PaqueteDeNpcs(Map<Integer, PaqueteNpc> paquetesNpcs, Map<Integer, PaqueteMovimiento> ubicacionNpcs) {
+	public PaqueteDeNpcs(final Map<Integer, PaqueteNpc> paquetesNpcs,
+			final Map<Integer, PaqueteMovimiento> ubicacionNpcs) {
 		this.ubicacionNpcs = ubicacionNpcs;
 		this.paquetesNpcs = paquetesNpcs;
 	}
 
 	/**
-	 * Devuenve ubicación del Npcs
-	 * 
+	 * Devuenve ubicaciï¿½n del Npcs
+	 *
 	 * @return ubicacionNpcs
 	 */
 	public Map<Integer, PaqueteMovimiento> getUbicacionNpcs() {
@@ -39,15 +40,15 @@ public class PaqueteDeNpcs extends Paquete implements Serializable, Cloneable {
 	}
 
 	/**
-	 * Setea ubicación del Npcs
-	 * 
-	 * @param ubicacionNpcs ubicación del Npcs
+	 * Setea ubicaciï¿½n del Npcs
+	 *
+	 * @param ubicacionNpcs ubicacion del Npcs
 	 */
-	public void setUbicacionNpcs(Map<Integer, PaqueteMovimiento> ubicacionNpcs) {
+	public void setUbicacionNpcs(final Map<Integer, PaqueteMovimiento> ubicacionNpcs) {
 		this.ubicacionNpcs = ubicacionNpcs;
 	}
 
-	/**Devuelve paqueteNpcs 
+	/**Devuelve paqueteNpcs
 	 * @return paquetesNpcs
 	 */
 	public Map<Integer, PaqueteNpc> getPaquetesNpcs() {
@@ -56,16 +57,16 @@ public class PaqueteDeNpcs extends Paquete implements Serializable, Cloneable {
 
 	/**
 	 * Setea paquete de Npcs
-	 * 
+	 *
 	 * @param paquetesNpcs paquete Npcs
 	 */
-	public void setPaquetesNpcs(Map<Integer, PaqueteNpc> paquetesNpcs) {
+	public void setPaquetesNpcs(final Map<Integer, PaqueteNpc> paquetesNpcs) {
 		this.paquetesNpcs = paquetesNpcs;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see mensajeria.Paquete#clone()
 	 */
 	@Override

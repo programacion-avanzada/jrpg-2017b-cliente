@@ -121,25 +121,24 @@ public class EstadoDePersonaje {
 
 		int drawBarra = 0;
 		g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
-		g.drawImage(miniaturaPersonaje, x + TAM_TEXTO, y +
-				OFFSET_MINIATURA_Y, ANCHOMINIATURA, ALTOMINIATURA, null);
+		g.drawImage(miniaturaPersonaje, x + TAM_TEXTO,
+				y + OFFSET_MINIATURA_Y, ANCHOMINIATURA, ALTOMINIATURA, null);
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Tahoma", Font.PLAIN, TAM_TEXTO));
-		g.drawImage(Recursos.getBarraSalud(), x + OFFSET_X_BARRA, y +
-				OFFSET_Y_BARRA, ANCHOBARRA, ALTOSALUD, null);
-		g.drawString(String.valueOf(personaje.getSaludTope()) + " / " +
-				String.valueOf(personaje.getSaludTope()),
+		g.drawImage(Recursos.getBarraSalud(), x + OFFSET_X_BARRA,
+				y + OFFSET_Y_BARRA, ANCHOBARRA, ALTOSALUD, null);
+		g.drawString(String.valueOf(personaje.getSaludTope()) 
+				+ " / " + String.valueOf(personaje.getSaludTope()),
 				x + X_OFFSET_BARRA_GEN, y + Y_OFFSET_BARRA_GEN);
 
-		g.drawImage(Recursos.getBarraEnergia(), x + OFFSET_X_BARRA, y +
-				OFFSET_Y_BARRA_ENER, ANCHOBARRA, ALTOENERGIA,
-				null);
-		g.drawString(String.valueOf(personaje.getEnergiaTope()) +
-				" / " + String.valueOf(personaje.getEnergiaTope()),
+		g.drawImage(Recursos.getBarraEnergia(), x + OFFSET_X_BARRA,
+				y + OFFSET_Y_BARRA_ENER, ANCHOBARRA, ALTOENERGIA, null);
+		g.drawString(String.valueOf(personaje.getEnergiaTope())
+				+" / " + String.valueOf(personaje.getEnergiaTope()),
 				x + X_OFFSET_BARRA_GEN, y + OFFSET_Y_BARRA_ENE);
 
-		if (personaje.getExperiencia() ==
-				Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
+		if (personaje.getExperiencia() 
+				== Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
 			drawBarra = ANCHOBARRA;
 		} else {
 			drawBarra = (personaje.getExperiencia() * ANCHOBARRA)
