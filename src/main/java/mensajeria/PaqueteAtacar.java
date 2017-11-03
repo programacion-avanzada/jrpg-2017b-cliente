@@ -14,12 +14,12 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 	private int nuevaEnergiaPersonaje;
 	private int nuevaSaludEnemigo;
 	private int nuevaEnergiaEnemigo;
-	private HashMap<String, Number> mapPersonaje = new HashMap<String, Number>();
-	private HashMap<String, Number> mapEnemigo = new HashMap<String, Number>();
+	private final HashMap<String, Number> mapPersonaje = new HashMap<String, Number>();
+	private final HashMap<String, Number> mapEnemigo = new HashMap<String, Number>();
 
 	/**
 	 * Constructor parametrizado
-	 * 
+	 *
 	 * @param id id personaje personaje
 	 * @param idEnemigo id del enemigo
 	 * @param nuevaSalud nueva salud personaje
@@ -29,11 +29,11 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 	 * @param nuevaDefensa nueva defensa personaje
 	 * @param nuevaDefensaEnemigo nueva defensa enemigo
 	 * @param probEvitarDano probabilidad de evitar danio
-	 * @param probEvitarDanoEnemgio probabilidad de evitar daño del enemigo
+	 * @param probEvitarDanoEnemgio probabilidad de evitar daï¿½o del enemigo
 	 */
-	public PaqueteAtacar(int id, int idEnemigo, int nuevaSalud, int nuevaEnergia, int nuevaSaludEnemigo,
-			int nuevaEnergiaEnemigo, int nuevaDefensa, int nuevaDefensaEnemigo, double probEvitarDano,
-			double probEvitarDanoEnemgio) {
+	public PaqueteAtacar(final int id, final int idEnemigo, final int nuevaSalud, final int nuevaEnergia, final int nuevaSaludEnemigo,
+			final int nuevaEnergiaEnemigo, final int nuevaDefensa, final int nuevaDefensaEnemigo, final double probEvitarDano,
+			final double probEvitarDanoEnemgio) {
 		setComando(Comando.ATACAR);
 		this.id = id;
 		this.idEnemigo = idEnemigo;
@@ -53,7 +53,7 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 
 	/**
 	 * Retorna el id del personaje
-	 * 
+	 *
 	 * @return id
 	 */
 	public int getId() {
@@ -62,16 +62,16 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 
 	/**
 	 * Setea el id
-	 * 
+	 *
 	 * @param id
 	 */
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
 	/**
 	 * Retorna el id del enemigo
-	 * 
+	 *
 	 * @return id del enemigo
 	 */
 	public int getIdEnemigo() {
@@ -80,10 +80,10 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 
 	/**
 	 * Setea el id del enemigo
-	 * 
+	 *
 	 * @param idEnemigo id del enemigo
 	 */
-	public void setIdEnemigo(int idEnemigo) {
+	public void setIdEnemigo(final int idEnemigo) {
 		this.idEnemigo = idEnemigo;
 	}
 
@@ -99,9 +99,9 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 	/**
 	 * Asigna nueva salud personaje. <br>
 	 *
-	 * @param newSaludPersonaje Valor con nueva salud del personaje. <br>
+	 * @param nuevaSaludPersonaje Valor con nueva salud del personaje. <br>
 	 */
-	public void setNuevaSaludPersonaje(int nuevaSaludPersonaje) {
+	public void setNuevaSaludPersonaje(final int nuevaSaludPersonaje) {
 		this.nuevaSaludPersonaje = nuevaSaludPersonaje;
 	}
 
@@ -117,9 +117,9 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 	/**
 	 * Asigna nueva energia personaje. <br>
 	 *
-	 * @param newEnergiaPersonaje Valor con nueva energia del personaje. <br>
+	 * @param nuevaEnergiaPersonaje Valor con nueva energia del personaje. <br>
 	 */
-	public void setNuevaEnergiaPersonaje(int nuevaEnergiaPersonaje) {
+	public void setNuevaEnergiaPersonaje(final int nuevaEnergiaPersonaje) {
 		this.nuevaEnergiaPersonaje = nuevaEnergiaPersonaje;
 	}
 
@@ -135,9 +135,9 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 	/**
 	 * Asigna nueva salud enemigo. <br>
 	 *
-	 * @param newSaludEnemigo Valor con nueva salud del enemigo. <br>
+	 * @param nuevaSaludEnemigo Valor con nueva salud del enemigo. <br>
 	 */
-	public void setNuevaSaludEnemigo(int nuevaSaludEnemigo) {
+	public void setNuevaSaludEnemigo(final int nuevaSaludEnemigo) {
 		this.nuevaSaludEnemigo = nuevaSaludEnemigo;
 	}
 
@@ -153,15 +153,15 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 	/**
 	 * Asigna nueva energia enemigo. <br>
 	 *
-	 * @param newEnergiaEnemigo Valor con nueva energia del enemigo. <br>
+	 * @param nuevaEnergiaEnemigo Valor con nueva energia del enemigo. <br>
 	 */
-	public void setNuevaEnergiaEnemigo(int nuevaEnergiaEnemigo) {
+	public void setNuevaEnergiaEnemigo(final int nuevaEnergiaEnemigo) {
 		this.nuevaEnergiaEnemigo = nuevaEnergiaEnemigo;
 	}
 
 	/**
 	 * Obtiene map personaje.
-	 * 
+	 *
 	 * @return map personaje
 	 */
 	public HashMap<String, Number> getMapPersonaje() {
