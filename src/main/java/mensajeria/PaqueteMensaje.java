@@ -22,16 +22,18 @@ public class PaqueteMensaje extends Paquete implements Serializable, Cloneable {
 	 *
 	 * @return msj
 	 */
+	@Override
 	public String getMensaje() {
 		return msj;
 	}
 
 	/**
 	 * Asigna mensaje
-	 * 
+	 *
 	 * @param mensaje a asignar
 	 */
-	public void setMensaje(String mensaje) {
+	@Override
+	public void setMensaje(final String mensaje) {
 		this.msj = mensaje;
 	}
 
@@ -43,19 +45,34 @@ public class PaqueteMensaje extends Paquete implements Serializable, Cloneable {
 	public String getUserEmisor() {
 		return userEmisor;
 	}
-
-	public void setUserEmisor(String idEmisor) {
+	
+	/**
+	 * Setea el usuario emisor con el id
+	 * @param idEmisor id del emisor del mensaje
+	 */
+	public void setUserEmisor(final String idEmisor) {
 		this.userEmisor = idEmisor;
 	}
-
+	
+	/**
+	 * Retorna el usuario receptor
+	 * 
+	 * @return userreceptor
+	 */
 	public String getUserReceptor() {
 		return userReceptor;
 	}
 
-	public void setUserReceptor(String idReceptor) {
+	/**
+	 * Setea el usuario receptor
+	 * 
+	 * @param idReceptor id del usuario receptor
+	 */
+	public void setUserReceptor(final String idReceptor) {
 		this.userReceptor = idReceptor;
 	}
 
+	@Override
 	public Object clone() {
 		Object obj = null;
 		obj = super.clone();
