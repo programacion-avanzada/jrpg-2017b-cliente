@@ -346,7 +346,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 * @param foto parametro foto
 	 * @param fotoEquipado parametro fotoEquipado
 	 */
-	public final void anadirItem(final int idItem,final  String nombre, final int wearLocation,
+	public final void anadirItem(final int idItem, final  String nombre, final int wearLocation,
 			final int bonusSalud, final int bonusEnergia,
 			final int bonusAtaque, final int bonusDefensa, final int bonusMagia,
 			final String foto, final String fotoEquipado) {
@@ -540,10 +540,14 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	/**
 	 * Pone ultimo item
 	 */
+	/**
+	 * 
+	 */
 	public void ponerUltimoItem() {
 		final int i = items.size() - 1;
 		if (i >= 0) {
-			useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
+			useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(),
+					items.get(i).getBonusFuerza(),
 					items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
 		}
 	}
