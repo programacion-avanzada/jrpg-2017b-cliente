@@ -19,9 +19,9 @@ public abstract class Comando {
 			"Trueque", "ActualizarTrueque", "Talk", "ActualizarNpcs" };
 	public static final String[] CLASSNAMESBIS = {
 			"Conexion", "CrearPersonaje", "Desconectar",
-			"InicioSesionSet","MostrarMapas", "Movimiento",
+			"InicioSesionSet", "MostrarMapas", "Movimiento",
 			"RegistroSet", "SalirSet", "Batalla", "Atacar",
-			"FinalizarBatalla","ActualizarPersonaje", "ActualizarPersonajeLvl",
+			"FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl",
 			"ActualizarInventario", "Comercio", "ActualizarComercio",
 			"Trueque", "ActualizarTrueque", "Talk", "ActualizarNpcs" };
 

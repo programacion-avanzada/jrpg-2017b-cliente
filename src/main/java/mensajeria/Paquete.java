@@ -5,7 +5,9 @@ import java.io.Serializable;
 import javax.swing.JOptionPane;
 
 /**
- * Clase Paquete
+ *
+ * Clase utiilzada para identificar a que paquete se hace referencia.
+ *
  */
 public class Paquete implements Serializable, Cloneable {
 
@@ -15,127 +17,98 @@ public class Paquete implements Serializable, Cloneable {
 	private String mensaje;
 	private String ip;
 	private int comando;
-
-	/**
-	 * Constructor Paquete
-	 */
 	public Paquete() {
 
 	}
-
-	/**
-	 * 
-	 * Constructor parametrizado
-	 * 
-	 * @param mensaje parametros mensaje
-	 * @param nick parametros nick
-	 * @param ip parametros ip
-	 * @param comando parametro comando
-	 */
-	public Paquete(String mensaje, String nick, String ip, int comando) {
+/**
+ * constructor parametrizado de la clase personaje
+ * @param mensaje
+ * @param nick
+ * @param ip
+ * @param comando
+ */
+	public Paquete(final String mensaje, final String nick, final String ip, final int comando) {
 		this.mensaje = mensaje;
 		this.ip = ip;
 		this.comando = comando;
 	}
-
-	/**
-	 * Constructor parametrizado
-	 * 
-	 * @param mensajeparametro mensaje
-	 * @param comando parametro comando
-	 */
-	public Paquete(String mensaje, int comando) {
+/**
+ * contructor parametrizado de la clase Personaeje
+ * @param mensaje
+ * @param comando
+ */
+	public Paquete(final String mensaje, final int comando) {
 		this.mensaje = mensaje;
 		this.comando = comando;
 	}
-
-	/**
-	 * Constructor parametrizado
-	 * 
-	 * @param comando comando
-	 */
-	public Paquete(int comando) {
+/**
+ * contrcutor parametrizado de la clase Personaje
+ * @param comando
+ */
+	public Paquete(final int comando) {
 		this.comando = comando;
 	}
-
-	/**
-	 * Setea el mensaje
-	 * 
-	 * @param mensaje mensaje
-	 */
-	public void setMensaje(String mensaje) {
+/**
+ * setea el atributo mensaje
+ * @param mensaje
+ */
+	public void setMensaje(final String mensaje) {
 		this.mensaje = mensaje;
 	}
-
-	/**
-	 * Setea el ip
-	 * 
-	 * @param ip parametro ip
-	 */
-	public void setIp(String ip) {
+/**
+ * setea el atributo IP
+ * @param ip
+ */
+	public void setIp(final String ip) {
 		this.ip = ip;
 	}
-
-	/**
-	 * Setea el comando
-	 * 
-	 * @param comando comando
-	 */
-	public void setComando(int comando) {
+/**
+ * setea el atributo comando
+ * @param comando
+ */
+	public void setComando(final int comando) {
 		this.comando = comando;
 	}
-
-	/**
-	 * Retorna el mensaje
-	 * 
-	 * @return mensaje
-	 */
+/**
+ * devuelve una cadena con el mensaje
+ * @return mensaje
+ */
 	public String getMensaje() {
 		return mensaje;
 	}
 
-	/**
-	 * Retorna el ip
-	 * 
-	 * @return ip
-	 */
+/**
+ * devuelve la IP
+ * @return ip
+ */
 	public String getIp() {
 		return ip;
 	}
-
-	/**
-	 * Retorna el comando
-	 * 
-	 * @return comando
-	 */
+/**
+ * devuelve el atributo Comando
+ * @return comando
+ */
 	public int getComando() {
 		return comando;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#clone()
-	 */
 	@Override
 	public Object clone() {
 		Object obj = null;
 		try {
 			obj = super.clone();
-		} catch (CloneNotSupportedException ex) {
+		} catch (final CloneNotSupportedException ex) {
 			JOptionPane.showMessageDialog(null, "Error al clonar");
 
 		}
 		return obj;
 	}
-
 	/**
-	 * Retorna el objeto
-	 *
-	 * @param nombrePaquete parametro nombrePaquete
-	 * @returnc
+	 * devuelve un objeto Comando
+	 * @param nombrePaquete
+	 * @return c
 	 */
-	public Comando getObjeto(String nombrePaquete) {
+	public Comando getObjeto(final String nombrePaquete) {
 		try {
 			Comando c;
 			c = (Comando) Class.forName(nombrePaquete + "." + Comando.CLASSNAMES[comando]).newInstance();
@@ -145,15 +118,13 @@ public class Paquete implements Serializable, Cloneable {
 		}
 
 	}
-
 	/**
-	 * Retorna el objeto seteado
-	 *
-	 * @param nombrePaquete parametro nombrePaquete
-	 * @param accion parametro accion
+	 * devuelve un objeto Comando
+	 * @param nombrePaquete
+	 * @param accion
 	 * @return c
 	 */
-	public static Comando getObjetoSet(String nombrePaquete, int accion) {
+	public static Comando getObjetoSet(final String nombrePaquete, final int accion) {
 		try {
 			Comando c;
 			c = (Comando) Class.forName(nombrePaquete + "." + Comando.CLASSNAMESBIS[accion]).newInstance();
@@ -163,5 +134,6 @@ public class Paquete implements Serializable, Cloneable {
 		}
 
 	}
+
 
 }

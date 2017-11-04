@@ -31,7 +31,7 @@ import mundo.Mundo;
 import recursos.Recursos;
 
 /**
- * Estado de batalla 
+ * Estado de batalla
  * Puede ser contra otro cliente
  */
 public class EstadoBatalla extends Estado {
@@ -52,25 +52,25 @@ public class EstadoBatalla extends Estado {
     private static final int HABLIDIAD_3 = 3;
     private static final int Y_OFFSET = 150;
     private static final int X_OFFSET = -350;
-    private Mundo mundo;
+    private final Mundo mundo;
     private Personaje personaje;
     private Personaje enemigo;
     private int[] posMouse;
-    private PaquetePersonaje paquetePersonaje;
-    private PaquetePersonaje paqueteEnemigo;
+    private final PaquetePersonaje paquetePersonaje;
+    private final PaquetePersonaje paqueteEnemigo;
     private PaqueteAtacar paqueteAtacar;
-    private PaqueteFinalizarBatalla paqueteFinalizarBatalla;
+    private final PaqueteFinalizarBatalla paqueteFinalizarBatalla;
     private boolean miTurno;
 
     private boolean haySpellSeleccionada;
     private boolean seRealizoAccion;
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
-    private BufferedImage miniaturaPersonaje;
-    private BufferedImage miniaturaEnemigo;
+    private final BufferedImage miniaturaPersonaje;
+    private final BufferedImage miniaturaEnemigo;
 
-    private MenuBatalla menuBatalla;
+    private final MenuBatalla menuBatalla;
 
     /**
      * Instantiates a new estado batalla.
@@ -285,7 +285,7 @@ public class EstadoBatalla extends Estado {
     public void enviarAtaque(final PaqueteAtacar paqueteAtacarParam) {
 	try {
 	    juego.getCliente().getSalida().writeObject(gson.toJson(paqueteAtacarParam));
-	} catch (IOException e) {
+	} catch (final IOException e) {
 	    JOptionPane.showMessageDialog(null, "Fallo la conexion con el servidor.");
 	}
     }
@@ -325,7 +325,7 @@ public class EstadoBatalla extends Estado {
 	    juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 	    juego.getCliente().getSalida().writeObject(gson.toJson(paqueteEnemigo));
 
-	} catch (IOException e) {
+	} catch (final IOException e) {
 	    JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
 	}
     }
