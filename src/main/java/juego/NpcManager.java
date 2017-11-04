@@ -149,7 +149,7 @@ public class NpcManager {
 		// Gracias Lucas por tanto, perdón por tan poco.
 		puedoSpawnear = true;
 		posX = random.nextInt(mundo.obtenerAncho() - RANDOM_LIMITE) + OFFSET_RANDOM;
-		posY = random.nextInt(mundo.obtenerAlto() - RANDOM_LIMITE) + 13;
+		posY = random.nextInt(mundo.obtenerAlto() - RANDOM_LIMITE) + OFFSET_RANDOM;
 		// tile = mundo.getTile(posX, posY);
 
 		for (int j = -1; j < 2; j++) {
@@ -242,7 +242,8 @@ public class NpcManager {
 		coords = Mundo.dosDaIso(actualUbicacion.getPosX(), actualUbicacion.getPosY());
 
 		// System.out.println(actualUbicacion.getDireccion());
-		Entidad ente = new Entidad(juego, mundo, ANCHO_ENTIDAD, ALTO_ENTIDAD, actualNpc.getNombre(), coords[0], coords[1],
+		Entidad ente = new Entidad(juego, mundo, ANCHO_ENTIDAD,
+			ALTO_ENTIDAD, actualNpc.getNombre(), coords[0], coords[1],
 			Recursos.getPersonaje().get(actualNpc.getRaza()), VEL_ANIMACION);
 		ente.setIdEnemigo(key);
 		ente.setDireccion(actualUbicacion.getDireccion());
