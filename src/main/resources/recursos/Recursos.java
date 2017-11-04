@@ -30,7 +30,7 @@ public class Recursos {
     private static final int SPRITE_DER = 4;
     private static final int SPRITE_ARRIBA_DER = 3;
     private static final int SPRITE_ARRIBA = 2;
-    private static int eLEMENTOS = 65;
+    private static int ELEMENTOS = 65;
     private static int aNCHOBARRA = 345;
     private static final int TAM_BUFFER_IMAGE = SPRITE_DER;
 
@@ -382,7 +382,7 @@ public class Recursos {
 		for (int x = 0; x < TAM_FILAS_SOLIDEZ; x++) {
 		    Tile.getAubenor()[y * TAM_FILAS_SOLIDEZ + x + 1] = new Tile(
 			    mapaAubenor.getTile(x * ANCHO_TILE, y * ALTO_TILE, ANCHO_TILE, ALTO_TILE),
-			    y * TAM_FILAS_SOLIDEZ + x + 1, solidezAubenor[y][x], ANCHO_TILE, 64);
+			    y * TAM_FILAS_SOLIDEZ + x + 1, solidezAubenor[y][x], ANCHO_TILE, ALTO_TILE);
 		}
 	    }
 	} else {
@@ -481,7 +481,7 @@ public class Recursos {
      * @param menuCarga frame del menu de carga
      */
     private static void actualizarBarraDeCarga(final int elementosCargados, final MenuCarga menuCarga) {
-	menuCarga.setBarraCargando(elementosCargados * aNCHOBARRA / eLEMENTOS);
+	menuCarga.setBarraCargando(elementosCargados * aNCHOBARRA / ELEMENTOS);
     }
 
     /**
