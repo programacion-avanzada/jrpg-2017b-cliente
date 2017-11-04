@@ -31,9 +31,11 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 	 * @param probEvitarDano probabilidad de evitar danio
 	 * @param probEvitarDanoEnemgio probabilidad de evitar da�o del enemigo
 	 */
-	public PaqueteAtacar(final int id, final int idEnemigo, final int nuevaSalud, final int nuevaEnergia, final int nuevaSaludEnemigo,
-			final int nuevaEnergiaEnemigo, final int nuevaDefensa, final int nuevaDefensaEnemigo, final double probEvitarDano,
-			final double probEvitarDanoEnemgio) {
+	public PaqueteAtacar(final int id, final int idEnemigo,
+			final int nuevaSalud, final int nuevaEnergia,
+			final int nuevaSaludEnemigo, final int nuevaEnergiaEnemigo,
+			final int nuevaDefensa, final int nuevaDefensaEnemigo,
+			final double probEvitarDano, final double probEvitarDanoEnemgio) {
 		setComando(Comando.ATACAR);
 		this.id = id;
 		this.idEnemigo = idEnemigo;
@@ -63,7 +65,7 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 	/**
 	 * Setea el id
 	 *
-	 * @param id
+	 * @param id id a setear
 	 */
 	public void setId(final int id) {
 		this.id = id;
