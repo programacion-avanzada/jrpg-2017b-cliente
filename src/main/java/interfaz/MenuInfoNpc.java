@@ -47,9 +47,9 @@ public class MenuInfoNpc {
     private static final String[] LEYENDABOTON = {"Batallar", "Volver", "Aceptar", "Aceptar", "Aceptar", "Aceptar",
 	    "Comerciar" };
 
-    private int x;
-    private int y;
-    private PaqueteNpc npc;
+    private final int x;
+    private final int y;
+    private final PaqueteNpc npc;
 
     /**
      * @param x parametro x
@@ -136,16 +136,35 @@ public class MenuInfoNpc {
      * 320); }
      */
 
+
+    /**
+     *
+     * @param mouseX posicion x del puntero
+     * @param mouseY posicion y del puntero
+     * @return retorna si la posicion del click corresponde a la del boton
+     */
     public boolean clickEnBoton(final int mouseX, final int mouseY) {
 	return (mouseX >= x + OFFSET_X && mouseX <= x + MOUSE_MAX_X && mouseY >= y + OFFSET_Y
 		&& mouseY <= y + MOUSE_MAX_Y);
     }
 
+    /**
+     *
+     * @param mouseX posicion x del puntero
+     * @param mouseY posicion Y del puntero
+     * @return retorna si la posicion del click corresponde a la del boton cerrar
+     */
     public boolean clickEnCerrar(final int mouseX, final int mouseY) {
 	return (mouseX >= x + MENU.getWidth() - OFFSET_X_CERRAR && mouseX <= x + MENU.getWidth() + OFFSET_MAX_CERRAR
 		&& mouseY >= y + OFFSET_Y_CERRAR && mouseY <= y + OFFSET_Y_CERRAR_MAX);
     }
 
+    /**
+    *
+    * @param mouseX posicion x del puntero
+    * @param mouseY posicion Y del puntero
+    * @return retorna si la posicion del click corresponde a la del boton menu
+    */
     public boolean clickEnMenu(final int mouseX, final int mouseY) {
 	return (mouseX >= x && mouseX <= x + MENU.getWidth() && mouseY >= y && mouseY <= y + MENU.getHeight());
     }
