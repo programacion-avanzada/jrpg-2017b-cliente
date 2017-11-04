@@ -30,7 +30,7 @@ public class PaqueteBatalla extends Paquete implements Serializable, Cloneable {
 	 *
 	 * @param id establece la id de la batalla
 	 */
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 	/**
@@ -46,7 +46,7 @@ public class PaqueteBatalla extends Paquete implements Serializable, Cloneable {
 	 *
 	 * @param idEnemigo establece la id del enemigo
 	 */
-	public void setIdEnemigo(int idEnemigo) {
+	public void setIdEnemigo(final int idEnemigo) {
 		this.idEnemigo = idEnemigo;
 	}
 	/**
@@ -62,7 +62,7 @@ public class PaqueteBatalla extends Paquete implements Serializable, Cloneable {
 	 * Setea mi turno
 	 * @param miTurno determina turno de jugador
 	 */
-	public void setMiTurno(boolean miTurno) {
+	public void setMiTurno(final boolean miTurno) {
 		this.miTurno = miTurno;
 	}
 }

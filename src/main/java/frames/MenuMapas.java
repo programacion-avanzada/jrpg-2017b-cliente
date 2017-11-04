@@ -24,7 +24,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLayeredPane;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+/**
+ * Clase MenuMapas
+ *
+ */
 public class MenuMapas extends JFrame {
     private static final int ALTO_MENU_MAPA = 300;
     private static final int ANCHO_MENU_MAPA = 450;
@@ -61,8 +64,12 @@ public class MenuMapas extends JFrame {
     private static final int ALTO_BACK = 271;
     private static final int ANCHO_BACK = 444;
     private static int numberMap = 0;
-    private JPanel contentPane;
+    private final JPanel contentPane;
 
+    /**
+     * Constructor por parametro de MenuMapas
+     * @param cliente cliente sobre el cual crea el menu
+     */
     public MenuMapas(final Cliente cliente) {
 	addKeyListener(new KeyAdapter() {
 	    @Override
@@ -105,38 +112,38 @@ public class MenuMapas extends JFrame {
 	setLocationRelativeTo(null);
 	setResizable(false);
 
-	JLayeredPane layeredPane = new JLayeredPane();
+	final JLayeredPane layeredPane = new JLayeredPane();
 	layeredPane.setBounds(0, 0, ANCHO_PANE, ALTO_PANE);
 	contentPane.add(layeredPane);
 
 	// Mapa Aris
-	JLabel lblAris = new JLabel("Aris");
+	final JLabel lblAris = new JLabel("Aris");
 	lblAris.setBounds(X_LB_ARIS, Y_LB_ARIS, ANCHO_LB_ARIS, ALTO_LB_ARIS);
 	layeredPane.add(lblAris, new Integer(2));
 	lblAris.setForeground(Color.WHITE);
 	lblAris.setFont(new Font("Tahoma", Font.PLAIN, TAM_TXT));
 
 	// Mapa Aubenor
-	JLabel lblAubenor = new JLabel("Aubenor");
+	final JLabel lblAubenor = new JLabel("Aubenor");
 	lblAubenor.setBounds(X_LB_AUBENOR, Y_LB_AUBENOR, ANCHO_LB_AUBENOR, ALTO_LB_AUBENOR);
 	layeredPane.add(lblAubenor, new Integer(2));
 	lblAubenor.setForeground(Color.WHITE);
 	lblAubenor.setFont(new Font("Tahoma", Font.PLAIN, TAM_TXT));
 
 	// Mapa Eodrim
-	JLabel lblEodrim = new JLabel("Eodrim");
+	final JLabel lblEodrim = new JLabel("Eodrim");
 	lblEodrim.setBounds(X_LB_EODRIN, Y_LB_EODRIN, ANCHO_LB_EODRIN, ALTO_LB_EODRIN);
 	layeredPane.add(lblEodrim, new Integer(2));
 	lblEodrim.setForeground(Color.WHITE);
 	lblEodrim.setFont(new Font("Tahoma", Font.PLAIN, TAM_TXT));
 
-	JButton btnAubenor = new JButton("");
+	final JButton btnAubenor = new JButton("");
 	btnAubenor.setBounds(X_BTN_AUBENOR, Y_BTN_AUBENOR, ANCHO_BTN_AUBENOR, ALTO_BTN_AUBENOR);
 	layeredPane.add(btnAubenor, new Integer(1));
 	btnAubenor.setFocusable(false);
 	btnAubenor.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
 
-	JButton btnEodrim = new JButton("");
+	final JButton btnEodrim = new JButton("");
 	btnEodrim.setBounds(X_BTN_ENDORIN, Y_BTN_EODRIN, ANCHO_BTN_EODRIN, ALTO_BTN_EODRIN);
 	layeredPane.add(btnEodrim, new Integer(1));
 	btnEodrim.setFocusable(false);
@@ -155,7 +162,7 @@ public class MenuMapas extends JFrame {
 
 	btnEodrim.setEnabled(false);
 
-	JButton btnAris = new JButton("");
+	final JButton btnAris = new JButton("");
 	btnAris.setBounds(X_BTN_ARIS, Y_BTN_ARIS, ANCHO_BTN_ARIS, ALTO_BTN_ARIS);
 	layeredPane.add(btnAris, new Integer(1));
 	btnAris.setFocusable(false);
@@ -174,7 +181,7 @@ public class MenuMapas extends JFrame {
 
 	btnAris.setEnabled(true);
 
-	JLabel lblBackground = new JLabel("");
+	final JLabel lblBackground = new JLabel("");
 	lblBackground.setBounds(0, 0, ANCHO_BACK, ALTO_BACK);
 	layeredPane.add(lblBackground, new Integer(0));
 	lblBackground.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/menuBackground.jpg")));

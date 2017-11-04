@@ -62,13 +62,13 @@ public class MenuStats extends JFrame {
     private static final int COL1_BTN_GENERICO = 251;
     private static final int ANCHO_BTN_GENERICO = 77;
     private static final int ALTO_BTN_GENERICO = 16;
-    private JPanel contentPane;
-    private PaquetePersonaje paquetePersonaje;
+    private final JPanel contentPane;
+    private final PaquetePersonaje paquetePersonaje;
     private final double mod = 1.5;
 
     /**
      * Create the frame.
-     * @param cliente
+     * @param cliente cliente sobre el cual construye el menu
      */
     public MenuStats(final Cliente cliente) {
 	paquetePersonaje = cliente.getPaquetePersonaje();
@@ -95,168 +95,168 @@ public class MenuStats extends JFrame {
 	BufferedImage imagenFondo = null;
 	try {
 	    imagenFondo = ImageIO.read(new File("recursos//background.jpg"));
-	} catch (IOException e) {
+	} catch (final IOException e) {
 	    JOptionPane.showMessageDialog(null, "No se pudo cargar el fondo");
 
 	}
 
-	JLabel lblNombre = new JLabel("Nombre");
+	final JLabel lblNombre = new JLabel("Nombre");
 	lblNombre.setForeground(Color.WHITE);
 	lblNombre.setBounds(COL4_BTN_GENERICO, FIL6_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblNombre);
 
-	JLabel lblCasta = new JLabel("Casta");
+	final JLabel lblCasta = new JLabel("Casta");
 	lblCasta.setForeground(Color.WHITE);
 	lblCasta.setBounds(COL4_BTN_GENERICO, FIL5_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblCasta);
 
-	JLabel lblRaza = new JLabel("Raza");
+	final JLabel lblRaza = new JLabel("Raza");
 	lblRaza.setForeground(Color.WHITE);
 	lblRaza.setBounds(COL4_BTN_GENERICO, FIL7_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblRaza);
 
-	JLabel lblNivel = new JLabel("Nivel");
+	final JLabel lblNivel = new JLabel("Nivel");
 	lblNivel.setForeground(Color.WHITE);
 	lblNivel.setBounds(COL3_BTN_GENERICO, FIL6_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblNivel);
 
-	JLabel lblExperiencia = new JLabel("Experiencia");
+	final JLabel lblExperiencia = new JLabel("Experiencia");
 	lblExperiencia.setForeground(Color.WHITE);
 	lblExperiencia.setBounds(COL3_BTN_GENERICO, FIL5_BTN_GENERICO, ANCHO3_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblExperiencia);
 
-	JLabel lblEnergia = new JLabel("Energia");
+	final JLabel lblEnergia = new JLabel("Energia");
 	lblEnergia.setForeground(Color.WHITE);
 	lblEnergia.setBounds(COL3_BTN_GENERICO, FIL4_BTN_GENERICO, ANCHO2_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblEnergia);
 
-	JLabel lblSalud = new JLabel("Salud");
+	final JLabel lblSalud = new JLabel("Salud");
 	lblSalud.setForeground(Color.WHITE);
 	lblSalud.setBounds(COL4_BTN_GENERICO, FIL4_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblSalud);
 
-	JLabel lblFuerza = new JLabel("Fuerza");
+	final JLabel lblFuerza = new JLabel("Fuerza");
 	lblFuerza.setForeground(Color.WHITE);
 	lblFuerza.setBounds(COL4_BTN_GENERICO, FIL3_BTN_GENERICO, ANCHO2_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblFuerza);
 
-	JLabel lblDestreza = new JLabel("Destreza");
+	final JLabel lblDestreza = new JLabel("Destreza");
 	lblDestreza.setForeground(Color.WHITE);
 	lblDestreza.setBounds(COL4_BTN_GENERICO, FIL2_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblDestreza);
 
-	JLabel lblInteligencia = new JLabel("Inteligencia");
+	final JLabel lblInteligencia = new JLabel("Inteligencia");
 	lblInteligencia.setForeground(Color.WHITE);
 	lblInteligencia.setBounds(COL4_BTN_GENERICO, FIL1_BTN_GENERICO, ANCHO3_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblInteligencia);
 
-	JLabel lblAtaque = new JLabel("Ataque");
+	final JLabel lblAtaque = new JLabel("Ataque");
 	lblAtaque.setForeground(Color.WHITE);
 	lblAtaque.setBounds(COL3_BTN_GENERICO, FIL3_BTN_GENERICO, ANCHO2_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblAtaque);
 
-	JLabel lblDefensa = new JLabel("Defensa");
+	final JLabel lblDefensa = new JLabel("Defensa");
 	lblDefensa.setForeground(Color.WHITE);
 	lblDefensa.setBounds(COL3_BTN_GENERICO, FIL2_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblDefensa);
 
-	JLabel lblMagia = new JLabel("Magia");
+	final JLabel lblMagia = new JLabel("Magia");
 	lblMagia.setForeground(Color.WHITE);
 	lblMagia.setBounds(COL3_BTN_GENERICO, FIL1_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lblMagia);
 
-	JLabel lblCantidadDeItems = new JLabel("Cantidad de Items");
+	final JLabel lblCantidadDeItems = new JLabel("Cantidad de Items");
 	lblCantidadDeItems.setForeground(Color.WHITE);
 	lblCantidadDeItems.setBounds(COL4_BTN_GENERICO, Y_LB_CANTINTEM, ANCHO_LB_CANTITEM, ALTO_BTN_GENERICO);
 	contentPane.add(lblCantidadDeItems);
 
-	JLabel nmbPj = new JLabel(paquetePersonaje.getNombre());
+	final JLabel nmbPj = new JLabel(paquetePersonaje.getNombre());
 	nmbPj.setForeground(Color.WHITE);
 	nmbPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	nmbPj.setBounds(COL2_BTN_GENERICO, FIL6_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(nmbPj);
 
-	JLabel cstPj = new JLabel(paquetePersonaje.getCasta());
+	final JLabel cstPj = new JLabel(paquetePersonaje.getCasta());
 	cstPj.setForeground(Color.WHITE);
 	cstPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	cstPj.setBounds(COL2_BTN_GENERICO, FIL5_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(cstPj);
 
-	JLabel rzPj = new JLabel(paquetePersonaje.getRaza());
+	final JLabel rzPj = new JLabel(paquetePersonaje.getRaza());
 	rzPj.setForeground(Color.WHITE);
 	rzPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	rzPj.setBounds(COL2_BTN_GENERICO, FIL7_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(rzPj);
 
-	JLabel saludPj = new JLabel(String.valueOf(paquetePersonaje.getSaludTope()));
+	final JLabel saludPj = new JLabel(String.valueOf(paquetePersonaje.getSaludTope()));
 	saludPj.setForeground(Color.WHITE);
 	saludPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	saludPj.setBounds(COL2_BTN_GENERICO, FIL4_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(saludPj);
 
-	JLabel fzaPj = new JLabel(String.valueOf(paquetePersonaje.getFuerza()));
+	final JLabel fzaPj = new JLabel(String.valueOf(paquetePersonaje.getFuerza()));
 	fzaPj.setForeground(Color.WHITE);
 	fzaPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	fzaPj.setBounds(COL2_BTN_GENERICO, FIL3_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(fzaPj);
 
-	JLabel dstzaPj = new JLabel(String.valueOf(paquetePersonaje.getDestreza()));
+	final JLabel dstzaPj = new JLabel(String.valueOf(paquetePersonaje.getDestreza()));
 	dstzaPj.setForeground(Color.WHITE);
 	dstzaPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	dstzaPj.setBounds(COL2_BTN_GENERICO, FIL2_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(dstzaPj);
 
-	JLabel intPj = new JLabel(String.valueOf(paquetePersonaje.getInteligencia()));
+	final JLabel intPj = new JLabel(String.valueOf(paquetePersonaje.getInteligencia()));
 	intPj.setForeground(Color.WHITE);
 	intPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	intPj.setBounds(COL2_BTN_GENERICO, FIL1_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(intPj);
 
-	JLabel cantItem = new JLabel(String.valueOf(paquetePersonaje.getCantItems()));
+	final JLabel cantItem = new JLabel(String.valueOf(paquetePersonaje.getCantItems()));
 	cantItem.setForeground(Color.WHITE);
 	cantItem.setHorizontalAlignment(SwingConstants.RIGHT);
 	cantItem.setBounds(X_LB_CANTITEM, Y_LB_CANTINTEM, ANCHO_CANTITEM, ALTO_BTN_GENERICO);
 	contentPane.add(cantItem);
 
-	JLabel lvPj = new JLabel(String.valueOf(paquetePersonaje.getNivel()));
+	final JLabel lvPj = new JLabel(String.valueOf(paquetePersonaje.getNivel()));
 	lvPj.setForeground(Color.WHITE);
 	lvPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	lvPj.setBounds(COL1_BTN_GENERICO, FIL6_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(lvPj);
 
-	JLabel xpPj = new JLabel(String.valueOf(paquetePersonaje.getExperiencia()));
+	final JLabel xpPj = new JLabel(String.valueOf(paquetePersonaje.getExperiencia()));
 	xpPj.setForeground(Color.WHITE);
 	xpPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	xpPj.setBounds(COL1_BTN_GENERICO, FIL5_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(xpPj);
 
-	JLabel energiaPj = new JLabel(String.valueOf(paquetePersonaje.getEnergiaTope()));
+	final JLabel energiaPj = new JLabel(String.valueOf(paquetePersonaje.getEnergiaTope()));
 	energiaPj.setForeground(Color.WHITE);
 	energiaPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	energiaPj.setBounds(COL1_BTN_GENERICO, FIL4_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(energiaPj);
 
-	int ataquePj = calcularAtaque(paquetePersonaje.getFuerza());
-	JLabel ataPj = new JLabel(String.valueOf(ataquePj));
+	final int ataquePj = calcularAtaque(paquetePersonaje.getFuerza());
+	final JLabel ataPj = new JLabel(String.valueOf(ataquePj));
 	ataPj.setForeground(Color.WHITE);
 	ataPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	ataPj.setBounds(COL1_BTN_GENERICO, FIL3_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(ataPj);
 
-	JLabel defPj = new JLabel(String.valueOf(paquetePersonaje.getDestreza()));
+	final JLabel defPj = new JLabel(String.valueOf(paquetePersonaje.getDestreza()));
 	defPj.setForeground(Color.WHITE);
 	defPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	defPj.setBounds(COL1_BTN_GENERICO, FIL2_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(defPj);
 
-	int intePj = calcularMagia(paquetePersonaje.getInteligencia());
-	JLabel magicPj = new JLabel(String.valueOf(intePj));
+	final int intePj = calcularMagia(paquetePersonaje.getInteligencia());
+	final JLabel magicPj = new JLabel(String.valueOf(intePj));
 	magicPj.setForeground(Color.WHITE);
 	magicPj.setHorizontalAlignment(SwingConstants.RIGHT);
 	magicPj.setBounds(COL1_BTN_GENERICO, FIL1_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
 	contentPane.add(magicPj);
 
-	JButton btnVolver = new JButton("Volver");
+	final JButton btnVolver = new JButton("Volver");
 	btnVolver.setIcon(new ImageIcon("recursos//volver.png"));
 	btnVolver.addActionListener(new ActionListener() {
 	    @Override
@@ -267,7 +267,7 @@ public class MenuStats extends JFrame {
 	});
 	btnVolver.setBounds(X_BTN_VOLVER, Y_BTN_VOLVER, ANCHO_BTN_VOLVER, ALTO_BTN_VOLVER);
 	contentPane.add(btnVolver);
-	JLabel background = new JLabel(
+	final JLabel background = new JLabel(
 		new ImageIcon(imagenFondo.getScaledInstance(X_RESOLUTION, Y_RESOLUTION, Image.SCALE_DEFAULT)));
 	background.setBounds(-COL4_BTN_GENERICO, Y_BACK, ANCHO_BACK, ALTO_BACK);
 	contentPane.add(background);

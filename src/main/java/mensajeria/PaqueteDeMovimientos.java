@@ -19,10 +19,10 @@ public class PaqueteDeMovimientos extends Paquete implements Serializable, Clone
 
 	/**
 	 * Asigna el objeto personajes
-	 * 
+	 *
 	 * @param personajes mapa de personaje
 	 */
-	public PaqueteDeMovimientos(Map<Integer, PaqueteMovimiento> personajes) {
+	public PaqueteDeMovimientos(final Map<Integer, PaqueteMovimiento> personajes) {
 		this.personajes = personajes;
 	}
 
@@ -37,7 +37,7 @@ public class PaqueteDeMovimientos extends Paquete implements Serializable, Clone
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see mensajeria.Paquete#clone()
 	 */
 	@Override
