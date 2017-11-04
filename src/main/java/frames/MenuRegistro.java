@@ -24,7 +24,11 @@ import javax.swing.JTextField;
 import cliente.Cliente;
 import mensajeria.Comando;
 
-// TODO: Auto-generated Javadoc
+
+/**
+ * Clase del menu Registro
+ *
+ */
 public class MenuRegistro extends JFrame {
 
     private static final int CANT_COL = 10;
@@ -166,10 +170,10 @@ public class MenuRegistro extends JFrame {
 
     /**
      * Sets the txt usuario.
-     * @param txtUsuario the new txt usuario
+     * @param txtUsuarioBis the new txt usuario
      */
-    public void settxtUsuario(final JTextField txtUsuario) {
-	this.txtUsuario = txtUsuario;
+    public void settxtUsuario(final JTextField txtUsuarioBis) {
+	this.txtUsuario = txtUsuarioBis;
     }
 
     /**
