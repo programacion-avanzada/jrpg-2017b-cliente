@@ -32,128 +32,157 @@ import frames.MenuStats;
 import mensajeria.Comando;
 import mensajeria.Paquete;
 
+/**
+ * The Class Pantalla.
+ */
 public class Pantalla {
 
-	private JFrame pantalla;
-	private Canvas canvas;
+    /** The pantalla. */
+    private JFrame pantalla;
 
-	// Menus
-	public static MenuInventario menuInventario;
-	public static MenuAsignarSkills menuAsignar;
-	public static MenuStats menuStats;
-	public static MenuEscape menuEscp;
-	public static VentanaContactos ventContac;
-		
-	private final Gson gson = new Gson();
+    /** The canvas. */
+    private Canvas canvas;
 
-	public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
-		pantalla = new JFrame(NOMBRE);
-		pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-			new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-			new Point(0,0),"custom cursor"));
+    /** The menu inventario. */
+    // Menus
+    public static MenuInventario menuInventario;
 
-		pantalla.setSize(ANCHO, ALTO);
-		pantalla.setResizable(false);
-		pantalla.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		pantalla.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent evt) {
-				try {
-					Paquete p = new Paquete();
-					p.setComando(Comando.DESCONECTAR);
-					p.setIp(cliente.getMiIp());
-					cliente.getSalida().writeObject(gson.toJson(p));
-					cliente.getEntrada().close();
-					cliente.getSalida().close();
-					cliente.getSocket().close();
-					System.exit(0);
-				} catch (IOException e) {
-					JOptionPane.showMessageDialog(null, "Fallo al intentar cerrar la aplicación.");
-					System.exit(1);
-				}
-			}
-		});
-		pantalla.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_I) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuInventario == null) {
-							menuInventario = new MenuInventario(cliente);
-							menuInventario.setVisible(true);
-						}
-					}
-				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuAsignar == null) {
-							menuAsignar = new MenuAsignarSkills(cliente);
-							menuAsignar.setVisible(true);
-						}
-					} 
-				} else if (e.getKeyCode() == KeyEvent.VK_S) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuStats == null) {
-							menuStats = new MenuStats(cliente);
-							menuStats.setVisible(true);
-						}
-					}
-				} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuEscp == null) {
-							menuEscp = new MenuEscape(cliente);
-							menuEscp.setVisible(true);
-						}
-					}
-				} else if (e.getKeyCode() == KeyEvent.VK_C) {
-//					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (ventContac == null) {
-							ventContac = new VentanaContactos(cliente.getJuego());
-							ventContac.setVisible(true);
-						}
-//					}
-				}
-			}
-		});
+    /** The menu asignar. */
+    public static MenuAsignarSkills menuAsignar;
 
+    /** The menu stats. */
+    public static MenuStats menuStats;
 
-		pantalla.setLocationRelativeTo(null);
-		pantalla.setVisible(false);
+    /** The menu escp. */
+    public static MenuEscape menuEscp;
 
-		canvas = new Canvas();
-		canvas.setPreferredSize(new Dimension(ANCHO, ALTO));
-		canvas.setMaximumSize(new Dimension(ANCHO, ALTO));
-		canvas.setMinimumSize(new Dimension(ANCHO, ALTO));
-		canvas.setFocusable(false);
+    /** The vent contac. */
+    public static VentanaContactos ventContac;
 
-		pantalla.add(canvas);
-		pantalla.pack();
-	}
+    /** The menu. */
+    private static JFrame menu;
 
-	public Canvas getCanvas() {
-		return canvas;
-	}
+    /** The gson. */
+    private final Gson gson = new Gson();
 
-	public JFrame getFrame() {
-		return pantalla;
-	}
+    /**
+     * Instantiates a new pantalla.
+     * @param nombre the nombre
+     * @param ancho the ancho
+     * @param alto the alto
+     * @param cliente the cliente
+     */
+    public Pantalla(final String nombre, final int ancho, final int alto, final Cliente cliente) {
+	pantalla = new JFrame(nombre);
+	pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+	pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+		new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0),
+		"custom cursor"));
 
-	public void mostrar() {
-		pantalla.setVisible(true);
-	}
+	pantalla.setSize(ancho, alto);
+	pantalla.setResizable(false);
+	pantalla.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+	pantalla.addWindowListener(new WindowAdapter() {
+	    @Override
+	    public void windowClosing(final WindowEvent evt) {
+		try {
+		    Paquete p = new Paquete();
+		    p.setComando(Comando.DESCONECTAR);
+		    p.setIp(cliente.getMiIp());
+		    cliente.getSalida().writeObject(gson.toJson(p));
+		    cliente.getEntrada().close();
+		    cliente.getSalida().close();
+		    cliente.getSocket().close();
+		    System.exit(0);
+		} catch (IOException e) {
+		    JOptionPane.showMessageDialog(null, "Fallo al intentar cerrar la aplicación.");
+		    System.exit(1);
+		}
+	    }
+	});
+	pantalla.addKeyListener(new KeyAdapter() {
+	    @Override
+	    public void keyReleased(final KeyEvent e) {
+		if (Estado.getEstado().esEstadoDeJuego()) {
+		    if (e.getKeyCode() == KeyEvent.VK_I && menuInventario == null) {
+			menuInventario = new MenuInventario(cliente);
+			menuInventario.setVisible(true);
+		    }
+		    if (e.getKeyCode() == KeyEvent.VK_A && menuAsignar == null) {
+			menuAsignar = new MenuAsignarSkills(cliente);
+			menuAsignar.setVisible(true);
+		    }
+		    if (e.getKeyCode() == KeyEvent.VK_S && menuStats == null) {
+			menuStats = new MenuStats(cliente);
+			menuStats.setVisible(true);
+		    }
+		    if (e.getKeyCode() == KeyEvent.VK_ESCAPE && menuEscp == null) {
+			menuEscp = new MenuEscape(cliente);
+			menuEscp.setVisible(true);
+		    }
+		    if (e.getKeyCode() == KeyEvent.VK_C && ventContac == null) {
+			ventContac = new VentanaContactos(cliente.getJuego());
+			ventContac.setVisible(true);
+		    }
+		}
+	    }
 
-	public static void centerString(Graphics g, Rectangle r, String s) {
-	    FontRenderContext frc = new FontRenderContext(null, true, true);
+	});
 
-	    Rectangle2D r2D = g.getFont().getStringBounds(s, frc);
-	    int rWidth = (int) Math.round(r2D.getWidth());
-	    int rHeight = (int) Math.round(r2D.getHeight());
-	    int rX = (int) Math.round(r2D.getX());
-	    int rY = (int) Math.round(r2D.getY());
+	pantalla.setLocationRelativeTo(null);
+	pantalla.setVisible(false);
 
-	    int a = (r.width / 2) - (rWidth / 2) - rX;
-	    int b = (r.height / 2) - (rHeight / 2) - rY;
+	canvas = new Canvas();
+	canvas.setPreferredSize(new Dimension(ancho, alto));
+	canvas.setMaximumSize(new Dimension(ancho, alto));
+	canvas.setMinimumSize(new Dimension(ancho, alto));
+	canvas.setFocusable(false);
 
-	    g.drawString(s, r.x + a, r.y + b);
-	}
+	pantalla.add(canvas);
+	pantalla.pack();
+    }
+
+    /**
+     * Gets the canvas.
+     * @return the canvas
+     */
+    public Canvas getCanvas() {
+	return canvas;
+    }
+
+    /**
+     * Gets the frame.
+     * @return the frame
+     */
+    public JFrame getFrame() {
+	return pantalla;
+    }
+
+    /**
+     * Mostrar.
+     */
+    public void mostrar() {
+	pantalla.setVisible(true);
+    }
+
+    /**
+     * Center string.
+     * @param g the g
+     * @param r the r
+     * @param s the s
+     */
+    public static void centerString(final Graphics g, final Rectangle r, final String s) {
+	FontRenderContext frc = new FontRenderContext(null, true, true);
+
+	Rectangle2D r2D = g.getFont().getStringBounds(s, frc);
+	int rWidth = (int) Math.round(r2D.getWidth());
+	int rHeight = (int) Math.round(r2D.getHeight());
+	int rX = (int) Math.round(r2D.getX());
+	int rY = (int) Math.round(r2D.getY());
+
+	int a = (r.width / 2) - (rWidth / 2) - rX;
+	int b = (r.height / 2) - (rHeight / 2) - rY;
+
+	g.drawString(s, r.x + a, r.y + b);
+    }
 }

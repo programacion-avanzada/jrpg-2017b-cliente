@@ -18,227 +18,274 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import cliente.Cliente;
 import juego.Pantalla;
 import mensajeria.PaquetePersonaje;
 
+/**
+ *
+ */
 public class MenuStats extends JFrame {
 
-		private JPanel contentPane;
-		private PaquetePersonaje paquetePersonaje;
-		private final double mod = 1.5;
-		
-		/**
-		 * Create the frame.
-		 */
-		public MenuStats(final Cliente cliente) {
-			paquetePersonaje = cliente.getPaquetePersonaje();
-			
-			this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			this.setResizable(false);
-			this.setBounds(100, 100, 346, 321);
-			this.setLocationRelativeTo(null);
-			this.setTitle("Estadísticas");
-			
-			contentPane = new JPanel();
-			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-			setContentPane(contentPane);
-			contentPane.setLayout(null);
-			
-			addWindowListener(new WindowAdapter() {
-				@Override
-				public void windowClosing(WindowEvent e) {
-					Pantalla.menuStats = null;
-					dispose();
-				}
-			});
-			
-			BufferedImage imagenFondo = null;
-			try {
-				imagenFondo = ImageIO.read(new File("recursos//background.jpg"));
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "No se pudo cargar el fondo");
+    private static final int ALTO_BACK = 312;
+    private static final int ANCHO_BACK = 363;
+    private static final int Y_BACK = -11;
+    private static final int Y_RESOLUTION = 350;
+    private static final int X_RESOLUTION = 400;
+    private static final int ALTO_BTN_VOLVER = 25;
+    private static final int ANCHO_BTN_VOLVER = 97;
+    private static final int Y_BTN_VOLVER = 245;
+    private static final int X_BTN_VOLVER = 128;
+    private static final int ALTO_MENU = 321;
+    private static final int ANCHO_MENU = 346;
+    private static final int BORDER = 5;
+    private static final int ANCHO_LB_CANTITEM = 110;
+    private static final int ANCHO_CANTITEM = 39;
+    private static final int X_LB_CANTITEM = 118;
+    private static final int Y_LB_CANTINTEM = 216;
+    private static final int ANCHO3_BTN_GENERICO = 72;
+    private static final int ANCHO2_BTN_GENERICO = 48;
+    private static final int ANCHO1_BTN_GENERICO = 56;
+    private static final int FIL7_BTN_GENERICO = 71;
+    private static final int FIL6_BTN_GENERICO = 13;
+    private static final int FIL5_BTN_GENERICO = 42;
+    private static final int FIL4_BTN_GENERICO = 100;
+    private static final int FIL3_BTN_GENERICO = 129;
+    private static final int FIL2_BTN_GENERICO = 158;
+    private static final int FIL1_BTN_GENERICO = 187;
+    private static final int COL4_BTN_GENERICO = 12;
+    private static final int COL3_BTN_GENERICO = 169;
+    private static final int COL2_BTN_GENERICO = 80;
+    private static final int COL1_BTN_GENERICO = 251;
+    private static final int ANCHO_BTN_GENERICO = 77;
+    private static final int ALTO_BTN_GENERICO = 16;
+    private final JPanel contentPane;
+    private final PaquetePersonaje paquetePersonaje;
+    private final double mod = 1.5;
 
-			}
-			
-			JLabel lblNombre = new JLabel("Nombre");
-			lblNombre.setForeground(Color.WHITE);
-			lblNombre.setBounds(12, 13, 56, 16);
-			contentPane.add(lblNombre);
-			
-			JLabel lblCasta = new JLabel("Casta");
-			lblCasta.setForeground(Color.WHITE);
-			lblCasta.setBounds(12, 42, 56, 16);
-			contentPane.add(lblCasta);
-			
-			JLabel lblRaza = new JLabel("Raza");
-			lblRaza.setForeground(Color.WHITE);
-			lblRaza.setBounds(12, 71, 56, 16);
-			contentPane.add(lblRaza);
-			
-			JLabel lblNivel = new JLabel("Nivel");
-			lblNivel.setForeground(Color.WHITE);
-			lblNivel.setBounds(169, 13, 56, 16);
-			contentPane.add(lblNivel);
-			
-			JLabel lblExperiencia = new JLabel("Experiencia");
-			lblExperiencia.setForeground(Color.WHITE);
-			lblExperiencia.setBounds(169, 42, 72, 16);
-			contentPane.add(lblExperiencia);
-			
-			JLabel lblEnergia = new JLabel("Energia");
-			lblEnergia.setForeground(Color.WHITE);
-			lblEnergia.setBounds(169, 100, 48, 16);
-			contentPane.add(lblEnergia);
-			
-			JLabel lblSalud = new JLabel("Salud");
-			lblSalud.setForeground(Color.WHITE);
-			lblSalud.setBounds(12, 100, 56, 16);
-			contentPane.add(lblSalud);
-			
-			JLabel lblFuerza = new JLabel("Fuerza");
-			lblFuerza.setForeground(Color.WHITE);
-			lblFuerza.setBounds(12, 129, 48, 16);
-			contentPane.add(lblFuerza);
-			
-			JLabel lblDestreza = new JLabel("Destreza");
-			lblDestreza.setForeground(Color.WHITE);
-			lblDestreza.setBounds(12, 158, 56, 16);
-			contentPane.add(lblDestreza);
-			
-			JLabel lblInteligencia = new JLabel("Inteligencia");
-			lblInteligencia.setForeground(Color.WHITE);
-			lblInteligencia.setBounds(12, 187, 72, 16);
-			contentPane.add(lblInteligencia);
-			
-			JLabel lblAtaque = new JLabel("Ataque");
-			lblAtaque.setForeground(Color.WHITE);
-			lblAtaque.setBounds(169, 129, 48, 16);
-			contentPane.add(lblAtaque);
-			
-			JLabel lblDefensa = new JLabel("Defensa");
-			lblDefensa.setForeground(Color.WHITE);
-			lblDefensa.setBounds(169, 158, 56, 16);
-			contentPane.add(lblDefensa);
-			
-			JLabel lblMagia = new JLabel("Magia");
-			lblMagia.setForeground(Color.WHITE);
-			lblMagia.setBounds(169, 187, 39, 16);
-			contentPane.add(lblMagia);
-			
-			JLabel lblCantidadDeItems = new JLabel("Cantidad de Items");
-			lblCantidadDeItems.setForeground(Color.WHITE);
-			lblCantidadDeItems.setBounds(12, 216, 110, 16);
-			contentPane.add(lblCantidadDeItems);
-			
-			JLabel nmbPj = new JLabel(paquetePersonaje.getNombre());
-			nmbPj.setForeground(Color.WHITE);
-			nmbPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			nmbPj.setBounds(80, 13, 77, 16);
-			contentPane.add(nmbPj);
-			
-			JLabel cstPj = new JLabel(paquetePersonaje.getCasta());
-			cstPj.setForeground(Color.WHITE);
-			cstPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			cstPj.setBounds(80, 42, 77, 16);
-			contentPane.add(cstPj);
-			
-			JLabel rzPj = new JLabel(paquetePersonaje.getRaza());
-			rzPj.setForeground(Color.WHITE);
-			rzPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			rzPj.setBounds(80, 71, 77, 16);
-			contentPane.add(rzPj);
-			
-			JLabel saludPj = new JLabel(String.valueOf(paquetePersonaje.getSaludTope()));
-			saludPj.setForeground(Color.WHITE);
-			saludPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			saludPj.setBounds(80, 100, 77, 16);
-			contentPane.add(saludPj);
-			
-			JLabel fzaPj = new JLabel(String.valueOf(paquetePersonaje.getFuerza()));
-			fzaPj.setForeground(Color.WHITE);
-			fzaPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			fzaPj.setBounds(80, 129, 77, 16);
-			contentPane.add(fzaPj);
-			
-			JLabel dstzaPj = new JLabel(String.valueOf(paquetePersonaje.getDestreza()));
-			dstzaPj.setForeground(Color.WHITE);
-			dstzaPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			dstzaPj.setBounds(80, 158, 77, 16);
-			contentPane.add(dstzaPj);
-			
-			JLabel intPj = new JLabel(String.valueOf(paquetePersonaje.getInteligencia()));
-			intPj.setForeground(Color.WHITE);
-			intPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			intPj.setBounds(80, 187, 77, 16);
-			contentPane.add(intPj);
-			
-			JLabel cantItem = new JLabel(String.valueOf(paquetePersonaje.getCantItems()));
-			cantItem.setForeground(Color.WHITE);
-			cantItem.setHorizontalAlignment(SwingConstants.RIGHT);
-			cantItem.setBounds(118, 216, 39, 16);
-			contentPane.add(cantItem);
-			
-			JLabel lvPj = new JLabel(String.valueOf(paquetePersonaje.getNivel()));
-			lvPj.setForeground(Color.WHITE);
-			lvPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			lvPj.setBounds(251, 13, 77, 16);
-			contentPane.add(lvPj);
-			
-			JLabel xpPj = new JLabel(String.valueOf(paquetePersonaje.getExperiencia()));
-			xpPj.setForeground(Color.WHITE);
-			xpPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			xpPj.setBounds(251, 42, 77, 16);
-			contentPane.add(xpPj);
-			
-			JLabel energiaPj = new JLabel(String.valueOf(paquetePersonaje.getEnergiaTope()));
-			energiaPj.setForeground(Color.WHITE);
-			energiaPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			energiaPj.setBounds(251, 100, 77, 16);
-			contentPane.add(energiaPj);
-			
-			int ataquePj = calcularAtaque(paquetePersonaje.getFuerza());
-			JLabel ataPj = new JLabel(String.valueOf(ataquePj));
-			ataPj.setForeground(Color.WHITE);
-			ataPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			ataPj.setBounds(251, 129, 77, 16);
-			contentPane.add(ataPj);
-			
-			JLabel defPj = new JLabel(String.valueOf(paquetePersonaje.getDestreza()));
-			defPj.setForeground(Color.WHITE);
-			defPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			defPj.setBounds(251, 158, 77, 16);
-			contentPane.add(defPj);
-			
-			int intePj = calcularMagia(paquetePersonaje.getInteligencia());
-			JLabel magicPj = new JLabel(String.valueOf(intePj));
-			magicPj.setForeground(Color.WHITE);
-			magicPj.setHorizontalAlignment(SwingConstants.RIGHT);
-			magicPj.setBounds(251, 187, 77, 16);
-			contentPane.add(magicPj);
-			
-			JButton btnVolver = new JButton("Volver");
-			btnVolver.setIcon(new ImageIcon("recursos//volver.png"));
-			btnVolver.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Pantalla.menuStats = null;
-					dispose();
-				}
-			});
-			btnVolver.setBounds(128, 245, 97, 25);
-			contentPane.add(btnVolver);
-			JLabel background = new JLabel(new ImageIcon(imagenFondo.getScaledInstance(400, 350, Image.SCALE_DEFAULT)));
-			background.setBounds(-12, -11, 363, 312);
-			contentPane.add(background);
-		}
+    /**
+     * Create the frame.
+     * @param cliente cliente sobre el cual construye el menu
+     */
+    public MenuStats(final Cliente cliente) {
+	paquetePersonaje = cliente.getPaquetePersonaje();
 
-		private int calcularMagia(final int inteligencia) {
-			return (int) (inteligencia*mod);
-		}
+	this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+	this.setResizable(false);
+	this.setBounds(FIL4_BTN_GENERICO, FIL4_BTN_GENERICO, ANCHO_MENU, ALTO_MENU);
+	this.setLocationRelativeTo(null);
+	this.setTitle("Estadísticas");
 
-		private int calcularAtaque(final int fuerza) {
-			return (int) (fuerza*mod);
-		}
+	contentPane = new JPanel();
+	contentPane.setBorder(new EmptyBorder(BORDER, BORDER, BORDER, BORDER));
+	setContentPane(contentPane);
+	contentPane.setLayout(null);
+
+	addWindowListener(new WindowAdapter() {
+	    @Override
+	    public void windowClosing(final WindowEvent e) {
+		Pantalla.menuStats = null;
+		dispose();
+	    }
+	});
+
+	BufferedImage imagenFondo = null;
+	try {
+	    imagenFondo = ImageIO.read(new File("recursos//background.jpg"));
+	} catch (final IOException e) {
+	    JOptionPane.showMessageDialog(null, "No se pudo cargar el fondo");
+
+	}
+
+	final JLabel lblNombre = new JLabel("Nombre");
+	lblNombre.setForeground(Color.WHITE);
+	lblNombre.setBounds(COL4_BTN_GENERICO, FIL6_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblNombre);
+
+	final JLabel lblCasta = new JLabel("Casta");
+	lblCasta.setForeground(Color.WHITE);
+	lblCasta.setBounds(COL4_BTN_GENERICO, FIL5_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblCasta);
+
+	final JLabel lblRaza = new JLabel("Raza");
+	lblRaza.setForeground(Color.WHITE);
+	lblRaza.setBounds(COL4_BTN_GENERICO, FIL7_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblRaza);
+
+	final JLabel lblNivel = new JLabel("Nivel");
+	lblNivel.setForeground(Color.WHITE);
+	lblNivel.setBounds(COL3_BTN_GENERICO, FIL6_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblNivel);
+
+	final JLabel lblExperiencia = new JLabel("Experiencia");
+	lblExperiencia.setForeground(Color.WHITE);
+	lblExperiencia.setBounds(COL3_BTN_GENERICO, FIL5_BTN_GENERICO, ANCHO3_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblExperiencia);
+
+	final JLabel lblEnergia = new JLabel("Energia");
+	lblEnergia.setForeground(Color.WHITE);
+	lblEnergia.setBounds(COL3_BTN_GENERICO, FIL4_BTN_GENERICO, ANCHO2_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblEnergia);
+
+	final JLabel lblSalud = new JLabel("Salud");
+	lblSalud.setForeground(Color.WHITE);
+	lblSalud.setBounds(COL4_BTN_GENERICO, FIL4_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblSalud);
+
+	final JLabel lblFuerza = new JLabel("Fuerza");
+	lblFuerza.setForeground(Color.WHITE);
+	lblFuerza.setBounds(COL4_BTN_GENERICO, FIL3_BTN_GENERICO, ANCHO2_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblFuerza);
+
+	final JLabel lblDestreza = new JLabel("Destreza");
+	lblDestreza.setForeground(Color.WHITE);
+	lblDestreza.setBounds(COL4_BTN_GENERICO, FIL2_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblDestreza);
+
+	final JLabel lblInteligencia = new JLabel("Inteligencia");
+	lblInteligencia.setForeground(Color.WHITE);
+	lblInteligencia.setBounds(COL4_BTN_GENERICO, FIL1_BTN_GENERICO, ANCHO3_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblInteligencia);
+
+	final JLabel lblAtaque = new JLabel("Ataque");
+	lblAtaque.setForeground(Color.WHITE);
+	lblAtaque.setBounds(COL3_BTN_GENERICO, FIL3_BTN_GENERICO, ANCHO2_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblAtaque);
+
+	final JLabel lblDefensa = new JLabel("Defensa");
+	lblDefensa.setForeground(Color.WHITE);
+	lblDefensa.setBounds(COL3_BTN_GENERICO, FIL2_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblDefensa);
+
+	final JLabel lblMagia = new JLabel("Magia");
+	lblMagia.setForeground(Color.WHITE);
+	lblMagia.setBounds(COL3_BTN_GENERICO, FIL1_BTN_GENERICO, ANCHO1_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lblMagia);
+
+	final JLabel lblCantidadDeItems = new JLabel("Cantidad de Items");
+	lblCantidadDeItems.setForeground(Color.WHITE);
+	lblCantidadDeItems.setBounds(COL4_BTN_GENERICO, Y_LB_CANTINTEM, ANCHO_LB_CANTITEM, ALTO_BTN_GENERICO);
+	contentPane.add(lblCantidadDeItems);
+
+	final JLabel nmbPj = new JLabel(paquetePersonaje.getNombre());
+	nmbPj.setForeground(Color.WHITE);
+	nmbPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	nmbPj.setBounds(COL2_BTN_GENERICO, FIL6_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(nmbPj);
+
+	final JLabel cstPj = new JLabel(paquetePersonaje.getCasta());
+	cstPj.setForeground(Color.WHITE);
+	cstPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	cstPj.setBounds(COL2_BTN_GENERICO, FIL5_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(cstPj);
+
+	final JLabel rzPj = new JLabel(paquetePersonaje.getRaza());
+	rzPj.setForeground(Color.WHITE);
+	rzPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	rzPj.setBounds(COL2_BTN_GENERICO, FIL7_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(rzPj);
+
+	final JLabel saludPj = new JLabel(String.valueOf(paquetePersonaje.getSaludTope()));
+	saludPj.setForeground(Color.WHITE);
+	saludPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	saludPj.setBounds(COL2_BTN_GENERICO, FIL4_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(saludPj);
+
+	final JLabel fzaPj = new JLabel(String.valueOf(paquetePersonaje.getFuerza()));
+	fzaPj.setForeground(Color.WHITE);
+	fzaPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	fzaPj.setBounds(COL2_BTN_GENERICO, FIL3_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(fzaPj);
+
+	final JLabel dstzaPj = new JLabel(String.valueOf(paquetePersonaje.getDestreza()));
+	dstzaPj.setForeground(Color.WHITE);
+	dstzaPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	dstzaPj.setBounds(COL2_BTN_GENERICO, FIL2_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(dstzaPj);
+
+	final JLabel intPj = new JLabel(String.valueOf(paquetePersonaje.getInteligencia()));
+	intPj.setForeground(Color.WHITE);
+	intPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	intPj.setBounds(COL2_BTN_GENERICO, FIL1_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(intPj);
+
+	final JLabel cantItem = new JLabel(String.valueOf(paquetePersonaje.getCantItems()));
+	cantItem.setForeground(Color.WHITE);
+	cantItem.setHorizontalAlignment(SwingConstants.RIGHT);
+	cantItem.setBounds(X_LB_CANTITEM, Y_LB_CANTINTEM, ANCHO_CANTITEM, ALTO_BTN_GENERICO);
+	contentPane.add(cantItem);
+
+	final JLabel lvPj = new JLabel(String.valueOf(paquetePersonaje.getNivel()));
+	lvPj.setForeground(Color.WHITE);
+	lvPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	lvPj.setBounds(COL1_BTN_GENERICO, FIL6_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(lvPj);
+
+	final JLabel xpPj = new JLabel(String.valueOf(paquetePersonaje.getExperiencia()));
+	xpPj.setForeground(Color.WHITE);
+	xpPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	xpPj.setBounds(COL1_BTN_GENERICO, FIL5_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(xpPj);
+
+	final JLabel energiaPj = new JLabel(String.valueOf(paquetePersonaje.getEnergiaTope()));
+	energiaPj.setForeground(Color.WHITE);
+	energiaPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	energiaPj.setBounds(COL1_BTN_GENERICO, FIL4_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(energiaPj);
+
+	final int ataquePj = calcularAtaque(paquetePersonaje.getFuerza());
+	final JLabel ataPj = new JLabel(String.valueOf(ataquePj));
+	ataPj.setForeground(Color.WHITE);
+	ataPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	ataPj.setBounds(COL1_BTN_GENERICO, FIL3_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(ataPj);
+
+	final JLabel defPj = new JLabel(String.valueOf(paquetePersonaje.getDestreza()));
+	defPj.setForeground(Color.WHITE);
+	defPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	defPj.setBounds(COL1_BTN_GENERICO, FIL2_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(defPj);
+
+	final int intePj = calcularMagia(paquetePersonaje.getInteligencia());
+	final JLabel magicPj = new JLabel(String.valueOf(intePj));
+	magicPj.setForeground(Color.WHITE);
+	magicPj.setHorizontalAlignment(SwingConstants.RIGHT);
+	magicPj.setBounds(COL1_BTN_GENERICO, FIL1_BTN_GENERICO, ANCHO_BTN_GENERICO, ALTO_BTN_GENERICO);
+	contentPane.add(magicPj);
+
+	final JButton btnVolver = new JButton("Volver");
+	btnVolver.setIcon(new ImageIcon("recursos//volver.png"));
+	btnVolver.addActionListener(new ActionListener() {
+	    @Override
+	    public void actionPerformed(final ActionEvent e) {
+		Pantalla.menuStats = null;
+		dispose();
+	    }
+	});
+	btnVolver.setBounds(X_BTN_VOLVER, Y_BTN_VOLVER, ANCHO_BTN_VOLVER, ALTO_BTN_VOLVER);
+	contentPane.add(btnVolver);
+	final JLabel background = new JLabel(
+		new ImageIcon(imagenFondo.getScaledInstance(X_RESOLUTION, Y_RESOLUTION, Image.SCALE_DEFAULT)));
+	background.setBounds(-COL4_BTN_GENERICO, Y_BACK, ANCHO_BACK, ALTO_BACK);
+	contentPane.add(background);
+    }
+
+    /**
+     * @param inteligencia inteligencia del personaje
+     * @return inteligencia aumentada por la casta
+     */
+    private int calcularMagia(final int inteligencia) {
+	return (int) (inteligencia * mod);
+    }
+
+    /**
+     * @param fuerza fuerza del personaje
+     * @return fuerza aumentada por la casta
+     */
+    private int calcularAtaque(final int fuerza) {
+	return (int) (fuerza * mod);
+    }
 }
